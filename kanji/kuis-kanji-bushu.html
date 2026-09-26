@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuis Kanji Metode Bushu</title>
+<style>
+#kbq, #kbq * { box-sizing: border-box; }
+#kbq {
+  max-width: 760px; margin: 0 auto; padding: 16px;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px; line-height: 1.6; color: #1f2937; background: #ffffff;
+}
+#kbq h1 { font-size: 22px; margin: 0 0 4px; line-height: 1.3; color: #111827; }
+#kbq h2 { font-size: 18px; margin: 0 0 12px; line-height: 1.3; color: #111827; }
+#kbq p { margin: 0 0 12px; }
+#kbq .kbq-sub { color: #6b7280; font-size: 14px; margin-bottom: 16px; }
+#kbq .kbq-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; border-bottom: 1px solid #e5e7eb; padding-bottom: 12px; }
+#kbq button { font: inherit; cursor: pointer; }
+#kbq .kbq-tab { padding: 8px 16px; border: 1px solid #d1d5db; background: #f9fafb; color: #374151; border-radius: 8px; }
+#kbq .kbq-tab.on { background: #1d4ed8; border-color: #1d4ed8; color: #ffffff; }
+#kbq .kbq-levels { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+#kbq .kbq-level { padding: 14px 8px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 10px; text-align: center; color: #111827; }
+#kbq .kbq-level:hover { border-color: #1d4ed8; background: #eff6ff; }
+#kbq .kbq-level b { display: block; font-size: 22px; }
+#kbq .kbq-level span { font-size: 13px; color: #6b7280; }
+#kbq .kbq-bar { height: 6px; background: #e5e7eb; border-radius: 3px; margin: 8px 0 16px; overflow: hidden; }
+#kbq .kbq-bar i { display: block; height: 100%; background: #1d4ed8; }
+#kbq .kbq-meta { display: flex; justify-content: space-between; font-size: 14px; color: #6b7280; }
+#kbq .kbq-q { font-size: 18px; margin: 0 0 14px; }
+#kbq .kbq-opt { display: block; width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px; border: 1px solid #d1d5db; background: #ffffff; color: #111827; border-radius: 10px; }
+#kbq .kbq-opt:hover:not([disabled]) { border-color: #1d4ed8; background: #eff6ff; }
+#kbq .kbq-opt.ok { border-color: #15803d; background: #dcfce7; }
+#kbq .kbq-opt.no { border-color: #b91c1c; background: #fee2e2; }
+#kbq .kbq-opt[disabled] { cursor: default; }
+#kbq .kbq-exp { margin: 12px 0; padding: 12px 14px; border-radius: 10px; background: #f3f4f6; font-size: 15px; }
+#kbq .kbq-btn { padding: 10px 18px; border: 1px solid #1d4ed8; background: #1d4ed8; color: #ffffff; border-radius: 8px; }
+#kbq .kbq-btn.alt { background: #ffffff; color: #1d4ed8; }
+#kbq .kbq-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+#kbq .kbq-score { font-size: 40px; font-weight: 700; color: #1d4ed8; margin: 8px 0; }
+#kbq .kbq-card { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; border: 1px solid #d1d5db; border-radius: 14px; background: #f9fafb; cursor: pointer; user-select: none; }
+#kbq .kbq-card .big { font-size: 72px; line-height: 1.2; color: #111827; }
+#kbq .kbq-card .rd { font-size: 18px; color: #4b5563; }
+#kbq .kbq-card .hint { margin-top: 14px; font-size: 13px; color: #9ca3af; }
+#kbq .kbq-card.back { background: #eff6ff; border-color: #93c5fd; }
+#kbq .kbq-card .parts { font-size: 28px; margin-bottom: 8px; color: #111827; }
+#kbq .kbq-card .story { font-size: 16px; color: #1f2937; }
+#kbq .kbq-card .note { margin-top: 10px; font-size: 13px; color: #6b7280; }
+#kbq table { width: 100%; border-collapse: collapse; font-size: 15px; }
+#kbq th, #kbq td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+#kbq th { background: #f3f4f6; }
+#kbq .kbq-wrap { overflow-x: auto; }
+#kbq .kbq-note { margin-top: 12px; font-size: 14px; color: #6b7280; }
+@media (max-width: 480px) {
+  #kbq { padding: 12px; }
+  #kbq .kbq-card .big { font-size: 60px; }
+}
+</style>
+</head>
+<body>
+<div id="kbq">
+  <h1>Kuis Kanji Metode Bushu (部首)</h1>
+  <div class="kbq-sub">Latihan bushu, posisi bushu, bagian bunyi, dan asal-usul kanji untuk level N5 sampai N1.</div>
+  <div class="kbq-tabs" id="kbq-tabs"></div>
+  <div id="kbq-app"></div>
+</div>
+<script>
+(function () {
+  "use strict";
+
+  // Soal: [pertanyaan, [pilihan], indeks jawaban benar, penjelasan]
+  var LEVELS = {
+    N5: [
+      ["Bagian kiri kanji 話 (hanasu, berbicara) adalah bushu apa?", ["言 gonben (ucapan)", "舌 shita (lidah)", "口 kuchi (mulut)", "心 kokoro (hati)"], 0, "話 (hanasu) = 言 (ucapan) + 舌 (lidah). Bagian kiri adalah bushu 言 (gonben), yang memberi petunjuk makna berbicara."],
+      ["Apa bushu kanji 校 (kou, sekolah)?", ["土 tsuchihen", "木 kihen", "日 hihen", "子 kohen"], 1, "校 (kou, sekolah) = 木 + 交. 木 adalah bushu, dan 交 (kou) memberi bunyi."],
+      ["Bushu bagian atas kanji 電 (den, listrik) adalah...", ["田 ta", "水 mizu", "雨 ame", "日 hi"], 2, "電 (den, listrik) memakai 雨 (amekanmuri) di atas, karena listrik dulu dikaitkan dengan kilat di langit saat hujan."],
+      ["Kanji mana yang memakai bushu 言?", ["校 (kou)", "休 (yasumu)", "川 (kawa)", "語 (go)"], 3, "語 (go, bahasa) memakai 言 (gonben, ucapan). Ini pola yang sama dengan 話, 読, dan 説."],
+      ["聞 (kiku, mendengar) tersusun dari...", ["門 + 口", "門 + 耳", "門 + 目", "門 + 日"], 1, "聞 (kiku) = 門 (gerbang) + 耳 (telinga): telinga menempel di gerbang untuk menguping. Ceritanya mnemonik, dan 門 juga memberi bunyi (mon, bun)."],
+      ["男 (otoko, laki-laki) tersusun dari...", ["田 + 力", "女 + 子", "宀 + 女", "日 + 力"], 0, "男 (otoko) = 田 (sawah) + 力 (tenaga): orang yang mengerahkan tenaga di sawah."],
+      ["安 (yasui, aman, murah) tersusun dari...", ["亻 + 女", "女 + 子", "宀 + 女", "广 + 女"], 2, "安 (yasui) = 宀 (atap) + 女 (perempuan): perempuan yang tenang di bawah atap, jadi aman dan tenteram."],
+      ["Kanji 川 (kawa, sungai) berasal dari gambar apa?", ["Tiga puncak gunung", "Aliran sungai", "Tiga batang pohon", "Tetesan hujan"], 1, "川 (kawa) berasal dari gambar aliran sungai dengan tiga garis mengalir. Ini jenis piktogram (象形, shoukei)."],
+      ["Kanji 山 (yama, gunung) berasal dari gambar apa?", ["Tiga puncak gunung", "Aliran sungai", "Tiga batang pohon", "Tumpukan tanah"], 0, "山 (yama) berasal dari gambar gunung dengan tiga puncak. Ini juga piktogram (象形, shoukei)."],
+      ["Cerita pengingat 休 (yasumu, istirahat) adalah...", ["Orang menatap matahari", "Orang berdiri di gerbang", "Orang membawa kayu bakar", "Orang bersandar pada pohon"], 3, "休 (yasumu) = 亻 (orang) + 木 (pohon): orang bersandar di pohon untuk beristirahat."]
+    ],
+    N4: [
+      ["Bushu apa yang ada di kanji 海 (umi, laut)?", ["氵 sanzui (air)", "土 tsuchihen (tanah)", "日 hihen (matahari)", "木 kihen (pohon)"], 0, "海 (umi, laut) memakai 氵 (sanzui, air). Bagian kanannya 毎 (mai) memberi petunjuk bunyi."],
+      ["Kanji 病 (yamai, byou, sakit) memakai bushu apa?", ["广 madare (bangunan)", "尸 shikabane (badan)", "疒 yamaidare (penyakit)", "宀 ukanmuri (atap)"], 2, "病 (yamai, byou) memakai 疒 (yamaidare) yang berarti penyakit. Bushu tare menggantung dari atas ke kiri."],
+      ["Bushu 辶 di kanji 送 (okuru, mengirim) berposisi...", ["hen (kiri)", "nyou (membungkus dari kiri bawah)", "kamae (mengurung)", "kanmuri (atas)"], 1, "辶 (shinnyou) membungkus kanji dari kiri bawah, jadi posisinya nyou. Contoh: 送 (okuru), 近 (chikai), 道 (michi)."],
+      ["Apa bushu kanji 銀 (gin, perak)?", ["糸 itohen", "車 kurumahen", "貝 kaihen", "金 kanehen"], 3, "銀 (gin, perak) memakai 金 (kanehen, logam) di kiri. Bagian kanan 艮 (gon) memberi petunjuk bunyi."],
+      ["Bushu apa yang memberi petunjuk makna pada 飲 (nomu, minum)?", ["食 shokuhen (makanan)", "氵 sanzui (air)", "口 kuchihen (mulut)", "欠 kakeru (kurang)"], 0, "飲 (nomu, minum) memakai 食 (shokuhen, makanan) di kiri. Kanji lain dengan bushu ini: 飯 (meshi, nasi)."],
+      ["買 (kau, membeli) dan 貸 (kasu, meminjamkan) memakai bushu 貝 (kaihen). Petunjuk maknanya adalah...", ["Makanan", "Kendaraan", "Uang atau harta", "Tanah"], 2, "買 dan 貸 memakai 貝 (kaihen), yang berarti kerang. Dulu kerang dipakai sebagai uang."],
+      ["明 (akarui, terang) tersusun dari...", ["日 + 月", "日 + 木", "火 + 月", "日 + 口"], 0, "明 (akarui, terang) = 日 (matahari) + 月 (bulan): dua benda bercahaya bersama."],
+      ["Kanji 店 (mise, toko) memakai bushu apa?", ["疒 yamaidare (penyakit)", "尸 shikabane (badan)", "宀 ukanmuri (atap)", "广 madare (bangunan)"], 3, "店 (mise, toko) memakai 广 (madare) yang berarti bangunan. Kanji lain: 度 (do) dan 広 (hiroi)."],
+      ["Bushu bagian atas kanji 茶 (cha, teh) adalah...", ["宀 ukanmuri", "艹 kusakanmuri", "雨 amekanmuri", "竹 takekanmuri"], 1, "茶 (cha, teh) memakai 艹 (kusakanmuri, tumbuhan) di atas, karena teh berasal dari daun tumbuhan."],
+      ["Kanji 起 (okiru, bangun) memakai bushu...", ["足 ashihen (kaki)", "辶 shinnyou (jalan)", "走 souhen (berlari)", "亻 ninben (orang)"], 2, "起 (okiru, bangun) memakai 走 (souhen) yang berarti berlari atau bergerak. Kanji lain: 越 (koeru) dan 超 (chou)."]
+    ],
+    N3: [
+      ["Kanji 情 (jou, perasaan) memakai bushu apa di sebelah kiri?", ["氵 sanzui (air)", "忄 risshinben (hati)", "扌 tehen (tangan)", "女 onnahen (perempuan)"], 1, "情 (jou, nasake) = 忄 (risshinben, hati) + 青 (sei). 忄 memberi makna perasaan, dan 青 memberi petunjuk bunyi."],
+      ["Bagian 青 di kanji 静 (shizuka, tenang) memberi petunjuk on'yomi apa?", ["han", "dou", "sei", "kou"], 2, "静 (shizuka, tenang) memakai 青 sebagai petunjuk bunyi. Keluarga 青: 清, 晴, 精, 請, semuanya dibaca sei (静 dibaca sei atau jou)."],
+      ["Bagian 包 di kanji 抱 (idaku, memeluk) memberi petunjuk on'yomi apa?", ["hou", "han", "sei", "kou"], 0, "抱 (hou, idaku, memeluk) = 扌 (tangan) + 包 (hou). 包 memberi bunyi hou, dan 扌 memberi makna aksi tangan."],
+      ["Bushu 心 di kanji 想 (sou, membayangkan) berada di posisi...", ["hen (kiri)", "kanmuri (atas)", "tare (menggantung)", "ashi (bawah)"], 3, "想 (sou, omou) = 相 + 心. 心 (kokoro) berada di bagian bawah, jadi posisinya ashi."],
+      ["Bushu apa di sebelah kiri kanji 訪 (tazuneru, mengunjungi)?", ["言 gonben (ucapan)", "亻 ninben (orang)", "辶 shinnyou (jalan)", "口 kuchihen (mulut)"], 0, "訪 (tazuneru, mengunjungi) = 言 (gonben, ucapan) + 方 (hou). 方 memberi petunjuk bunyi hou."],
+      ["Bushu bagian atas kanji 薬 (kusuri, obat) adalah...", ["宀 ukanmuri", "艹 kusakanmuri", "雨 amekanmuri", "日 hihen"], 1, "薬 (kusuri, obat) memakai 艹 (kusakanmuri, tumbuhan) di atas, karena obat dulu dibuat dari tanaman."],
+      ["Kanji 船 (fune, kapal) memakai bushu apa?", ["車 kurumahen (kendaraan)", "氵 sanzui (air)", "舟 funehen (perahu)", "木 kihen (pohon)"], 2, "船 (fune, kapal) memakai 舟 (funehen), yang berarti perahu."],
+      ["Bushu di sebelah kanan kanji 顔 (kao, wajah) adalah...", ["目 me (mata)", "耳 mimi (telinga)", "口 kuchi (mulut)", "頁 oogai (kepala)"], 3, "顔 (kao, wajah) memakai 頁 (oogai) yang berarti kepala, dan berada di kanan (tsukuri). Kanji lain dengan bushu ini: 頭 (atama, kepala)."],
+      ["Bushu di bagian bawah kanji 熱 (netsu, panas) adalah...", ["灬 rekka (api)", "氵 sanzui (air)", "日 hi (matahari)", "心 kokoro (hati)"], 0, "熱 (netsu, panas) memakai 灬 (rekka) di bagian bawah, yaitu bentuk 火 (api) yang dipadatkan."],
+      ["Kanji 破 (yaburu, memecah) memakai bushu apa?", ["土 tsuchihen (tanah)", "石 ishihen (batu)", "木 kihen (pohon)", "金 kanehen (logam)"], 1, "破 (yaburu, memecah) = 石 (ishihen, batu) + 皮 (hi). Batu yang pecah, dan 皮 memberi petunjuk bunyi."]
+    ],
+    N2: [
+      ["Kanji 境 (sakai, batas) memakai bushu apa di sebelah kiri?", ["土 tsuchihen (tanah)", "氵 sanzui (air)", "木 kihen (pohon)", "金 kanehen (logam)"], 0, "境 (sakai, kyou, batas) = 土 (tsuchihen, tanah) + 竟 (kyou). Batas berkaitan dengan wilayah tanah, dan 竟 memberi petunjuk bunyi kyou."],
+      ["Bagian 竟 di kanji 鏡 (kagami, cermin) dan 境 memberi petunjuk on'yomi apa?", ["sei", "hou", "kyou", "han"], 2, "鏡 (kagami, kyou, cermin) = 金 (logam) + 竟 (kyou). 境 (kyou) memakai bagian bunyi yang sama, jadi keluarga 竟 dibaca kyou."],
+      ["Bushu apa yang ada di kanji 液 (eki, cairan)?", ["日 hihen", "氵 sanzui", "土 tsuchihen", "亻 ninben"], 1, "液 (eki, cairan) memakai 氵 (sanzui, air). Contoh kata: 液体 (ekitai, cairan)."],
+      ["Kanji 燃 (moeru, terbakar) memakai bushu apa di sebelah kiri?", ["氵 sanzui (air)", "日 hihen (matahari)", "土 tsuchihen (tanah)", "火 hihen (api)"], 3, "燃 (moeru, nen, terbakar) memakai 火 (hihen, api) di kiri. Bagian kanan 然 juga berhubungan dengan pembakaran."],
+      ["Kanji 橋 (hashi, jembatan) memakai bushu apa?", ["木 kihen (kayu)", "石 ishihen (batu)", "氵 sanzui (air)", "車 kurumahen (kendaraan)"], 0, "橋 (hashi, kyou, jembatan) memakai 木 (kihen, kayu), karena jembatan dulu dibuat dari kayu. Bagian kanan 喬 (kyou) memberi petunjuk bunyi kyou."],
+      ["Kanji 針 (hari, jarum) memakai bushu apa?", ["糸 itohen (benang)", "竹 takekanmuri (bambu)", "金 kanehen (logam)", "皮 kawa (kulit)"], 2, "針 (hari, jarum) memakai 金 (kanehen, logam), karena jarum dibuat dari logam."],
+      ["Bagian kiri kanji 環 (kan, cincin) adalah bentuk bushu dari...", ["木 (pohon)", "玉 (permata)", "土 (tanah)", "石 (batu biasa)"], 1, "環 (kan, cincin, lingkaran) memakai bagian kiri 王 (tamahen), yang berasal dari 玉 (permata). Cincin dulu dibuat dari batu permata."],
+      ["Bushu 阝 di sebelah kiri kanji 険 (kewashii, terjal, berbahaya) disebut kozatohen dan berarti...", ["阝 di kanan, oozato (kota)", "氵 sanzui (air)", "宀 ukanmuri (atap)", "阝 di kiri, kozatohen (bukit)"], 3, "険 (kewashii, ken, terjal) memakai 阝 yang berada di kiri. 阝 di kiri disebut kozatohen dan berarti bukit. Jika 阝 berada di kanan, namanya oozato dan berarti kota, seperti pada 都 (to, kota)."]
+    ],
+    N1: [
+      ["Kanji 嘲 (azakeru, mengejek) memakai bushu apa di sebelah kiri?", ["目 mehen (mata)", "扌 tehen (tangan)", "口 kuchihen (mulut)", "耳 mimihen (telinga)"], 2, "嘲 (azakeru, chou, mengejek) = 口 (kuchihen, mulut) + 朝 (chou). Mengejek dilakukan dengan ucapan, dan 朝 memberi petunjuk bunyi chou."],
+      ["Kanji 諦 (akirameru, menyerah) memakai bushu apa?", ["言 gonben (ucapan)", "亻 ninben (orang)", "忄 risshinben (hati)", "辶 shinnyou (jalan)"], 0, "諦 (akirameru, tei, menyerah) = 言 (gonben, ucapan) + 帝 (tei). 帝 memberi petunjuk bunyi tei."],
+      ["Bushu apa di sebelah kiri kanji 溺 (oboreru, tenggelam)?", ["木 kihen (pohon)", "氵 sanzui (air)", "土 tsuchihen (tanah)", "火 hihen (api)"], 1, "溺 (oboreru, deki, tenggelam) = 氵 (sanzui, air) + 弱. Tenggelam terjadi di dalam air."],
+      ["Kanji 瞳 (hitomi, pupil mata) memakai bushu apa?", ["耳 mimihen (telinga)", "口 kuchihen (mulut)", "月 nikuzuki (badan)", "目 mehen (mata)"], 3, "瞳 (hitomi, dou, pupil mata) = 目 (mehen, mata) + 童 (dou). 童 memberi petunjuk bunyi dou."],
+      ["Kanji 蜂 (hachi, lebah) memakai bushu apa?", ["虫 mushihen (serangga)", "鳥 torihen (burung)", "魚 uohen (ikan)", "犬 kemonohen (hewan berkaki empat)"], 0, "蜂 (hachi, hou, lebah) = 虫 (mushihen, serangga) + 夆 (hou). 夆 memberi petunjuk bunyi hou."],
+      ["Bagian 建 di kanji 鍵 (kagi, kunci) memberi petunjuk on'yomi apa?", ["kou", "ken", "sei", "dou"], 1, "鍵 (kagi, ken, kunci) = 金 (logam) + 建 (ken). 建 memberi bunyi ken, sama seperti pada 建 (tateru) dan 健 (ken, sehat)."],
+      ["Kanji 鶴 (tsuru, bangau) memakai bushu apa?", ["虫 mushihen (serangga)", "犬 kemonohen (hewan)", "鳥 tori (burung)", "貝 kai (kerang)"], 2, "鶴 (tsuru, kaku, bangau) = 鳥 (tori, burung) + 隺 (kaku). 鳥 berada di kanan (posisi tsukuri), dan 隺 memberi petunjuk bunyi kaku."],
+      ["Kanji 憧 (akogareru, mendambakan) memakai bushu apa di sebelah kiri?", ["氵 sanzui (air)", "扌 tehen (tangan)", "亻 ninben (orang)", "忄 risshinben (hati)"], 3, "憧 (akogareru, shou, dou, mendambakan) = 忄 (risshinben, hati) + 童 (dou). 忄 memberi makna perasaan, dan 童 memberi petunjuk bunyi."]
+    ]
+  };
+
+  // Kartu: [kanji, bacaan dan arti, penyusun, cerita, catatan]
+  var CARDS = [
+    ["聞", "kiku (mendengar)", "門 + 耳", "Telinga menempel di gerbang untuk menguping, jadi mendengar.", "Cerita ini mnemonik. Secara etimologi 聞 adalah keisei, karena 門 juga memberi bunyi (mon, bun)."],
+    ["休", "yasumu (istirahat)", "亻 + 木", "Orang bersandar di pohon, jadi istirahat.", ""],
+    ["明", "akarui (terang)", "日 + 月", "Matahari dan bulan bersama, jadi terang.", ""],
+    ["間", "aida (sela, ruang antara)", "門 + 日", "Sinar matahari masuk lewat celah gerbang, jadi sela.", ""],
+    ["問", "tou (bertanya)", "門 + 口", "Mulut bertanya di depan gerbang, jadi bertanya.", "Cerita ini mnemonik. Secara etimologi 問 adalah keisei, karena 門 memberi bunyi (mon)."],
+    ["男", "otoko (laki-laki)", "田 + 力", "Tenaga bekerja di sawah, jadi laki-laki.", ""],
+    ["好", "suki (suka)", "女 + 子", "Perempuan dan anak, gambaran kasih sayang, jadi suka.", ""],
+    ["安", "yasui (aman, murah)", "宀 + 女", "Perempuan tenang di bawah atap, jadi aman dan tenteram.", ""],
+    ["信", "shin (percaya)", "亻 + 言", "Ucapan seseorang yang bisa dipegang, jadi percaya.", ""],
+    ["鳴", "naku (berbunyi, berkicau)", "口 + 鳥", "Mulut burung berbunyi, jadi berkicau.", ""],
+    ["東", "higashi (timur)", "日 + 木", "Matahari terbit di balik pohon, jadi timur.", ""],
+    ["森", "mori (hutan lebat)", "木 x 3", "Tiga pohon rapat, jadi hutan lebat. Bandingkan 林 (hayashi) dengan dua pohon.", ""]
+  ];
+
+  var ORIGINS = [
+    ["聞 kiku", "門 + 耳", "Telinga menempel di gerbang untuk menguping, jadi mendengar", "keisei, cerita = mnemonik"],
+    ["休 yasumu", "亻 + 木", "Orang bersandar di pohon, jadi istirahat", "kaii"],
+    ["明 akarui", "日 + 月", "Matahari dan bulan bersama, jadi terang", "kaii"],
+    ["間 aida", "門 + 日", "Sinar matahari masuk lewat celah gerbang, jadi sela, ruang antara", "kaii"],
+    ["問 tou", "門 + 口", "Mulut bertanya di depan gerbang, jadi bertanya", "keisei, cerita = mnemonik"],
+    ["男 otoko", "田 + 力", "Tenaga (力, chikara) bekerja di sawah (田, ta), jadi laki-laki", "kaii"],
+    ["好 suki", "女 + 子", "Perempuan dan anak, gambaran kasih sayang, jadi suka", "kaii"],
+    ["安 yasui", "宀 + 女", "Perempuan tenang di bawah atap, jadi aman, tenteram", "kaii"],
+    ["信 shin", "亻 + 言", "Ucapan seseorang yang bisa dipegang, jadi percaya", "kaii"],
+    ["鳴 naku", "口 + 鳥", "Mulut burung berbunyi, jadi berbunyi, berkicau", "kaii"],
+    ["東 higashi", "日 + 木", "Matahari terbit di balik pohon, jadi timur", "kaii"],
+    ["林 hayashi / 森 mori", "木 x 2 / 木 x 3", "Dua pohon menjadi hutan kecil, tiga pohon menjadi hutan lebat", "kaii"]
+  ];
+
+  var app = document.getElementById("kbq-app");
+  var tabsEl = document.getElementById("kbq-tabs");
+  var tab = "kuis";
+  var quiz = { level: null, qs: [], idx: 0, score: 0, picked: -1 };
+  var deck = { order: [], pos: 0, flipped: false };
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function startQuiz(level) {
+    var qs = shuffle(LEVELS[level]).map(function (q) {
+      var opts = shuffle(q[1].map(function (t, i) { return { t: t, c: i === q[2] }; }));
+      return { p: q[0], o: opts, e: q[3] };
+    });
+    quiz = { level: level, qs: qs, idx: 0, score: 0, picked: -1 };
+  }
+
+  function startDeck() {
+    var order = [];
+    for (var i = 0; i < CARDS.length; i++) order.push(i);
+    deck = { order: order, pos: 0, flipped: false };
+  }
+
+  function renderTabs() {
+    var names = [["kuis", "Kuis"], ["kartu", "Kartu hapalan"], ["asal", "Asal-usul kanji"]];
+    tabsEl.innerHTML = names.map(function (n) {
+      return '<button class="kbq-tab' + (tab === n[0] ? " on" : "") + '" data-act="tab" data-v="' + n[0] + '">' + n[1] + "</button>";
+    }).join("");
+  }
+
+  function renderQuiz() {
+    if (!quiz.level) {
+      var h = "<h2>Pilih level</h2><div class=\"kbq-levels\">";
+      ["N5", "N4", "N3", "N2", "N1"].forEach(function (l) {
+        h += '<button class="kbq-level" data-act="level" data-v="' + l + '"><b>' + l + "</b><span>" + LEVELS[l].length + " soal</span></button>";
+      });
+      h += "</div><p class=\"kbq-note\">Pembagian level mengikuti daftar kanji tidak resmi yang umum dipakai, jadi bisa sedikit berbeda dari daftar lain.</p>";
+      app.innerHTML = h;
+      return;
+    }
+    var total = quiz.qs.length;
+    if (quiz.idx >= total) {
+      var pct = Math.round(quiz.score / total * 100);
+      app.innerHTML = "<h2>Hasil kuis " + quiz.level + "</h2>" +
+        '<div class="kbq-score">' + quiz.score + " / " + total + "</div>" +
+        "<p>Skor kamu " + pct + " persen. " + (pct >= 80 ? "Bagus sekali." : pct >= 50 ? "Lumayan, coba ulangi untuk memantapkan." : "Baca lagi tabel bushu, lalu coba lagi.") + "</p>" +
+        '<div class="kbq-row"><button class="kbq-btn" data-act="level" data-v="' + quiz.level + '">Ulangi ' + quiz.level + '</button>' +
+        '<button class="kbq-btn alt" data-act="menu">Pilih level lain</button></div>';
+      return;
+    }
+    var q = quiz.qs[quiz.idx];
+    var answered = quiz.picked >= 0;
+    var h2 = '<div class="kbq-meta"><span>' + quiz.level + " &middot; Soal " + (quiz.idx + 1) + " dari " + total + "</span><span>Skor " + quiz.score + "</span></div>" +
+      '<div class="kbq-bar"><i style="width:' + (quiz.idx / total * 100) + '%"></i></div>' +
+      '<p class="kbq-q">' + esc(q.p) + "</p>";
+    q.o.forEach(function (o, i) {
+      var cls = "kbq-opt";
+      if (answered) {
+        if (o.c) cls += " ok";
+        else if (i === quiz.picked) cls += " no";
+      }
+      h2 += '<button class="' + cls + '" data-act="pick" data-v="' + i + '"' + (answered ? " disabled" : "") + ">" + esc(o.t) + "</button>";
+    });
+    if (answered) {
+      var right = q.o[quiz.picked].c;
+      h2 += '<div class="kbq-exp"><b>' + (right ? "Benar." : "Belum tepat.") + "</b> " + esc(q.e) + "</div>" +
+        '<div class="kbq-row"><button class="kbq-btn" data-act="next">' + (quiz.idx + 1 >= total ? "Lihat hasil" : "Lanjut") + "</button></div>";
+    }
+    app.innerHTML = h2;
+  }
+
+  function renderDeck() {
+    var c = CARDS[deck.order[deck.pos]];
+    var face;
+    if (!deck.flipped) {
+      face = '<div class="kbq-card" data-act="flip"><div class="big">' + esc(c[0]) + '</div><div class="rd">' + esc(c[1]) + '</div><div class="hint">Ketuk kartu untuk melihat asal-usulnya</div></div>';
+    } else {
+      face = '<div class="kbq-card back" data-act="flip"><div class="parts">' + esc(c[0]) + " = " + esc(c[2]) + '</div><div class="story">' + esc(c[3]) + "</div>" +
+        (c[4] ? '<div class="note">' + esc(c[4]) + "</div>" : "") + '<div class="hint">Ketuk untuk kembali</div></div>';
+    }
+    app.innerHTML = '<div class="kbq-meta"><span>Kartu ' + (deck.pos + 1) + " dari " + CARDS.length + "</span></div>" +
+      '<div class="kbq-bar"><i style="width:' + ((deck.pos + 1) / CARDS.length * 100) + '%"></i></div>' + face +
+      '<div class="kbq-row"><button class="kbq-btn alt" data-act="prev">Sebelumnya</button>' +
+      '<button class="kbq-btn" data-act="nextcard">Berikutnya</button>' +
+      '<button class="kbq-btn alt" data-act="shuffle">Acak</button></div>';
+  }
+
+  function renderOrigins() {
+    var h = "<h2>Asal-usul kanji (語源)</h2>" +
+      "<p>Cerita di balik kanji membantu kamu mengingat, karena adegan lebih mudah diingat daripada goresan.</p>" +
+      '<div class="kbq-wrap"><table><thead><tr><th>Kanji</th><th>Bagian</th><th>Cerita pengingat</th><th>Tipe</th></tr></thead><tbody>';
+    ORIGINS.forEach(function (r) {
+      h += "<tr><td>" + esc(r[0]) + "</td><td>" + esc(r[1]) + "</td><td>" + esc(r[2]) + "</td><td>" + esc(r[3]) + "</td></tr>";
+    });
+    h += "</tbody></table></div>" +
+      '<p class="kbq-note">Kaii (会意) adalah kanji gabungan makna, keisei (形声) adalah gabungan makna dan bunyi. Pada 聞 dan 問, cerita gerbang adalah pengingat, sedangkan asal-usul resminya keisei karena 門 juga memberi bunyi.</p>';
+    app.innerHTML = h;
+  }
+
+  function render() {
+    renderTabs();
+    if (tab === "kuis") renderQuiz();
+    else if (tab === "kartu") renderDeck();
+    else renderOrigins();
+  }
+
+  document.getElementById("kbq").addEventListener("click", function (e) {
+    var t = e.target;
+    while (t && t !== this && !(t.getAttribute && t.getAttribute("data-act"))) t = t.parentNode;
+    if (!t || t === this) return;
+    var act = t.getAttribute("data-act");
+    var v = t.getAttribute("data-v");
+    if (act === "tab") {
+      tab = v;
+      if (tab === "kartu" && !deck.order.length) startDeck();
+    } else if (act === "level") {
+      startQuiz(v);
+    } else if (act === "menu") {
+      quiz = { level: null, qs: [], idx: 0, score: 0, picked: -1 };
+    } else if (act === "pick") {
+      if (quiz.picked >= 0) return;
+      quiz.picked = parseInt(v, 10);
+      if (quiz.qs[quiz.idx].o[quiz.picked].c) quiz.score++;
+    } else if (act === "next") {
+      quiz.idx++;
+      quiz.picked = -1;
+    } else if (act === "flip") {
+      deck.flipped = !deck.flipped;
+    } else if (act === "nextcard") {
+      deck.pos = (deck.pos + 1) % CARDS.length;
+      deck.flipped = false;
+    } else if (act === "prev") {
+      deck.pos = (deck.pos - 1 + CARDS.length) % CARDS.length;
+      deck.flipped = false;
+    } else if (act === "shuffle") {
+      deck.order = shuffle(deck.order);
+      deck.pos = 0;
+      deck.flipped = false;
+    }
+    render();
+  });
+
+  startDeck();
+  render();
+})();
+</script>
+</body>
+</html>
