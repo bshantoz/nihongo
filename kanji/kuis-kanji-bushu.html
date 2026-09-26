@@ -6,91 +6,118 @@
 <title>Kuis Kanji Metode Bushu</title>
 <style>
 #kbq, #kbq * { box-sizing: border-box; }
+html, body { margin: 0; background: transparent; }
 #kbq {
+  --fg: #1f2937; --fg-strong: #111827; --fg-mid: #374151; --fg-soft: #4b5563; --fg-muted: #6b7280; --fg-faint: #9ca3af;
+  --surface: #ffffff; --surface2: #f9fafb; --surface3: #f3f4f6; --border: #d1d5db; --border-soft: #e5e7eb;
+  --primary: #1d4ed8; --primary-fg: #ffffff; --primary-text: #1d4ed8; --accent-bg: #eff6ff; --accent-border: #93c5fd;
+  --ok-bg: #dcfce7; --ok-bd: #15803d; --bad-bg: #fee2e2; --bad-bd: #b91c1c; --bad-text: #b91c1c;
+  --msg-bg: #eff6ff; --msg-fg: #1e3a8a; --err-bg: #fee2e2; --err-fg: #7f1d1d; --mark-bg: #fef08a; --mark-fg: #111827;
+  color-scheme: light;
   max-width: 760px; margin: 0 auto; padding: 16px;
   font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 16px; line-height: 1.6; color: #1f2937; background: #ffffff;
+  font-size: 16px; line-height: 1.6; color: var(--fg); background: transparent;
 }
-#kbq h1 { font-size: 22px; margin: 0 0 4px; line-height: 1.3; color: #111827; }
-#kbq h2 { font-size: 18px; margin: 0 0 12px; line-height: 1.3; color: #111827; }
+#kbq[data-theme="dark"] {
+  --fg: #e5e7eb; --fg-strong: #f9fafb; --fg-mid: #d1d5db; --fg-soft: #b8bfca; --fg-muted: #9ca3af; --fg-faint: #7b8494;
+  --surface: #1f2430; --surface2: #262c3a; --surface3: #2e3544; --border: #434c5e; --border-soft: #353d4d;
+  --primary: #2563eb; --primary-fg: #ffffff; --primary-text: #93c5fd; --accent-bg: #1e2a44; --accent-border: #3b5b9a;
+  --ok-bg: #12351f; --ok-bd: #22c55e; --bad-bg: #3b1616; --bad-bd: #ef4444; --bad-text: #fca5a5;
+  --msg-bg: #1e2a44; --msg-fg: #bfdbfe; --err-bg: #3b1616; --err-fg: #fecaca; --mark-bg: #854d0e; --mark-fg: #fef3c7;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  #kbq:not([data-theme="light"]):not([data-theme="dark"]) {
+  --fg: #e5e7eb; --fg-strong: #f9fafb; --fg-mid: #d1d5db; --fg-soft: #b8bfca; --fg-muted: #9ca3af; --fg-faint: #7b8494;
+  --surface: #1f2430; --surface2: #262c3a; --surface3: #2e3544; --border: #434c5e; --border-soft: #353d4d;
+  --primary: #2563eb; --primary-fg: #ffffff; --primary-text: #93c5fd; --accent-bg: #1e2a44; --accent-border: #3b5b9a;
+  --ok-bg: #12351f; --ok-bd: #22c55e; --bad-bg: #3b1616; --bad-bd: #ef4444; --bad-text: #fca5a5;
+  --msg-bg: #1e2a44; --msg-fg: #bfdbfe; --err-bg: #3b1616; --err-fg: #fecaca; --mark-bg: #854d0e; --mark-fg: #fef3c7;
+  color-scheme: dark;
+  }
+}
+#kbq .kbq-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+#kbq h1 { font-size: 22px; margin: 0 0 4px; line-height: 1.3; color: var(--fg-strong); }
+#kbq h2 { font-size: 18px; margin: 0 0 12px; line-height: 1.3; color: var(--fg-strong); }
 #kbq p { margin: 0 0 12px; }
-#kbq .kbq-sub { color: #6b7280; font-size: 14px; margin-bottom: 16px; }
-#kbq .kbq-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; border-bottom: 1px solid #e5e7eb; padding-bottom: 12px; }
+#kbq .kbq-sub { color: var(--fg-muted); font-size: 14px; margin-bottom: 16px; }
+#kbq .kbq-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; border-bottom: 1px solid var(--border-soft); padding-bottom: 12px; }
 #kbq button { font: inherit; cursor: pointer; }
-#kbq .kbq-tab { padding: 8px 16px; border: 1px solid #d1d5db; background: #f9fafb; color: #374151; border-radius: 8px; }
-#kbq .kbq-tab.on { background: #1d4ed8; border-color: #1d4ed8; color: #ffffff; }
+#kbq .kbq-tab { padding: 8px 16px; border: 1px solid var(--border); background: var(--surface2); color: var(--fg-mid); border-radius: 8px; }
+#kbq .kbq-tab.on { background: var(--primary); border-color: var(--primary); color: var(--primary-fg); }
 #kbq .kbq-levels { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
-#kbq .kbq-level { padding: 14px 8px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 10px; text-align: center; color: #111827; }
-#kbq .kbq-level:hover { border-color: #1d4ed8; background: #eff6ff; }
+#kbq .kbq-level { padding: 14px 8px; border: 1px solid var(--border); background: var(--surface2); border-radius: 10px; text-align: center; color: var(--fg-strong); }
+#kbq .kbq-level:hover { border-color: var(--primary); background: var(--accent-bg); }
 #kbq .kbq-level b { display: block; font-size: 22px; }
-#kbq .kbq-level span { display: block; font-size: 13px; color: #6b7280; }
-#kbq .kbq-bar { height: 6px; background: #e5e7eb; border-radius: 3px; margin: 8px 0 16px; overflow: hidden; }
-#kbq .kbq-bar i { display: block; height: 100%; background: #1d4ed8; }
-#kbq .kbq-meta { display: flex; justify-content: space-between; font-size: 14px; color: #6b7280; }
+#kbq .kbq-level span { display: block; font-size: 13px; color: var(--fg-muted); }
+#kbq .kbq-bar { height: 6px; background: var(--border-soft); border-radius: 3px; margin: 8px 0 16px; overflow: hidden; }
+#kbq .kbq-bar i { display: block; height: 100%; background: var(--primary); }
+#kbq .kbq-meta { display: flex; justify-content: space-between; font-size: 14px; color: var(--fg-muted); }
 #kbq .kbq-q { font-size: 18px; margin: 0 0 14px; }
-#kbq .kbq-opt { display: block; width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px; border: 1px solid #d1d5db; background: #ffffff; color: #111827; border-radius: 10px; }
-#kbq .kbq-opt:hover:not([disabled]) { border-color: #1d4ed8; background: #eff6ff; }
-#kbq .kbq-opt.ok { border-color: #15803d; background: #dcfce7; }
-#kbq .kbq-opt.no { border-color: #b91c1c; background: #fee2e2; }
+#kbq .kbq-opt { display: block; width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--fg-strong); border-radius: 10px; }
+#kbq .kbq-opt:hover:not([disabled]) { border-color: var(--primary); background: var(--accent-bg); }
+#kbq .kbq-opt.ok { border-color: var(--ok-bd); background: var(--ok-bg); }
+#kbq .kbq-opt.no { border-color: var(--bad-bd); background: var(--bad-bg); }
 #kbq .kbq-opt[disabled] { cursor: default; }
-#kbq .kbq-exp { margin: 12px 0; padding: 12px 14px; border-radius: 10px; background: #f3f4f6; font-size: 15px; }
-#kbq .kbq-btn { padding: 10px 18px; border: 1px solid #1d4ed8; background: #1d4ed8; color: #ffffff; border-radius: 8px; }
-#kbq .kbq-btn.alt { background: #ffffff; color: #1d4ed8; }
+#kbq .kbq-exp { margin: 12px 0; padding: 12px 14px; border-radius: 10px; background: var(--surface3); font-size: 15px; }
+#kbq .kbq-btn { padding: 10px 18px; border: 1px solid var(--primary); background: var(--primary); color: var(--primary-fg); border-radius: 8px; }
+#kbq .kbq-btn.alt { background: var(--surface); color: var(--primary-text); }
 #kbq .kbq-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-#kbq .kbq-score { font-size: 40px; font-weight: 700; color: #1d4ed8; margin: 8px 0; }
-#kbq .kbq-card { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; border: 1px solid #d1d5db; border-radius: 14px; background: #f9fafb; cursor: pointer; user-select: none; }
-#kbq .kbq-card .big { font-size: 72px; line-height: 1.2; color: #111827; }
-#kbq .kbq-card .rd { font-size: 18px; color: #4b5563; }
-#kbq .kbq-card .hint { margin-top: 14px; font-size: 13px; color: #9ca3af; }
-#kbq .kbq-card.back { background: #eff6ff; border-color: #93c5fd; }
-#kbq .kbq-card .parts { font-size: 28px; margin-bottom: 8px; color: #111827; }
-#kbq .kbq-card .story { font-size: 16px; color: #1f2937; }
-#kbq .kbq-card .note { margin-top: 10px; font-size: 13px; color: #6b7280; }
+#kbq .kbq-score { font-size: 40px; font-weight: 700; color: var(--primary-text); margin: 8px 0; }
+#kbq .kbq-card { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface2); cursor: pointer; user-select: none; }
+#kbq .kbq-card .big { font-size: 72px; line-height: 1.2; color: var(--fg-strong); }
+#kbq .kbq-card .rd { font-size: 18px; color: var(--fg-soft); }
+#kbq .kbq-card .hint { margin-top: 14px; font-size: 13px; color: var(--fg-faint); }
+#kbq .kbq-card.back { background: var(--accent-bg); border-color: var(--accent-border); }
+#kbq .kbq-card .parts { font-size: 28px; margin-bottom: 8px; color: var(--fg-strong); }
+#kbq .kbq-card .story { font-size: 16px; color: var(--fg); }
+#kbq .kbq-card .note { margin-top: 10px; font-size: 13px; color: var(--fg-muted); }
 #kbq table { width: 100%; border-collapse: collapse; font-size: 15px; }
-#kbq th, #kbq td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-#kbq th { background: #f3f4f6; }
+#kbq th, #kbq td { border: 1px solid var(--border-soft); padding: 8px 10px; text-align: left; vertical-align: top; }
+#kbq th { background: var(--surface3); }
 #kbq .kbq-wrap { overflow-x: auto; }
-#kbq .kbq-note { margin-top: 12px; font-size: 14px; color: #6b7280; }
-#kbq .kbq-home { padding: 6px 12px; border: 1px solid #d1d5db; background: #ffffff; color: #374151; border-radius: 8px; font-size: 14px; margin-bottom: 14px; }
-#kbq .kbq-home:hover { background: #f3f4f6; }
-#kbq input[type=text], #kbq textarea { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; color: #111827; background: #ffffff; margin-bottom: 10px; }
-#kbq label { display: block; font-size: 14px; color: #4b5563; margin-bottom: 4px; }
-#kbq .kbq-item { display: flex; gap: 8px; align-items: flex-start; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e5e7eb; }
+#kbq .kbq-note { margin-top: 12px; font-size: 14px; color: var(--fg-muted); }
+#kbq .kbq-home { padding: 6px 12px; border: 1px solid var(--border); background: var(--surface); color: var(--fg-mid); border-radius: 8px; font-size: 14px; margin-bottom: 14px; }
+#kbq .kbq-home:hover { background: var(--surface3); }
+#kbq input[type=text], #kbq textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font: inherit; color: var(--fg-strong); background: var(--surface); margin-bottom: 10px; }
+#kbq label { display: block; font-size: 14px; color: var(--fg-soft); margin-bottom: 4px; }
+#kbq .kbq-item { display: flex; gap: 8px; align-items: flex-start; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-soft); }
 #kbq .kbq-item span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-#kbq .kbq-sm { padding: 6px 12px; font-size: 14px; border: 1px solid #d1d5db; background: #ffffff; color: #1d4ed8; border-radius: 8px; }
-#kbq .kbq-sm.del { color: #b91c1c; }
+#kbq .kbq-sm { padding: 6px 12px; font-size: 14px; border: 1px solid var(--border); background: var(--surface); color: var(--primary-text); border-radius: 8px; }
+#kbq .kbq-sm.del { color: var(--bad-text); }
 #kbq .kbq-radio { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
 #kbq .kbq-radio input[type=text] { margin: 0; flex: 1; }
-#kbq .kbq-msg { padding: 10px 12px; border-radius: 8px; background: #eff6ff; color: #1e3a8a; font-size: 14px; margin-bottom: 12px; }
-#kbq .kbq-msg.err { background: #fee2e2; color: #7f1d1d; }
+#kbq .kbq-msg { padding: 10px 12px; border-radius: 8px; background: var(--msg-bg); color: var(--msg-fg); font-size: 14px; margin-bottom: 12px; }
+#kbq .kbq-msg.err { background: var(--err-bg); color: var(--err-fg); }
 #kbq .kbq-level[disabled] { opacity: 0.5; cursor: default; }
 #kbq .kbq-search { display: flex; gap: 6px; flex-wrap: nowrap; margin-bottom: 12px; }
 #kbq .kbq-search .kbq-btn { padding: 10px 12px; white-space: nowrap; }
-#kbq .kbq-search input[type=search] { flex: 1 1 0; min-width: 0; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; color: #111827; background: #ffffff; }
+#kbq .kbq-search input[type=search] { flex: 1 1 0; min-width: 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font: inherit; color: var(--fg-strong); background: var(--surface); }
 #kbq .kbq-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-#kbq .kbq-chip { padding: 5px 12px; border: 1px solid #d1d5db; background: #ffffff; color: #374151; border-radius: 999px; font-size: 14px; }
-#kbq .kbq-chip.on { background: #1d4ed8; border-color: #1d4ed8; color: #ffffff; }
+#kbq .kbq-chip { padding: 5px 12px; border: 1px solid var(--border); background: var(--surface); color: var(--fg-mid); border-radius: 999px; font-size: 14px; }
+#kbq .kbq-chip.on { background: var(--primary); border-color: var(--primary); color: var(--primary-fg); }
+#kbq .kbq-theme { flex: none; white-space: nowrap; font-size: 13px; }
 #kbq table.kbq-data { min-width: 640px; }
 #kbq .kbq-kj { font-size: 32px; line-height: 1.1; white-space: nowrap; }
-#kbq .kbq-lv { display: block; font-size: 11px; line-height: 1.4; color: #6b7280; }
-#kbq td .sub { display: block; font-size: 13px; color: #6b7280; }
-#kbq mark { background: #fef08a; color: #111827; border-radius: 2px; padding: 0 1px; }
-#kbq .kbq-card .big2 { font-size: 28px; line-height: 1.3; color: #111827; }
+#kbq .kbq-lv { display: block; font-size: 11px; line-height: 1.4; color: var(--fg-muted); }
+#kbq td .sub { display: block; font-size: 13px; color: var(--fg-muted); }
+#kbq mark { background: var(--mark-bg); color: var(--mark-fg); border-radius: 2px; padding: 0 1px; }
+#kbq .kbq-card .big2 { font-size: 28px; line-height: 1.3; color: var(--fg-strong); }
 #kbq .kbq-card.back { align-items: flex-start; text-align: left; }
 #kbq .kbq-card.back .parts { font-size: 26px; }
 #kbq .kbq-card.back .story { margin-bottom: 6px; }
-#kbq .kbq-sel { padding: 5px 8px; border: 1px solid #d1d5db; border-radius: 8px; background: #ffffff; color: #374151; font: inherit; font-size: 14px; }
-#kbq .kbq-pn { align-self: center; font-size: 13px; color: #6b7280; }
-#kbq .kbq-foot { margin-top: 28px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 12px; line-height: 1.5; color: #6b7280; }
+#kbq .kbq-sel { padding: 5px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg-mid); font: inherit; font-size: 14px; }
+#kbq .kbq-pn { align-self: center; font-size: 13px; color: var(--fg-muted); }
+#kbq .kbq-foot { margin-top: 28px; padding-top: 12px; border-top: 1px solid var(--border-soft); font-size: 12px; line-height: 1.5; color: var(--fg-muted); }
 @media (max-width: 640px) {
   #kbq table.kbq-data { min-width: 0; }
   #kbq table.kbq-data thead { display: none; }
   #kbq table.kbq-data, #kbq table.kbq-data tbody, #kbq table.kbq-data tr, #kbq table.kbq-data td { display: block; width: 100%; }
-  #kbq table.kbq-data tr { border: 1px solid #e5e7eb; border-radius: 10px; margin-bottom: 10px; padding: 8px 4px; }
+  #kbq table.kbq-data tr { border: 1px solid var(--border-soft); border-radius: 10px; margin-bottom: 10px; padding: 8px 4px; }
   #kbq table.kbq-data td { border: none; padding: 4px 8px; }
   #kbq table.kbq-data td:nth-child(1), #kbq table.kbq-data td.kbq-kj { display: inline-block; width: auto; vertical-align: middle; }
-  #kbq table.kbq-data td:nth-child(1) { color: #6b7280; font-size: 13px; }
-  #kbq table.kbq-data td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: #9ca3af; }
+  #kbq table.kbq-data td:nth-child(1) { color: var(--fg-muted); font-size: 13px; }
+  #kbq table.kbq-data td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--fg-faint); }
 }
 @media (max-width: 480px) {
   #kbq { padding: 12px; }
@@ -100,7 +127,7 @@
 </head>
 <body>
 <div id="kbq">
-  <h1>Kuis Kanji Metode Bushu (部首)</h1>
+  <div class="kbq-head"><h1>Kuis Kanji Metode Bushu (部首)</h1><button class="kbq-chip kbq-theme" id="kbq-theme" data-act="theme" title="Ganti tema warna">Tema: Otomatis</button></div>
   <div class="kbq-sub">Latihan bushu, posisi bushu, bagian bunyi, dan asal-usul kanji untuk level N5 sampai N1.</div>
   <div class="kbq-tabs" id="kbq-tabs"></div>
   <div id="kbq-app"></div>
@@ -3057,6 +3084,8 @@
       applyData(JSON.parse(JSON.stringify(DEFAULT_LEVELS)));
       setMsg("Perubahan lokal dihapus. Soal kembali ke versi bawaan atau versi soal-kanji.json di server.", false);
       loadRemote();
+    } else if (act === "theme") {
+      cycleTheme();
     } else if (act === "pick") {
       if (quiz.picked >= 0) return;
       quiz.picked = parseInt(v, 10);
@@ -3150,8 +3179,58 @@
   } catch (err) {}
   if (!localLoaded) loadRemote();
 
+  // ---------- Tema dan tinggi (untuk iframe) ----------
+  var THEME_KEY = "kbq_theme_v1";
+  var themePref = "auto";
+  var parentTheme = null;
+  try {
+    var savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme === "light" || savedTheme === "dark" || savedTheme === "auto") themePref = savedTheme;
+  } catch (err) {}
+  var qTheme = /[?&]theme=(dark|light|auto)/.exec(location.search);
+  if (qTheme) themePref = qTheme[1];
+
+  function effectiveTheme() {
+    if (themePref === "light" || themePref === "dark") return themePref;
+    return parentTheme;
+  }
+  function applyTheme() {
+    var root = document.getElementById("kbq");
+    var t = effectiveTheme();
+    if (t) root.setAttribute("data-theme", t); else root.removeAttribute("data-theme");
+    var btn = document.getElementById("kbq-theme");
+    if (btn) btn.textContent = "Tema: " + (themePref === "light" ? "Terang" : themePref === "dark" ? "Gelap" : "Otomatis");
+  }
+  function cycleTheme() {
+    themePref = themePref === "auto" ? "light" : themePref === "light" ? "dark" : "auto";
+    try { localStorage.setItem(THEME_KEY, themePref); } catch (err) {}
+    applyTheme();
+  }
+  function postHeight() {
+    try {
+      if (window.parent && window.parent !== window) {
+        var hgt = Math.ceil(document.getElementById("kbq").getBoundingClientRect().height) + 8;
+        window.parent.postMessage({ kbqHeight: hgt }, "*");
+      }
+    } catch (err) {}
+  }
+  window.addEventListener("message", function (e) {
+    if (e.source !== window.parent) return;
+    var d = e.data;
+    if (d && typeof d === "object" && (d.kbqTheme === "dark" || d.kbqTheme === "light")) {
+      parentTheme = d.kbqTheme;
+      applyTheme();
+    }
+  });
+  if (window.ResizeObserver) new ResizeObserver(postHeight).observe(document.getElementById("kbq"));
+  window.addEventListener("resize", postHeight);
+  window.addEventListener("load", postHeight);
+
+  applyTheme();
   rebuildDeck();
   render();
+  try { if (window.parent && window.parent !== window) window.parent.postMessage({ kbqReady: 1 }, "*"); } catch (err) {}
+  postHeight();
 })();
 </script>
 </body>
