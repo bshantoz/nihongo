@@ -333,7 +333,8 @@
     item.dialog.forEach(function(line){
       var d = document.createElement("div");
       d.className = "n3-choukai-line";
-      d.innerHTML = "<b>" + line.speaker + "：</b>" + line.jp + "<span class=\"romaji\">" + line.romaji + "</span>";
+      var icon = line.gender === "P" ? "👩" : (line.gender === "L" ? "👨" : "");
+      d.innerHTML = "<b>" + icon + " " + line.speaker + "：</b>" + line.jp + "<span class=\"romaji\">" + line.romaji + "</span>";
       scriptEl.appendChild(d);
     });
 
@@ -365,6 +366,74 @@
     explain.textContent = (i === item.correct ? "✔ Benar! " : "✘ Kurang tepat. ") + item.penjelasan;
   }
 
+  // ---------- Pemilihan suara laki-laki / perempuan (ja-JP) ----------
+  // Nama yang biasanya menandakan suara pria pada mesin TTS berbagai browser/OS.
+  var MALE_VOICE_HINTS = ["male","otoya","ichiro","keita","daisuke","男性","man"];
+  var FEMALE_VOICE_HINTS = ["female","kyoko","haruka","ayumi","nanami","sakura","女性","woman"];
+  var voiceProfiles = null; // {L:{voice,pitch,rate}, P:{voice,pitch,rate}}
+
+  function classifyVoice(v){
+    var name = (v.name || "").toLowerCase();
+    if(MALE_VOICE_HINTS.some(function(h){ return name.indexOf(h) !== -1; })) return "L";
+    if(FEMALE_VOICE_HINTS.some(function(h){ return name.indexOf(h) !== -1; })) return "P";
+    return null;
+  }
+
+  function buildVoiceProfiles(){
+    var all = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+    var jaVoices = all.filter(function(v){ return (v.lang || "").toLowerCase().indexOf("ja") === 0; });
+    var profiles = { L:{voice:null,pitch:0.82,rate:0.92}, P:{voice:null,pitch:1.18,rate:0.95} };
+
+    if(jaVoices.length === 0){
+      // Tidak ada suara Jepang sama sekali: biarkan browser pakai default, dibedakan lewat pitch saja.
+      return profiles;
+    }
+
+    // 1) coba kenali dari nama suara (mis. Kyoko=wanita, Otoya=pria di macOS; Ichiro/Nanami di Windows/Edge)
+    var found = { L:null, P:null };
+    jaVoices.forEach(function(v){
+      var g = classifyVoice(v);
+      if(g && !found[g]) found[g] = v;
+    });
+
+    // 2) kalau ada minimal 2 suara ja-JP berbeda tapi belum kebedah namanya, bagi saja jadi dua kelompok
+    if((!found.L || !found.P) && jaVoices.length >= 2){
+      if(!found.L) found.L = jaVoices[0];
+      if(!found.P) found.P = jaVoices.find(function(v){ return v !== found.L; }) || jaVoices[1];
+    }
+    // 3) kalau cuma ada 1 suara ja-JP, dua-duanya pakai suara itu (dibedakan lewat pitch di bawah)
+    if(!found.L) found.L = jaVoices[0];
+    if(!found.P) found.P = jaVoices[0];
+
+    profiles.L.voice = found.L;
+    profiles.P.voice = found.P;
+    // Kalau ternyata voice L dan P sama persis, pertegas bedanya lewat pitch supaya tetap kedengaran beda.
+    if(found.L === found.P){
+      profiles.L.pitch = 0.75;
+      profiles.P.pitch = 1.35;
+    }
+    return profiles;
+  }
+
+  function getVoiceProfiles(cb){
+    if(!("speechSynthesis" in window)){ cb(null); return; }
+    var existing = window.speechSynthesis.getVoices();
+    if(existing.length > 0){
+      voiceProfiles = buildVoiceProfiles();
+      cb(voiceProfiles);
+    } else {
+      // Voice list Chrome sering kosong sesaat setelah load; tunggu event voiceschanged.
+      window.speechSynthesis.onvoiceschanged = function(){
+        voiceProfiles = buildVoiceProfiles();
+        cb(voiceProfiles);
+      };
+      // Fallback: kalau event tidak pernah terpicu (beberapa browser), tetap jalan setelah jeda singkat.
+      setTimeout(function(){
+        if(!voiceProfiles){ voiceProfiles = buildVoiceProfiles(); cb(voiceProfiles); }
+      }, 300);
+    }
+  }
+
   function playChoukaiAudio(item){
     document.getElementById("choukaiScript").style.display = "block";
     document.getElementById("choukaiQ").style.display = "block";
@@ -373,17 +442,31 @@
       return;
     }
     window.speechSynthesis.cancel();
-    var lines = item.dialog.map(function(l){ return l.jp; });
-    var i = 0;
-    function speakNext(){
-      if(i >= lines.length) return;
-      var utter = new SpeechSynthesisUtterance(lines[i]);
-      utter.lang = "ja-JP";
-      utter.rate = 0.92;
-      utter.onend = function(){ i++; speakNext(); };
-      window.speechSynthesis.speak(utter);
+
+    function startSpeaking(profiles){
+      var lines = item.dialog;
+      var i = 0;
+      function speakNext(){
+        if(i >= lines.length) return;
+        var line = lines[i];
+        var profile = (profiles && profiles[line.gender]) || null;
+        var utter = new SpeechSynthesisUtterance(line.jp);
+        utter.lang = "ja-JP";
+        if(profile && profile.voice) utter.voice = profile.voice;
+        utter.pitch = profile ? profile.pitch : 1;
+        utter.rate = profile ? profile.rate : 0.92;
+        utter.onend = function(){ i++; speakNext(); };
+        utter.onerror = function(){ i++; speakNext(); };
+        window.speechSynthesis.speak(utter);
+      }
+      speakNext();
     }
-    speakNext();
+
+    if(voiceProfiles){
+      startSpeaking(voiceProfiles);
+    } else {
+      getVoiceProfiles(startSpeaking);
+    }
   }
 
   document.getElementById("btnBackChoukai").addEventListener("click", function(){
