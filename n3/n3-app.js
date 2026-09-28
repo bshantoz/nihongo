@@ -475,4 +475,39 @@
     document.getElementById("choukaiList").style.display = "block";
   });
 
+  // ---------- Tombol diagnostik: cek suara Jepang yang tersedia di perangkat ----------
+  var btnCekSuara = document.getElementById("btnCekSuara");
+  if(btnCekSuara){
+    btnCekSuara.addEventListener("click", function(){
+      var resultEl = document.getElementById("voiceCheckResult");
+      resultEl.style.display = "block";
+      if(!("speechSynthesis" in window)){
+        resultEl.innerHTML = "Browser ini tidak mendukung Web Speech API sama sekali.";
+        return;
+      }
+      resultEl.innerHTML = "Mencari suara...";
+      getVoiceProfiles(function(profiles){
+        var all = window.speechSynthesis.getVoices();
+        var jaVoices = all.filter(function(v){ return (v.lang||"").toLowerCase().indexOf("ja") === 0; });
+        if(jaVoices.length === 0){
+          resultEl.innerHTML = "⚠️ Tidak ditemukan suara berbahasa Jepang di perangkat/browser ini. " +
+            "Audio tetap akan dicoba diputar pakai suara default, dibedakan lewat nada saja. " +
+            "Coba tambahkan suara Jepang lewat pengaturan Text-to-Speech di HP/laptop ini.";
+          return;
+        }
+        var html = "<b>" + jaVoices.length + " suara Jepang ditemukan:</b>";
+        jaVoices.forEach(function(v){
+          var tag = "none", label = "belum dipetakan L/P";
+          if(profiles.L.voice === v){ tag = "L"; label = "dipakai untuk 👨 laki-laki"; }
+          if(profiles.P.voice === v){ tag = tag === "L" ? "L" : "P"; label = (tag === "L" ? "dipakai untuk 👨 & 👩 (sama)" : "dipakai untuk 👩 perempuan"); }
+          html += "<div class=\"n3-voice-row\"><span class=\"n3-voice-tag " + tag + "\">" + tag.replace("none","-") + "</span>" + v.name + " (" + v.lang + ") — " + label + "</div>";
+        });
+        if(profiles.L.voice === profiles.P.voice){
+          html += "<div style=\"margin-top:8px;color:rgba(20,40,60,.6)\">Cuma ada 1 suara Jepang, jadi laki-laki/perempuan dibedakan lewat nada (pitch) saja, bukan suara asli berbeda.</div>";
+        }
+        resultEl.innerHTML = html;
+      });
+    });
+  }
+
 })();
