@@ -320,6 +320,8 @@
   });
 
   function openChoukai(idx){
+    window.speechSynthesis && window.speechSynthesis.cancel();
+    resetChoukaiPlayState();
     var item = CHOUKAI[idx];
     document.getElementById("choukaiList").style.display = "none";
     document.getElementById("choukaiArea").style.display = "block";
@@ -423,15 +425,29 @@
       cb(voiceProfiles);
     } else {
       // Voice list Chrome sering kosong sesaat setelah load; tunggu event voiceschanged.
-      window.speechSynthesis.onvoiceschanged = function(){
+      // PENTING: pakai flag "resolved" supaya cb() cuma dipanggil SEKALI. Tanpa ini,
+      // di HP event voiceschanged kadang baru terpicu setelah fallback setTimeout
+      // sudah lebih dulu jalan -> cb() kepanggil 2x -> seluruh dialog terbaca dua kali.
+      var resolved = false;
+      var resolveOnce = function(){
+        if(resolved) return;
+        resolved = true;
+        window.speechSynthesis.onvoiceschanged = null; // lepas listener biar tidak nyangkut & terpicu lagi nanti
         voiceProfiles = buildVoiceProfiles();
         cb(voiceProfiles);
       };
+      window.speechSynthesis.onvoiceschanged = resolveOnce;
       // Fallback: kalau event tidak pernah terpicu (beberapa browser), tetap jalan setelah jeda singkat.
-      setTimeout(function(){
-        if(!voiceProfiles){ voiceProfiles = buildVoiceProfiles(); cb(voiceProfiles); }
-      }, 300);
+      setTimeout(resolveOnce, 300);
     }
+  }
+
+  var isSpeakingChoukai = false; // cegah tombol Putar dipicu dobel (mis. tap ganda di HP) selagi masih membaca
+
+  function resetChoukaiPlayState(){
+    isSpeakingChoukai = false;
+    var btnPlay = document.getElementById("btnPlayAudio");
+    if(btnPlay) btnPlay.disabled = false;
   }
 
   function playChoukaiAudio(item){
@@ -441,15 +457,24 @@
       alert("Maaf, browser ini tidak mendukung fitur suara (Web Speech API). Silakan baca naskah percakapan di bawah.");
       return;
     }
+    if(isSpeakingChoukai) return; // sedang membaca, abaikan tap tambahan
+    isSpeakingChoukai = true;
+    var btnPlay = document.getElementById("btnPlayAudio");
+    if(btnPlay) btnPlay.disabled = true;
+
     window.speechSynthesis.cancel();
 
     function startSpeaking(profiles){
+      // Dialog ini sendiri yang sudah dibatalkan/diganti sebelum suara ini sempat jalan
+      // (mis. user pindah ke soal lain sambil menunggu daftar suara siap) -> jangan diputar.
+      if(!isSpeakingChoukai) return;
       var lines = item.dialog;
       var i = 0;
       function speakNext(){
-        if(i >= lines.length) return;
+        if(i >= lines.length){ resetChoukaiPlayState(); return; }
         var line = lines[i];
         var profile = (profiles && profiles[line.gender]) || null;
+        // Hanya teks kanji/kana (line.jp) yang dibacakan; romaji tidak pernah diikutkan ke TTS.
         var utter = new SpeechSynthesisUtterance(line.jp);
         utter.lang = "ja-JP";
         if(profile && profile.voice) utter.voice = profile.voice;
@@ -471,6 +496,7 @@
 
   document.getElementById("btnBackChoukai").addEventListener("click", function(){
     window.speechSynthesis && window.speechSynthesis.cancel();
+    resetChoukaiPlayState();
     document.getElementById("choukaiArea").style.display = "none";
     document.getElementById("choukaiList").style.display = "block";
   });
