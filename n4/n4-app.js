@@ -536,4 +536,42 @@
     });
   }
 
+  // ===================== Deep link dari kartu hasil pencarian blog (?q=&tab=) =====================
+  (function () {
+    var qp;
+    try { qp = new URLSearchParams(location.search); } catch (err) { return; }
+    var q = (qp.get("q") || "").trim();
+    if (!q) return;
+    var wantTab = qp.get("tab") === "kartu" ? "kartu" : "daftar";
+
+    function activatePanel(name) {
+      tabs.forEach(function (t) { t.classList.toggle("active", t.dataset.panel === name); });
+      panels.forEach(function (p) { p.classList.toggle("active", p.id === "panel-" + name); });
+    }
+
+    if (wantTab === "kartu") {
+      var match = null;
+      for (var i = 0; i < KOTOBA.length; i++) {
+        if (KOTOBA[i].kanji === q || KOTOBA[i].kana === q) { match = KOTOBA[i]; break; }
+      }
+      if (!match) {
+        for (var j = 0; j < KOTOBA.length; j++) {
+          if (KOTOBA[j].kanji.indexOf(q) >= 0 || KOTOBA[j].kana.indexOf(q) >= 0) { match = KOTOBA[j]; break; }
+        }
+      }
+      if (match) {
+        currentDeck = [match];
+        cardIndex = 0;
+        renderCard();
+        flashcardEl.classList.add("flipped");
+      }
+      activatePanel("kartu");
+    } else {
+      daftarKategoriSel.value = "";
+      daftarSearch.value = q;
+      renderDaftar();
+      activatePanel("daftar");
+    }
+  })();
+
 })();
