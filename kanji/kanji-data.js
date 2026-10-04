@@ -2479,7 +2479,9 @@
     ["N1","驚","kyou","odoroku,odorokasu","terkejut",52,"ashi","敬 (hormat) + 馬 (kuda)","","c","敬苟艹艸句勹丿口攵攴𠂉乂馬灬火","Bagian bunyi (fonetik): 敬"],
     ["N1","鑑","kan","kangamiru,kagami","teladan, menilai",17,"hen","金 (emas) + 監 (mengawasi)","","c","金監臣𠂉皿","Bagian bunyi (fonetik): 監"],
     ["N1","鷹","you,ou","taka","elang",72,"","广 (bangunan) + 雁 + 鳥 (burung)","","c","广雁厂亻人隹鳥灬火",""],
-    ["N1","麟","rin","","kirin",151,"hen","鹿 (rusa) + 粦","","c","鹿广厂比匕粦米舛夕㐄",""]
+    ["N1","麟","rin","","kirin",151,"hen","鹿 (rusa) + 粦","","c","鹿广厂比匕粦米舛夕㐄",""],
+    ["N1","肆","shi","hoshiimama","empat (dokumen)",149,"","","","c","聿","Angka formal (daiji) untuk 四 (empat) di dokumen resmi. Jarang dipakai di luar itu."],
+    ["N1","捌","hachi,hatsu,han,betsu","sabaku,hakeru","delapan (dokumen), menangani",3,"hen","扌 (tangan) + 別 (memisah)","","c","扌手別","Angka formal (daiji) untuk 八 (delapan) di dokumen resmi. Bagian bunyi (fonetik): 別"]
   ];
 window.KBQ_DATA={LEVELS:LEVELS,LEVEL_INFO:LEVEL_INFO,RADS:RADS,KANJI:KANJI};
 })();

@@ -125,5 +125,24 @@ window.N1_KOTOBA = [
   {kat:"Psikologi & Perasaan Kompleks", kanji:"羨望", kana:"せんぼう", romaji:"senbou", arti:"rasa iri (kagum)", contohJp:"彼の成功に羨望を感じます。", contohRomaji:"Kare no seikou ni senbou o kanjimasu.", contohId:"Merasa iri dengan kesuksesannya."},
   {kat:"Psikologi & Perasaan Kompleks", kanji:"自負", kana:"じふ", romaji:"jifu", arti:"kebanggaan diri (percaya diri)", contohJp:"仕事に自負を持っています。", contohRomaji:"Shigoto ni jifu o motte imasu.", contohId:"Memiliki kebanggaan terhadap pekerjaannya."},
   {kat:"Psikologi & Perasaan Kompleks", kanji:"未練", kana:"みれん", romaji:"miren", arti:"rasa sayang yang belum lepas", contohJp:"過去の恋に未練があります。", contohRomaji:"Kako no koi ni miren ga arimasu.", contohId:"Masih ada rasa sayang pada cinta masa lalu."},
-  {kat:"Psikologi & Perasaan Kompleks", kanji:"困惑", kana:"こんわく", romaji:"konwaku", arti:"kebingungan, kekagetan", contohJp:"突然の質問に困惑しました。", contohRomaji:"Totsuzen no shitsumon ni konwaku shimashita.", contohId:"Bingung dengan pertanyaan mendadak itu."}
+  {kat:"Psikologi & Perasaan Kompleks", kanji:"困惑", kana:"こんわく", romaji:"konwaku", arti:"kebingungan, kekagetan", contohJp:"突然の質問に困惑しました。", contohRomaji:"Totsuzen no shitsumon ni konwaku shimashita.", contohId:"Bingung dengan pertanyaan mendadak itu."},
+
+  // ---------------- ANGKA FORMAL & UANG ----------------
+  {kat:"Angka Formal & Uang", kanji:"大字", kana:"だいじ", romaji:"daiji", arti:"angka formal (untuk dokumen resmi)", contohJp:"契約書では大字を使います。", contohRomaji:"Keiyakusho dewa daiji o tsukaimasu.", contohId:"Di surat kontrak dipakai angka formal."},
+  {kat:"Angka Formal & Uang", kanji:"漢数字", kana:"かんすうじ", romaji:"kansuuji", arti:"angka kanji", contohJp:"この表は漢数字で書かれています。", contohRomaji:"Kono hyou wa kansuuji de kakarete imasu.", contohId:"Tabel ini ditulis dengan angka kanji."},
+  {kat:"Angka Formal & Uang", kanji:"数字", kana:"すうじ", romaji:"suuji", arti:"angka, bilangan", contohJp:"数字を間違えないでください。", contohRomaji:"Suuji o machigaenai de kudasai.", contohId:"Tolong jangan salah menulis angka."},
+  {kat:"Angka Formal & Uang", kanji:"壱", kana:"いち", romaji:"ichi", arti:"satu (angka formal)", contohJp:"壱万円を受け取りました。", contohRomaji:"Ichimanen o uketorimashita.", contohId:"Saya menerima 10.000 yen (ditulis formal)."},
+  {kat:"Angka Formal & Uang", kanji:"弐", kana:"に", romaji:"ni", arti:"dua (angka formal)", contohJp:"弐千円です。", contohRomaji:"Nisen'en desu.", contohId:"Dua ribu yen."},
+  {kat:"Angka Formal & Uang", kanji:"参", kana:"さん", romaji:"san", arti:"tiga (angka formal)", contohJp:"参万円です。", contohRomaji:"Sanman'en desu.", contohId:"Tiga puluh ribu yen."},
+  {kat:"Angka Formal & Uang", kanji:"肆", kana:"し", romaji:"shi", arti:"empat (angka formal)", contohJp:"肆は四の大字です。", contohRomaji:"Shi wa yon no daiji desu.", contohId:"肆 adalah angka formal untuk 四."},
+  {kat:"Angka Formal & Uang", kanji:"伍", kana:"ご", romaji:"go", arti:"lima (angka formal)", contohJp:"伍千円です。", contohRomaji:"Gosen'en desu.", contohId:"Lima ribu yen."},
+  {kat:"Angka Formal & Uang", kanji:"陸", kana:"ろく", romaji:"roku", arti:"enam (angka formal)", contohJp:"陸百円です。", contohRomaji:"Roppyaku'en desu.", contohId:"Enam ratus yen."},
+  {kat:"Angka Formal & Uang", kanji:"漆", kana:"しち", romaji:"shichi", arti:"tujuh (angka formal)", contohJp:"漆は七の大字です。", contohRomaji:"Shichi wa nana no daiji desu.", contohId:"漆 adalah angka formal untuk 七."},
+  {kat:"Angka Formal & Uang", kanji:"捌", kana:"はち", romaji:"hachi", arti:"delapan (angka formal)", contohJp:"捌は八の大字です。", contohRomaji:"Hachi wa hachi no daiji desu.", contohId:"捌 adalah angka formal untuk 八."},
+  {kat:"Angka Formal & Uang", kanji:"玖", kana:"きゅう", romaji:"kyuu", arti:"sembilan (angka formal)", contohJp:"玖は九の大字です。", contohRomaji:"Kyuu wa kyuu no daiji desu.", contohId:"玖 adalah angka formal untuk 九."},
+  {kat:"Angka Formal & Uang", kanji:"拾", kana:"じゅう", romaji:"juu", arti:"sepuluh (angka formal)", contohJp:"拾は十の大字です。", contohRomaji:"Juu wa juu no daiji desu.", contohId:"拾 adalah angka formal untuk 十."},
+  {kat:"Angka Formal & Uang", kanji:"お札", kana:"おさつ", romaji:"osatsu", arti:"uang kertas", contohJp:"お札を数えます。", contohRomaji:"Osatsu o kazoemasu.", contohId:"Menghitung uang kertas."},
+  {kat:"Angka Formal & Uang", kanji:"紙幣", kana:"しへい", romaji:"shihei", arti:"uang kertas (formal)", contohJp:"この紙幣は新しいです。", contohRomaji:"Kono shihei wa atarashii desu.", contohId:"Uang kertas ini baru."},
+  {kat:"Angka Formal & Uang", kanji:"硬貨", kana:"こうか", romaji:"kouka", arti:"uang logam", contohJp:"硬貨が財布に入っています。", contohRomaji:"Kouka ga saifu ni haitte imasu.", contohId:"Uang logam ada di dompet."},
+  {kat:"Angka Formal & Uang", kanji:"一万円札", kana:"いちまんえんさつ", romaji:"ichimanensatsu", arti:"uang kertas 10.000 yen", contohJp:"一万円札を千円札に替えてください。", contohRomaji:"Ichimanensatsu o sen'ensatsu ni kaete kudasai.", contohId:"Tolong tukarkan uang 10.000 yen ke uang 1.000 yen."},
 ];
