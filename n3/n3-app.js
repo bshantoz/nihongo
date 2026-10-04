@@ -226,22 +226,98 @@
         if(hay.indexOf(q) === -1) return;
       }
       var tr = document.createElement("tr");
+      tr.setAttribute("data-i", idx); tr.tabIndex = 0; tr.setAttribute("role", "button");
       var arch = isArchived(w), fav = isFav(w);
       tr.innerHTML = "<td>" + w.kanji + "</td><td>" + w.kana + "</td><td>" + w.romaji + "</td><td>" + w.arti + "</td>" +
         "<td>" + (arch ? "<span class=\"n3-badge-archived\">Hapal</span>" : "") +
-        "<button class=\"n3-fav\" type=\"button\" data-i=\"" + idx + "\" aria-pressed=\"" + (fav ? "true" : "false") + "\" aria-label=\"" + (fav ? "Hapus dari favorit" : "Tandai favorit") + "\">" + FAV_SVG + "</button></td>";
+        "<button class=\"n3-fav\" type=\"button\" data-i=\"" + idx + "\" aria-pressed=\"" + (fav ? "true" : "false") + "\" aria-label=\"" + (fav ? "Hapus dari favorit" : "Tandai favorit") + "\">" + FAV_SVG + "</button><span class=\"n3-chev\" aria-hidden=\"true\">&rsaquo;</span></td>";
       daftarBody.appendChild(tr);
     });
   }
+  function refreshDeckKeep(){
+    var cur = currentDeck[cardIndex];
+    buildDeck();
+    var ix = cur ? currentDeck.indexOf(cur) : -1;
+    cardIndex = ix >= 0 ? ix : 0;
+    renderCard();
+  }
+  var daftarListEl = document.getElementById("daftarList");
+  var daftarDetailEl = document.getElementById("daftarDetail");
+  var daftarWrapEl = document.querySelector("#panel-daftar .n3-list-wrap");
+  var detailIdx = -1, listScroll = 0;
+  var BUSHU_URL = "/p/materi-dan-kuis-kanji-metode-bushu.html";
+  function escH(s){ return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+  function kanjiOf(s){
+    var m = String(s).match(/[一-鿿々]/g) || [], out = [];
+    m.forEach(function(c){ if(out.indexOf(c) === -1) out.push(c); });
+    return out;
+  }
+  function renderDetail(){
+    var w = KOTOBA[detailIdx];
+    if(!w){ closeDetail(); return; }
+    var fav = isFav(w), arch = isArchived(w), ks = kanjiOf(w.kanji);
+    var h = "<button class=\"n3-back\" id=\"dBack\" type=\"button\">&larr; Kembali ke daftar</button>" +
+      "<div class=\"n3-dcard\">" +
+        "<button class=\"n3-fav\" id=\"dFav\" type=\"button\" aria-pressed=\"" + (fav ? "true" : "false") + "\" aria-label=\"" + (fav ? "Hapus dari favorit" : "Tandai favorit") + "\">" + FAV_SVG + "</button>" +
+        "<div class=\"n3-d-kanji\">" + escH(w.kanji) + "</div>" +
+        "<div class=\"n3-d-kana\">" + escH(w.kana) + " <span>(" + escH(w.romaji) + ")</span></div>" +
+        (w.kat ? "<span class=\"n3-d-kat\">" + escH(w.kat) + "</span>" : "") +
+      "</div>" +
+      "<div class=\"n3-dsec\"><h4>Arti</h4><p class=\"n3-d-arti\">" + escH(w.arti) + "</p></div>" +
+      (w.contohJp ? "<div class=\"n3-dsec\"><h4>Contoh kalimat</h4><div class=\"n3-d-ex\"><span class=\"jp\">" + escH(w.contohJp) + "</span><span class=\"romaji\">" + escH(w.contohRomaji) + "</span><span class=\"id\">" + escH(w.contohId) + "</span></div></div>" : "") +
+      (ks.length ? "<div class=\"n3-dsec\"><h4>Kanji</h4><div class=\"n3-d-kj\">" + ks.map(function(c){
+          return "<a class=\"n3-kj\" href=\"" + BUSHU_URL + "?q=" + encodeURIComponent(c) + "&tab=asal\">" + c + " <small>&#8599;</small></a>";
+        }).join("") + "</div><p class=\"n3-d-note\">Ketuk kanji untuk melihat bushu, susunan, dan cara menulisnya.</p></div>" : "") +
+      "<button class=\"n3-btn n3-btn-outline n3-wide\" id=\"dHapal\" type=\"button\">" + (arch ? "Batalkan hapal" : "Tandai hapal") + "</button>";
+    daftarDetailEl.innerHTML = h;
+  }
+  function openDetail(idx){
+    listScroll = daftarWrapEl ? daftarWrapEl.scrollTop : 0;
+    detailIdx = idx;
+    renderDetail();
+    daftarListEl.hidden = true;
+    daftarDetailEl.hidden = false;
+    var root = document.getElementById("n3app");
+    if(root){ var r = root.getBoundingClientRect(); if(r.top < 0) window.scrollTo(0, window.pageYOffset + r.top - 70); }
+  }
+  function closeDetail(){
+    detailIdx = -1;
+    daftarDetailEl.hidden = true;
+    daftarListEl.hidden = false;
+    if(daftarWrapEl) daftarWrapEl.scrollTop = listScroll;
+  }
+  daftarDetailEl.addEventListener("click", function(e){
+    var t = e.target.closest ? e.target.closest("button") : null;
+    if(!t) return;
+    var w = KOTOBA[detailIdx];
+    if(t.id === "dBack"){ closeDetail(); return; }
+    if(!w) return;
+    if(t.id === "dFav"){ toggleFav(w); }
+    else if(t.id === "dHapal"){ if(isArchived(w)) unarchiveWord(w); else archiveWord(w); }
+    else return;
+    renderDetail(); renderDaftar(); refreshDeckKeep();
+  });
+  var daftarTabBtn = document.querySelector("#n3app .n3-tab[data-panel=\"daftar\"]");
+  if(daftarTabBtn) daftarTabBtn.addEventListener("click", function(){ if(detailIdx >= 0) closeDetail(); });
   daftarBody.addEventListener("click", function(e){
     var b = e.target.closest ? e.target.closest(".n3-fav") : null;
-    if(!b) return;
-    var w = KOTOBA[parseInt(b.getAttribute("data-i"), 10)];
-    if(!w) return;
-    toggleFav(w);
-    renderDaftar();
-    if(deckMode === "fav"){ buildDeck(); }
-    renderCard();
+    if(b){
+      var w = KOTOBA[parseInt(b.getAttribute("data-i"), 10)];
+      if(!w) return;
+      toggleFav(w);
+      renderDaftar();
+      refreshDeckKeep();
+      return;
+    }
+    var tr = e.target.closest ? e.target.closest("tr") : null;
+    if(tr && tr.hasAttribute("data-i")) openDetail(parseInt(tr.getAttribute("data-i"), 10));
+  });
+  daftarBody.addEventListener("keydown", function(e){
+    if(e.key !== "Enter" && e.key !== " ") return;
+    var tr = e.target && e.target.tagName === "TR" ? e.target : null;
+    if(!tr || !tr.hasAttribute("data-i")) return;
+    e.preventDefault();
+    openDetail(parseInt(tr.getAttribute("data-i"), 10));
   });
   daftarFavOnly.addEventListener("click", function(){
     favOnly = !favOnly;
