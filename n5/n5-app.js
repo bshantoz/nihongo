@@ -29,6 +29,20 @@
     if(idx !== -1){ archived.splice(idx,1); saveArchived(archived); }
   }
 
+  // Favorit (kunci terpisah dari arsip hapal)
+  var FAV_KEY = "n5_kotoba_fav_v1";
+  function loadFav(){
+    try{ var raw = localStorage.getItem(FAV_KEY); var a = raw ? JSON.parse(raw) : []; return Array.isArray(a) ? a : []; }catch(e){ return []; }
+  }
+  var favs = loadFav();
+  function isFav(w){ return favs.indexOf(wordKey(w)) !== -1; }
+  function toggleFav(w){
+    favs = loadFav();
+    var k = wordKey(w), i = favs.indexOf(k);
+    if(i === -1) favs.push(k); else favs.splice(i,1);
+    try{ localStorage.setItem(FAV_KEY, JSON.stringify(favs)); }catch(e){}
+  }
+
   // ===================== TAB SWITCHING =====================
   var tabs = document.querySelectorAll("#n5app .n5-tab");
   var panels = document.querySelectorAll("#n5app .n5-panel");
@@ -48,24 +62,27 @@
 
   var kartuKategoriSel = document.getElementById("kartuKategori");
   var optAll = document.createElement("option");
-  optAll.value = ""; optAll.textContent = "Semua Kategori";
+  optAll.value = ""; optAll.textContent = "Semua kategori";
   kartuKategoriSel.appendChild(optAll);
   kategoriList.forEach(function(k){
     var o = document.createElement("option"); o.value = k; o.textContent = k;
     kartuKategoriSel.appendChild(o);
   });
 
-  var showArchivedChk = document.getElementById("kartuShowArchived");
+  var deckMode = "belum"; // belum | hapal | fav
   var cardIndex = 0;
   var currentDeck = [];
 
+  function inMode(w, mode){
+    if(mode === "hapal") return isArchived(w);
+    if(mode === "fav") return isFav(w);
+    return !isArchived(w);
+  }
   function buildDeck(){
     var kat = kartuKategoriSel.value;
-    var showArch = showArchivedChk.checked;
     currentDeck = KOTOBA.filter(function(w){
       if(kat && w.kat !== kat) return false;
-      var arch = isArchived(w);
-      return showArch ? arch : !arch;
+      return inMode(w, deckMode);
     });
     cardIndex = 0;
   }
@@ -77,20 +94,42 @@
   var fcArti = document.getElementById("fcArti");
   var fcContoh = document.getElementById("fcContoh");
   var kartuCounter = document.getElementById("kartuCounter");
-  var btnArchive = document.getElementById("btnArchive");
-  var btnUnarchive = document.getElementById("btnUnarchive");
+  var kartuStatus = document.getElementById("kartuStatus");
+  var kartuBar = document.getElementById("kartuBar");
+  var btnHapal = document.getElementById("btnHapal");
+  var btnFav = document.getElementById("btnFav");
+  var modeChips = document.querySelectorAll("#kartuMode .n5-chip");
+
+  function updateChips(){
+    var kat = kartuKategoriSel.value;
+    modeChips.forEach(function(c){
+      var m = c.getAttribute("data-mode"), n = 0;
+      KOTOBA.forEach(function(w){ if((!kat || w.kat === kat) && inMode(w, m)) n++; });
+      c.querySelector(".n5-n").textContent = n;
+      c.classList.toggle("on", m === deckMode);
+    });
+  }
+  function emptyMsg(){
+    if(deckMode === "hapal") return "Belum ada kata yang ditandai hapal.";
+    if(deckMode === "fav") return "Belum ada favorit. Ketuk ikon bookmark di kartu untuk menyimpan.";
+    return "Semua kata di kategori ini sudah hapal.";
+  }
 
   function renderCard(){
     flashcardEl.classList.remove("flipped");
-    if(currentDeck.length === 0){
-      fcKanji.textContent = "🎉";
+    updateChips();
+    var n = currentDeck.length;
+    flashcardEl.classList.toggle("n5-empty", n === 0);
+    if(n === 0){
+      fcKanji.textContent = emptyMsg();
       fcKat.textContent = "";
-      fcKana.textContent = "Tidak ada kartu di sini";
-      fcArti.textContent = showArchivedChk.checked ? "Belum ada kata yang diarsipkan." : "Semua kata di kategori ini sudah diarsipkan!";
-      fcContoh.innerHTML = "";
+      fcKana.textContent = ""; fcArti.textContent = ""; fcContoh.innerHTML = "";
       kartuCounter.textContent = "0 / 0";
-      btnArchive.style.display = showArchivedChk.checked ? "none" : "none";
-      btnUnarchive.style.display = "none";
+      kartuStatus.textContent = "";
+      kartuBar.style.width = "0%";
+      btnHapal.disabled = true;
+      btnHapal.textContent = "Tandai hapal";
+      btnFav.hidden = true;
       return;
     }
     var w = currentDeck[cardIndex];
@@ -100,20 +139,22 @@
     fcArti.textContent = w.arti;
     fcContoh.innerHTML = w.contohJp ?
       ("<span class=\"jp\">" + w.contohJp + "</span><span class=\"romaji\">" + w.contohRomaji + "</span><span class=\"id\">" + w.contohId + "</span>") : "";
-    kartuCounter.textContent = (cardIndex+1) + " / " + currentDeck.length;
-    if(showArchivedChk.checked){
-      btnArchive.style.display = "none";
-      btnUnarchive.style.display = "inline-block";
-    } else {
-      btnArchive.style.display = "inline-block";
-      btnUnarchive.style.display = "none";
-    }
+    kartuCounter.textContent = (cardIndex+1) + " / " + n;
+    kartuBar.style.width = ((cardIndex+1) / n * 100) + "%";
+    var arch = isArchived(w);
+    kartuStatus.textContent = arch ? "Sudah hapal" : "";
+    btnHapal.disabled = false;
+    btnHapal.textContent = arch ? "Batalkan hapal" : "Tandai hapal";
+    btnFav.hidden = false;
+    var fav = isFav(w);
+    btnFav.setAttribute("aria-pressed", fav ? "true" : "false");
+    btnFav.setAttribute("aria-label", fav ? "Hapus dari favorit" : "Tandai favorit");
   }
 
   flashcardEl.addEventListener("click", function(){
+    if(currentDeck.length === 0) return;
     flashcardEl.classList.toggle("flipped");
   });
-
   document.getElementById("btnNextCard").addEventListener("click", function(){
     if(currentDeck.length === 0) return;
     cardIndex = (cardIndex + 1) % currentDeck.length;
@@ -124,26 +165,34 @@
     cardIndex = (cardIndex - 1 + currentDeck.length) % currentDeck.length;
     renderCard();
   });
-  btnArchive.addEventListener("click", function(){
-    if(currentDeck.length === 0) return;
-    var w = currentDeck[cardIndex];
-    archiveWord(w);
-    buildDeck();
-    if(cardIndex >= currentDeck.length) cardIndex = 0;
+  function afterChange(removeFromDeck){
+    if(removeFromDeck){
+      currentDeck.splice(cardIndex, 1);
+      if(cardIndex >= currentDeck.length) cardIndex = 0;
+    }
     renderCard();
     renderDaftar();
+  }
+  btnHapal.addEventListener("click", function(){
+    if(currentDeck.length === 0) return;
+    var w = currentDeck[cardIndex];
+    if(isArchived(w)) unarchiveWord(w); else archiveWord(w);
+    // di mode "belum" dan "hapal", kartu yang berubah status keluar dari tumpukan; di mode favorit tetap
+    afterChange(deckMode !== "fav");
   });
-  btnUnarchive.addEventListener("click", function(){
+  btnFav.addEventListener("click", function(){
     if(currentDeck.length === 0) return;
     var w = currentDeck[cardIndex];
-    unarchiveWord(w);
-    buildDeck();
-    if(cardIndex >= currentDeck.length) cardIndex = 0;
-    renderCard();
-    renderDaftar();
+    toggleFav(w);
+    afterChange(deckMode === "fav");
+  });
+  modeChips.forEach(function(c){
+    c.addEventListener("click", function(){
+      deckMode = c.getAttribute("data-mode");
+      buildDeck(); renderCard();
+    });
   });
   kartuKategoriSel.addEventListener("change", function(){ buildDeck(); renderCard(); });
-  showArchivedChk.addEventListener("change", function(){ buildDeck(); renderCard(); });
 
   buildDeck();
   renderCard();
@@ -151,7 +200,7 @@
   // ===================== DAFTAR KOTOBA =====================
   var daftarKategoriSel = document.getElementById("daftarKategori");
   var optAll2 = document.createElement("option");
-  optAll2.value = ""; optAll2.textContent = "Semua Kategori";
+  optAll2.value = ""; optAll2.textContent = "Semua kategori";
   daftarKategoriSel.appendChild(optAll2);
   kategoriList.forEach(function(k){
     var o = document.createElement("option"); o.value = k; o.textContent = k;
@@ -160,23 +209,45 @@
   var daftarSearch = document.getElementById("daftarSearch");
   var daftarBody = document.getElementById("daftarBody");
 
+  var daftarFavOnly = document.getElementById("daftarFavOnly");
+  var favOnly = false;
+  var FAV_SVG = "<svg class=\"off\" viewBox=\"0 0 24 24\"><path d=\"M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z\"/></svg>" +
+    "<svg class=\"on\" viewBox=\"0 0 24 24\"><path d=\"M16.8203 1.91016H7.18031C5.06031 1.91016 3.32031 3.65016 3.32031 5.77016V19.8602C3.32031 21.6602 4.61031 22.4202 6.19031 21.5502L11.0703 18.8402C11.5903 18.5502 12.4303 18.5502 12.9403 18.8402L17.8203 21.5502C19.4003 22.4302 20.6903 21.6702 20.6903 19.8602V5.77016C20.6803 3.65016 18.9503 1.91016 16.8203 1.91016Z\"/></svg>";
+
   function renderDaftar(){
     var q = daftarSearch.value.trim().toLowerCase();
     var kat = daftarKategoriSel.value;
     daftarBody.innerHTML = "";
-    KOTOBA.forEach(function(w){
+    KOTOBA.forEach(function(w, idx){
       if(kat && w.kat !== kat) return;
+      if(favOnly && !isFav(w)) return;
       if(q){
         var hay = (w.kanji + w.kana + w.romaji + w.arti).toLowerCase();
         if(hay.indexOf(q) === -1) return;
       }
       var tr = document.createElement("tr");
-      var arch = isArchived(w);
+      var arch = isArchived(w), fav = isFav(w);
       tr.innerHTML = "<td>" + w.kanji + "</td><td>" + w.kana + "</td><td>" + w.romaji + "</td><td>" + w.arti + "</td>" +
-        "<td>" + (arch ? "<span class=\"n5-badge-archived\">Dihapal</span>" : "") + "</td>";
+        "<td>" + (arch ? "<span class=\"n5-badge-archived\">Hapal</span>" : "") +
+        "<button class=\"n5-fav\" type=\"button\" data-i=\"" + idx + "\" aria-pressed=\"" + (fav ? "true" : "false") + "\" aria-label=\"" + (fav ? "Hapus dari favorit" : "Tandai favorit") + "\">" + FAV_SVG + "</button></td>";
       daftarBody.appendChild(tr);
     });
   }
+  daftarBody.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest(".n5-fav") : null;
+    if(!b) return;
+    var w = KOTOBA[parseInt(b.getAttribute("data-i"), 10)];
+    if(!w) return;
+    toggleFav(w);
+    renderDaftar();
+    if(deckMode === "fav"){ buildDeck(); }
+    renderCard();
+  });
+  daftarFavOnly.addEventListener("click", function(){
+    favOnly = !favOnly;
+    daftarFavOnly.setAttribute("aria-pressed", favOnly ? "true" : "false");
+    renderDaftar();
+  });
   daftarSearch.addEventListener("input", renderDaftar);
   daftarKategoriSel.addEventListener("change", renderDaftar);
   renderDaftar();
@@ -279,7 +350,7 @@
     if(i === q.correct) quizState.score++;
     var explain = document.getElementById("quizExplain");
     explain.style.display = "block";
-    explain.textContent = (i === q.correct ? "✔ Benar! " : "✘ Kurang tepat. ") + q.penjelasan;
+    explain.textContent = (i === q.correct ? "Benar. " : "Kurang tepat. ") + q.penjelasan;
     document.getElementById("btnNextQuestion").style.display =
       (quizState.idx < quizState.list.length - 1) ? "inline-block" : "none";
     if(quizState.idx >= quizState.list.length - 1){
@@ -365,7 +436,7 @@
     });
     var explain = document.getElementById("choukaiExplain");
     explain.style.display = "block";
-    explain.textContent = (i === item.correct ? "✔ Benar! " : "✘ Kurang tepat. ") + item.penjelasan;
+    explain.textContent = (i === item.correct ? "Benar. " : "Kurang tepat. ") + item.penjelasan;
   }
 
   // ---------- Pemilihan suara laki-laki / perempuan (ja-JP) ----------
@@ -516,7 +587,7 @@
         var all = window.speechSynthesis.getVoices();
         var jaVoices = all.filter(function(v){ return (v.lang||"").toLowerCase().indexOf("ja") === 0; });
         if(jaVoices.length === 0){
-          resultEl.innerHTML = "⚠️ Tidak ditemukan suara berbahasa Jepang di perangkat/browser ini. " +
+          resultEl.innerHTML = "Tidak ditemukan suara berbahasa Jepang di perangkat/browser ini. " +
             "Audio tetap akan dicoba diputar pakai suara default, dibedakan lewat nada saja. " +
             "Coba tambahkan suara Jepang lewat pengaturan Text-to-Speech di HP/laptop ini.";
           return;
@@ -529,7 +600,7 @@
           html += "<div class=\"n5-voice-row\"><span class=\"n5-voice-tag " + tag + "\">" + tag.replace("none","-") + "</span>" + v.name + " (" + v.lang + ") — " + label + "</div>";
         });
         if(profiles.L.voice === profiles.P.voice){
-          html += "<div style=\"margin-top:8px;color:rgba(20,40,60,.6)\">Cuma ada 1 suara Jepang, jadi laki-laki/perempuan dibedakan lewat nada (pitch) saja, bukan suara asli berbeda.</div>";
+          html += "<div style=\"margin-top:8px;opacity:.7\">Cuma ada 1 suara Jepang, jadi laki-laki/perempuan dibedakan lewat nada (pitch) saja, bukan suara asli berbeda.</div>";
         }
         resultEl.innerHTML = html;
       });
