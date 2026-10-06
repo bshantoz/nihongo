@@ -85,8 +85,7 @@ main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;
 .foot{color:var(--muted);font-size:.82rem;margin:0}
 @media (prefers-reduced-motion:no-preference){.c{transition:background .12s}}
 </style>
-</head>
-<body>
+
 <div class="wrap">
   <header>
     <h1>クロスワード<small>kurosuwādo · teka-teki silang bahasa Jepang</small></h1>
@@ -395,16 +394,34 @@ function hint(){
   }
   renderAll();
 }
-function speak(text){
+
+/* ---------- Suara: pakai suara browser; kalau tidak ada voice Jepang, pakai TTS online ---------- */
+var JS={au:null};
+function jaVoices(){try{return (window.speechSynthesis&&speechSynthesis.getVoices?speechSynthesis.getVoices():[]).filter(function(x){return /^ja/i.test(x.lang);});}catch(e){return [];}}
+function jaStop(){try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}try{if(JS.au)JS.au.pause();}catch(e){}}
+function jaSay(text,o){
+  o=o||{};var rate=o.rate||.85;jaStop();
+  var vs=jaVoices();
+  if(vs.length&&window.SpeechSynthesisUtterance){
+    try{
+      var u=new SpeechSynthesisUtterance(text);u.lang='ja-JP';u.rate=rate;if(o.pitch)u.pitch=o.pitch;
+      u.voice=o.pick?o.pick(vs):vs[0];
+      if(o.end){u.onend=o.end;u.onerror=o.end;}
+      speechSynthesis.speak(u);return 'browser';
+    }catch(e){}
+  }
   try{
-    if(!window.speechSynthesis)return;
-    speechSynthesis.cancel();
-    var u=new SpeechSynthesisUtterance(text);u.lang='ja-JP';u.rate=.85;
-    var v=speechSynthesis.getVoices().filter(function(x){return /^ja/i.test(x.lang);})[0];
-    if(v)u.voice=v;
-    speechSynthesis.speak(u);
+    if(!JS.au)JS.au=new Audio();
+    var a=JS.au,pr=Math.min(1.25,Math.max(.6,rate/.85));
+    a.onended=a.onerror=function(){if(o.end)o.end();};
+    a.src='https://translate.google.com/translate_tts?ie=UTF8&client=tw-ob&tl=ja&q='+encodeURIComponent(text);
+    a.defaultPlaybackRate=pr;a.playbackRate=pr;
+    var p=a.play();if(p&&p.catch)p.catch(function(){if(o.end)o.end();});
+    return 'online';
   }catch(e){}
+  if(o.end)o.end();return '';
 }
+function speak(t){jaSay(t,{rate:.85});}
 
 /* ---------- Papan ketik kana ---------- */
 var PAD=['あいうえお','かきくけこ','さしすせそ','たちつてと','なにぬねの','はひふへほ','まみむめも','や_ゆ_よ','らりるれろ','わんゃゅょ','がぎぐげご','ざじずぜぞ','だぢづでど','ばびぶべぼ','ぱぴぷぺぽ'];

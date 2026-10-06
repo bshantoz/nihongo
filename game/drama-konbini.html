@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Mini Drama Konbini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: panggung SVG di atas, panel dialog di bawahnya, kontrol kecil paling bawah; kuis menggantikan panel dialog */
+:root{
+  --bg:#f2f1ee; --surface:#ffffff; --ink:#241c16; --muted:#6e6358; --line:#ddd6cc;
+  --accent:#c4540f; --accent-ink:#ffffff; --tint:#fbe6d6;
+  --ok:#1f7a45; --ok-bg:#d6efdf; --bad:#b3342f; --bad-bg:#f9dad7;
+  --s-wall:#e3ece7; --s-floor:#cbd3cc; --s-shelf:#a8b3ad; --s-banner:#2f6f6a; --s-counter:#8c6b4f; --s-top:#d9c7b0; --s-reg:#4c5862; --s-glass:#bfe3f5;
+  --font-display:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
+  --font-body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17130f; --surface:#241d17; --ink:#f4ece3; --muted:#b6a898; --line:#3a2f26;
+  --accent:#f09a5a; --accent-ink:#17130f; --tint:#3f2a1c;
+  --ok:#7fdca5; --ok-bg:#173a27; --bad:#ff8c85; --bad-bg:#47201f;
+  --s-wall:#26332f; --s-floor:#1e2724; --s-shelf:#46544e; --s-banner:#2a5c58; --s-counter:#5d4633; --s-top:#8b7459; --s-reg:#39434b; --s-glass:#3d5666; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17130f; --surface:#241d17; --ink:#f4ece3; --muted:#b6a898; --line:#3a2f26;
+  --accent:#f09a5a; --accent-ink:#17130f; --tint:#3f2a1c;
+  --ok:#7fdca5; --ok-bg:#173a27; --bad:#ff8c85; --bad-bg:#47201f;
+  --s-wall:#26332f; --s-floor:#1e2724; --s-shelf:#46544e; --s-banner:#2a5c58; --s-counter:#5d4633; --s-top:#8b7459; --s-reg:#39434b; --s-glass:#3d5666; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:20px 48px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:560px;margin-inline:auto;display:grid;gap:12px}
+h1{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(1.6rem,6vw,2.2rem);line-height:1.15}
+h1 small{display:block;font-family:var(--font-body);font-weight:500;font-size:.78rem;letter-spacing:.08em;color:var(--muted);margin-top:4px;text-transform:uppercase}
+.stage{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--s-wall);line-height:0}
+#svg{width:100%;height:auto;display:block}
+.wall{fill:var(--s-wall)}.floor{fill:var(--s-floor)}.shelf{fill:var(--s-shelf)}.banner{fill:var(--s-banner)}
+.cnt{fill:var(--s-counter)}.top{fill:var(--s-top)}.reg{fill:var(--s-reg)}.glass{fill:var(--s-glass)}
+.btxt{font-family:var(--font-display);font-weight:800;font-size:13px;fill:#fff;letter-spacing:.12em}
+.emo{font:800 20px var(--font-display);opacity:0;transition:opacity .2s}
+.emo.on{opacity:1}
+/* gerak karakter */
+.breathe{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.eyes{animation:blink 4.6s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.tailw{animation:tail 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:0% 100%}
+@keyframes tail{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}
+.mo{opacity:0}
+.talk .mo{animation:mouth .34s steps(1) infinite}
+@keyframes mouth{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+.hop{animation:hop .6s ease-out}
+@keyframes hop{0%{transform:translateY(0)}35%{transform:translateY(-12px)}70%{transform:translateY(0)}85%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+#clerk{transform-origin:290px 150px}
+.bow{animation:bow 1.1s ease-in-out}
+@keyframes bow{0%{transform:rotate(0)}35%,60%{transform:rotate(16deg)}100%{transform:rotate(0)}}
+.nod{animation:nod .7s ease-in-out}
+@keyframes nod{0%,100%{transform:translateY(0)}30%{transform:translateY(5px)}60%{transform:translateY(0)}}
+.item,.cash,.chg,.steam{opacity:0;transition:opacity .35s,transform .45s}
+.item{transform:translateY(-14px)}
+.s-items .item{opacity:1;transform:translateY(0)}
+.s-items .bk{opacity:0}
+.bk{transition:opacity .3s}
+.s-money .cash{opacity:1}
+.s-change .chg{opacity:1}
+.s-heat .mw{animation:shake .25s linear 4}
+@keyframes shake{0%,100%{transform:translateX(0)}50%{transform:translateX(1.5px)}}
+.s-heat .glow{opacity:1}
+.glow{opacity:0;transition:opacity .3s}
+.s-ding .steam{opacity:.9;animation:steam 1.6s ease-out}
+@keyframes steam{0%{transform:translateY(6px);opacity:0}30%{opacity:.9}100%{transform:translateY(-10px);opacity:0}}
+/* panel dialog */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:8px;min-height:190px;align-content:start}
+.who{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.dot.c{background:#2f8f8c}
+.jp{font-family:var(--font-display);font-weight:600;font-size:clamp(1.3rem,5.4vw,1.7rem);line-height:1.4;overflow-wrap:anywhere}
+.ro{color:var(--accent);font-size:.95rem;overflow-wrap:anywhere}
+.id{color:var(--ink);opacity:.85}
+.vocab{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:3px 10px;font-size:.82rem}
+.chip b{font-family:var(--font-display);font-weight:600}
+.nav{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 16px;font-weight:700}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.4;cursor:default}
+.prog{display:flex;gap:4px;flex:1;min-width:80px}
+.prog i{flex:1;height:5px;border-radius:99px;background:var(--line)}
+.prog i.d{background:var(--accent)}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.tg{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-size:.85rem;font-weight:500}
+.tg[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+select.tg{appearance:auto;color:inherit}
+.q{margin:0;font-weight:700}
+.qo{display:grid;gap:6px}
+.o{text-align:left;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);padding:10px 12px;min-height:44px;overflow-wrap:anywhere}
+.o.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.o.bad{background:var(--bad-bg);border-color:var(--bad)}
+.o:disabled{cursor:default}
+.fb{background:var(--tint);border-radius:10px;padding:10px 12px}
+.foot{color:var(--muted);font-size:.82rem;margin:0}
+@media (prefers-reduced-motion:reduce){.breathe,.eyes,.tailw,.talk .mo,.hop,.bow,.nod,.s-heat .mw,.s-ding .steam{animation:none}.talk .mo{opacity:.7}}
+</style>
+
+<div class="wrap">
+  <header><h1>コンビニで<small>konbini de · mini drama di minimarket</small></h1></header>
+  <div class="stage" id="stageBox"></div>
+  <div class="panel" id="panel"></div>
+  <div class="nav" id="nav"></div>
+  <div class="opts" id="opts" role="group" aria-label="Pengaturan"></div>
+  <p class="foot">Suara memakai pengisi suara Jepang bawaan browser, jadi kualitasnya bergantung pada perangkat.</p>
+</div>
+
+<script>
+/* ---------- Naskah ---------- */
+var LINES=[
+ {w:'c',j:'いらっしゃいませ。',r:'Irasshaimase.',i:'Selamat datang.',act:'bow',v:[['いらっしゃいませ','irasshaimase','sapaan pelayan: selamat datang']]},
+ {w:'m',j:'これを おねがいします。',r:'Kore o onegaishimasu.',i:'Tolong yang ini.',act:'hop',v:[['おねがいします','onegaishimasu','tolong / saya minta'],['これ','kore','ini']]},
+ {w:'c',j:'おべんとうは あたためますか。',r:'Obentou wa atatamemasu ka.',i:'Bentonya mau dihangatkan?',act:'nod',em:'?',v:[['おべんとう','obentou','bekal / bento'],['あたためる','atatameru','menghangatkan']]},
+ {w:'m',j:'はい、おねがいします。',r:'Hai, onegaishimasu.',i:'Ya, tolong.',act:'nod',v:[['はい','hai','ya']]},
+ {w:'c',j:'ふくろは いりますか。',r:'Fukuro wa irimasu ka.',i:'Perlu kantong plastik?',act:'nod',em:'?',v:[['ふくろ','fukuro','kantong'],['いる','iru','perlu']]},
+ {w:'m',j:'いいえ、だいじょうぶです。',r:'Iie, daijoubu desu.',i:'Tidak, tidak perlu.',act:'nod',v:[['いいえ','iie','tidak'],['だいじょうぶ','daijoubu','tidak apa-apa / cukup']]},
+ {w:'c',j:'ぜんぶで ろっぴゃく さんじゅうえんです。',r:'Zenbu de roppyaku sanjuu en desu.',i:'Totalnya 630 yen.',act:'nod',v:[['ぜんぶで','zenbu de','totalnya'],['ろっぴゃく','roppyaku','600'],['さんじゅう','sanjuu','30']]},
+ {w:'m',j:'せんえんで おねがいします。',r:'Sen-en de onegaishimasu.',i:'Saya bayar pakai 1.000 yen.',act:'hop',em:'♪',v:[['せんえん','sen-en','1.000 yen'],['〜で','de','dengan / pakai']]},
+ {w:'c',j:'せんえん おあずかりします。さんびゃく ななじゅうえんの おかえしです。',r:'Sen-en oazukari shimasu. Sanbyaku nanajuu en no okaeshi desu.',i:'Saya terima 1.000 yen. Kembaliannya 370 yen.',act:'bow',v:[['おあずかりします','oazukari shimasu','saya terima (uang)'],['さんびゃく','sanbyaku','300'],['おかえし','okaeshi','kembalian']]},
+ {w:'m',j:'ありがとう。',r:'Arigatou.',i:'Terima kasih.',act:'hop',em:'♥',v:[['ありがとう','arigatou','terima kasih']]},
+ {w:'c',j:'ありがとうございました。また どうぞ。',r:'Arigatou gozaimashita. Mata douzo.',i:'Terima kasih. Silakan datang lagi.',act:'bow',em:'♪',v:[['また','mata','lagi'],['どうぞ','douzo','silakan']]}
+];
+var QUIZ=[
+ {q:'Kasir bertanya "Fukuro wa irimasu ka?". Artinya?',a:'Perlu kantong plastik?',w:['Mau bayar tunai?','Mau dihangatkan?','Ada kartu poin?'],f:'Fukuro = kantong, irimasu = perlu.'},
+ {q:'Berapa total belanja Mochi?',a:'630 yen',w:['360 yen','1.000 yen','603 yen'],f:'Roppyaku sanjuu en = 600 + 30 = 630 yen. Perhatikan: 600 dibaca roppyaku, bukan rokuhyaku.'},
+ {q:'Bagaimana cara sopan menolak kantong?',a:'Iie, daijoubu desu.',w:['Hai, onegaishimasu.','Irasshaimase.','Arigatou gozaimashita.'],f:'Daijoubu desu di sini berarti "tidak perlu, cukup".'},
+ {q:'Mochi membayar 1.000 yen untuk belanja 630 yen. Berapa kembaliannya?',a:'370 yen',w:['270 yen','470 yen','730 yen'],f:'Sanbyaku nanajuu en = 300 + 70 = 370 yen. 300 dibaca sanbyaku.'}
+];
+
+/* ---------- Panggung ---------- */
+function shelfUnit(x,y,w,rows,seed){
+  var cols=['#e9806e','#f2c14e','#6fb98f','#6aa0d9','#b58bd6','#f09a5a','#d9d9d9'],s='',k=seed;
+  for(var r=0;r<rows;r++){
+    var yy=y+r*30;
+    for(var cx=x+4;cx<x+w-14;cx+=14){k=(k*37+11)%97;var h=14+(k%9);s+='<rect x="'+cx+'" y="'+(yy+26-h)+'" width="11" height="'+h+'" rx="2" fill="'+cols[k%cols.length]+'" opacity=".9"/>';}
+    s+='<rect class="shelf" x="'+x+'" y="'+(yy+26)+'" width="'+w+'" height="4" rx="1"/>';
+  }
+  return s;
+}
+var MOCHI='<g class="tailw"><path d="M45 54C58 54 60 40 54 34" fill="none" stroke="#5a3a22" stroke-width="7" stroke-linecap="round"/><path d="M45 54C58 54 60 40 54 34" fill="none" stroke="#f2a65a" stroke-width="4.6" stroke-linecap="round"/></g>'+
+ '<ellipse cx="32" cy="50" rx="16" ry="12.5" fill="#f2a65a" stroke="#5a3a22" stroke-width="1.6"/><ellipse cx="32" cy="53" rx="8.5" ry="8" fill="#fff3e0"/>'+
+ '<ellipse cx="25" cy="59.5" rx="5" ry="3" fill="#fff3e0" stroke="#5a3a22" stroke-width="1.3"/><ellipse cx="39" cy="59.5" rx="5" ry="3" fill="#fff3e0" stroke="#5a3a22" stroke-width="1.3"/>'+
+ '<g id="mhead"><path d="M17.5 24L19 7.5L31 17.5Z" fill="#f2a65a" stroke="#5a3a22" stroke-width="1.6" stroke-linejoin="round"/><path d="M21 19L21.6 12.5L26.5 17Z" fill="#f7b6b6"/>'+
+ '<path d="M46.5 24L45 7.5L33 17.5Z" fill="#f2a65a" stroke="#5a3a22" stroke-width="1.6" stroke-linejoin="round"/><path d="M43 19L42.4 12.5L37.5 17Z" fill="#f7b6b6"/>'+
+ '<ellipse cx="32" cy="29" rx="16" ry="13.5" fill="#f2a65a" stroke="#5a3a22" stroke-width="1.6"/><path d="M32 16.5V21M27 17.5L28 21M37 17.5L36 21" stroke="#c9772e" stroke-width="1.6" stroke-linecap="round"/>'+
+ '<ellipse cx="32" cy="34" rx="7.5" ry="5.2" fill="#fff3e0"/>'+
+ '<g class="eyes"><ellipse cx="25" cy="28.5" rx="2.1" ry="2.8" fill="#3b2415"/><ellipse cx="39" cy="28.5" rx="2.1" ry="2.8" fill="#3b2415"/><circle cx="25.7" cy="27.4" r=".8" fill="#fff"/><circle cx="39.7" cy="27.4" r=".8" fill="#fff"/></g>'+
+ '<path d="M30.2 32.4H33.8L32 34.4Z" fill="#e58a8a"/><path d="M32 34.4V36M32 36Q30.3 37.6 28.6 36.3M32 36Q33.7 37.6 35.4 36.3" fill="none" stroke="#5a3a22" stroke-width="1.1" stroke-linecap="round"/>'+
+ '<ellipse class="mo" cx="32" cy="38.2" rx="2" ry="2.3" fill="#7a2a10"/>'+
+ '<path d="M18 32L10.5 30.5M18 34.5L10.5 35.5M46 32L53.5 30.5M46 34.5L53.5 35.5" stroke="#5a3a22" stroke-width=".9" stroke-linecap="round" opacity=".55"/></g>';
+function buildStage(){
+  var h='<svg viewBox="0 0 400 240" id="svg" role="img" aria-label="Mochi si kucing berbelanja di minimarket dan dilayani seorang kasir">';
+  h+='<rect class="wall" width="400" height="172"/><rect class="floor" y="172" width="400" height="68"/>';
+  h+=shelfUnit(14,36,140,4,3)+shelfUnit(220,36,170,4,7);
+  h+='<rect class="banner" width="400" height="24"/><text class="btxt" x="200" y="17" text-anchor="middle">コンビニ</text><rect x="40" y="28" width="320" height="3" rx="1.5" fill="#fff" opacity=".6"/>';
+  /* kasir */
+  h+='<g id="clerk"><g class="breathe">'+
+     '<rect x="250" y="124" width="16" height="30" rx="8" fill="#2f8f8c"/><rect x="314" y="124" width="16" height="30" rx="8" fill="#2f8f8c"/>'+
+     '<path d="M255 156C255 130 270 119 290 119C310 119 325 130 325 156Z" fill="#2f8f8c"/><polygon points="277,119 290,136 303,119" fill="#fff"/><rect x="304" y="130" width="14" height="8" rx="1.5" fill="#fff"/>'+
+     '<rect x="284" y="104" width="12" height="17" fill="#f2cfae"/>'+
+     '<g id="chead"><circle cx="266" cy="90" r="4" fill="#f2cfae"/><circle cx="314" cy="90" r="4" fill="#f2cfae"/><circle cx="290" cy="88" r="24" fill="#f2cfae"/>'+
+     '<path d="M266 80C268 60 280 54 292 54C306 54 314 62 314 80Z" fill="#2f8f8c"/><path d="M298 78H326Q329 83 323 84H298Z" fill="#256e6c"/>'+
+     '<path d="M268 80Q268 92 271 98M312 80Q312 90 309 98" stroke="#2b2b3a" stroke-width="4" fill="none" stroke-linecap="round"/>'+
+     '<g class="eyes"><ellipse cx="282" cy="89" rx="2.6" ry="3.4" fill="#2b2b3a"/><ellipse cx="298" cy="89" rx="2.6" ry="3.4" fill="#2b2b3a"/></g>'+
+     '<path d="M278 82Q282 79 286 82M294 82Q298 79 302 82" stroke="#2b2b3a" stroke-width="1.4" fill="none" stroke-linecap="round"/>'+
+     '<circle cx="276" cy="97" r="4" fill="#f09a8c" opacity=".5"/><circle cx="304" cy="97" r="4" fill="#f09a8c" opacity=".5"/>'+
+     '<path d="M284 99Q290 105 296 99" stroke="#7a2f2f" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse class="mo" cx="290" cy="101" rx="4.2" ry="4.6" fill="#7a2f2f"/></g>'+
+     '</g></g>';
+  /* meja kasir */
+  h+='<rect class="cnt" x="150" y="156" width="250" height="84"/><rect class="top" x="144" y="148" width="262" height="10" rx="3"/>';
+  h+='<g class="mw"><rect x="156" y="116" width="52" height="32" rx="4" fill="#cfd5d9"/><rect x="162" y="121" width="30" height="22" rx="2" class="glass"/><rect class="glow" x="162" y="121" width="30" height="22" rx="2" fill="#ffd36e"/><circle cx="200" cy="126" r="2.5" fill="#8a949a"/><circle cx="200" cy="134" r="2.5" fill="#8a949a"/></g>';
+  h+='<g class="steam" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity="0"><path d="M170 112Q166 104 171 98M182 112Q178 104 183 98M194 112Q190 104 195 98"/></g>';
+  h+='<g class="reg"><rect x="338" y="118" width="46" height="30" rx="4"/><rect x="344" y="122" width="34" height="12" rx="2" class="glass"/></g>';
+  h+='<g class="item"><rect x="216" y="132" width="30" height="16" rx="3" fill="#e9806e"/><rect x="220" y="136" width="22" height="8" rx="2" fill="#fff" opacity=".85"/><rect x="250" y="126" width="9" height="22" rx="3" fill="#6aa0d9"/><rect x="251.5" y="122" width="6" height="5" rx="1.5" fill="#f2c14e"/></g>';
+  h+='<g class="cash"><rect x="262" y="141" width="26" height="7" rx="1.5" fill="#d8c98a" stroke="#a6954f" stroke-width="1"/><text x="275" y="147" font-size="6" text-anchor="middle" fill="#6b5d1c" font-family="sans-serif">1000</text></g>';
+  h+='<g class="chg"><circle cx="300" cy="145" r="3.6" fill="#d9b44a"/><circle cx="307" cy="146" r="3.6" fill="#c9c9c9"/><circle cx="314" cy="145" r="3.6" fill="#d9b44a"/></g>';
+  /* Mochi */
+  h+='<g id="mochi"><g class="breathe"><svg x="38" y="118" width="116" height="116" viewBox="0 0 64 64" overflow="visible">'+MOCHI+'</svg>';
+  h+='<g class="bk"><rect x="124" y="198" width="38" height="26" rx="4" fill="#c9a26b" stroke="#8a6a3a" stroke-width="1.5"/><path d="M129 198Q143 182 157 198" fill="none" stroke="#8a6a3a" stroke-width="2.5"/><rect x="130" y="188" width="14" height="10" rx="2" fill="#e9806e"/><rect x="146" y="184" width="8" height="14" rx="2" fill="#6aa0d9"/></g></g></g>';
+  /* emote */
+  h+='<text class="emo" id="emM" x="106" y="108" text-anchor="middle" fill="#c4540f"></text><text class="emo" id="emC" x="290" y="46" text-anchor="middle" fill="#2f8f8c"></text>';
+  h+='</svg>';
+  $('stageBox').innerHTML=h;
+}
+
+/* ---------- Status ---------- */
+var $=function(id){return document.getElementById(id);};
+var idx=-1,mode='play',auto=false,voice=true,showRo=true,showId=true,rate=.85,spT=0,qi=0,qs=0,qlock=false,seq=0;
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+
+function pickVoice(who){
+  var vs=(window.speechSynthesis&&speechSynthesis.getVoices?speechSynthesis.getVoices():[]).filter(function(v){return /^ja/i.test(v.lang);});
+  if(!vs.length)return null;
+  if(vs.length===1)return vs[0];
+  return who==='m'?vs[vs.length-1]:vs[0];
+}
+
+/* ---------- Suara: pakai suara browser; kalau tidak ada voice Jepang, pakai TTS online ---------- */
+var JS={au:null};
+function jaVoices(){try{return (window.speechSynthesis&&speechSynthesis.getVoices?speechSynthesis.getVoices():[]).filter(function(x){return /^ja/i.test(x.lang);});}catch(e){return [];}}
+function jaStop(){try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}try{if(JS.au)JS.au.pause();}catch(e){}}
+function jaSay(text,o){
+  o=o||{};var rate=o.rate||.85;jaStop();
+  var vs=jaVoices();
+  if(vs.length&&window.SpeechSynthesisUtterance){
+    try{
+      var u=new SpeechSynthesisUtterance(text);u.lang='ja-JP';u.rate=rate;if(o.pitch)u.pitch=o.pitch;
+      u.voice=o.pick?o.pick(vs):vs[0];
+      if(o.end){u.onend=o.end;u.onerror=o.end;}
+      speechSynthesis.speak(u);return 'browser';
+    }catch(e){}
+  }
+  try{
+    if(!JS.au)JS.au=new Audio();
+    var a=JS.au,pr=Math.min(1.25,Math.max(.6,rate/.85));
+    a.onended=a.onerror=function(){if(o.end)o.end();};
+    a.src='https://translate.google.com/translate_tts?ie=UTF8&client=tw-ob&tl=ja&q='+encodeURIComponent(text);
+    a.defaultPlaybackRate=pr;a.playbackRate=pr;
+    var p=a.play();if(p&&p.catch)p.catch(function(){if(o.end)o.end();});
+    return 'online';
+  }catch(e){}
+  if(o.end)o.end();return '';
+}
+function speak(text,who,done){
+  var fin=false,end=function(){if(fin)return;fin=true;setTalk(null);if(done)done();};
+  var dur=Math.max(1200,text.length*140/rate*.85);
+  setTalk(who);
+  if(voice){
+    var r=jaSay(text,{rate:rate,pitch:who==='m'?1.5:1.0,end:end,pick:function(vs){return vs.length===1?vs[0]:(who==='m'?vs[vs.length-1]:vs[0]);}});
+    if(r){setTimeout(end,dur+6000);return;}
+  }
+  setTimeout(end,dur);
+}
+function setTalk(who){
+  var m=$('mochi'),c=$('clerk');if(!m||!c)return;
+  m.classList.toggle('talk',who==='m');c.classList.toggle('talk',who==='c');
+}
+function act(el,cls){el.classList.remove(cls);void el.getBoundingClientRect();el.classList.add(cls);}
+function scene(i){
+  var s=$('svg');if(!s)return;
+  s.setAttribute('class',(i>=1?'s-items ':'')+(i>=3?'s-heat ':'')+(i>=4?'s-ding ':'')+(i>=7?'s-money ':'')+(i>=8?'s-change':''));
+  var L=LINES[i];if(!L)return;
+  var target=L.w==='m'?$('mochi'):$('clerk'),head=L.w==='m'?$('mhead'):$('chead');
+  act(target.firstChild?target:target,L.act==='hop'?'hop':L.act==='bow'?'bow':'nod');
+  var em=L.w==='m'?$('emM'):$('emC'),other=L.w==='m'?$('emC'):$('emM');
+  other.classList.remove('on');
+  if(L.em){em.textContent=L.em;em.classList.add('on');setTimeout(function(){em.classList.remove('on');},1800);}else em.classList.remove('on');
+}
+
+/* ---------- Tampilan ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function render(){
+  var p=$('panel'),n=$('nav');
+  if(mode==='quiz'){renderQuiz();return;}
+  if(idx<0){
+    p.innerHTML='<div class="who"><span class="dot"></span>Adegan 1</div><div class="jp">Mochi mampir ke minimarket</div><div class="id">Dengarkan percakapan Mochi dengan kasir. Tiap kalimat ada romaji dan artinya. Ketuk Mulai untuk memutar.</div>';
+    n.innerHTML='<span class="prog">'+LINES.map(function(){return '<i></i>';}).join('')+'</span><button type="button" class="btn pri" id="bStart">Mulai</button>';
+    return;
+  }
+  if(idx>=LINES.length){
+    p.innerHTML='<div class="who"><span class="dot"></span>Selesai</div><div class="jp">Adegan selesai</div><div class="id">Ada kuis mini 4 soal dari percakapan tadi.</div>';
+    n.innerHTML='<button type="button" class="btn" id="bAgain">Ulangi adegan</button><button type="button" class="btn pri" id="bQuiz">Kuis mini</button>';
+    return;
+  }
+  var L=LINES[idx];
+  p.innerHTML='<div class="who"><span class="dot'+(L.w==='c'?' c':'')+'"></span>'+(L.w==='m'?'Mochi':'Kasir 店員 (ten’in)')+'</div>'+
+    '<div class="jp">'+esc(L.j)+'</div>'+(showRo?'<div class="ro">'+esc(L.r)+'</div>':'')+(showId?'<div class="id">'+esc(L.i)+'</div>':'')+
+    '<div class="vocab">'+L.v.map(function(v,k){return '<button type="button" class="chip" data-v="'+k+'"><b>'+esc(v[0])+'</b> '+(showRo?esc(v[1])+' · ':'')+esc(v[2])+'</button>';}).join('')+'</div>';
+  n.innerHTML='<button type="button" class="btn" id="bPrev"'+(idx===0?' disabled':'')+'>←</button><span class="prog">'+LINES.map(function(_,k){return '<i'+(k<=idx?' class="d"':'')+'></i>';}).join('')+'</span><button type="button" class="btn" id="bSay">🔊</button><button type="button" class="btn pri" id="bNext">'+(idx===LINES.length-1?'Selesai':'Lanjut')+'</button>';
+}
+function renderOpts(){
+  $('opts').innerHTML='<button type="button" class="tg" data-t="ro" aria-pressed="'+showRo+'">Romaji</button><button type="button" class="tg" data-t="id" aria-pressed="'+showId+'">Terjemahan</button><button type="button" class="tg" data-t="vo" aria-pressed="'+voice+'">Suara</button><button type="button" class="tg" data-t="au" aria-pressed="'+auto+'">Otomatis</button>'+
+   '<select class="tg" id="rate" aria-label="Kecepatan suara"><option value="0.7"'+(rate===.7?' selected':'')+'>Pelan</option><option value="0.85"'+(rate===.85?' selected':'')+'>Normal</option><option value="1"'+(rate===1?' selected':'')+'>Cepat</option></select>';
+}
+function go(i){
+  idx=i;seq++;var my=seq;
+  jaStop();
+  setTalk(null);render();
+  if(i>=0&&i<LINES.length){
+    scene(i);
+    speak(LINES[i].j,LINES[i].w,function(){
+      if(auto&&my===seq&&mode==='play'){setTimeout(function(){if(my===seq)go(idx+1);},800);}
+    });
+  }else if(i>=LINES.length){scene(LINES.length-1);}
+}
+/* ---------- Kuis ---------- */
+function shuffle(a){for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),t=a[j];a[j]=a[k];a[k]=t;}return a;}
+function startQuiz(){mode='quiz';qi=0;qs=0;qlock=false;renderQuiz();}
+function renderQuiz(){
+  var p=$('panel'),n=$('nav');
+  if(qi>=QUIZ.length){
+    var best=+(lsGet('konbini-best')||0),rec=qs>best;if(rec)lsSet('konbini-best',String(qs));
+    p.innerHTML='<div class="who"><span class="dot"></span>Hasil kuis</div><div class="jp">'+qs+' / '+QUIZ.length+' benar</div><div class="id">'+(qs===QUIZ.length?'Sempurna! すばらしい (subarashii).':'Ulangi adegan untuk melatih telinga, lalu coba lagi.')+(rec?' Rekor baru.':'')+'</div>';
+    n.innerHTML='<button type="button" class="btn" id="bAgain">Ulangi adegan</button><button type="button" class="btn pri" id="bQuizAgain">Kuis lagi</button>';
+    return;
+  }
+  var q=QUIZ[qi];
+  p.innerHTML='<div class="who"><span class="dot"></span>Kuis '+(qi+1)+'/'+QUIZ.length+'</div><p class="q">'+esc(q.q)+'</p><div class="qo">'+shuffle([q.a].concat(q.w)).map(function(o){return '<button type="button" class="o" data-o="'+esc(o)+'">'+esc(o)+'</button>';}).join('')+'</div><div id="fb"></div>';
+  n.innerHTML='';qlock=false;
+}
+function answerQ(b){
+  if(qlock)return;qlock=true;
+  var q=QUIZ[qi],ok=b.getAttribute('data-o')===q.a;
+  Array.prototype.forEach.call(document.querySelectorAll('.o'),function(x){x.disabled=true;if(x.getAttribute('data-o')===q.a)x.classList.add('ok');});
+  if(ok)qs++;else b.classList.add('bad');
+  $('fb').innerHTML='<div class="fb"><b>'+(ok?'Benar!':'Kurang tepat.')+'</b> '+esc(q.f)+'</div>';
+  $('nav').innerHTML='<button type="button" class="btn pri" id="bQnext">'+(qi===QUIZ.length-1?'Lihat hasil':'Lanjut')+'</button>';
+}
+
+/* ---------- Event ---------- */
+document.addEventListener('click',function(e){
+  var t=e.target,id=t.id,b;
+  if(id==='bStart')go(0);
+  else if(id==='bNext')go(idx+1);
+  else if(id==='bPrev'&&idx>0)go(idx-1);
+  else if(id==='bSay'&&LINES[idx])speak(LINES[idx].j,LINES[idx].w);
+  else if(id==='bAgain'){mode='play';go(-1);}
+  else if(id==='bQuiz'||id==='bQuizAgain')startQuiz();
+  else if(id==='bQnext'){qi++;renderQuiz();}
+  else if((b=t.closest&&t.closest('[data-o]')))answerQ(b);
+  else if((b=t.closest&&t.closest('[data-v]'))){var v=LINES[idx].v[+b.getAttribute('data-v')];speak(v[0].replace('〜',''),'c');}
+  else if((b=t.closest&&t.closest('[data-t]'))){
+    var k=b.getAttribute('data-t');
+    if(k==='ro')showRo=!showRo;else if(k==='id')showId=!showId;else if(k==='vo'){voice=!voice;if(!voice)jaStop();}else auto=!auto;
+    renderOpts();if(mode==='play')render();
+  }
+});
+document.addEventListener('change',function(e){if(e.target.id==='rate'){rate=parseFloat(e.target.value);}});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey||e.metaKey||e.altKey||mode!=='play')return;
+  if(e.key==='ArrowRight'||e.key==='Enter'){if(idx>=0&&idx<LINES.length&&document.activeElement.tagName!=='BUTTON')go(idx+1);}
+  else if(e.key==='ArrowLeft'&&idx>0)go(idx-1);
+});
+buildStage();renderOpts();render();scene(0);
+</script>
+</body>
+</html>

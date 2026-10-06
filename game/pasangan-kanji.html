@@ -65,8 +65,7 @@ h1 small{display:block;font-family:var(--font-body);font-weight:500;font-size:.7
 .foot{color:var(--muted);font-size:.82rem;margin:0}
 @media (prefers-reduced-motion:reduce){.in{transition:none}}
 </style>
-</head>
-<body>
+
 <div class="wrap">
   <header><h1>漢字ペア<small>kanji pea · pasangan kanji</small></h1></header>
   <div class="ctl">
@@ -125,7 +124,34 @@ function fmt(s){return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
 function bkey(){return 'kanji-best-'+level+'-'+mode+'-'+size;}
 function getBest(){try{return localStorage.getItem(bkey());}catch(e){return null;}}
 function setBest(v){try{localStorage.setItem(bkey(),String(v));}catch(e){}}
-function speak(t){try{if(!window.speechSynthesis)return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=.85;var v=speechSynthesis.getVoices().filter(function(x){return /^ja/i.test(x.lang);})[0];if(v)u.voice=v;speechSynthesis.speak(u);}catch(e){}}
+
+/* ---------- Suara: pakai suara browser; kalau tidak ada voice Jepang, pakai TTS online ---------- */
+var JS={au:null};
+function jaVoices(){try{return (window.speechSynthesis&&speechSynthesis.getVoices?speechSynthesis.getVoices():[]).filter(function(x){return /^ja/i.test(x.lang);});}catch(e){return [];}}
+function jaStop(){try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}try{if(JS.au)JS.au.pause();}catch(e){}}
+function jaSay(text,o){
+  o=o||{};var rate=o.rate||.85;jaStop();
+  var vs=jaVoices();
+  if(vs.length&&window.SpeechSynthesisUtterance){
+    try{
+      var u=new SpeechSynthesisUtterance(text);u.lang='ja-JP';u.rate=rate;if(o.pitch)u.pitch=o.pitch;
+      u.voice=o.pick?o.pick(vs):vs[0];
+      if(o.end){u.onend=o.end;u.onerror=o.end;}
+      speechSynthesis.speak(u);return 'browser';
+    }catch(e){}
+  }
+  try{
+    if(!JS.au)JS.au=new Audio();
+    var a=JS.au,pr=Math.min(1.25,Math.max(.6,rate/.85));
+    a.onended=a.onerror=function(){if(o.end)o.end();};
+    a.src='https://translate.google.com/translate_tts?ie=UTF8&client=tw-ob&tl=ja&q='+encodeURIComponent(text);
+    a.defaultPlaybackRate=pr;a.playbackRate=pr;
+    var p=a.play();if(p&&p.catch)p.catch(function(){if(o.end)o.end();});
+    return 'online';
+  }catch(e){}
+  if(o.end)o.end();return '';
+}
+function speak(t){jaSay(t,{rate:.85});}
 
 function chips(id,items,cur,attr){
   $(id).innerHTML=items.map(function(x){var v=Array.isArray(x)?x[0]:x,l=Array.isArray(x)?x[1]:(attr==='z'?x+' pasang':x);
