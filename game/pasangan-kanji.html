@@ -125,12 +125,27 @@ function bkey(){return 'kanji-best-'+level+'-'+mode+'-'+size;}
 function getBest(){try{return localStorage.getItem(bkey());}catch(e){return null;}}
 function setBest(v){try{localStorage.setItem(bkey(),String(v));}catch(e){}}
 
-/* ---------- Suara: pakai suara browser; kalau tidak ada voice Jepang, pakai TTS online ---------- */
-var JS={au:null};
+/* ---------- Suara: file mp3 -> suara browser -> TTS online ---------- */
+var AUD_BASE='https://bshantoz.github.io/nihongo/game/audio/';
+var AUD=null,JS={au:null};
+function h32(s,seed){var b=unescape(encodeURIComponent(s)),h=seed>>>0,i;for(i=0;i<b.length;i++){h^=b.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}return h;}
+function jaKey(who,t){var s=who+'|'+t;return ('00000000'+h32(s,0x811c9dc5).toString(16)).slice(-8)+('00000000'+h32(s,0x9747b28c).toString(16)).slice(-8);}
+try{fetch(AUD_BASE+'manifest.json').then(function(r){return r.ok?r.json():[];}).then(function(a){AUD={};a.forEach(function(k){AUD[k]=1;});}).catch(function(){});}catch(e){}
 function jaVoices(){try{return (window.speechSynthesis&&speechSynthesis.getVoices?speechSynthesis.getVoices():[]).filter(function(x){return /^ja/i.test(x.lang);});}catch(e){return [];}}
 function jaStop(){try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}try{if(JS.au)JS.au.pause();}catch(e){}}
-function jaSay(text,o){
-  o=o||{};var rate=o.rate||.85;jaStop();
+function jaPlay(url,rate,o,onfail){
+  try{
+    if(!JS.au)JS.au=new Audio();
+    var a=JS.au,pr=Math.min(1.25,Math.max(.6,rate/.85)),failed=false;
+    var fail=function(){if(failed)return;failed=true;if(onfail)onfail();};
+    a.onended=function(){if(o.end)o.end();};
+    a.onerror=fail;
+    a.src=url;a.defaultPlaybackRate=pr;a.playbackRate=pr;
+    var p=a.play();if(p&&p.catch)p.catch(fail);
+    return true;
+  }catch(e){return false;}
+}
+function jaFallback(text,o,rate){
   var vs=jaVoices();
   if(vs.length&&window.SpeechSynthesisUtterance){
     try{
@@ -140,18 +155,16 @@ function jaSay(text,o){
       speechSynthesis.speak(u);return 'browser';
     }catch(e){}
   }
-  try{
-    if(!JS.au)JS.au=new Audio();
-    var a=JS.au,pr=Math.min(1.25,Math.max(.6,rate/.85));
-    a.onended=a.onerror=function(){if(o.end)o.end();};
-    a.src='https://translate.google.com/translate_tts?ie=UTF8&client=tw-ob&tl=ja&q='+encodeURIComponent(text);
-    a.defaultPlaybackRate=pr;a.playbackRate=pr;
-    var p=a.play();if(p&&p.catch)p.catch(function(){if(o.end)o.end();});
-    return 'online';
-  }catch(e){}
+  if(jaPlay('https://translate.google.com/translate_tts?ie=UTF8&client=tw-ob&tl=ja&q='+encodeURIComponent(text),rate,o,function(){if(o.end)o.end();}))return 'online';
   if(o.end)o.end();return '';
 }
-function speak(t){jaSay(t,{rate:.85});}
+function jaSay(text,o){
+  o=o||{};var rate=o.rate||.85;jaStop();
+  var key=jaKey(o.who||'n',text);
+  if(AUD&&AUD[key]&&jaPlay(AUD_BASE+key+'.mp3',rate,o,function(){jaFallback(text,o,rate);}))return 'mp3';
+  return jaFallback(text,o,rate);
+}
+function speak(t){jaSay(t,{rate:.85,who:'n'});}
 
 function chips(id,items,cur,attr){
   $(id).innerHTML=items.map(function(x){var v=Array.isArray(x)?x[0]:x,l=Array.isArray(x)?x[1]:(attr==='z'?x+' pasang':x);
