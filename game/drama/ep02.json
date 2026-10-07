@@ -1,0 +1,322 @@
+{
+ "id": "ep02",
+ "scene": "station",
+ "lines": [
+  {
+   "w": "m",
+   "j": "すみません。{新宿|しんじゅく}までの{切符|きっぷ}を、{一枚|いちまい}お{願|ねが}いします。",
+   "r": "Sumimasen. Shinjuku made no kippu o, ichimai onegaishimasu.",
+   "i": "Permisi. Tolong satu tiket sampai Shinjuku.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "すみません",
+     "sumimasen",
+     "permisi / maaf"
+    ],
+    [
+     "{切符|きっぷ}",
+     "kippu",
+     "tiket"
+    ],
+    [
+     "{新宿|しんじゅく}まで",
+     "Shinjuku made",
+     "sampai Shinjuku"
+    ],
+    [
+     "{一枚|いちまい}",
+     "ichimai",
+     "satu lembar"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{大人|おとな}ですか、{子供|こども}ですか。",
+   "r": "Otona desu ka, kodomo desu ka.",
+   "i": "Dewasa atau anak-anak?",
+   "act": "nod",
+   "em": "?",
+   "s": [],
+   "v": [
+    [
+     "{大人|おとな}",
+     "otona",
+     "orang dewasa"
+    ],
+    [
+     "{子供|こども}",
+     "kodomo",
+     "anak-anak"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{大人|おとな}です。",
+   "r": "Otona desu.",
+   "i": "Dewasa.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "〜です",
+     "desu",
+     "adalah (sopan)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{240|にひゃくよんじゅう}{円|えん}です。",
+   "r": "Nihyaku yonjuu en desu.",
+   "i": "240 yen.",
+   "act": "nod",
+   "s": [
+    "money"
+   ],
+   "v": [
+    [
+     "{200|にひゃく}",
+     "nihyaku",
+     "200"
+    ],
+    [
+     "{40|よんじゅう}",
+     "yonjuu",
+     "40"
+    ],
+    [
+     "{円|えん}",
+     "en",
+     "yen"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、どうぞ。",
+   "r": "Hai, douzo.",
+   "i": "Ya, silakan (ini uangnya).",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "どうぞ",
+     "douzo",
+     "silakan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございます。はい、{切符|きっぷ}です。",
+   "r": "Arigatou gozaimasu. Hai, kippu desu.",
+   "i": "Terima kasih. Ini tiketnya.",
+   "act": "bow",
+   "em": "♪",
+   "s": [
+    "ticket"
+   ],
+   "v": [
+    [
+     "ありがとうございます",
+     "arigatou gozaimasu",
+     "terima kasih (sopan)"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{何番線|なんばんせん}ですか。",
+   "r": "Nanbansen desu ka.",
+   "i": "Peron nomor berapa?",
+   "act": "hop",
+   "em": "?",
+   "s": [],
+   "v": [
+    [
+     "{何番線|なんばんせん}",
+     "nanbansen",
+     "peron nomor berapa"
+    ],
+    [
+     "{何|なん}",
+     "nan",
+     "apa / berapa"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{三番線|さんばんせん}です。{階段|かいだん}を{上|あ}がって、{右|みぎ}です。",
+   "r": "Sanbansen desu. Kaidan o agatte, migi desu.",
+   "i": "Peron 3. Naik tangga, lalu ke kanan.",
+   "act": "nod",
+   "s": [
+    "plat"
+   ],
+   "v": [
+    [
+     "{三番線|さんばんせん}",
+     "sanbansen",
+     "peron 3"
+    ],
+    [
+     "{階段|かいだん}",
+     "kaidan",
+     "tangga"
+    ],
+    [
+     "{右|みぎ}",
+     "migi",
+     "kanan"
+    ],
+    [
+     "{上|あ}がる",
+     "agaru",
+     "naik"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{次|つぎ}の{電車|でんしゃ}は、{何時|なんじ}ですか。",
+   "r": "Tsugi no densha wa, nanji desu ka.",
+   "i": "Kereta berikutnya jam berapa?",
+   "act": "hop",
+   "em": "?",
+   "s": [],
+   "v": [
+    [
+     "{次|つぎ}の",
+     "tsugi no",
+     "berikutnya"
+    ],
+    [
+     "{電車|でんしゃ}",
+     "densha",
+     "kereta (listrik)"
+    ],
+    [
+     "{何時|なんじ}",
+     "nanji",
+     "jam berapa"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{10|じゅう}{時|じ}{15|じゅうご}{分|ふん}です。",
+   "r": "Juuji juugo fun desu.",
+   "i": "Jam 10.15.",
+   "act": "nod",
+   "s": [
+    "time"
+   ],
+   "v": [
+    [
+     "{時|じ}",
+     "ji",
+     "jam (pukul)"
+    ],
+    [
+     "{分|ふん}",
+     "fun",
+     "menit"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。",
+   "r": "Arigatou gozaimasu.",
+   "i": "Terima kasih banyak.",
+   "act": "hop",
+   "em": "♥",
+   "s": [],
+   "v": [
+    [
+     "ありがとうございます",
+     "arigatou gozaimasu",
+     "terima kasih (sopan)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "いってらっしゃい。",
+   "r": "Itterasshai.",
+   "i": "Hati-hati di jalan.",
+   "act": "bow",
+   "em": "♪",
+   "s": [],
+   "v": [
+    [
+     "いってらっしゃい",
+     "itterasshai",
+     "selamat jalan (diucapkan ke yang pergi)"
+    ],
+    [
+     "いってきます",
+     "ittekimasu",
+     "aku berangkat (jawabannya)"
+    ]
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Petugas bertanya \"Otona desu ka, kodomo desu ka?\". Artinya?",
+   "a": "Dewasa atau anak-anak?",
+   "w": [
+    "Mau ke mana?",
+    "Satu atau dua tiket?",
+    "Pakai kartu atau tunai?"
+   ],
+   "f": "大人 (otona) = dewasa, 子供 (kodomo) = anak-anak."
+  },
+  {
+   "q": "Bagaimana cara membaca 240円?",
+   "a": "にひゃくよんじゅうえん (nihyaku yonjuu en)",
+   "w": [
+    "にびゃくよんじゅうえん (nibyaku yonjuu en)",
+    "にひゃくしじゅうえん (nihyaku shijuu en)",
+    "にひゃくよんひゃくえん (nihyaku yonhyaku en)"
+   ],
+   "f": "200 = nihyaku, 40 = yonjuu (40 biasanya dibaca yonjuu, bukan shijuu), lalu 円 = en."
+  },
+  {
+   "q": "Mochi bertanya \"Nanbansen desu ka?\". Ia ingin tahu apa?",
+   "a": "Peron nomor berapa",
+   "w": [
+    "Jam berapa kereta berangkat",
+    "Berapa harga tiket",
+    "Di mana tangga"
+   ],
+   "f": "何番線 (nanbansen) = peron nomor berapa."
+  },
+  {
+   "q": "Kereta berikutnya berangkat jam 10.15. Bagaimana mengucapkannya?",
+   "a": "じゅうじ じゅうごふん (juuji juugo fun)",
+   "w": [
+    "じゅうじ じゅうごぶん (juuji juugo bun)",
+    "いちじ ごふん (ichiji go fun)",
+    "じゅうじ ごじゅうふん (juuji gojuu fun)"
+   ],
+   "f": "10時 = juuji, 15分 = juugo fun. Perhatikan 分 dibaca fun setelah angka 5, 15, 25."
+  },
+  {
+   "q": "Petugas berkata \"Itterasshai\". Apa artinya?",
+   "a": "Hati-hati di jalan",
+   "w": [
+    "Selamat datang",
+    "Sampai besok",
+    "Terima kasih kembali"
+   ],
+   "f": "いってらっしゃい diucapkan kepada orang yang pergi. Jawabannya いってきます (ittekimasu): aku berangkat."
+  }
+ ]
+}

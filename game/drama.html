@@ -14,7 +14,7 @@
   --bg:#f2f1ee; --surface:#ffffff; --ink:#241c16; --muted:#6e6358; --line:#ddd6cc;
   --accent:#c4540f; --accent-ink:#ffffff; --tint:#fbe6d6;
   --ok:#1f7a45; --ok-bg:#d6efdf; --bad:#b3342f; --bad-bg:#f9dad7;
-  --s-wall:#e3ece7; --s-floor:#cbd3cc; --s-shelf:#a8b3ad; --s-banner:#2f6f6a; --s-counter:#8c6b4f; --s-top:#d9c7b0; --s-reg:#4c5862; --s-glass:#bfe3f5;
+  --s-wall:#e3ece7; --s-floor:#cbd3cc; --s-shelf:#a8b3ad; --s-banner:#2f6f6a; --s-counter:#8c6b4f; --s-top:#d9c7b0; --s-reg:#4c5862; --s-glass:#bfe3f5; --s-navy:#2b4a7a; --s-sign:#f6f4ee; --s-signt:#2b2b3a;
   --font-display:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
   --font-body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',system-ui,sans-serif;
 }
@@ -22,12 +22,12 @@
   --bg:#17130f; --surface:#241d17; --ink:#f4ece3; --muted:#b6a898; --line:#3a2f26;
   --accent:#f09a5a; --accent-ink:#17130f; --tint:#3f2a1c;
   --ok:#7fdca5; --ok-bg:#173a27; --bad:#ff8c85; --bad-bg:#47201f;
-  --s-wall:#26332f; --s-floor:#1e2724; --s-shelf:#46544e; --s-banner:#2a5c58; --s-counter:#5d4633; --s-top:#8b7459; --s-reg:#39434b; --s-glass:#3d5666; color-scheme:dark}}
+  --s-wall:#26332f; --s-floor:#1e2724; --s-shelf:#46544e; --s-banner:#2a5c58; --s-counter:#5d4633; --s-top:#8b7459; --s-reg:#39434b; --s-glass:#3d5666; --s-navy:#35568c; --s-sign:#2f3a44; --s-signt:#e8e2d6; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#17130f; --surface:#241d17; --ink:#f4ece3; --muted:#b6a898; --line:#3a2f26;
   --accent:#f09a5a; --accent-ink:#17130f; --tint:#3f2a1c;
   --ok:#7fdca5; --ok-bg:#173a27; --bad:#ff8c85; --bad-bg:#47201f;
-  --s-wall:#26332f; --s-floor:#1e2724; --s-shelf:#46544e; --s-banner:#2a5c58; --s-counter:#5d4633; --s-top:#8b7459; --s-reg:#39434b; --s-glass:#3d5666; color-scheme:dark}
+  --s-wall:#26332f; --s-floor:#1e2724; --s-shelf:#46544e; --s-banner:#2a5c58; --s-counter:#5d4633; --s-top:#8b7459; --s-reg:#39434b; --s-glass:#3d5666; --s-navy:#35568c; --s-sign:#2f3a44; --s-signt:#e8e2d6; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:20px 48px}
 button{font:inherit;color:inherit;cursor:pointer}
@@ -121,6 +121,13 @@ rt{font-family:var(--font-body);font-weight:500;font-size:.5em;color:var(--muted
 .ep .lv{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:0 8px;font-size:.72rem;font-weight:700;color:var(--muted);margin-left:6px;vertical-align:middle}
 .ep:disabled{opacity:.55;cursor:default}
 .msg{color:var(--muted);padding:20px 4px;margin:0}
+.bnavy{fill:var(--s-navy)}.sign{fill:var(--s-sign)}
+.stxt{font:700 10px var(--font-display);fill:var(--s-signt)}
+.led{font:800 15px var(--font-display);fill:#ffb347;opacity:0;transition:opacity .35s}
+.s-plat .plat,.s-time .tim{opacity:1}
+.tkt{opacity:0;transform:translateX(34px);transition:opacity .35s,transform .5s}
+.s-ticket .tkt{opacity:1;transform:translateX(0)}
+.s-ticket .cash{opacity:0}
 </style>
 
 <div class="wrap">
@@ -157,24 +164,38 @@ var MOCHI='<g class="tailw"><path d="M45 54C58 54 60 40 54 34" fill="none" strok
  '<path d="M30.2 32.4H33.8L32 34.4Z" fill="#e58a8a"/><path d="M32 34.4V36M32 36Q30.3 37.6 28.6 36.3M32 36Q33.7 37.6 35.4 36.3" fill="none" stroke="#5a3a22" stroke-width="1.1" stroke-linecap="round"/>'+
  '<ellipse class="mo" cx="32" cy="38.2" rx="2" ry="2.3" fill="#7a2a10"/>'+
  '<path d="M18 32L10.5 30.5M18 34.5L10.5 35.5M46 32L53.5 30.5M46 34.5L53.5 35.5" stroke="#5a3a22" stroke-width=".9" stroke-linecap="round" opacity=".55"/></g>';
-function buildKonbini(){
-  var h='<svg viewBox="0 0 400 240" id="svg" role="img" aria-label="Mochi si kucing berbelanja di minimarket dan dilayani seorang kasir">';
-  h+='<rect class="wall" width="400" height="172"/><rect class="floor" y="172" width="400" height="68"/>';
-  h+=shelfUnit(14,36,140,4,3)+shelfUnit(220,36,170,4,7);
-  h+='<rect class="banner" width="400" height="24"/><text class="btxt" x="200" y="17" text-anchor="middle">コンビニ</text><rect x="40" y="28" width="320" height="3" rx="1.5" fill="#fff" opacity=".6"/>';
+function clerkSvg(c1,c2){
+  var h='';
   /* kasir */
   h+='<g id="clerk"><g class="breathe">'+
-     '<rect x="250" y="124" width="16" height="30" rx="8" fill="#2f8f8c"/><rect x="314" y="124" width="16" height="30" rx="8" fill="#2f8f8c"/>'+
-     '<path d="M255 156C255 130 270 119 290 119C310 119 325 130 325 156Z" fill="#2f8f8c"/><polygon points="277,119 290,136 303,119" fill="#fff"/><rect x="304" y="130" width="14" height="8" rx="1.5" fill="#fff"/>'+
+     '<rect x="250" y="124" width="16" height="30" rx="8" fill="'+c1+'"/><rect x="314" y="124" width="16" height="30" rx="8" fill="'+c1+'"/>'+
+     '<path d="M255 156C255 130 270 119 290 119C310 119 325 130 325 156Z" fill="'+c1+'"/><polygon points="277,119 290,136 303,119" fill="#fff"/><rect x="304" y="130" width="14" height="8" rx="1.5" fill="#fff"/>'+
      '<rect x="284" y="104" width="12" height="17" fill="#f2cfae"/>'+
      '<g id="chead"><circle cx="266" cy="90" r="4" fill="#f2cfae"/><circle cx="314" cy="90" r="4" fill="#f2cfae"/><circle cx="290" cy="88" r="24" fill="#f2cfae"/>'+
-     '<path d="M266 80C268 60 280 54 292 54C306 54 314 62 314 80Z" fill="#2f8f8c"/><path d="M298 78H326Q329 83 323 84H298Z" fill="#256e6c"/>'+
+     '<path d="M266 80C268 60 280 54 292 54C306 54 314 62 314 80Z" fill="'+c1+'"/><path d="M298 78H326Q329 83 323 84H298Z" fill="'+c2+'"/>'+
      '<path d="M268 80Q268 92 271 98M312 80Q312 90 309 98" stroke="#2b2b3a" stroke-width="4" fill="none" stroke-linecap="round"/>'+
      '<g class="eyes"><ellipse cx="282" cy="89" rx="2.6" ry="3.4" fill="#2b2b3a"/><ellipse cx="298" cy="89" rx="2.6" ry="3.4" fill="#2b2b3a"/></g>'+
      '<path d="M278 82Q282 79 286 82M294 82Q298 79 302 82" stroke="#2b2b3a" stroke-width="1.4" fill="none" stroke-linecap="round"/>'+
      '<circle cx="276" cy="97" r="4" fill="#f09a8c" opacity=".5"/><circle cx="304" cy="97" r="4" fill="#f09a8c" opacity=".5"/>'+
      '<path d="M284 99Q290 105 296 99" stroke="#7a2f2f" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse class="mo" cx="290" cy="101" rx="4.2" ry="4.6" fill="#7a2f2f"/></g>'+
      '</g></g>';
+  return h;
+}
+function mochiSvg(basket){
+  var h='';
+  /* Mochi */
+  h+='<g id="mochi"><g class="breathe"><svg x="38" y="118" width="116" height="116" viewBox="0 0 64 64" overflow="visible">'+MOCHI+'</svg>';
+  if(basket)h+='<g class="bk"><rect x="124" y="198" width="38" height="26" rx="4" fill="#c9a26b" stroke="#8a6a3a" stroke-width="1.5"/><path d="M129 198Q143 182 157 198" fill="none" stroke="#8a6a3a" stroke-width="2.5"/><rect x="130" y="188" width="14" height="10" rx="2" fill="#e9806e"/><rect x="146" y="184" width="8" height="14" rx="2" fill="#6aa0d9"/></g>';
+  h+='</g></g>';
+  return h;
+}
+function buildKonbini(){
+  var h='<svg viewBox="0 0 400 240" id="svg" role="img" aria-label="Mochi si kucing berbelanja di minimarket dan dilayani seorang kasir">';
+  h+='<rect class="wall" width="400" height="172"/><rect class="floor" y="172" width="400" height="68"/>';
+  h+=shelfUnit(14,36,140,4,3)+shelfUnit(220,36,170,4,7);
+  h+='<rect class="banner" width="400" height="24"/><text class="btxt" x="200" y="17" text-anchor="middle">コンビニ</text><rect x="40" y="28" width="320" height="3" rx="1.5" fill="#fff" opacity=".6"/>';
+  var c1='#2f8f8c',c2='#256e6c';
+  h+=clerkSvg(c1,c2);
   /* meja kasir */
   h+='<rect class="cnt" x="150" y="156" width="250" height="84"/><rect class="top" x="144" y="148" width="262" height="10" rx="3"/>';
   h+='<g class="mw"><rect x="156" y="116" width="52" height="32" rx="4" fill="#cfd5d9"/><rect x="162" y="121" width="30" height="22" rx="2" class="glass"/><rect class="glow" x="162" y="121" width="30" height="22" rx="2" fill="#ffd36e"/><circle cx="200" cy="126" r="2.5" fill="#8a949a"/><circle cx="200" cy="134" r="2.5" fill="#8a949a"/></g>';
@@ -183,18 +204,43 @@ function buildKonbini(){
   h+='<g class="item"><rect x="216" y="132" width="30" height="16" rx="3" fill="#e9806e"/><rect x="220" y="136" width="22" height="8" rx="2" fill="#fff" opacity=".85"/><rect x="250" y="126" width="9" height="22" rx="3" fill="#6aa0d9"/><rect x="251.5" y="122" width="6" height="5" rx="1.5" fill="#f2c14e"/></g>';
   h+='<g class="cash"><rect x="262" y="141" width="26" height="7" rx="1.5" fill="#d8c98a" stroke="#a6954f" stroke-width="1"/><text x="275" y="147" font-size="6" text-anchor="middle" fill="#6b5d1c" font-family="sans-serif">1000</text></g>';
   h+='<g class="chg"><circle cx="300" cy="145" r="3.6" fill="#d9b44a"/><circle cx="307" cy="146" r="3.6" fill="#c9c9c9"/><circle cx="314" cy="145" r="3.6" fill="#d9b44a"/></g>';
-  /* Mochi */
-  h+='<g id="mochi"><g class="breathe"><svg x="38" y="118" width="116" height="116" viewBox="0 0 64 64" overflow="visible">'+MOCHI+'</svg>';
-  h+='<g class="bk"><rect x="124" y="198" width="38" height="26" rx="4" fill="#c9a26b" stroke="#8a6a3a" stroke-width="1.5"/><path d="M129 198Q143 182 157 198" fill="none" stroke="#8a6a3a" stroke-width="2.5"/><rect x="130" y="188" width="14" height="10" rx="2" fill="#e9806e"/><rect x="146" y="184" width="8" height="14" rx="2" fill="#6aa0d9"/></g></g></g>';
+  h+=mochiSvg(true);
   /* emote */
-  h+='<text class="emo" id="emM" x="106" y="108" text-anchor="middle" fill="#c4540f"></text><text class="emo" id="emC" x="290" y="46" text-anchor="middle" fill="#2f8f8c"></text>';
+  h+='<text class="emo" id="emM" x="106" y="108" text-anchor="middle" fill="#c4540f"></text><text class="emo" id="emC" x="290" y="46" text-anchor="middle" fill="'+c1+'"></text>';
   h+='</svg>';
   return h;
 }
+function buildStation(){
+  var h='<svg viewBox="0 0 400 240" id="svg" role="img" aria-label="Mochi si kucing membeli tiket kereta di loket stasiun dan dilayani seorang petugas">';
+  h+='<rect class="wall" width="400" height="172"/><rect class="floor" y="172" width="400" height="68"/>';
+  h+='<path d="M0 198H400M0 222H400M70 172L40 240M200 172V240M330 172L360 240" stroke="#000" stroke-opacity=".07" fill="none"/>';
+  h+='<rect class="bnavy" width="400" height="24"/><text class="btxt" x="200" y="17" text-anchor="middle">駅</text><rect x="40" y="28" width="320" height="3" rx="1.5" fill="#fff" opacity=".6"/>';
+  /* peta jalur */
+  h+='<rect class="sign" x="18" y="38" width="120" height="76" rx="5"/><text class="stxt" x="78" y="53" text-anchor="middle">路線図</text>';
+  h+='<path d="M30 94H54V72H102V94H126" fill="none" stroke="#2f8f8c" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>';
+  h+='<g fill="#fff" stroke="#2b2b3a" stroke-width="1.4"><circle cx="30" cy="94" r="3.5"/><circle cx="54" cy="72" r="3.5"/><circle cx="78" cy="72" r="3.5"/><circle cx="126" cy="94" r="3.5"/></g><circle cx="102" cy="72" r="5.2" fill="#e9806e" stroke="#2b2b3a" stroke-width="1.4"/>';
+  h+='<text class="stxt" x="102" y="108" text-anchor="middle">新宿</text>';
+  /* papan keberangkatan */
+  h+='<rect class="reg" x="160" y="38" width="104" height="52" rx="5"/><text x="212" y="49" text-anchor="middle" font-size="7" fill="#9fb0bb" font-family="sans-serif">発車案内</text>';
+  h+='<text class="led plat" x="212" y="66" text-anchor="middle">3番線</text><text class="led tim" x="212" y="83" text-anchor="middle" font-size="13">10:15 新宿</text>';
+  /* jam */
+  h+='<circle cx="352" cy="62" r="17" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 62V50M352 62L360 66" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="62" r="1.8" fill="#2b2b3a"/>';
+  var c1='#2b4a7a',c2='#1f3558';
+  h+=clerkSvg(c1,c2);
+  h+='<rect class="cnt" x="150" y="156" width="250" height="84"/><rect class="top" x="144" y="148" width="262" height="10" rx="3"/>';
+  h+='<g class="reg"><rect x="338" y="110" width="46" height="38" rx="4"/><rect x="344" y="115" width="34" height="14" rx="2" class="glass"/><rect x="350" y="136" width="22" height="3" rx="1.5" fill="#9fb0bb"/></g>';
+  h+='<g class="cash"><circle cx="258" cy="144" r="4.2" fill="#d9b44a" stroke="#a6954f"/><circle cx="268" cy="145" r="4.2" fill="#c9c9c9" stroke="#9a9a9a"/><circle cx="278" cy="144" r="3.4" fill="#d9b44a" stroke="#a6954f"/><circle cx="286" cy="145" r="3.4" fill="#d9b44a" stroke="#a6954f"/></g>';
+  h+='<g class="tkt"><rect x="176" y="136" width="30" height="14" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><rect x="176" y="136" width="8" height="14" rx="2" fill="#e9806e"/><text x="195" y="146" font-size="7" text-anchor="middle" fill="#6b5d1c" font-family="sans-serif">240</text></g>';
+  h+=mochiSvg(false);
+  h+='<text class="emo" id="emM" x="106" y="108" text-anchor="middle" fill="#c4540f"></text><text class="emo" id="emC" x="290" y="46" text-anchor="middle" fill="'+c1+'"></text>';
+  h+='</svg>';
+  return h;
+}
+
 /* ---------- Pengaturan data ---------- */
 var DRAMA_BASE='https://bshantoz.github.io/nihongo/game/drama/';
 
-var SCENES={konbini:{build:buildKonbini,cast:{m:{name:'Mochi',el:'mochi',em:'emM',dot:''},c:{name:'Kasir 店員 (ten’in)',el:'clerk',em:'emC',dot:' c'}}}};
+var SCENES={station:{build:buildStation,cast:{m:{name:'Mochi',el:'mochi',em:'emM',dot:''},c:{name:'Petugas 駅員 (ekiin)',el:'clerk',em:'emC',dot:' c'}}},konbini:{build:buildKonbini,cast:{m:{name:'Mochi',el:'mochi',em:'emM',dot:''},c:{name:'Kasir 店員 (ten’in)',el:'clerk',em:'emC',dot:' c'}}}};
 
 /* ---------- Status ---------- */
 var $=function(id){return document.getElementById(id);};

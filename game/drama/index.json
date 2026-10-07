@@ -15,8 +15,7 @@
   "ro": "eki de",
   "idn": "Di stasiun",
   "level": "N5",
-  "desc": "Membeli tiket dan bertanya peron.",
-  "soon": true
+  "desc": "Membeli tiket ke Shinjuku dan bertanya peron serta jam kereta."
  },
  {
   "id": "ep03",
