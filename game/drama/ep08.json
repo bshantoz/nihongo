@@ -1,0 +1,264 @@
+{
+ "id": "ep08",
+ "scene": "byouin",
+ "lines": [
+  {
+   "w": "c",
+   "j": "こんにちは。{保険証|ほけんしょう}を、お{願|ねが}いします。",
+   "r": "Konnichiwa. Hokenshou o, onegaishimasu.",
+   "i": "Selamat siang. Tolong kartu asuransinya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{保険証|ほけんしょう}",
+     "hokenshou",
+     "kartu asuransi kesehatan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、これです。",
+   "r": "Hai, kore desu.",
+   "i": "Ya, ini.",
+   "act": "hop",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "これ",
+     "kore",
+     "ini"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{初|はじ}めてですか。",
+   "r": "Hajimete desu ka.",
+   "i": "Apakah ini yang pertama kali?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{初|はじ}めて",
+     "hajimete",
+     "pertama kali"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、{初|はじ}めてです。",
+   "r": "Hai, hajimete desu.",
+   "i": "Ya, pertama kali.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "はい",
+     "hai",
+     "ya"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "この{紙|かみ}に、{名前|なまえ}を、{書|か}いてください。",
+   "r": "Kono kami ni, namae o, kaite kudasai.",
+   "i": "Tolong tulis nama di kertas ini.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{紙|かみ}",
+     "kami",
+     "kertas"
+    ],
+    [
+     "{名前|なまえ}",
+     "namae",
+     "nama"
+    ],
+    [
+     "{書|か}く",
+     "kaku",
+     "menulis"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ペンを、{貸|か}してください。",
+   "r": "Pen o, kashite kudasai.",
+   "i": "Tolong pinjamkan pulpen.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ペン",
+     "pen",
+     "pulpen"
+    ],
+    [
+     "{貸|か}す",
+     "kasu",
+     "meminjamkan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "どうぞ。どこが、{痛|いた}いですか。",
+   "r": "Douzo. Doko ga, itai desu ka.",
+   "i": "Silakan. Di mana yang sakit?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "どこ",
+     "doko",
+     "di mana"
+    ],
+    [
+     "{痛|いた}い",
+     "itai",
+     "sakit"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "お{腹|なか}が、{痛|いた}いです。",
+   "r": "Onaka ga, itai desu.",
+   "i": "Perut saya sakit.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "お{腹|なか}",
+     "onaka",
+     "perut"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{番号|ばんごう}で、お{呼|よ}びします。あちらで、お{待|ま}ちください。",
+   "r": "Bangou de, oyobi shimasu. Achira de, omachi kudasai.",
+   "i": "Kami panggil dengan nomor. Silakan tunggu di sana.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{番号|ばんごう}",
+     "bangou",
+     "nomor"
+    ],
+    [
+     "お{待|ま}ちください",
+     "omachi kudasai",
+     "silakan tunggu"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、ありがとうございます。",
+   "r": "Hai, arigatou gozaimasu.",
+   "i": "Baik, terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ありがとうございます",
+     "arigatou gozaimasu",
+     "terima kasih (sopan)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{12|じゅうに}{番|ばん}の{方|かた}、どうぞ。",
+   "r": "Juuni ban no kata, douzo.",
+   "i": "Nomor 12, silakan.",
+   "act": "bow",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{番|ばん}",
+     "ban",
+     "nomor"
+    ],
+    [
+     "{方|かた}",
+     "kata",
+     "orang (sopan)"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Apa arti 保険証 (hokenshou)?",
+   "a": "Kartu asuransi kesehatan",
+   "w": [
+    "Kartu identitas",
+    "Kartu pasien lama",
+    "Surat dokter"
+   ],
+   "f": "保険証 diminta di resepsionis rumah sakit di Jepang."
+  },
+  {
+   "q": "\"Hajimete desu ka?\" artinya?",
+   "a": "Apakah ini yang pertama kali?",
+   "w": [
+    "Sudah lama sakit?",
+    "Sudah makan?",
+    "Mau ke mana?"
+   ],
+   "f": "初めて (hajimete) = pertama kali."
+  },
+  {
+   "q": "\"Onaka ga itai desu\" artinya?",
+   "a": "Perut saya sakit",
+   "w": [
+    "Kepala saya sakit",
+    "Tangan saya sakit",
+    "Gigi saya sakit"
+   ],
+   "f": "お腹 (onaka) = perut, 痛い (itai) = sakit."
+  },
+  {
+   "q": "\"Achira de omachi kudasai\" artinya?",
+   "a": "Silakan tunggu di sana",
+   "w": [
+    "Silakan masuk ke sini",
+    "Silakan bayar di sana",
+    "Silakan tulis di sana"
+   ],
+   "f": "お待ちください = silakan tunggu."
+  },
+  {
+   "q": "\"Juuni ban no kata, douzo\" artinya?",
+   "a": "Nomor 12, silakan",
+   "w": [
+    "Lantai 12, silakan",
+    "Pukul 12, silakan",
+    "Kamar 12, sudah penuh"
+   ],
+   "f": "〜番の方 = pemilik nomor ..., dipakai saat memanggil pasien."
+  }
+ ]
+}

@@ -1,0 +1,267 @@
+{
+ "id": "ep04",
+ "scene": "yakkyoku",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。",
+   "r": "Irasshaimase.",
+   "i": "Selamat datang.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "いらっしゃいませ",
+     "irasshaimase",
+     "selamat datang"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "すみません。{頭|あたま}が、{痛|いた}いです。",
+   "r": "Sumimasen. Atama ga, itai desu.",
+   "i": "Permisi. Kepala saya sakit.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{頭|あたま}",
+     "atama",
+     "kepala"
+    ],
+    [
+     "{痛|いた}い",
+     "itai",
+     "sakit"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{熱|ねつ}は、ありますか。",
+   "r": "Netsu wa, arimasu ka.",
+   "i": "Apakah ada demam?",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{熱|ねつ}",
+     "netsu",
+     "demam / panas"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、{少|すこ}し、あります。",
+   "r": "Hai, sukoshi, arimasu.",
+   "i": "Ya, sedikit.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{少|すこ}し",
+     "sukoshi",
+     "sedikit"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "じゃあ、この{薬|くすり}を、どうぞ。",
+   "r": "Jaa, kono kusuri o, douzo.",
+   "i": "Kalau begitu, silakan obat ini.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{薬|くすり}",
+     "kusuri",
+     "obat"
+    ],
+    [
+     "じゃあ",
+     "jaa",
+     "kalau begitu"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "どうやって、{飲|の}みますか。",
+   "r": "Douyatte, nomimasu ka.",
+   "i": "Bagaimana cara meminumnya?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "どうやって",
+     "douyatte",
+     "bagaimana caranya"
+    ],
+    [
+     "{飲|の}む",
+     "nomu",
+     "minum"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{一日|いちにち}に{三回|さんかい}、{食後|しょくご}に、{飲|の}んでください。",
+   "r": "Ichinichi ni sankai, shokugo ni, nonde kudasai.",
+   "i": "Tiga kali sehari, diminum setelah makan.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{一日|いちにち}",
+     "ichinichi",
+     "satu hari"
+    ],
+    [
+     "{三回|さんかい}",
+     "sankai",
+     "tiga kali"
+    ],
+    [
+     "{食後|しょくご}",
+     "shokugo",
+     "setelah makan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかりました。いくらですか。",
+   "r": "Wakarimashita. Ikura desu ka.",
+   "i": "Mengerti. Berapa harganya?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "わかりました",
+     "wakarimashita",
+     "mengerti"
+    ],
+    [
+     "いくら",
+     "ikura",
+     "berapa (harga)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{580|ごひゃくはちじゅう}{円|えん}です。",
+   "r": "Gohyaku hachijuu en desu.",
+   "i": "580 yen.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{500|ごひゃく}",
+     "gohyaku",
+     "500"
+    ],
+    [
+     "{80|はちじゅう}",
+     "hachijuu",
+     "80"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、どうぞ。",
+   "r": "Hai, douzo.",
+   "i": "Ya, silakan.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "どうぞ",
+     "douzo",
+     "silakan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございます。お{大事|だいじ}に。",
+   "r": "Arigatou gozaimasu. Odaiji ni.",
+   "i": "Terima kasih. Semoga lekas sembuh.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "お{大事|だいじ}に",
+     "odaiji ni",
+     "semoga lekas sembuh"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Mochi berkata \"Atama ga itai desu\". Artinya?",
+   "a": "Kepala saya sakit",
+   "w": [
+    "Perut saya sakit",
+    "Saya demam",
+    "Saya batuk"
+   ],
+   "f": "頭 (atama) = kepala, 痛い (itai) = sakit."
+  },
+  {
+   "q": "Apoteker bertanya \"Netsu wa arimasu ka?\". Artinya?",
+   "a": "Apakah ada demam?",
+   "w": [
+    "Sudah makan?",
+    "Di mana yang sakit?",
+    "Sudah minum obat?"
+   ],
+   "f": "熱 (netsu) = demam atau panas badan."
+  },
+  {
+   "q": "\"Ichinichi ni sankai, shokugo ni\" artinya?",
+   "a": "Tiga kali sehari, setelah makan",
+   "w": [
+    "Satu kali sehari, sebelum makan",
+    "Tiga kali sehari, sebelum tidur",
+    "Dua kali sehari, setelah makan"
+   ],
+   "f": "一日に三回 = tiga kali sehari, 食後 (shokugo) = setelah makan."
+  },
+  {
+   "q": "Bagaimana cara membaca 580円?",
+   "a": "ごひゃくはちじゅうえん (gohyaku hachijuu en)",
+   "w": [
+    "ごびゃくはちじゅうえん (gobyaku hachijuu en)",
+    "ごひゃくはっじゅうえん (gohyaku hachijuu en, salah)",
+    "ごひゃくはちひゃくえん (gohyaku hachihyaku en)"
+   ],
+   "f": "500 = gohyaku (bukan gobyaku), 80 = hachijuu."
+  },
+  {
+   "q": "\"Odaiji ni\" diucapkan kepada orang yang...",
+   "a": "Sedang sakit",
+   "w": [
+    "Baru datang",
+    "Akan berangkat",
+    "Baru selesai makan"
+   ],
+   "f": "お大事に berarti semoga lekas sembuh."
+  }
+ ]
+}

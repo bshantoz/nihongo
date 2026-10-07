@@ -1,0 +1,282 @@
+{
+ "id": "ep07",
+ "scene": "fukuya",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。",
+   "r": "Irasshaimase.",
+   "i": "Selamat datang.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "いらっしゃいませ",
+     "irasshaimase",
+     "selamat datang"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "すみません、このシャツは、いくらですか。",
+   "r": "Sumimasen, kono shatsu wa, ikura desu ka.",
+   "i": "Permisi, kemeja ini berapa?",
+   "act": "hop",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "シャツ",
+     "shatsu",
+     "kemeja"
+    ],
+    [
+     "いくら",
+     "ikura",
+     "berapa (harga)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{2900|にせんきゅうひゃく}{円|えん}です。",
+   "r": "Nisen kyuuhyaku en desu.",
+   "i": "2.900 yen.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{2000|にせん}",
+     "nisen",
+     "2.000"
+    ],
+    [
+     "{900|きゅうひゃく}",
+     "kyuuhyaku",
+     "900"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ちょっと、{高|たか}いですね。もう{少|すこ}し、{安|やす}いのは、ありますか。",
+   "r": "Chotto, takai desu ne. Mou sukoshi, yasui no wa, arimasu ka.",
+   "i": "Agak mahal ya. Ada yang lebih murah?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ちょっと",
+     "chotto",
+     "agak"
+    ],
+    [
+     "{高|たか}い",
+     "takai",
+     "mahal"
+    ],
+    [
+     "{安|やす}い",
+     "yasui",
+     "murah"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "こちらは、{1500|せんごひゃく}{円|えん}です。",
+   "r": "Kochira wa, sengohyaku en desu.",
+   "i": "Yang ini 1.500 yen.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{1500|せんごひゃく}",
+     "sengohyaku",
+     "1.500"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ほかの{色|いろ}は、ありますか。",
+   "r": "Hoka no iro wa, arimasu ka.",
+   "i": "Ada warna lain?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ほかの",
+     "hoka no",
+     "yang lain"
+    ],
+    [
+     "{色|いろ}",
+     "iro",
+     "warna"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{青|あお}と{白|しろ}が、あります。",
+   "r": "Ao to shiro ga, arimasu.",
+   "i": "Ada biru dan putih.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{青|あお}",
+     "ao",
+     "biru"
+    ],
+    [
+     "{白|しろ}",
+     "shiro",
+     "putih"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{試着|しちゃく}しても、いいですか。",
+   "r": "Shichaku shite mo, ii desu ka.",
+   "i": "Boleh saya coba?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{試着|しちゃく}",
+     "shichaku",
+     "mencoba pakaian"
+    ],
+    [
+     "〜してもいいですか",
+     "shite mo ii desu ka",
+     "bolehkah saya ..."
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "はい、どうぞ。{試着室|しちゃくしつ}は、あちらです。",
+   "r": "Hai, douzo. Shichakushitsu wa, achira desu.",
+   "i": "Silakan. Ruang ganti di sebelah sana.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{試着室|しちゃくしつ}",
+     "shichakushitsu",
+     "ruang ganti"
+    ],
+    [
+     "あちら",
+     "achira",
+     "sebelah sana"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ちょうど、いいです。これを、ください。",
+   "r": "Choudo, ii desu. Kore o, kudasai.",
+   "i": "Pas sekali. Saya ambil yang ini.",
+   "act": "hop",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "ちょうどいい",
+     "choudo ii",
+     "pas sekali"
+    ],
+    [
+     "これ",
+     "kore",
+     "ini"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございました。",
+   "r": "Arigatou gozaimashita.",
+   "i": "Terima kasih.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "ありがとうございました",
+     "arigatou gozaimashita",
+     "terima kasih (selesai)"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Chotto takai desu ne\" artinya?",
+   "a": "Agak mahal ya",
+   "w": [
+    "Murah sekali",
+    "Agak kecil ya",
+    "Bagus sekali"
+   ],
+   "f": "高い (takai) = mahal (atau tinggi)."
+  },
+  {
+   "q": "Apa arti 安い (yasui)?",
+   "a": "Murah",
+   "w": [
+    "Mahal",
+    "Besar",
+    "Baru"
+   ],
+   "f": "安い = murah. Lawan katanya 高い (takai) = mahal."
+  },
+  {
+   "q": "Bagaimana cara membaca 2900円?",
+   "a": "にせんきゅうひゃくえん (nisen kyuuhyaku en)",
+   "w": [
+    "にせんくひゃくえん (nisen kuhyaku en)",
+    "にぜんきゅうひゃくえん (nizen kyuuhyaku en)",
+    "にせんきゅうびゃくえん (nisen kyuubyaku en)"
+   ],
+   "f": "2000 = nisen, 900 = kyuuhyaku."
+  },
+  {
+   "q": "\"Shichaku shite mo ii desu ka?\" artinya?",
+   "a": "Boleh saya coba?",
+   "w": [
+    "Boleh saya beli?",
+    "Boleh saya foto?",
+    "Ada ukuran lain?"
+   ],
+   "f": "試着 = mencoba pakaian. 〜てもいいですか = bolehkah saya ...?"
+  },
+  {
+   "q": "\"Ao to shiro ga arimasu\" artinya?",
+   "a": "Ada biru dan putih",
+   "w": [
+    "Ada merah dan hitam",
+    "Ada hijau dan kuning",
+    "Hanya ada putih"
+   ],
+   "f": "青 (ao) = biru, 白 (shiro) = putih."
+  }
+ ]
+}

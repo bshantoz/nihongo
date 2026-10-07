@@ -1,0 +1,267 @@
+{
+ "id": "ep06",
+ "scene": "kouban",
+ "lines": [
+  {
+   "w": "m",
+   "j": "すみません。{道|みち}に、{迷|まよ}いました。",
+   "r": "Sumimasen. Michi ni, mayoimashita.",
+   "i": "Permisi. Saya tersesat.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{道|みち}",
+     "michi",
+     "jalan"
+    ],
+    [
+     "{迷|まよ}う",
+     "mayou",
+     "tersesat"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "どちらへ、{行|い}きたいですか。",
+   "r": "Dochira e, ikitai desu ka.",
+   "i": "Mau ke mana?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "どちら",
+     "dochira",
+     "mana (sopan)"
+    ],
+    [
+     "{行|い}きたい",
+     "ikitai",
+     "ingin pergi"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{駅|えき}は、どこですか。",
+   "r": "Eki wa, doko desu ka.",
+   "i": "Stasiun di mana?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{駅|えき}",
+     "eki",
+     "stasiun"
+    ],
+    [
+     "どこ",
+     "doko",
+     "di mana"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{地図|ちず}を、{見|み}てください。ここが、{交番|こうばん}です。",
+   "r": "Chizu o, mite kudasai. Koko ga, kouban desu.",
+   "i": "Silakan lihat peta. Di sini pos polisi.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{地図|ちず}",
+     "chizu",
+     "peta"
+    ],
+    [
+     "{交番|こうばん}",
+     "kouban",
+     "pos polisi"
+    ],
+    [
+     "ここ",
+     "koko",
+     "di sini"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "すみません、もう{一度|いちど}、お{願|ねが}いします。",
+   "r": "Sumimasen, mou ichido, onegaishimasu.",
+   "i": "Maaf, tolong sekali lagi.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "もう{一度|いちど}",
+     "mou ichido",
+     "sekali lagi"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "まっすぐ{行|い}って、{二|ふた}つ{目|め}の{信号|しんごう}を、{右|みぎ}です。",
+   "r": "Massugu itte, futatsu me no shingou o, migi desu.",
+   "i": "Lurus, lalu belok kanan di lampu lalu lintas kedua.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "まっすぐ",
+     "massugu",
+     "lurus"
+    ],
+    [
+     "{二|ふた}つ{目|め}",
+     "futatsu me",
+     "yang kedua"
+    ],
+    [
+     "{信号|しんごう}",
+     "shingou",
+     "lampu lalu lintas"
+    ],
+    [
+     "{右|みぎ}",
+     "migi",
+     "kanan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{遠|とお}いですか。",
+   "r": "Tooi desu ka.",
+   "i": "Jauhkah?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{遠|とお}い",
+     "tooi",
+     "jauh"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "いいえ、{近|ちか}いです。{歩|ある}いて、{5|ご}{分|ふん}ぐらいです。",
+   "r": "Iie, chikai desu. Aruite, gofun gurai desu.",
+   "i": "Tidak, dekat. Jalan kaki sekitar 5 menit.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{近|ちか}い",
+     "chikai",
+     "dekat"
+    ],
+    [
+     "{歩|ある}く",
+     "aruku",
+     "berjalan"
+    ],
+    [
+     "{5|ご}{分|ふん}",
+     "gofun",
+     "5 menit"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかりました。ありがとうございます。",
+   "r": "Wakarimashita. Arigatou gozaimasu.",
+   "i": "Mengerti. Terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "わかりました",
+     "wakarimashita",
+     "mengerti"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "{気|き}をつけてくださいね。",
+   "r": "Ki o tsukete kudasai ne.",
+   "i": "Hati-hati ya.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{気|き}をつける",
+     "ki o tsukeru",
+     "berhati-hati"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Michi ni mayoimashita\" artinya?",
+   "a": "Saya tersesat",
+   "w": [
+    "Saya lapar",
+    "Saya kehilangan dompet",
+    "Saya ingin pulang"
+   ],
+   "f": "道 (michi) = jalan, 迷う (mayou) = tersesat."
+  },
+  {
+   "q": "Polisi berkata \"Migi desu\". Ke arah mana?",
+   "a": "Kanan",
+   "w": [
+    "Kiri",
+    "Lurus",
+    "Putar balik"
+   ],
+   "f": "右 (migi) = kanan, 左 (hidari) = kiri."
+  },
+  {
+   "q": "\"Futatsu me no shingou\" artinya?",
+   "a": "Lampu lalu lintas yang kedua",
+   "w": [
+    "Lampu lalu lintas pertama",
+    "Dua lampu lalu lintas",
+    "Perempatan kedua"
+   ],
+   "f": "二つ目 (futatsu me) = yang kedua, 信号 (shingou) = lampu lalu lintas."
+  },
+  {
+   "q": "\"Aruite gofun gurai\" artinya?",
+   "a": "Jalan kaki sekitar 5 menit",
+   "w": [
+    "Naik kereta 5 menit",
+    "Jalan kaki 50 menit",
+    "Naik taksi 5 menit"
+   ],
+   "f": "歩いて = dengan berjalan kaki, 5分 = gofun."
+  },
+  {
+   "q": "Frasa sopan untuk meminta diulang adalah...",
+   "a": "もう一度、お願いします (mou ichido, onegaishimasu)",
+   "w": [
+    "いってらっしゃい (itterasshai)",
+    "お大事に (odaiji ni)",
+    "いただきます (itadakimasu)"
+   ],
+   "f": "もう一度 = sekali lagi. Sangat berguna saat belum paham."
+  }
+ ]
+}

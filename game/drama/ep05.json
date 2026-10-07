@@ -1,0 +1,275 @@
+{
+ "id": "ep05",
+ "scene": "yuubin",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。",
+   "r": "Irasshaimase.",
+   "i": "Selamat datang.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "いらっしゃいませ",
+     "irasshaimase",
+     "selamat datang"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "この{荷物|にもつ}を、インドネシアに{送|おく}りたいです。",
+   "r": "Kono nimotsu o, Indoneshia ni okuritai desu.",
+   "i": "Saya ingin mengirim paket ini ke Indonesia.",
+   "act": "hop",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{荷物|にもつ}",
+     "nimotsu",
+     "paket / barang"
+    ],
+    [
+     "{送|おく}りたい",
+     "okuritai",
+     "ingin mengirim"
+    ],
+    [
+     "インドネシア",
+     "Indoneshia",
+     "Indonesia"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{航空便|こうくうびん}ですか、{船便|ふなびん}ですか。",
+   "r": "Koukuubin desu ka, funabin desu ka.",
+   "i": "Lewat udara atau lewat laut?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{航空便|こうくうびん}",
+     "koukuubin",
+     "pos udara"
+    ],
+    [
+     "{船便|ふなびん}",
+     "funabin",
+     "pos laut"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{航空便|こうくうびん}で、お{願|ねが}いします。",
+   "r": "Koukuubin de, onegaishimasu.",
+   "i": "Lewat udara, tolong.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "〜で",
+     "de",
+     "dengan / pakai"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{重|おも}さを、はかりますね。{2|に}キロです。",
+   "r": "Omosa o, hakarimasu ne. Nikiro desu.",
+   "i": "Saya timbang dulu ya. 2 kilo.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{重|おも}さ",
+     "omosa",
+     "berat"
+    ],
+    [
+     "はかる",
+     "hakaru",
+     "menimbang"
+    ],
+    [
+     "{2|に}キロ",
+     "nikiro",
+     "2 kg"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "いくらですか。",
+   "r": "Ikura desu ka.",
+   "i": "Berapa harganya?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "いくら",
+     "ikura",
+     "berapa (harga)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{4500|よんせんごひゃく}{円|えん}です。",
+   "r": "Yonsen gohyaku en desu.",
+   "i": "4.500 yen.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{4000|よんせん}",
+     "yonsen",
+     "4.000"
+    ],
+    [
+     "{500|ごひゃく}",
+     "gohyaku",
+     "500"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "どのくらい、かかりますか。",
+   "r": "Dono kurai, kakarimasu ka.",
+   "i": "Kira-kira berapa lama?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "どのくらい",
+     "dono kurai",
+     "kira-kira berapa lama"
+    ],
+    [
+     "かかる",
+     "kakaru",
+     "memakan (waktu)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{一週間|いっしゅうかん}ぐらいです。",
+   "r": "Isshuukan gurai desu.",
+   "i": "Sekitar satu minggu.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{一週間|いっしゅうかん}",
+     "isshuukan",
+     "satu minggu"
+    ],
+    [
+     "ぐらい",
+     "gurai",
+     "sekitar"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかりました。お{願|ねが}いします。",
+   "r": "Wakarimashita. Onegaishimasu.",
+   "i": "Mengerti. Tolong ya.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "わかりました",
+     "wakarimashita",
+     "mengerti"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございました。",
+   "r": "Arigatou gozaimashita.",
+   "i": "Terima kasih.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "ありがとうございました",
+     "arigatou gozaimashita",
+     "terima kasih (selesai)"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Kono nimotsu o Indoneshia ni okuritai desu\" artinya?",
+   "a": "Saya ingin mengirim paket ini ke Indonesia",
+   "w": [
+    "Saya ingin membeli paket ini",
+    "Paket ini dari Indonesia",
+    "Saya ingin mengambil paket"
+   ],
+   "f": "荷物 (nimotsu) = paket, 送りたい (okuritai) = ingin mengirim."
+  },
+  {
+   "q": "Apa arti 航空便 (koukuubin)?",
+   "a": "Pos udara (lebih cepat)",
+   "w": [
+    "Pos laut",
+    "Kartu pos",
+    "Paket kilat darat"
+   ],
+   "f": "航空便 = lewat udara, 船便 (funabin) = lewat laut."
+  },
+  {
+   "q": "Bagaimana cara membaca 4500円?",
+   "a": "よんせんごひゃくえん (yonsen gohyaku en)",
+   "w": [
+    "しせんごひゃくえん (shisen gohyaku en)",
+    "よんぜんごひゃくえん (yonzen gohyaku en)",
+    "よんせんごびゃくえん (yonsen gobyaku en)"
+   ],
+   "f": "4000 = yonsen, 500 = gohyaku."
+  },
+  {
+   "q": "\"Dono kurai kakarimasu ka?\" artinya?",
+   "a": "Kira-kira berapa lama?",
+   "w": [
+    "Berapa harganya?",
+    "Berapa beratnya?",
+    "Ke mana tujuannya?"
+   ],
+   "f": "どのくらい = kira-kira berapa banyak/lama, かかります = memakan (waktu/biaya)."
+  },
+  {
+   "q": "\"Isshuukan gurai\" artinya?",
+   "a": "Sekitar satu minggu",
+   "w": [
+    "Sekitar satu bulan",
+    "Sekitar satu hari",
+    "Sekitar tiga hari"
+   ],
+   "f": "一週間 = satu minggu, ぐらい = sekitar."
+  }
+ ]
+}

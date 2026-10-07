@@ -128,6 +128,11 @@ rt{font-family:var(--font-body);font-weight:500;font-size:.5em;color:var(--muted
 .tkt{opacity:0;transform:translateX(34px);transition:opacity .35s,transform .5s}
 .s-ticket .tkt{opacity:1;transform:translateX(0)}
 .s-ticket .cash{opacity:0}
+.pp{opacity:0;transform:translateY(-8px);transition:opacity .35s,transform .45s}
+.s-a .pa,.s-b .pb,.s-c .pc,.s-d .pd,.s-e .pe{opacity:1;transform:none}
+.s-b .hb,.s-c .hc,.s-d .hd,.s-e .he{opacity:0}
+.sm{opacity:0}
+.s-b .sm{animation:steam 1.8s ease-out infinite}
 </style>
 
 <div class="wrap">
@@ -164,7 +169,15 @@ var MOCHI='<g class="tailw"><path d="M45 54C58 54 60 40 54 34" fill="none" strok
  '<path d="M30.2 32.4H33.8L32 34.4Z" fill="#e58a8a"/><path d="M32 34.4V36M32 36Q30.3 37.6 28.6 36.3M32 36Q33.7 37.6 35.4 36.3" fill="none" stroke="#5a3a22" stroke-width="1.1" stroke-linecap="round"/>'+
  '<ellipse class="mo" cx="32" cy="38.2" rx="2" ry="2.3" fill="#7a2a10"/>'+
  '<path d="M18 32L10.5 30.5M18 34.5L10.5 35.5M46 32L53.5 30.5M46 34.5L53.5 35.5" stroke="#5a3a22" stroke-width=".9" stroke-linecap="round" opacity=".55"/></g>';
-function clerkSvg(c1,c2){
+function hatSvg(hat,c1,c2){
+  if(hat==='none')return '<path d="M265 84C262 62 277 53 292 53C307 53 318 62 315 84C309 72 298 67 290 67C281 67 271 72 265 84Z" fill="#3a2f2a"/>';
+  if(hat==='chef')return '<ellipse cx="290" cy="50" rx="21" ry="13" fill="#fff" stroke="#d8d2c6"/><rect x="268" y="56" width="44" height="14" rx="3" fill="#fff" stroke="#d8d2c6"/><path d="M270 66H310" stroke="#d8d2c6"/>';
+  if(hat==='nurse')return '<path d="M265 84C262 62 277 53 292 53C307 53 318 62 315 84C309 72 298 67 290 67C281 67 271 72 265 84Z" fill="#3a2f2a"/><path d="M272 66Q290 50 308 66L306 71H274Z" fill="#fff" stroke="#d8d2c6"/><path d="M290 58V66M286 62H294" stroke="#d9534f" stroke-width="2.4" stroke-linecap="round"/>';
+  var s='<path d="M266 80C268 60 280 54 292 54C306 54 314 62 314 80Z" fill="'+c1+'"/><path d="M298 78H326Q329 83 323 84H298Z" fill="'+c2+'"/>';
+  if(hat==='police')s+='<circle cx="290" cy="68" r="3.4" fill="#e9c24a" stroke="#b8932c"/>';
+  return s;
+}
+function clerkSvg(c1,c2,hat){
   var h='';
   /* kasir */
   h+='<g id="clerk"><g class="breathe">'+
@@ -172,7 +185,7 @@ function clerkSvg(c1,c2){
      '<path d="M255 156C255 130 270 119 290 119C310 119 325 130 325 156Z" fill="'+c1+'"/><polygon points="277,119 290,136 303,119" fill="#fff"/><rect x="304" y="130" width="14" height="8" rx="1.5" fill="#fff"/>'+
      '<rect x="284" y="104" width="12" height="17" fill="#f2cfae"/>'+
      '<g id="chead"><circle cx="266" cy="90" r="4" fill="#f2cfae"/><circle cx="314" cy="90" r="4" fill="#f2cfae"/><circle cx="290" cy="88" r="24" fill="#f2cfae"/>'+
-     '<path d="M266 80C268 60 280 54 292 54C306 54 314 62 314 80Z" fill="'+c1+'"/><path d="M298 78H326Q329 83 323 84H298Z" fill="'+c2+'"/>'+
+     hatSvg(hat,c1,c2)+
      '<path d="M268 80Q268 92 271 98M312 80Q312 90 309 98" stroke="#2b2b3a" stroke-width="4" fill="none" stroke-linecap="round"/>'+
      '<g class="eyes"><ellipse cx="282" cy="89" rx="2.6" ry="3.4" fill="#2b2b3a"/><ellipse cx="298" cy="89" rx="2.6" ry="3.4" fill="#2b2b3a"/></g>'+
      '<path d="M278 82Q282 79 286 82M294 82Q298 79 302 82" stroke="#2b2b3a" stroke-width="1.4" fill="none" stroke-linecap="round"/>'+
@@ -237,12 +250,72 @@ function buildStation(){
   return h;
 }
 
+/* ---------- Adegan tempat lain: meja, penjaga, dan properti dengan status a-e ---------- */
+var mt=function(x,y,t,sz){return '<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+(sz||9)+'" fill="#4a3520" font-weight="700" font-family="Shippori Mincho,serif">'+t+'</text>';};
+var PLACES={
+ restoran:{aria:'Mochi memesan ramen di kedai ramen dan dilayani seorang pelayan',bn:'らーめん',bc:'#a63a2f',hat:'chef',c1:'#f1efe9',c2:'#cfc9bd',ec:'#a63a2f',name:'Pelayan 店員 (ten’in)',
+  bg:function(){return '<g><rect x="26" y="30" width="30" height="42" fill="#2b3a67"/><rect x="60" y="30" width="30" height="42" fill="#2b3a67"/><rect x="94" y="30" width="30" height="42" fill="#2b3a67"/><text x="41" y="58" text-anchor="middle" font-size="16" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">ら</text><text x="75" y="58" text-anchor="middle" font-size="16" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">ー</text><text x="109" y="58" text-anchor="middle" font-size="16" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">め</text></g>'+
+   '<rect x="146" y="40" width="96" height="62" rx="4" fill="#d8c39a" stroke="#a88a56" stroke-width="2"/>'+mt(194,56,'メニュー',9)+mt(194,72,'らーめん 800',9)+mt(194,85,'ぎょうざ 400',9)+mt(194,97,'ごはん 200',9)+
+   '<ellipse cx="362" cy="62" rx="14" ry="19" fill="#d9453a"/><rect x="354" y="40" width="16" height="4" fill="#5a3a22"/><text x="362" y="68" text-anchor="middle" font-size="15" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">麺</text>';},
+  props:function(){return '<g class="pp pa hb"><rect x="212" y="130" width="28" height="18" rx="2" fill="#f4ead2" stroke="#c9a46b"/><path d="M217 136H235M217 141H231" stroke="#8a6a3a" stroke-width="1.4"/></g>'+
+   '<g class="pp pb"><path d="M210 134H250Q248 150 230 150Q212 150 210 134Z" fill="#c9503f" stroke="#7a2a1f" stroke-width="1.4"/><ellipse cx="230" cy="134" rx="20" ry="4.5" fill="#f2c14e"/><circle cx="222" cy="133" r="3.6" fill="#fff" stroke="#e9806e"/><path d="M232 132Q238 134 244 132" stroke="#8a6a3a" fill="none"/><rect x="258" y="130" width="11" height="18" rx="2" fill="#bfe3f5" opacity=".85" stroke="#8aa7b5"/></g>'+
+   '<g class="sm" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M220 126Q216 118 221 112M232 126Q228 118 233 112M244 126Q240 118 245 112"/></g>'+
+   '<g class="pp pc"><rect x="276" y="136" width="24" height="12" fill="#fff" stroke="#bdbdbd"/><path d="M280 140H296M280 144H292" stroke="#999"/></g>';}},
+ yakkyoku:{aria:'Mochi membeli obat di apotek dan dilayani seorang apoteker',bn:'薬局',bc:'#2f8f6a',hat:'none',c1:'#eef0ee',c2:'#cfd5d1',ec:'#2f8f6a',name:'Apoteker 薬剤師 (yakuzaishi)',
+  bg:function(){return shelfUnit(14,36,140,4,5)+shelfUnit(214,36,110,4,9)+'<path d="M368 46h12v14h14v12h-14v14h-12V72h-14V60h14z" fill="#3aa86a"/>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="141" width="40" height="6" rx="3" fill="#fff" stroke="#8a949a"/><rect x="244" y="142.5" width="8" height="3" rx="1.5" fill="#e9806e"/></g>'+
+   '<g class="pp pb"><rect x="218" y="124" width="28" height="24" rx="2" fill="#fff" stroke="#3aa86a" stroke-width="1.6"/><path d="M232 129v14M225 136h14" stroke="#3aa86a" stroke-width="3.2"/></g>'+
+   '<g class="pp pc"><circle cx="262" cy="144" r="4.2" fill="#d9b44a" stroke="#a6954f"/><circle cx="272" cy="145" r="4.2" fill="#c9c9c9" stroke="#9a9a9a"/><circle cx="282" cy="144" r="3.4" fill="#d9b44a" stroke="#a6954f"/></g>';}},
+ yuubin:{aria:'Mochi mengirim paket ke Indonesia di kantor pos dan dilayani seorang petugas',bn:'〒 郵便局',bc:'#d9453a',hat:'cap',c1:'#d9453a',c2:'#a8322a',ec:'#d9453a',name:'Petugas pos 局員 (kyokuin)',
+  bg:function(){return '<rect x="22" y="38" width="112" height="70" rx="5" class="sign"/><text class="stxt" x="78" y="56" text-anchor="middle">EMS · 航空便</text><path d="M44 86L96 74L116 64L100 82L108 94L96 88L72 98L74 86Z" fill="#6aa0d9" stroke="#2b2b3a" stroke-width="1.2" stroke-linejoin="round"/>'+
+   '<rect x="168" y="96" width="40" height="52" fill="#c9a26b" stroke="#8a6a3a"/><rect x="178" y="70" width="48" height="40" fill="#d8b47a" stroke="#8a6a3a"/><circle cx="352" cy="62" r="18" fill="#d9453a"/><text x="352" y="69" text-anchor="middle" font-size="22" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">〒</text>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="124" width="40" height="24" rx="2" fill="#d8b47a" stroke="#8a6a3a" stroke-width="1.5"/><path d="M214 134H254M234 124V148" stroke="#b58b4a" stroke-width="3"/><rect x="238" y="136" width="12" height="8" fill="#fff"/></g>'+
+   '<g class="pp pd"><rect x="214" y="124" width="14" height="5" fill="#d9453a"/><rect x="214" y="129" width="14" height="3" fill="#2b4a7a"/></g>'+
+   '<g class="pp pb"><rect x="262" y="134" width="34" height="14" rx="2" fill="#9aa7ae"/><rect x="268" y="137" width="16" height="7" fill="#bfe3f5"/><text x="276" y="143" text-anchor="middle" font-size="6" fill="#2b2b3a" font-family="sans-serif">2.0kg</text></g>'+
+   '<g class="pp pc"><rect x="300" y="139" width="26" height="9" fill="#d8c98a" stroke="#a6954f"/><text x="313" y="146" text-anchor="middle" font-size="6" fill="#6b5d1c" font-family="sans-serif">4500</text></g>';}},
+ kouban:{aria:'Mochi bertanya jalan ke stasiun di pos polisi dan dijawab seorang polisi',bn:'交番',bc:'#27375c',hat:'police',c1:'#27375c',c2:'#1b2742',ec:'#27375c',name:'Polisi 警察官 (keisatsukan)',
+  bg:function(){return '<rect x="22" y="38" width="118" height="74" rx="5" class="sign"/><path d="M34 60H128M34 86H128M62 44V106M100 44V106" stroke="#9fb0bb" stroke-width="3"/><path d="M40 98H62V60H100" fill="none" stroke="#e9806e" stroke-width="2" stroke-dasharray="3 2"/><circle cx="100" cy="60" r="4.5" fill="#d9453a"/><text class="stxt" x="116" y="53" text-anchor="middle" font-size="8">地図</text>'+
+   '<circle cx="204" cy="56" r="15" fill="#d9453a"/><circle cx="204" cy="56" r="15" fill="none" stroke="#fff" stroke-width="2" opacity=".6"/><rect x="176" y="78" width="56" height="20" rx="3" class="sign"/><text class="stxt" x="204" y="92" text-anchor="middle" font-size="12">交番</text>';},
+  props:function(){return '<g class="pp pa"><rect x="212" y="130" width="46" height="18" fill="#f6f4ee" stroke="#8a949a"/><path d="M216 140H254M234 132V146" stroke="#9fb0bb" stroke-width="2.2"/><circle cx="224" cy="140" r="2.4" fill="#2f8f8c"/></g>'+
+   '<g class="pp pb"><path d="M224 140H234V136H250V143" fill="none" stroke="#e9806e" stroke-width="2.4" stroke-dasharray="3 2"/><circle cx="250" cy="143" r="3.2" fill="#d9453a"/></g>';}},
+ fukuya:{aria:'Mochi membeli kemeja di toko pakaian dan dilayani seorang penjaga toko',bn:'ようふく',bc:'#c0587a',hat:'none',c1:'#c0587a',c2:'#963f5c',ec:'#c0587a',name:'Penjaga toko 店員 (ten’in)',
+  bg:function(){var s='<path d="M20 58H156" stroke="#8a949a" stroke-width="3" stroke-linecap="round"/>',cols=['#e9806e','#6aa0d9','#f2c14e','#6fb98f','#b58bd6','#ffffff'],i;for(i=0;i<6;i++){var x=32+i*21;s+='<path d="M'+x+' 58L'+(x-8)+' 66V98H'+(x+8)+'V66Z" fill="'+cols[i]+'" stroke="#00000022"/>';}
+   return s+'<rect x="344" y="38" width="46" height="96" rx="4" fill="#bfe3f5" stroke="#8a949a" stroke-width="3" opacity=".9"/><path d="M352 60L382 40M352 90L382 60" stroke="#fff" stroke-width="4" opacity=".6"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="212" y="132" width="34" height="16" rx="3" fill="#e9806e"/><path d="M222 132L229 140L236 132" fill="#fff" stroke="#fff"/><rect x="246" y="128" width="14" height="10" rx="1" fill="#fff" stroke="#bdbdbd"/><text x="253" y="135" text-anchor="middle" font-size="5" font-family="sans-serif" fill="#333">2900</text></g>'+
+   '<g class="pp pb"><rect x="212" y="132" width="34" height="16" rx="3" fill="#6aa0d9"/><path d="M222 132L229 140L236 132" fill="#fff" stroke="#fff"/><rect x="246" y="128" width="14" height="10" rx="1" fill="#fff" stroke="#bdbdbd"/><text x="253" y="135" text-anchor="middle" font-size="5" font-family="sans-serif" fill="#333">1500</text></g>'+
+   '<g class="pp pc"><rect x="268" y="136" width="14" height="12" rx="2" fill="#6aa0d9"/><rect x="284" y="136" width="14" height="12" rx="2" fill="#fff" stroke="#bdbdbd"/></g>'+
+   '<g class="pp pd"><rect x="304" y="126" width="24" height="22" rx="2" fill="#c0587a"/><path d="M310 126Q316 116 322 126" fill="none" stroke="#963f5c" stroke-width="2"/></g>';}},
+ byouin:{aria:'Mochi mendaftar di resepsionis rumah sakit dan dilayani seorang petugas',bn:'病院',bc:'#2f8f8c',hat:'nurse',c1:'#e9f1f1',c2:'#c3d4d4',ec:'#2f8f8c',name:'Resepsionis 受付 (uketsuke)',
+  bg:function(){return '<rect x="22" y="38" width="112" height="70" rx="5" class="sign"/><path d="M78 50h8v10h10v8H86v10h-8V68H68v-8h10z" fill="#3aa86a"/><text class="stxt" x="78" y="100" text-anchor="middle" font-size="9">受付・会計</text>'+
+   '<rect class="reg" x="160" y="38" width="104" height="52" rx="5"/><text x="212" y="49" text-anchor="middle" font-size="7" fill="#9fb0bb" font-family="sans-serif">診察番号</text><text class="pp pd" x="212" y="78" text-anchor="middle" style="font:800 24px Shippori Mincho,serif;fill:#ffb347">12番</text>'+
+   '<circle cx="352" cy="62" r="17" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 62V50M352 62L360 66" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="62" r="1.8" fill="#2b2b3a"/>';},
+  props:function(){return '<g class="pp pa"><rect x="212" y="134" width="26" height="14" rx="2" fill="#fff" stroke="#8a949a"/><rect x="212" y="134" width="26" height="4" fill="#3aa86a"/><rect x="216" y="141" width="10" height="3" fill="#bdbdbd"/></g>'+
+   '<g class="pp pb"><rect x="246" y="130" width="30" height="18" fill="#fff" stroke="#bdbdbd"/><path d="M250 136H272M250 141H268" stroke="#8a949a"/><path d="M270 126L280 142" stroke="#2b4a7a" stroke-width="2.4" stroke-linecap="round"/></g>'+
+   '<g class="pp pc"><rect x="288" y="132" width="20" height="16" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><text x="298" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#6b5d1c" font-family="sans-serif">12</text></g>';}}
+};
+function buildPlace(id){
+  var P=PLACES[id];
+  var h='<svg viewBox="0 0 400 240" id="svg" role="img" aria-label="'+P.aria+'">';
+  h+='<rect class="wall" width="400" height="172"/><rect class="floor" y="172" width="400" height="68"/>';
+  h+='<path d="M0 198H400M0 222H400M70 172L40 240M200 172V240M330 172L360 240" stroke="#000" stroke-opacity=".07" fill="none"/>';
+  h+=P.bg();
+  h+='<rect width="400" height="24" fill="'+P.bc+'"/><text class="btxt" x="200" y="17" text-anchor="middle">'+P.bn+'</text><rect x="40" y="28" width="320" height="3" rx="1.5" fill="#fff" opacity=".6"/>';
+  h+=clerkSvg(P.c1,P.c2,P.hat);
+  h+='<rect class="cnt" x="150" y="156" width="250" height="84"/><rect class="top" x="144" y="148" width="262" height="10" rx="3"/>';
+  h+=P.props();
+  h+=mochiSvg(false);
+  h+='<text class="emo" id="emM" x="106" y="108" text-anchor="middle" fill="#c4540f"></text><text class="emo" id="emC" x="290" y="46" text-anchor="middle" fill="'+P.ec+'"></text>';
+  h+='</svg>';
+  return h;
+}
+
 /* ---------- Pengaturan data ---------- */
 var DRAMA_BASE='https://bshantoz.github.io/nihongo/game/drama/';
 
 var SCENES={station:{build:buildStation,cast:{m:{name:'Mochi',el:'mochi',em:'emM',dot:''},c:{name:'Petugas 駅員 (ekiin)',el:'clerk',em:'emC',dot:' c'}}},konbini:{build:buildKonbini,cast:{m:{name:'Mochi',el:'mochi',em:'emM',dot:''},c:{name:'Kasir 店員 (ten’in)',el:'clerk',em:'emC',dot:' c'}}}};
 
 /* ---------- Status ---------- */
+(function(){for(var id in PLACES)(function(id){var P=PLACES[id];SCENES[id]={build:function(){return buildPlace(id);},cast:{m:{name:'Mochi',el:'mochi',em:'emM',dot:''},c:{name:P.name,el:'clerk',em:'emC',dot:' c'}}};})(id);})();
 var $=function(id){return document.getElementById(id);};
 var INDEX=[],EP=null,EPI=null,LINES=[],QUIZ=[],CAST={};
 var idx=-1,mode='play',auto=false,spT=0,qi=0,qs=0,qlock=false,seq=0;

@@ -1,0 +1,273 @@
+{
+ "id": "ep03",
+ "scene": "restoran",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。{何人|なんにん}ですか。",
+   "r": "Irasshaimase. Nannin desu ka.",
+   "i": "Selamat datang. Berapa orang?",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{何人|なんにん}",
+     "nannin",
+     "berapa orang"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{一人|ひとり}です。",
+   "r": "Hitori desu.",
+   "i": "Satu orang.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{一人|ひとり}",
+     "hitori",
+     "satu orang"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "こちらへ、どうぞ。メニューです。",
+   "r": "Kochira e, douzo. Menyuu desu.",
+   "i": "Silakan ke sini. Ini menunya.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "こちら",
+     "kochira",
+     "sebelah sini"
+    ],
+    [
+     "メニュー",
+     "menyuu",
+     "menu"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ラーメンを、ください。",
+   "r": "Raamen o, kudasai.",
+   "i": "Tolong ramen.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ラーメン",
+     "raamen",
+     "ramen"
+    ],
+    [
+     "ください",
+     "kudasai",
+     "tolong beri"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "お{飲|の}み{物|もの}は、いかがですか。",
+   "r": "Onomimono wa, ikaga desu ka.",
+   "i": "Minumannya bagaimana?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "お{飲|の}み{物|もの}",
+     "onomimono",
+     "minuman"
+    ],
+    [
+     "いかがですか",
+     "ikaga desu ka",
+     "bagaimana (sopan)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "お{水|みず}を、ください。",
+   "r": "Omizu o, kudasai.",
+   "i": "Tolong air putih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "お{水|みず}",
+     "omizu",
+     "air putih"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "お{待|ま}たせしました。ラーメンです。",
+   "r": "Omatase shimashita. Raamen desu.",
+   "i": "Maaf menunggu. Ini ramennya.",
+   "act": "bow",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "お{待|ま}たせしました",
+     "omatase shimashita",
+     "maaf sudah menunggu"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "いただきます。おいしいです！",
+   "r": "Itadakimasu. Oishii desu!",
+   "i": "Selamat makan. Enak!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "いただきます",
+     "itadakimasu",
+     "ucapan sebelum makan"
+    ],
+    [
+     "おいしい",
+     "oishii",
+     "enak"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "m",
+   "j": "すみません、お{会計|かいけい}、お{願|ねが}いします。",
+   "r": "Sumimasen, okaikei, onegaishimasu.",
+   "i": "Permisi, tolong bonnya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "お{会計|かいけい}",
+     "okaikei",
+     "pembayaran / bon"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{800|はっぴゃく}{円|えん}です。",
+   "r": "Happyaku en desu.",
+   "i": "800 yen.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{800|はっぴゃく}",
+     "happyaku",
+     "800"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ごちそうさまでした。",
+   "r": "Gochisousama deshita.",
+   "i": "Terima kasih atas makanannya.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ごちそうさまでした",
+     "gochisousama deshita",
+     "ucapan setelah makan"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございました。また、どうぞ。",
+   "r": "Arigatou gozaimashita. Mata, douzo.",
+   "i": "Terima kasih. Silakan datang lagi.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "また",
+     "mata",
+     "lagi"
+    ],
+    [
+     "どうぞ",
+     "douzo",
+     "silakan"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Pelayan bertanya \"Nannin desu ka?\". Artinya?",
+   "a": "Berapa orang?",
+   "w": [
+    "Mau pesan apa?",
+    "Mau duduk di mana?",
+    "Sudah reservasi?"
+   ],
+   "f": "何人 (nannin) = berapa orang. Jawabannya 一人 (hitori) = satu orang."
+  },
+  {
+   "q": "Apa yang diucapkan sebelum mulai makan?",
+   "a": "いただきます (itadakimasu)",
+   "w": [
+    "ごちそうさまでした (gochisousama deshita)",
+    "いらっしゃいませ (irasshaimase)",
+    "すみません (sumimasen)"
+   ],
+   "f": "いただきます diucapkan sebelum makan, ごちそうさまでした setelah selesai makan."
+  },
+  {
+   "q": "Bagaimana cara membaca 800円?",
+   "a": "はっぴゃくえん (happyaku en)",
+   "w": [
+    "はちひゃくえん (hachihyaku en)",
+    "はっひゃくえん (hakhyaku en)",
+    "やっぴゃくえん (yappyaku en)"
+   ],
+   "f": "800 dibaca はっぴゃく (happyaku), bukan hachihyaku."
+  },
+  {
+   "q": "Bagaimana cara meminta bon di restoran?",
+   "a": "お会計、お願いします (okaikei, onegaishimasu)",
+   "w": [
+    "お水をください (omizu o kudasai)",
+    "メニューです (menyuu desu)",
+    "いただきます (itadakimasu)"
+   ],
+   "f": "お会計 (okaikei) = pembayaran/bon."
+  },
+  {
+   "q": "Mochi berkata \"Omizu o kudasai\". Artinya?",
+   "a": "Tolong air putih",
+   "w": [
+    "Tolong tehnya",
+    "Tolong bonnya",
+    "Tolong menunya"
+   ],
+   "f": "お水 (omizu) = air putih, ください (kudasai) = tolong beri."
+  }
+ ]
+}

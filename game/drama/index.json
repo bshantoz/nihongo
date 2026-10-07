@@ -24,7 +24,51 @@
   "ro": "resutoran de",
   "idn": "Di restoran",
   "level": "N5",
-  "desc": "Memesan makanan dan minta bon.",
-  "soon": true
+  "desc": "Memesan ramen dan air putih, lalu membayar."
+ },
+ {
+  "id": "ep04",
+  "no": 4,
+  "ja": "{薬局|やっきょく}で",
+  "ro": "yakkyoku de",
+  "idn": "Di apotek",
+  "level": "N4",
+  "desc": "Menjelaskan sakit kepala dan demam, lalu menerima obat."
+ },
+ {
+  "id": "ep05",
+  "no": 5,
+  "ja": "{郵便局|ゆうびんきょく}で",
+  "ro": "yuubinkyoku de",
+  "idn": "Di kantor pos",
+  "level": "N4",
+  "desc": "Mengirim paket ke Indonesia lewat pos udara."
+ },
+ {
+  "id": "ep06",
+  "no": 6,
+  "ja": "{交番|こうばん}で",
+  "ro": "kouban de",
+  "idn": "Di pos polisi",
+  "level": "N4",
+  "desc": "Tersesat dan bertanya jalan ke stasiun."
+ },
+ {
+  "id": "ep07",
+  "no": 7,
+  "ja": "{服屋|ふくや}で",
+  "ro": "fukuya de",
+  "idn": "Di toko baju",
+  "level": "N5",
+  "desc": "Menawar harga, memilih warna, dan mencoba kemeja."
+ },
+ {
+  "id": "ep08",
+  "no": 8,
+  "ja": "{病院|びょういん}で",
+  "ro": "byouin de",
+  "idn": "Di rumah sakit",
+  "level": "N5",
+  "desc": "Mendaftar di resepsionis dan menunggu dipanggil."
  }
 ]
