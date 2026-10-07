@@ -328,7 +328,7 @@ function saveP(){lsSet('drama-prog',JSON.stringify(PROG));}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 /* {kanji|bacaan} -> <ruby>; teks suara = bacaan kana */
 function rb(s){return esc(s).replace(/\{([^|}]+)\|([^}]+)\}/g,'<ruby>$1<rt>$2</rt></ruby>');}
-function plain(s){return String(s).replace(/\{([^|}]+)\|([^}]+)\}/g,'$2').replace('〜','');}
+function plain(s){return String(s).replace(/\{([^|}]+)\|([^}]+)\}/g,'$2').replace(/〜/g,'');}
 function getJSON(name){
   var inl=window.__DRAMA;if(inl&&inl[name])return Promise.resolve(inl[name]);
   return fetch(DRAMA_BASE+name+'.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});
@@ -370,7 +370,7 @@ function jaFallback(text,o,rate){
 function jaSay(text,o){
   o=o||{};var rate=o.rate||.85;jaStop();
   var key=jaKey(o.who||'n',text);
-  if(AUD&&AUD[key]&&jaPlay(AUD_BASE+key+'.mp3',rate,o,function(){jaFallback(text,o,rate);}))return 'mp3';
+  if((!AUD||AUD[key]!==0)&&jaPlay(AUD_BASE+key+'.mp3',rate,o,function(){jaFallback(text,o,rate);}))return 'mp3';
   return jaFallback(text,o,rate);
 }
 function speak(text,who,done){
@@ -533,5 +533,4 @@ document.addEventListener('keydown',function(e){
 loadIndex();
 
 </script>
-</body>
-</html>
+</body></html>
