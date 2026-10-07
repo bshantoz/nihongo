@@ -1,0 +1,31 @@
+[
+ {
+  "id": "ep01",
+  "no": 1,
+  "ja": "コンビニで",
+  "ro": "konbini de",
+  "idn": "Di minimarket",
+  "level": "N5",
+  "desc": "Mochi belanja bento dan teh, lalu membayar di kasir."
+ },
+ {
+  "id": "ep02",
+  "no": 2,
+  "ja": "{駅|えき}で",
+  "ro": "eki de",
+  "idn": "Di stasiun",
+  "level": "N5",
+  "desc": "Membeli tiket dan bertanya peron.",
+  "soon": true
+ },
+ {
+  "id": "ep03",
+  "no": 3,
+  "ja": "レストランで",
+  "ro": "resutoran de",
+  "idn": "Di restoran",
+  "level": "N5",
+  "desc": "Memesan makanan dan minta bon.",
+  "soon": true
+ }
+]

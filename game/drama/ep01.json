@@ -1,0 +1,293 @@
+{
+ "id": "ep01",
+ "scene": "konbini",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。",
+   "r": "Irasshaimase.",
+   "i": "Selamat datang.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "いらっしゃいませ",
+     "irasshaimase",
+     "sapaan pelayan: selamat datang"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "これを、お{願|ねが}いします。",
+   "r": "Kore o, onegaishimasu.",
+   "i": "Tolong yang ini.",
+   "act": "hop",
+   "s": [
+    "items"
+   ],
+   "v": [
+    [
+     "お{願|ねが}いします",
+     "onegaishimasu",
+     "tolong / saya minta"
+    ],
+    [
+     "これ",
+     "kore",
+     "ini"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "お{弁当|べんとう}は、{温|あたた}めますか。",
+   "r": "Obentou wa, atatamemasu ka.",
+   "i": "Bentonya mau dihangatkan?",
+   "act": "nod",
+   "em": "?",
+   "s": [],
+   "v": [
+    [
+     "お{弁当|べんとう}",
+     "obentou",
+     "bekal / bento"
+    ],
+    [
+     "{温|あたた}める",
+     "atatameru",
+     "menghangatkan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、お{願|ねが}いします。",
+   "r": "Hai, onegaishimasu.",
+   "i": "Ya, tolong.",
+   "act": "nod",
+   "s": [
+    "heat"
+   ],
+   "v": [
+    [
+     "はい",
+     "hai",
+     "ya"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{袋|ふくろ}は、{要|い}りますか。",
+   "r": "Fukuro wa, irimasu ka.",
+   "i": "Perlu kantong plastik?",
+   "act": "nod",
+   "em": "?",
+   "s": [
+    "ding"
+   ],
+   "v": [
+    [
+     "{袋|ふくろ}",
+     "fukuro",
+     "kantong"
+    ],
+    [
+     "{要|い}る",
+     "iru",
+     "perlu"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "いいえ、{大丈夫|だいじょうぶ}です。",
+   "r": "Iie, daijoubu desu.",
+   "i": "Tidak, tidak perlu.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "いいえ",
+     "iie",
+     "tidak"
+    ],
+    [
+     "{大丈夫|だいじょうぶ}",
+     "daijoubu",
+     "tidak apa-apa / cukup"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{全部|ぜんぶ}で、{630|ろっぴゃくさんじゅう}{円|えん}です。",
+   "r": "Zenbu de, roppyaku sanjuu en desu.",
+   "i": "Totalnya 630 yen.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{全部|ぜんぶ}で",
+     "zenbu de",
+     "totalnya"
+    ],
+    [
+     "{600|ろっぴゃく}",
+     "roppyaku",
+     "600"
+    ],
+    [
+     "{30|さんじゅう}",
+     "sanjuu",
+     "30"
+    ],
+    [
+     "{円|えん}",
+     "en",
+     "yen"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{千円|せんえん}で、お{願|ねが}いします。",
+   "r": "Sen-en de, onegaishimasu.",
+   "i": "Saya bayar pakai 1.000 yen.",
+   "act": "hop",
+   "em": "♪",
+   "s": [
+    "money"
+   ],
+   "v": [
+    [
+     "{千円|せんえん}",
+     "sen-en",
+     "1.000 yen"
+    ],
+    [
+     "〜で",
+     "de",
+     "dengan / pakai"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{千円|せんえん}、お{預|あず}かりします。{370|さんびゃくななじゅう}{円|えん}の、お{返|かえ}しです。",
+   "r": "Sen-en, oazukari shimasu. Sanbyaku nanajuu en no, okaeshi desu.",
+   "i": "Saya terima 1.000 yen. Kembaliannya 370 yen.",
+   "act": "bow",
+   "s": [
+    "change"
+   ],
+   "v": [
+    [
+     "お{預|あず}かりします",
+     "oazukari shimasu",
+     "saya terima (uang)"
+    ],
+    [
+     "{300|さんびゃく}",
+     "sanbyaku",
+     "300"
+    ],
+    [
+     "お{返|かえ}し",
+     "okaeshi",
+     "kembalian"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとう。",
+   "r": "Arigatou.",
+   "i": "Terima kasih.",
+   "act": "hop",
+   "em": "♥",
+   "s": [],
+   "v": [
+    [
+     "ありがとう",
+     "arigatou",
+     "terima kasih"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございました。また、どうぞ。",
+   "r": "Arigatou gozaimashita. Mata, douzo.",
+   "i": "Terima kasih. Silakan datang lagi.",
+   "act": "bow",
+   "em": "♪",
+   "s": [],
+   "v": [
+    [
+     "また",
+     "mata",
+     "lagi"
+    ],
+    [
+     "どうぞ",
+     "douzo",
+     "silakan"
+    ]
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Kasir bertanya \"Fukuro wa irimasu ka?\". Artinya?",
+   "a": "Perlu kantong plastik?",
+   "w": [
+    "Mau bayar tunai?",
+    "Mau dihangatkan?",
+    "Ada kartu poin?"
+   ],
+   "f": "袋 (fukuro) = kantong, 要ります (irimasu) = perlu."
+  },
+  {
+   "q": "Berapa total belanja Mochi?",
+   "a": "630 yen",
+   "w": [
+    "360 yen",
+    "1.000 yen",
+    "603 yen"
+   ],
+   "f": "六百三十円 (roppyaku sanjuu en) = 600 + 30. Perhatikan: 600 dibaca roppyaku, bukan rokuhyaku."
+  },
+  {
+   "q": "Bagaimana cara sopan menolak kantong?",
+   "a": "Iie, daijoubu desu.",
+   "w": [
+    "Hai, onegaishimasu.",
+    "Irasshaimase.",
+    "Arigatou gozaimashita."
+   ],
+   "f": "大丈夫です (daijoubu desu) di sini berarti \"tidak perlu, cukup\"."
+  },
+  {
+   "q": "Mochi membayar 1.000 yen untuk belanja 630 yen. Berapa kembaliannya?",
+   "a": "370 yen",
+   "w": [
+    "270 yen",
+    "470 yen",
+    "730 yen"
+   ],
+   "f": "三百七十円 (sanbyaku nanajuu en) = 300 + 70. 300 dibaca sanbyaku."
+  },
+  {
+   "q": "Bagaimana cara membaca 千円?",
+   "a": "せんえん (sen-en)",
+   "w": [
+    "ぜんえん (zen-en)",
+    "ちえん (chi-en)",
+    "せんまん (sen-man)"
+   ],
+   "f": "千 (sen) = seribu, 円 (en) = yen, jadi 千円 = せんえん (sen-en)."
+  }
+ ]
+}
