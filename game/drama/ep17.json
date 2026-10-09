@@ -1,0 +1,292 @@
+{
+ "id": "ep17",
+ "scene": "eigakan",
+ "g": "f",
+ "lines": [
+  {
+   "w": "m",
+   "j": "ごめん、{待|ま}った？",
+   "r": "Gomen, matta?",
+   "i": "Maaf, sudah menunggu lama?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ごめん",
+     "gomen",
+     "maaf (santai)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "ううん、いま、{来|き}たところ。",
+   "r": "Uun, ima, kita tokoro.",
+   "i": "Tidak, aku juga baru sampai.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ううん",
+     "uun",
+     "tidak (santai)"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{今日|きょう}の{服|ふく}、かわいいね。",
+   "r": "Kyou no fuku, kawaii ne.",
+   "i": "Bajumu hari ini lucu ya.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{服|ふく}",
+     "fuku",
+     "baju"
+    ],
+    [
+     "かわいい",
+     "kawaii",
+     "lucu / imut"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ほんと？ありがとう。うれしい！",
+   "r": "Honto? Arigatou. Ureshii!",
+   "i": "Benarkah? Terima kasih. Senang!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "うれしい",
+     "ureshii",
+     "senang"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "m",
+   "j": "チケット、{買|か}っておいたよ。",
+   "r": "Chiketto, katte oita yo.",
+   "i": "Tiketnya sudah kubelikan.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "チケット",
+     "chiketto",
+     "tiket"
+    ],
+    [
+     "〜ておく",
+     "te oku",
+     "melakukan sebelumnya"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ありがとう！ポップコーン、{食|た}べたいな。",
+   "r": "Arigatou! Poppukoon, tabetai na.",
+   "i": "Terima kasih! Aku ingin makan popcorn.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ポップコーン",
+     "poppukoon",
+     "popcorn"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "{塩|しお}と、キャラメル、どっちが、いい？",
+   "r": "Shio to, kyarameru, docchi ga, ii?",
+   "i": "Asin atau karamel, yang mana?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{塩|しお}",
+     "shio",
+     "garam / asin"
+    ],
+    [
+     "キャラメル",
+     "kyarameru",
+     "karamel"
+    ],
+    [
+     "どっち",
+     "docchi",
+     "yang mana"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{塩|しお}が、いい。{飲|の}み{物|もの}は、アイスティーで。",
+   "r": "Shio ga, ii. Nomimono wa, aisu tii de.",
+   "i": "Yang asin. Minumannya es teh.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{飲|の}み{物|もの}",
+     "nomimono",
+     "minuman"
+    ],
+    [
+     "アイスティー",
+     "aisu tii",
+     "es teh"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかった。ちょっと、{待|ま}ってて。",
+   "r": "Wakatta. Chotto, matte te.",
+   "i": "Oke. Tunggu sebentar ya.",
+   "act": "hop",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "わかった",
+     "wakatta",
+     "oke / mengerti"
+    ],
+    [
+     "{待|ま}ってて",
+     "matte te",
+     "tunggu ya"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{映画|えいが}、{楽|たの}しみだね。",
+   "r": "Eiga, tanoshimi da ne.",
+   "i": "Filmnya bikin tidak sabar ya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{楽|たの}しみ",
+     "tanoshimi",
+     "dinanti-nanti"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "うん。{一緒|いっしょ}に、{見|み}られて、うれしい。",
+   "r": "Un. Issho ni, mirarete, ureshii.",
+   "i": "Ya. Aku senang bisa nonton bareng.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{一緒|いっしょ}に",
+     "issho ni",
+     "bersama"
+    ],
+    [
+     "{見|み}られて",
+     "mirarete",
+     "bisa melihat"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "もう、はずかしいよ。{行|い}こう！",
+   "r": "Mou, hazukashii yo. Ikou!",
+   "i": "Aduh, malu tahu. Ayo!",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "はずかしい",
+     "hazukashii",
+     "malu"
+    ],
+    [
+     "もう",
+     "mou",
+     "aduh (menggoda)"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Kyou no fuku, kawaii ne\" artinya?",
+   "a": "Bajumu hari ini lucu ya",
+   "w": [
+    "Hari ini panas ya",
+    "Bajuku kotor",
+    "Kamu terlambat hari ini"
+   ],
+   "f": "服 = baju, かわいい = lucu/imut. Cara santai memuji pasangan atau teman."
+  },
+  {
+   "q": "Apa arti チケット、買っておいたよ?",
+   "a": "Tiketnya sudah kubelikan",
+   "w": [
+    "Tiketnya habis",
+    "Aku belum beli tiket",
+    "Tiketnya hilang"
+   ],
+   "f": "〜ておく = melakukan sesuatu sebelumnya, sebagai persiapan."
+  },
+  {
+   "q": "\"Shio to kyarameru, docchi ga ii?\" artinya?",
+   "a": "Asin atau karamel, yang mana?",
+   "w": [
+    "Berapa harga popcorn?",
+    "Mau berapa popcorn?",
+    "Popcornnya sudah habis?"
+   ],
+   "f": "どっちがいい？ = yang mana yang lebih baik?"
+  },
+  {
+   "q": "Apa arti 楽しみだね?",
+   "a": "Bikin tidak sabar ya",
+   "w": [
+    "Membosankan ya",
+    "Melelahkan ya",
+    "Menakutkan ya"
+   ],
+   "f": "楽しみ = sesuatu yang dinanti-nantikan."
+  },
+  {
+   "q": "\"Mou, hazukashii yo\" artinya?",
+   "a": "Aduh, malu tahu",
+   "w": [
+    "Aduh, aku lapar",
+    "Aduh, aku lelah",
+    "Aduh, aku marah"
+   ],
+   "f": "恥ずかしい = malu. もう di awal menunjukkan malu yang menggemaskan."
+  }
+ ]
+}

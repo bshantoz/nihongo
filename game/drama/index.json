@@ -115,5 +115,50 @@
   "idn": "Di kantor kelurahan",
   "level": "N4",
   "desc": "Mengurus surat keterangan domisili (住民票)."
+ },
+ {
+  "id": "ep14",
+  "no": 14,
+  "ja": "{公園|こうえん}で",
+  "ro": "kouen de",
+  "idn": "Di taman (bertemu teman)",
+  "level": "N5",
+  "desc": "Bertemu teman perempuan, ngobrol santai, dan bertukar LINE."
+ },
+ {
+  "id": "ep15",
+  "no": 15,
+  "ja": "{駅前|えきまえ}で",
+  "ro": "ekimae de",
+  "idn": "Di depan stasiun (ajak nonton)",
+  "level": "N4",
+  "desc": "Mengajak teman nonton film dan makan ramen dulu."
+ },
+ {
+  "id": "ep16",
+  "no": 16,
+  "ja": "{居酒屋|いざかや}で",
+  "ro": "izakaya de",
+  "idn": "Di izakaya (makan bareng)",
+  "level": "N4",
+  "desc": "Memesan makanan, bersulang, lalu patungan dengan teman."
+ },
+ {
+  "id": "ep17",
+  "no": 17,
+  "ja": "{映画館|えいがかん}で",
+  "ro": "eigakan de",
+  "idn": "Di bioskop (kencan)",
+  "level": "N4",
+  "desc": "Kencan dengan pacar: memuji baju, beli tiket dan popcorn."
+ },
+ {
+  "id": "ep18",
+  "no": 18,
+  "ja": "{川沿|かわぞ}いで",
+  "ro": "kawazoi de",
+  "idn": "Di tepi sungai (curhat)",
+  "level": "N3",
+  "desc": "Curhat ke sahabat soal kerjaan, dengan bahasa gaul sehari-hari."
  }
 ]

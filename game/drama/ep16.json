@@ -1,0 +1,285 @@
+{
+ "id": "ep16",
+ "scene": "izakaya",
+ "g": "f",
+ "lines": [
+  {
+   "w": "c",
+   "j": "{何|なに}、{飲|の}む？とりあえず、ビール？",
+   "r": "Nani, nomu? Toriaezu, biiru?",
+   "i": "Mau minum apa? Bir dulu?",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "とりあえず",
+     "toriaezu",
+     "untuk sementara / dulu"
+    ],
+    [
+     "ビール",
+     "biiru",
+     "bir"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "わたしは、ウーロン{茶|ちゃ}にする。",
+   "r": "Watashi wa, uuron cha ni suru.",
+   "i": "Aku pilih teh oolong.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ウーロン{茶|ちゃ}",
+     "uuron cha",
+     "teh oolong"
+    ],
+    [
+     "〜にする",
+     "ni suru",
+     "memilih ..."
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "りょうかい。{食|た}べ{物|もの}は、{何|なに}にする？",
+   "r": "Ryoukai. Tabemono wa, nani ni suru?",
+   "i": "Oke. Makanannya pilih apa?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "りょうかい",
+     "ryoukai",
+     "oke / siap"
+    ],
+    [
+     "{食|た}べ{物|もの}",
+     "tabemono",
+     "makanan"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{唐揚|からあ}げと、{枝豆|えだまめ}が、{食|た}べたい。",
+   "r": "Karaage to, edamame ga, tabetai.",
+   "i": "Aku ingin karaage dan edamame.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{唐揚|からあ}げ",
+     "karaage",
+     "ayam goreng Jepang"
+    ],
+    [
+     "{枝豆|えだまめ}",
+     "edamame",
+     "kedelai muda rebus"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "いいね。わたしは、{焼|や}き{鳥|とり}も、{頼|たの}もう。",
+   "r": "Ii ne. Watashi wa, yakitori mo, tanomou.",
+   "i": "Bagus. Aku juga mau pesan yakitori.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{焼|や}き{鳥|とり}",
+     "yakitori",
+     "sate ayam"
+    ],
+    [
+     "{頼|たの}む",
+     "tanomu",
+     "memesan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "すみません、{注文|ちゅうもん}、お{願|ねが}いします！",
+   "r": "Sumimasen, chuumon, onegaishimasu!",
+   "i": "Permisi, mau pesan!",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{注文|ちゅうもん}",
+     "chuumon",
+     "pesanan"
+    ]
+   ],
+   "em": "!"
+  },
+  {
+   "w": "m",
+   "j": "じゃあ、かんぱい！",
+   "r": "Jaa, kanpai!",
+   "i": "Nah, bersulang!",
+   "act": "hop",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "かんぱい",
+     "kanpai",
+     "bersulang"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "かんぱーい！おつかれさま！",
+   "r": "Kanpaai! Otsukaresama!",
+   "i": "Bersulang! Kerja bagus hari ini!",
+   "act": "hop",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "おつかれさま",
+     "otsukaresama",
+     "terima kasih atas kerja kerasnya"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "ん、おいしい！この{唐揚|からあ}げ、サイコー！",
+   "r": "N, oishii! Kono karaage, saikou!",
+   "i": "Hmm, enak! Karaage ini juara!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "サイコー",
+     "saikoo",
+     "terbaik / juara"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "でしょ？{割|わ}り{勘|かん}で、いい？",
+   "r": "Desho? Warikan de, ii?",
+   "i": "Kan? Bayarnya patungan, ya?",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "でしょ",
+     "desho",
+     "kan / benar, kan?"
+    ],
+    [
+     "{割|わ}り{勘|かん}",
+     "warikan",
+     "bayar sendiri-sendiri"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "うん、いいよ。ごちそうさま！",
+   "r": "Un, ii yo. Gochisousama!",
+   "i": "Ya, boleh. Terima kasih makanannya!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ごちそうさま",
+     "gochisousama",
+     "terima kasih atas makanannya"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "また、{来|く}ようね！",
+   "r": "Mata, koyou ne!",
+   "i": "Ayo datang lagi ya!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{来|く}よう",
+     "koyou",
+     "ayo datang"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Apa arti とりあえず、ビール？",
+   "a": "Bir dulu?",
+   "w": [
+    "Mau bir lagi?",
+    "Tidak minum bir?",
+    "Birnya habis?"
+   ],
+   "f": "とりあえず = untuk sementara/dulu, kebiasaan memesan bir pertama di izakaya."
+  },
+  {
+   "q": "Apa arti ウーロン茶にする (uuron cha ni suru)?",
+   "a": "Aku pilih teh oolong",
+   "w": [
+    "Aku suka teh oolong",
+    "Aku tidak mau teh oolong",
+    "Aku sudah minum teh oolong"
+   ],
+   "f": "〜にする = memilih/memutuskan ...."
+  },
+  {
+   "q": "Apa arti おつかれさま (otsukaresama)?",
+   "a": "Terima kasih atas kerja kerasnya",
+   "w": [
+    "Selamat pagi",
+    "Selamat makan",
+    "Sampai jumpa besok"
+   ],
+   "f": "Ucapan untuk rekan setelah bekerja, juga sering dipakai saat bersulang."
+  },
+  {
+   "q": "Apa arti 割り勘 (warikan)?",
+   "a": "Bayar sendiri-sendiri",
+   "w": [
+    "Traktir semua",
+    "Bayar di muka",
+    "Bayar dengan kartu"
+   ],
+   "f": "割り勘 = patungan sesuai bagian masing-masing."
+  },
+  {
+   "q": "\"Kono karaage, saikou!\" artinya?",
+   "a": "Karaage ini juara!",
+   "w": [
+    "Karaage ini dingin",
+    "Karaage ini asin",
+    "Karaage ini mahal"
+   ],
+   "f": "最高 (saikou) = yang terbaik, santai dibaca サイコー."
+  }
+ ]
+}

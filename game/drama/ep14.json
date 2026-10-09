@@ -1,0 +1,315 @@
+{
+ "id": "ep14",
+ "scene": "kouen",
+ "g": "f",
+ "lines": [
+  {
+   "w": "m",
+   "j": "あ、ゆいちゃん！",
+   "r": "A, Yui-chan!",
+   "i": "Ah, Yui!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "〜ちゃん",
+     "chan",
+     "akhiran akrab untuk nama teman"
+    ]
+   ],
+   "em": "!"
+  },
+  {
+   "w": "c",
+   "j": "あ、モチ！ひさしぶり！",
+   "r": "A, Mochi! Hisashiburi!",
+   "i": "Ah, Mochi! Lama tidak bertemu!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ひさしぶり",
+     "hisashiburi",
+     "lama tidak bertemu"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "ひさしぶり。{元気|げんき}？",
+   "r": "Hisashiburi. Genki?",
+   "i": "Lama tidak bertemu. Sehat?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{元気|げんき}",
+     "genki",
+     "sehat"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "うん、{元気|げんき}だよ。モチは？",
+   "r": "Un, genki da yo. Mochi wa?",
+   "i": "Ya, sehat. Kalau kamu?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "うん",
+     "un",
+     "ya (santai)"
+    ],
+    [
+     "〜だよ",
+     "da yo",
+     "akhiran santai penegas"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わたしも、{元気|げんき}。{今日|きょう}は、{天気|てんき}が、いいね。",
+   "r": "Watashi mo, genki. Kyou wa, tenki ga, ii ne.",
+   "i": "Aku juga sehat. Hari ini cuacanya bagus ya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{天気|てんき}",
+     "tenki",
+     "cuaca"
+    ],
+    [
+     "いいね",
+     "ii ne",
+     "bagus ya"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ほんとだね。ねえ、ジュース、{飲|の}む？",
+   "r": "Hontou da ne. Nee, juusu, nomu?",
+   "i": "Benar ya. Hei, mau minum jus?",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "ほんと",
+     "honto",
+     "benar / sungguh"
+    ],
+    [
+     "ねえ",
+     "nee",
+     "hei"
+    ],
+    [
+     "{飲|の}む",
+     "nomu",
+     "minum"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "うん、{飲|の}む！ありがとう。",
+   "r": "Un, nomu! Arigatou.",
+   "i": "Ya, mau! Terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ありがとう",
+     "arigatou",
+     "terima kasih (santai)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{最近|さいきん}、{仕事|しごと}は、どう？",
+   "r": "Saikin, shigoto wa, dou?",
+   "i": "Belakangan ini, kerjaan gimana?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{最近|さいきん}",
+     "saikin",
+     "belakangan ini"
+    ],
+    [
+     "{仕事|しごと}",
+     "shigoto",
+     "pekerjaan"
+    ],
+    [
+     "どう",
+     "dou",
+     "bagaimana"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "ちょっと、{忙|いそが}しいけど、{楽|たの}しいよ。",
+   "r": "Chotto, isogashii kedo, tanoshii yo.",
+   "i": "Agak sibuk, tapi menyenangkan.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{忙|いそが}しい",
+     "isogashii",
+     "sibuk"
+    ],
+    [
+     "{楽|たの}しい",
+     "tanoshii",
+     "menyenangkan"
+    ],
+    [
+     "けど",
+     "kedo",
+     "tapi"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "そっか。よかった。{今度|こんど}、ごはん、{行|い}こうよ。",
+   "r": "Sokka. Yokatta. Kondo, gohan, ikou yo.",
+   "i": "Begitu ya. Syukurlah. Lain kali, ayo makan.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "そっか",
+     "sokka",
+     "oh begitu"
+    ],
+    [
+     "よかった",
+     "yokatta",
+     "syukurlah"
+    ],
+    [
+     "{今度|こんど}",
+     "kondo",
+     "lain kali"
+    ],
+    [
+     "{行|い}こう",
+     "ikou",
+     "ayo pergi"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "いいね！ライン、{交換|こうかん}しよう。",
+   "r": "Ii ne! Rain, koukan shiyou.",
+   "i": "Boleh! Ayo tukar LINE.",
+   "act": "hop",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "ライン",
+     "rain",
+     "LINE (aplikasi chat)"
+    ],
+    [
+     "{交換|こうかん}",
+     "koukan",
+     "bertukar"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "うん！じゃあ、またね！",
+   "r": "Un! Jaa, mata ne!",
+   "i": "Ya! Sampai jumpa lagi!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "じゃあ",
+     "jaa",
+     "kalau begitu"
+    ],
+    [
+     "またね",
+     "mata ne",
+     "sampai jumpa (santai)"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Hisashiburi!\" diucapkan saat apa?",
+   "a": "Bertemu teman yang lama tidak bertemu",
+   "w": [
+    "Berpisah dengan teman",
+    "Meminta maaf",
+    "Berterima kasih"
+   ],
+   "f": "ひさしぶり = lama tidak bertemu, santai untuk teman dekat. Versi sopan: おひさしぶりです."
+  },
+  {
+   "q": "\"Genki da yo\" artinya?",
+   "a": "Aku sehat",
+   "w": [
+    "Aku sibuk",
+    "Aku lapar",
+    "Aku capek"
+   ],
+   "f": "元気 = sehat/bersemangat. 〜だよ adalah akhiran santai penegas."
+  },
+  {
+   "q": "Bagaimana cara santai menawarkan \"mau minum?\" ke teman?",
+   "a": "ジュース、飲む？",
+   "w": [
+    "ジュースを、飲みますか。",
+    "ジュースを、飲んでください。",
+    "ジュースが、飲みたいですか。"
+   ],
+   "f": "Dengan teman cukup bentuk kamus dan nada naik: 飲む？ (nomu?)."
+  },
+  {
+   "q": "\"Kondo, gohan, ikou yo\" artinya?",
+   "a": "Lain kali, ayo makan",
+   "w": [
+    "Hari ini sudah makan",
+    "Kemarin kita makan",
+    "Aku tidak mau makan"
+   ],
+   "f": "今度 = lain kali, 行こう = ayo pergi, 〜よ = penegas santai."
+  },
+  {
+   "q": "Apa arti \"Jaa, mata ne\"?",
+   "a": "Sampai jumpa lagi",
+   "w": [
+    "Terima kasih banyak",
+    "Tunggu sebentar",
+    "Maaf ya"
+   ],
+   "f": "またね = sampai jumpa (santai), versi sopan: またお会いしましょう atau さようなら."
+  }
+ ]
+}

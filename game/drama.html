@@ -171,6 +171,7 @@ var MOCHI='<g class="tailw"><path d="M45 54C58 54 60 40 54 34" fill="none" strok
  '<path d="M18 32L10.5 30.5M18 34.5L10.5 35.5M46 32L53.5 30.5M46 34.5L53.5 35.5" stroke="#5a3a22" stroke-width=".9" stroke-linecap="round" opacity=".55"/></g>';
 function hatSvg(hat,c1,c2){
   if(hat==='none')return '<path d="M265 84C262 62 277 53 292 53C307 53 318 62 315 84C309 72 298 67 290 67C281 67 271 72 265 84Z" fill="#3a2f2a"/>';
+  if(hat==='girl')return '<path d="M263 86C260 62 276 52 291 52C307 52 320 62 317 86C311 72 299 66 290 66C281 66 270 72 263 86Z" fill="#4a2f24"/><path d="M264 84C260 100 260 112 266 120L276 114C271 106 271 96 271 86Z" fill="#4a2f24"/><path d="M316 84C320 100 320 112 314 120L304 114C309 106 309 96 309 86Z" fill="#4a2f24"/><circle cx="272" cy="64" r="4.6" fill="#f08fb0"/><circle cx="279" cy="62" r="4.6" fill="#f08fb0"/><circle cx="275.5" cy="63.5" r="2" fill="#d9567f"/>';
   if(hat==='chef')return '<ellipse cx="290" cy="50" rx="21" ry="13" fill="#fff" stroke="#d8d2c6"/><rect x="268" y="56" width="44" height="14" rx="3" fill="#fff" stroke="#d8d2c6"/><path d="M270 66H310" stroke="#d8d2c6"/>';
   if(hat==='nurse')return '<path d="M265 84C262 62 277 53 292 53C307 53 318 62 315 84C309 72 298 67 290 67C281 67 271 72 265 84Z" fill="#3a2f2a"/><path d="M272 66Q290 50 308 66L306 71H274Z" fill="#fff" stroke="#d8d2c6"/><path d="M290 58V66M286 62H294" stroke="#d9534f" stroke-width="2.4" stroke-linecap="round"/>';
   var s='<path d="M266 80C268 60 280 54 292 54C306 54 314 62 314 80Z" fill="'+c1+'"/><path d="M298 78H326Q329 83 323 84H298Z" fill="'+c2+'"/>';
@@ -332,17 +333,53 @@ var PLACES={
    '<g class="pp pb he"><rect x="244" y="130" width="32" height="18" rx="2" fill="#dff3e6" stroke="#6fb98f" stroke-width="1.4"/><rect x="248" y="134" width="9" height="11" fill="#bfe3f5"/><path d="M260 137H272M260 142H270" stroke="#6f8089" stroke-width="1.3"/></g>'+
    '<g class="pp pc he"><rect x="282" y="128" width="26" height="20" fill="#fff" stroke="#bdbdbd"/><path d="M286 134H304M286 139H300" stroke="#8a949a"/><path d="M300 124L308 138" stroke="#2b4a7a" stroke-width="2.2" stroke-linecap="round"/></g>'+
    '<g class="pp pd he"><circle cx="314" cy="145" r="4" fill="#c9c9c9" stroke="#9a9a9a"/><circle cx="322" cy="146" r="4" fill="#c9c9c9" stroke="#9a9a9a"/><circle cx="318" cy="140" r="4" fill="#d9b44a" stroke="#a6954f"/></g>'+
-   '<g class="pp pe"><rect x="212" y="122" width="38" height="26" rx="2" fill="#fff" stroke="#8a949a" stroke-width="1.4"/><text x="231" y="133" text-anchor="middle" font-size="7" font-weight="700" fill="#4a5d7a" font-family="Shippori Mincho,serif">住民票</text><path d="M217 139H245M217 143H240" stroke="#9fb0bb"/></g>';}}
+   '<g class="pp pe"><rect x="212" y="122" width="38" height="26" rx="2" fill="#fff" stroke="#8a949a" stroke-width="1.4"/><text x="231" y="133" text-anchor="middle" font-size="7" font-weight="700" fill="#4a5d7a" font-family="Shippori Mincho,serif">住民票</text><path d="M217 139H245M217 143H240" stroke="#9fb0bb"/></g>';}},
+ kouen:{aria:'Mochi bertemu temannya Yui di taman dan mengobrol santai',bn:'こうえん',bc:'#3f8f4f',hat:'girl',c1:'#e9806e',c2:'#c4604f',ec:'#e9806e',name:'Teman ゆい (Yui)',sky:'#cfe8f7',gr:'#b9d9a0',
+  bg:function(){return '<ellipse cx="60" cy="52" rx="34" ry="24" fill="#fff" opacity=".9"/><ellipse cx="90" cy="60" rx="26" ry="16" fill="#fff" opacity=".9"/><circle cx="352" cy="62" r="17" fill="#ffd36e"/>'+
+   '<rect x="168" y="88" width="10" height="64" fill="#8a6a3a"/><circle cx="173" cy="74" r="34" fill="#5fa86a"/><circle cx="150" cy="92" r="20" fill="#74bb7e"/><circle cx="198" cy="92" r="20" fill="#74bb7e"/>'+
+   '<path d="M20 150Q60 130 110 150" fill="#8cc67f"/>';},
+  fg:function(){return '<rect x="150" y="156" width="250" height="84" rx="16" fill="#5fa86a"/><rect x="144" y="148" width="262" height="14" rx="7" fill="#7cc486"/>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="128" width="14" height="20" rx="3" fill="#d9453a" stroke="#8a2a22"/><rect x="214" y="134" width="14" height="6" fill="#fff"/><ellipse cx="221" cy="128" rx="7" ry="2" fill="#c9c9c9"/></g>'+
+   '<g class="pp pc"><rect x="262" y="124" width="18" height="24" rx="3" fill="#2b2b3a"/><rect x="264" y="128" width="14" height="16" rx="1" fill="#6fd29a"/><text x="271" y="139" text-anchor="middle" font-size="6" font-weight="700" fill="#fff" font-family="sans-serif">LINE</text></g>';}},
+ ekimae:{aria:'Mochi bertemu temannya Kenta di depan stasiun untuk pergi nonton film',bn:'駅前',bc:'#2b4a7a',hat:'none',c1:'#6b7a8f',c2:'#4b5a6f',ec:'#6b7a8f',name:'Teman けんた (Kenta)',sky:'#d9e8f3',gr:'#c9c9c4',
+  bg:function(){return '<rect x="20" y="40" width="150" height="110" fill="#e8e4da" stroke="#b9b3a3" stroke-width="2"/><rect x="34" y="54" width="122" height="30" rx="3" fill="#2b4a7a"/><text x="95" y="75" text-anchor="middle" font-size="15" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">駅</text><path d="M34 96H156M34 116H156" stroke="#bdb7a8" stroke-width="3"/>'+
+   '<circle cx="352" cy="64" r="18" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 64V51M352 64L360 68" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="64" r="1.8" fill="#2b2b3a"/>'+
+   '<rect x="206" y="50" width="70" height="40" rx="4" fill="#d9453a"/><text x="241" y="68" text-anchor="middle" font-size="10" fill="#fff" font-weight="700" font-family="Shippori Mincho,serif">らーめん</text><text x="241" y="82" text-anchor="middle" font-size="8" fill="#fff" font-family="Shippori Mincho,serif">500m</text>';},
+  fg:function(){return '<rect x="150" y="158" width="250" height="82" rx="4" fill="#9aa3a8"/><rect x="144" y="150" width="262" height="10" rx="3" fill="#b7bfc4"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="214" y="124" width="18" height="24" rx="3" fill="#2b2b3a"/><rect x="216" y="128" width="14" height="16" rx="1" fill="#bfe3f5"/><text x="223" y="139" text-anchor="middle" font-size="5.5" font-weight="700" fill="#2b2b3a" font-family="sans-serif">13:00</text></g>'+
+   '<g class="pp pb"><rect x="214" y="132" width="26" height="14" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><rect x="244" y="130" width="26" height="14" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><path d="M218 138H236M248 136H266" stroke="#8a6a3a" stroke-width="1.4"/></g>'+
+   '<g class="pp pc"><path d="M284 134H312Q310 148 298 148Q286 148 284 134Z" fill="#c9503f" stroke="#7a2a1f" stroke-width="1.4"/><ellipse cx="298" cy="134" rx="14" ry="3.5" fill="#f2c14e"/></g>';}},
+ izakaya:{aria:'Mochi makan malam di izakaya bersama temannya Aya',bn:'居酒屋',bc:'#a63a2f',hat:'girl',c1:'#8bb8d9',c2:'#6f9bbd',ec:'#8bb8d9',name:'Teman あや (Aya)',sky:'#6a4030',gr:'#3a2a22',
+  bg:function(){var s='',i,t=['からあげ','やきとり','えだまめ','ビール'];
+   for(i=0;i<4;i++)s+='<rect x="'+(24+i*34)+'" y="40" width="28" height="64" rx="2" fill="#f4ead2"/><text x="'+(38+i*34)+'" y="56" text-anchor="middle" style="font:700 8px Shippori Mincho,serif;fill:#6a3a22" transform="rotate(0)">'+t[i].charAt(0)+'</text><text x="'+(38+i*34)+'" y="68" text-anchor="middle" style="font:700 8px Shippori Mincho,serif;fill:#6a3a22">'+t[i].charAt(1)+'</text><text x="'+(38+i*34)+'" y="80" text-anchor="middle" style="font:700 8px Shippori Mincho,serif;fill:#6a3a22">'+t[i].charAt(2)+'</text>'+(t[i].length>3?'<text x="'+(38+i*34)+'" y="92" text-anchor="middle" style="font:700 8px Shippori Mincho,serif;fill:#6a3a22">'+t[i].charAt(3)+'</text>':'');
+   return s+'<circle cx="190" cy="62" r="18" fill="#d9453a"/><rect x="180" y="40" width="20" height="4" fill="#5a3a22"/><text x="190" y="68" text-anchor="middle" font-size="16" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">酒</text><circle cx="352" cy="62" r="17" fill="#d9453a"/><rect x="344" y="42" width="16" height="4" fill="#5a3a22"/>';},
+  fg:function(){return '<rect x="150" y="158" width="250" height="82" fill="#a9774a"/><rect x="144" y="150" width="262" height="10" rx="3" fill="#c99565"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="214" y="128" width="26" height="20" rx="2" fill="#f4ead2" stroke="#c9a46b"/><path d="M219 134H235M219 139H231" stroke="#8a6a3a" stroke-width="1.4"/></g>'+
+   '<g class="pp pb"><path d="M212 128H228L226 148H214Z" fill="#f2c14e" stroke="#b8932c"/><rect x="212" y="125" width="16" height="5" rx="2" fill="#fff"/><path d="M228 132Q234 132 234 138Q234 143 228 143" fill="none" stroke="#b8932c" stroke-width="2"/><path d="M242 132H256L254 148H244Z" fill="#b5774a" opacity=".9" stroke="#7a4a22"/></g>'+
+   '<g class="pp pc"><ellipse cx="282" cy="146" rx="16" ry="4" fill="#fff" stroke="#bdbdbd"/><circle cx="274" cy="140" r="5" fill="#d9a04a"/><circle cx="283" cy="138" r="5" fill="#d9a04a"/><circle cx="291" cy="141" r="5" fill="#d9a04a"/><ellipse cx="312" cy="146" rx="12" ry="3.5" fill="#fff" stroke="#bdbdbd"/><ellipse cx="308" cy="142" rx="3" ry="2" fill="#6fb98f"/><ellipse cx="315" cy="142" rx="3" ry="2" fill="#6fb98f"/></g>'+
+   '<g class="pp pd"><path d="M208 152L240 120M214 154L246 124" stroke="#c9a26b" stroke-width="2"/><circle cx="222" cy="138" r="3.4" fill="#b5522a"/><circle cx="229" cy="131" r="3.4" fill="#b5522a"/></g>';}},
+ eigakan:{aria:'Mochi berkencan dengan pacarnya Mio di bioskop',bn:'映画館',bc:'#7a2f4a',hat:'girl',c1:'#f2a6c0',c2:'#d9809f',ec:'#d9809f',name:'Pacar みお (Mio)',sky:'#2a2438',gr:'#5a2f3f',
+  bg:function(){var s='',cols=['#e9806e','#6aa0d9','#f2c14e'],i;for(i=0;i<3;i++)s+='<rect x="'+(24+i*46)+'" y="38" width="38" height="58" rx="2" fill="'+cols[i]+'" stroke="#fff" stroke-width="2"/><circle cx="'+(43+i*46)+'" cy="62" r="9" fill="#fff" opacity=".6"/><rect x="'+(30+i*46)+'" y="80" width="26" height="4" fill="#fff" opacity=".7"/>';
+   return s+'<rect x="170" y="40" width="96" height="44" rx="5" fill="#15121f" stroke="#ffb347" stroke-width="2"/><text x="218" y="58" text-anchor="middle" font-size="8" fill="#ffb347" font-family="sans-serif">NOW SHOWING</text><text x="218" y="76" text-anchor="middle" style="font:800 14px Shippori Mincho,serif;fill:#ffb347">チケット</text><circle cx="352" cy="62" r="16" fill="#ffd36e"/><path d="M345 56L360 62L345 68Z" fill="#7a2f4a"/>';},
+  fg:function(){var s='<rect x="150" y="158" width="250" height="82" fill="#c9433a"/>',i;for(i=0;i<8;i++)s+='<rect x="'+(158+i*30)+'" y="158" width="14" height="82" fill="#fff" opacity=".85"/>';return s+'<rect x="144" y="150" width="262" height="10" rx="3" fill="#f3d9a0"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="214" y="130" width="28" height="16" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><rect x="246" y="130" width="28" height="16" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><path d="M219 136H237M251 136H269" stroke="#8a6a3a" stroke-width="1.4"/></g>'+
+   '<g class="pp pb"><path d="M286 128H312L309 148H289Z" fill="#fff" stroke="#c9433a" stroke-width="1.4"/><path d="M290 128L292 148M298 128V148M306 128L304 148" stroke="#c9433a" stroke-width="2"/><circle cx="292" cy="126" r="5" fill="#fff3cf"/><circle cx="300" cy="124" r="5.4" fill="#fff3cf"/><circle cx="308" cy="126" r="5" fill="#fff3cf"/></g>'+
+   '<g class="pp pc"><path d="M216 132H230L228 148H218Z" fill="#6aa0d9" stroke="#2b4a7a"/><path d="M226 132L232 120" stroke="#d9453a" stroke-width="2"/><path d="M240 132H254L252 148H242Z" fill="#e9806e" stroke="#a8322a"/><path d="M250 132L256 120" stroke="#d9453a" stroke-width="2"/></g>';}},
+ kawara:{aria:'Mochi curhat kepada sahabatnya Takumi di tepi sungai saat senja',bn:'かわぞい',bc:'#c4540f',hat:'none',c1:'#3f6a8a',c2:'#2c4f69',ec:'#3f6a8a',name:'Sahabat たくみ (Takumi)',sky:'#f4b983',gr:'#6f9a64',
+  bg:function(){return '<circle cx="300" cy="96" r="30" fill="#ffd9a0" opacity=".9"/><circle cx="300" cy="96" r="20" fill="#ffe9c0"/><rect x="0" y="112" width="400" height="44" fill="#6aa0c9" opacity=".85"/><path d="M0 118H400M0 130H400M0 142H400" stroke="#fff" stroke-opacity=".35"/><path d="M20 112V84H110V112" fill="none" stroke="#5a3a52" stroke-width="5"/><path d="M20 84H110" stroke="#5a3a52" stroke-width="7"/><path d="M60 50Q66 44 72 50M78 44Q84 38 90 44" fill="none" stroke="#5a3a52" stroke-width="2"/>';},
+  fg:function(){return '<rect x="150" y="160" width="250" height="80" rx="10" fill="#6f9a64"/><rect x="144" y="150" width="262" height="6" rx="3" fill="#8a949a"/><rect x="170" y="150" width="5" height="22" fill="#8a949a"/><rect x="250" y="150" width="5" height="22" fill="#8a949a"/><rect x="340" y="150" width="5" height="22" fill="#8a949a"/>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="128" width="14" height="20" rx="3" fill="#6b4a2f" stroke="#3a2a22"/><rect x="214" y="134" width="14" height="6" fill="#f6e7c8"/><ellipse cx="221" cy="128" rx="7" ry="2" fill="#c9c9c9"/></g>'+
+   '<g class="pp pb"><path d="M254 150L296 100" stroke="#5a3a22" stroke-width="3" stroke-linecap="round"/><path d="M296 100Q310 104 308 124" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="308" cy="126" r="2.4" fill="#d9453a"/></g>';}}
 };
 function buildPlace(id){
   var P=PLACES[id];
   var h='<svg viewBox="0 0 400 240" id="svg" role="img" aria-label="'+P.aria+'">';
-  h+='<rect class="wall" width="400" height="172"/><rect class="floor" y="172" width="400" height="68"/>';
+  h+='<rect class="wall" width="400" height="172"'+(P.sky?' style="fill:'+P.sky+'"':'')+'/><rect class="floor" y="172" width="400" height="68"'+(P.gr?' style="fill:'+P.gr+'"':'')+'/>';
   h+='<path d="M0 198H400M0 222H400M70 172L40 240M200 172V240M330 172L360 240" stroke="#000" stroke-opacity=".07" fill="none"/>';
   h+=P.bg();
   h+='<rect width="400" height="24" fill="'+P.bc+'"/><text class="btxt" x="200" y="17" text-anchor="middle">'+P.bn+'</text><rect x="40" y="28" width="320" height="3" rx="1.5" fill="#fff" opacity=".6"/>';
   h+=clerkSvg(P.c1,P.c2,P.hat);
-  h+='<rect class="cnt" x="150" y="156" width="250" height="84"/><rect class="top" x="144" y="148" width="262" height="10" rx="3"/>';
+  h+=P.fg?P.fg():'<rect class="cnt" x="150" y="156" width="250" height="84"/><rect class="top" x="144" y="148" width="262" height="10" rx="3"/>';
   h+=P.props();
   h+=mochiSvg(false);
   h+='<text class="emo" id="emM" x="106" y="108" text-anchor="middle" fill="#c4540f"></text><text class="emo" id="emC" x="290" y="46" text-anchor="middle" fill="'+P.ec+'"></text>';
@@ -419,7 +456,8 @@ function speak(text,who,done){
   var dur=Math.max(1200,text.length*140/O.rate*.85);
   setTalk(who);
   if(O.vo){
-    var r=jaSay(text,{rate:O.rate,who:who,pitch:who==='m'?1.5:1.0,end:end,pick:function(vs){return vs.length===1?vs[0]:(who==='m'?vs[vs.length-1]:vs[0]);}});
+    var vw=(who==='c'&&EP&&EP.g==='f')?'f':who;
+    var r=jaSay(text,{rate:O.rate,who:vw,pitch:vw==='m'?1.5:vw==='f'?1.25:1.0,end:end,pick:function(vs){return vs.length===1?vs[0]:(who==='m'?vs[vs.length-1]:vs[0]);}});
     if(r){setTimeout(end,dur+6000);return;}
   }
   setTimeout(end,dur);

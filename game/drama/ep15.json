@@ -1,0 +1,290 @@
+{
+ "id": "ep15",
+ "scene": "ekimae",
+ "lines": [
+  {
+   "w": "c",
+   "j": "おう、モチ！{待|ま}った？",
+   "r": "Ou, Mochi! Matta?",
+   "i": "Hei, Mochi! Sudah menunggu lama?",
+   "act": "hop",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "おう",
+     "ou",
+     "hei (santai, laki-laki)"
+    ],
+    [
+     "{待|ま}った",
+     "matta",
+     "menunggu"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "ううん、いま、{来|き}たところ。",
+   "r": "Uun, ima, kita tokoro.",
+   "i": "Tidak, aku baru saja sampai.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ううん",
+     "uun",
+     "tidak (santai)"
+    ],
+    [
+     "〜たところ",
+     "ta tokoro",
+     "baru saja ..."
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "よかった。{今日|きょう}は、どこに、{行|い}く？",
+   "r": "Yokatta. Kyou wa, doko ni, iku?",
+   "i": "Syukurlah. Hari ini mau ke mana?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "どこ",
+     "doko",
+     "di mana / ke mana"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{映画|えいが}を、{見|み}に、{行|い}かない？",
+   "r": "Eiga o, mi ni, ikanai?",
+   "i": "Nonton film yuk?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{映画|えいが}",
+     "eiga",
+     "film"
+    ],
+    [
+     "〜に{行|い}く",
+     "ni iku",
+     "pergi untuk ..."
+    ],
+    [
+     "〜ない？",
+     "nai?",
+     "ajakan santai"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "いいね。{何|なに}を、{見|み}る？",
+   "r": "Ii ne. Nani o, miru?",
+   "i": "Boleh. Mau nonton apa?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{何|なに}",
+     "nani",
+     "apa"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "アクションの{映画|えいが}は、どう？",
+   "r": "Akushon no eiga wa, dou?",
+   "i": "Film aksi, bagaimana?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "アクション",
+     "akushon",
+     "aksi"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "いいね。{何時|なんじ}から？",
+   "r": "Ii ne. Nanji kara?",
+   "i": "Bagus. Mulai jam berapa?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{何時|なんじ}",
+     "nanji",
+     "jam berapa"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{二時|にじ}からだよ。まだ、{一時間|いちじかん}ある。",
+   "r": "Niji kara da yo. Mada, ichijikan aru.",
+   "i": "Mulai jam dua. Masih ada satu jam.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "まだ",
+     "mada",
+     "masih"
+    ],
+    [
+     "{一時間|いちじかん}",
+     "ichijikan",
+     "satu jam"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "じゃあ、その{前|まえ}に、ごはん、{食|た}べよう。",
+   "r": "Jaa, sono mae ni, gohan, tabeyou.",
+   "i": "Kalau begitu, sebelum itu kita makan.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "その{前|まえ}に",
+     "sono mae ni",
+     "sebelum itu"
+    ],
+    [
+     "{食|た}べよう",
+     "tabeyou",
+     "ayo makan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "うん。ラーメンが、{食|た}べたいな。",
+   "r": "Un. Raamen ga, tabetai na.",
+   "i": "Ya. Aku ingin makan ramen.",
+   "act": "hop",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "ラーメン",
+     "raamen",
+     "ramen"
+    ],
+    [
+     "{食|た}べたい",
+     "tabetai",
+     "ingin makan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{俺|おれ}も！あの{店|みせ}、{安|やす}くて、おいしいよ。",
+   "r": "Ore mo! Ano mise, yasukute, oishii yo.",
+   "i": "Aku juga! Toko itu murah dan enak.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{俺|おれ}",
+     "ore",
+     "aku (laki-laki, santai)"
+    ],
+    [
+     "{安|やす}くて",
+     "yasukute",
+     "murah dan ..."
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "{行|い}こう、{行|い}こう！",
+   "r": "Ikou, ikou!",
+   "i": "Ayo, ayo!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{行|い}こう",
+     "ikou",
+     "ayo pergi"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Ima, kita tokoro\" artinya?",
+   "a": "Aku baru saja sampai",
+   "w": [
+    "Aku sudah lama di sini",
+    "Aku mau pulang",
+    "Aku belum sampai"
+   ],
+   "f": "〜たところ = baru saja melakukan ..."
+  },
+  {
+   "q": "\"Eiga o mi ni ikanai?\" artinya?",
+   "a": "Nonton film yuk?",
+   "w": [
+    "Kamu sudah nonton film?",
+    "Film apa yang kamu suka?",
+    "Aku tidak mau nonton film"
+   ],
+   "f": "〜に行かない？ adalah cara santai mengajak seseorang pergi untuk melakukan sesuatu."
+  },
+  {
+   "q": "Bagaimana cara bertanya \"mulai jam berapa?\" dengan santai?",
+   "a": "何時から？",
+   "w": [
+    "何時ですか？",
+    "何ですか？",
+    "いつですか？"
+   ],
+   "f": "何時 = jam berapa, から = mulai dari/sejak."
+  },
+  {
+   "q": "Apa arti 俺 (ore)?",
+   "a": "Aku (laki-laki, santai)",
+   "w": [
+    "Kamu (laki-laki)",
+    "Dia (laki-laki)",
+    "Kita"
+   ],
+   "f": "俺 dipakai laki-laki dengan teman dekat. Dalam situasi resmi pakai 私 (watashi)."
+  },
+  {
+   "q": "\"Ano mise, yasukute, oishii yo\" artinya?",
+   "a": "Toko itu murah dan enak",
+   "w": [
+    "Toko itu mahal tapi enak",
+    "Toko itu jauh dan sepi",
+    "Toko itu baru dan bersih"
+   ],
+   "f": "安くて = murah dan ..., おいしい = enak."
+  }
+ ]
+}

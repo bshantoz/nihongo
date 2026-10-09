@@ -1,0 +1,308 @@
+{
+ "id": "ep18",
+ "scene": "kawara",
+ "lines": [
+  {
+   "w": "c",
+   "j": "おっ、モチ。どうした？{元気|げんき}ないじゃん。",
+   "r": "O, Mochi. Doushita? Genki nai jan.",
+   "i": "Hei Mochi. Kenapa? Kok lesu.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "どうした",
+     "doushita",
+     "kenapa?"
+    ],
+    [
+     "〜じゃん",
+     "jan",
+     "kan / kok (santai)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{実|じつ}は、{最近|さいきん}、{仕事|しごと}が、{大変|たいへん}でさ。",
+   "r": "Jitsu wa, saikin, shigoto ga, taihen de sa.",
+   "i": "Sebenarnya, belakangan ini kerjaanku berat.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{実|じつ}は",
+     "jitsu wa",
+     "sebenarnya"
+    ],
+    [
+     "{大変|たいへん}",
+     "taihen",
+     "berat / repot"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{何|なに}か、あったの？{話|はなし}、{聞|き}くよ。",
+   "r": "Nani ka, atta no? Hanashi, kiku yo.",
+   "i": "Ada apa? Ceritakan, aku dengarkan.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{聞|き}く",
+     "kiku",
+     "mendengar"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{先輩|せんぱい}に、{毎日|まいにち}、{怒|おこ}られちゃって。",
+   "r": "Senpai ni, mainichi, okorarechatte.",
+   "i": "Setiap hari dimarahi senior.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{先輩|せんぱい}",
+     "senpai",
+     "senior"
+    ],
+    [
+     "{怒|おこ}られる",
+     "okorareru",
+     "dimarahi"
+    ],
+    [
+     "〜ちゃう",
+     "chau",
+     "terlanjur (santai)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "うわ、それは、きついな。",
+   "r": "Uwa, sore wa, kitsui na.",
+   "i": "Wah, itu berat ya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "きつい",
+     "kitsui",
+     "berat / menekan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "うん。{日本語|にほんご}も、まだ、{下手|へた}だし、{自信|じしん}なくなっちゃった。",
+   "r": "Un. Nihongo mo, mada, heta da shi, jishin nakunacchatta.",
+   "i": "Ya. Bahasa Jepangku juga masih payah, jadi kehilangan percaya diri.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{下手|へた}",
+     "heta",
+     "kurang pandai"
+    ],
+    [
+     "{自信|じしん}",
+     "jishin",
+     "percaya diri"
+    ],
+    [
+     "〜し",
+     "shi",
+     "lagi pula ..."
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{下手|へた}じゃないよ。{前|まえ}より、ぜんぜん、うまくなってる。",
+   "r": "Heta ja nai yo. Mae yori, zenzen, umaku natteru.",
+   "i": "Tidak payah kok. Jauh lebih pintar dari dulu.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{前|まえ}より",
+     "mae yori",
+     "dibanding dulu"
+    ],
+    [
+     "うまくなる",
+     "umaku naru",
+     "menjadi pandai"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "ほんと？",
+   "r": "Honto?",
+   "i": "Benarkah?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ほんと",
+     "honto",
+     "benarkah"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "ほんとだって。{無理|むり}しすぎは、よくないよ。",
+   "r": "Honto datte. Muri shisugi wa, yokunai yo.",
+   "i": "Beneran. Memaksakan diri terlalu keras itu tidak baik.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{無理|むり}",
+     "muri",
+     "memaksakan diri"
+    ],
+    [
+     "〜すぎ",
+     "sugi",
+     "terlalu ..."
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{今度|こんど}の{休|やす}み、{釣|つ}りでも、{行|い}かない？",
+   "r": "Kondo no yasumi, tsuri demo, ikanai?",
+   "i": "Libur nanti, mancing yuk?",
+   "act": "hop",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{休|やす}み",
+     "yasumi",
+     "libur"
+    ],
+    [
+     "{釣|つ}り",
+     "tsuri",
+     "memancing"
+    ],
+    [
+     "〜でも",
+     "demo",
+     "misalnya ..."
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "いいね。ありがとう、たくみ。{話|はな}したら、{楽|らく}になった。",
+   "r": "Ii ne. Arigatou, Takumi. Hanashitara, raku ni natta.",
+   "i": "Boleh. Terima kasih, Takumi. Setelah bercerita jadi lega.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{話|はな}したら",
+     "hanashitara",
+     "setelah bercerita"
+    ],
+    [
+     "{楽|らく}になる",
+     "raku ni naru",
+     "jadi lega"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "{友|とも}だちだろ。いつでも、{言|い}えよ。",
+   "r": "Tomodachi daro. Itsu demo, ieyo.",
+   "i": "Kita kan teman. Bilang saja kapan pun.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "〜だろ",
+     "daro",
+     "kan (santai, laki-laki)"
+    ],
+    [
+     "いつでも",
+     "itsu demo",
+     "kapan saja"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Genki nai jan\" artinya?",
+   "a": "Kok kamu lesu",
+   "w": [
+    "Kamu sangat sehat",
+    "Kamu terlambat",
+    "Kamu sedang sibuk"
+   ],
+   "f": "〜じゃん adalah akhiran santai yang berarti 'kan / kok'."
+  },
+  {
+   "q": "\"Okorarechatte\" bentuk dasarnya apa?",
+   "a": "怒る (okoru), marah",
+   "w": [
+    "怒す (okosu)",
+    "怒れる (okoreru)",
+    "怒ける (okokeru)"
+   ],
+   "f": "怒られる = dimarahi (pasif), 〜ちゃう = terlanjur terjadi, dengan nuansa menyesal."
+  },
+  {
+   "q": "Apa arti きつい (kitsui) pada \"Sore wa kitsui na\"?",
+   "a": "Itu berat",
+   "w": [
+    "Itu lucu",
+    "Itu mudah",
+    "Itu enak"
+   ],
+   "f": "きつい = berat/menekan secara mental atau fisik."
+  },
+  {
+   "q": "\"Muri shisugi wa yokunai yo\" artinya?",
+   "a": "Memaksakan diri terlalu keras itu tidak baik",
+   "w": [
+    "Jangan terlalu banyak tidur",
+    "Jangan terlambat bekerja",
+    "Jangan makan terlalu banyak"
+   ],
+   "f": "無理する = memaksakan diri, 〜すぎ = terlalu."
+  },
+  {
+   "q": "\"Tomodachi daro\" artinya?",
+   "a": "Kita kan teman",
+   "w": [
+    "Dia teman baruku",
+    "Aku tidak punya teman",
+    "Kamu bukan temanku"
+   ],
+   "f": "〜だろ = kan? (nada santai laki-laki), menunjukkan sahabat."
+  }
+ ]
+}
