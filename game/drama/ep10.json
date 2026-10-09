@@ -1,0 +1,288 @@
+{
+ "id": "ep10",
+ "scene": "ginkou",
+ "lines": [
+  {
+   "w": "m",
+   "j": "すみません、{口座|こうざ}を、{開|ひら}きたいです。",
+   "r": "Sumimasen, kouza o, hirakitai desu.",
+   "i": "Permisi, saya ingin membuka rekening.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{口座|こうざ}",
+     "kouza",
+     "rekening"
+    ],
+    [
+     "{開|ひら}きたい",
+     "hirakitai",
+     "ingin membuka"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "かしこまりました。{在留|ざいりゅう}カードを、お{願|ねが}いします。",
+   "r": "Kashikomarimashita. Zairyuu kaado o, onegaishimasu.",
+   "i": "Baik. Tolong kartu izin tinggalnya.",
+   "act": "bow",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "かしこまりました",
+     "kashikomarimashita",
+     "baik, dimengerti (sangat sopan)"
+    ],
+    [
+     "{在留|ざいりゅう}カード",
+     "zairyuu kaado",
+     "kartu izin tinggal"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、これです。",
+   "r": "Hai, kore desu.",
+   "i": "Ya, ini.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "これ",
+     "kore",
+     "ini"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "この{用紙|ようし}に、お{名前|なまえ}と{住所|じゅうしょ}を、{書|か}いてください。",
+   "r": "Kono youshi ni, onamae to juusho o, kaite kudasai.",
+   "i": "Tolong tulis nama dan alamat di formulir ini.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{用紙|ようし}",
+     "youshi",
+     "formulir"
+    ],
+    [
+     "{住所|じゅうしょ}",
+     "juusho",
+     "alamat"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ローマ{字|じ}でも、いいですか。",
+   "r": "Roomaji demo, ii desu ka.",
+   "i": "Boleh pakai huruf latin?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ローマ{字|じ}",
+     "roomaji",
+     "huruf latin"
+    ],
+    [
+     "いいですか",
+     "ii desu ka",
+     "bolehkah?"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "はい、{大丈夫|だいじょうぶ}です。",
+   "r": "Hai, daijoubu desu.",
+   "i": "Ya, tidak masalah.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{大丈夫|だいじょうぶ}",
+     "daijoubu",
+     "tidak masalah"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{暗証番号|あんしょうばんごう}を、{四桁|よんけた}で、{決|き}めてください。",
+   "r": "Anshou bangou o, yonketa de, kimete kudasai.",
+   "i": "Tolong tentukan PIN empat digit.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{暗証番号|あんしょうばんごう}",
+     "anshou bangou",
+     "PIN"
+    ],
+    [
+     "{四桁|よんけた}",
+     "yonketa",
+     "empat digit"
+    ],
+    [
+     "{決|き}める",
+     "kimeru",
+     "menentukan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、{決|き}めました。",
+   "r": "Hai, kimemashita.",
+   "i": "Ya, sudah saya tentukan.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{決|き}めました",
+     "kimemashita",
+     "sudah menentukan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{通帳|つうちょう}とカードは、{一週間|いっしゅうかん}ぐらいで、{届|とど}きます。",
+   "r": "Tsuuchou to kaado wa, isshuukan gurai de, todokimasu.",
+   "i": "Buku tabungan dan kartu sampai kira-kira seminggu.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{通帳|つうちょう}",
+     "tsuuchou",
+     "buku tabungan"
+    ],
+    [
+     "{一週間|いっしゅうかん}",
+     "isshuukan",
+     "satu minggu"
+    ],
+    [
+     "{届|とど}く",
+     "todoku",
+     "sampai / tiba"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{一週間|いっしゅうかん}ですね。わかりました。",
+   "r": "Isshuukan desu ne. Wakarimashita.",
+   "i": "Seminggu ya. Saya mengerti.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "わかりました",
+     "wakarimashita",
+     "saya mengerti"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "これは、{仮|かり}のカードです。",
+   "r": "Kore wa, kari no kaado desu.",
+   "i": "Ini kartu sementara.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{仮|かり}",
+     "kari",
+     "sementara"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。",
+   "r": "Arigatou gozaimasu.",
+   "i": "Terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ありがとうございます",
+     "arigatou gozaimasu",
+     "terima kasih (sopan)"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Apa arti 口座を開きたいです (kouza o hirakitai desu)?",
+   "a": "Saya ingin membuka rekening",
+   "w": [
+    "Saya ingin menutup rekening",
+    "Saya ingin menarik uang",
+    "Saya ingin kirim uang"
+   ],
+   "f": "口座 = rekening, 開きたい = ingin membuka."
+  },
+  {
+   "q": "Dokumen apa yang diminta petugas bank?",
+   "a": "在留カード (zairyuu kaado)",
+   "w": [
+    "パスポート (pasupooto) saja",
+    "保険証 (hokenshou)",
+    "運転免許証 (unten menkyoshou)"
+   ],
+   "f": "在留カード adalah kartu izin tinggal bagi warga asing di Jepang, dokumen utama saat membuka rekening."
+  },
+  {
+   "q": "\"Roomaji demo ii desu ka\" artinya?",
+   "a": "Boleh pakai huruf latin?",
+   "w": [
+    "Boleh pakai bahasa Inggris?",
+    "Boleh bayar tunai?",
+    "Boleh difoto?"
+   ],
+   "f": "ローマ字 = huruf latin, 〜でもいいですか = bolehkah (pakai) ...?"
+  },
+  {
+   "q": "Apa arti 暗証番号 (anshou bangou)?",
+   "a": "PIN / nomor rahasia",
+   "w": [
+    "Nomor telepon",
+    "Nomor rekening",
+    "Nomor kartu pelajar"
+   ],
+   "f": "暗証番号 adalah PIN kartu ATM, biasanya empat digit (四桁)."
+  },
+  {
+   "q": "\"Isshuukan gurai de todokimasu\" artinya?",
+   "a": "Sampai kira-kira seminggu",
+   "w": [
+    "Sampai kira-kira sebulan",
+    "Sampai besok pagi",
+    "Diambil sendiri minggu depan"
+   ],
+   "f": "一週間 = satu minggu, 届く = sampai/tiba."
+  }
+ ]
+}

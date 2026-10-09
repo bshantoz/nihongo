@@ -1,0 +1,290 @@
+{
+ "id": "ep09",
+ "scene": "kafe",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。ご{注文|ちゅうもん}は、お{決|き}まりですか。",
+   "r": "Irasshaimase. Gochuumon wa, okimari desu ka.",
+   "i": "Selamat datang. Sudah menentukan pesanannya?",
+   "act": "bow",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "ご{注文|ちゅうもん}",
+     "gochuumon",
+     "pesanan"
+    ],
+    [
+     "お{決|き}まりですか",
+     "okimari desu ka",
+     "sudah diputuskan?"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ホットコーヒーを、ひとつ、ください。",
+   "r": "Hotto koohii o, hitotsu, kudasai.",
+   "i": "Tolong satu kopi panas.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ホットコーヒー",
+     "hotto koohii",
+     "kopi panas"
+    ],
+    [
+     "ひとつ",
+     "hitotsu",
+     "satu (benda)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "サイズは、どうしますか。",
+   "r": "Saizu wa, doushimasu ka.",
+   "i": "Ukurannya mau yang mana?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "サイズ",
+     "saizu",
+     "ukuran"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{大|おお}きいのを、お{願|ねが}いします。",
+   "r": "Ookii no o, onegaishimasu.",
+   "i": "Tolong yang besar.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{大|おお}きい",
+     "ookii",
+     "besar"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ケーキも、いかがですか。",
+   "r": "Keeki mo, ikaga desu ka.",
+   "i": "Mau kue juga?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ケーキ",
+     "keeki",
+     "kue"
+    ],
+    [
+     "いかがですか",
+     "ikaga desu ka",
+     "bagaimana (sopan)"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "じゃあ、チーズケーキも、ください。",
+   "r": "Jaa, chiizu keeki mo, kudasai.",
+   "i": "Kalau begitu, cheesecake juga.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "じゃあ",
+     "jaa",
+     "kalau begitu"
+    ],
+    [
+     "チーズケーキ",
+     "chiizu keeki",
+     "cheesecake"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "{店内|てんない}でお{召|め}し{上|あ}がりですか。お{持|も}ち{帰|かえ}りですか。",
+   "r": "Tennai de omeshiagari desu ka. Omochikaeri desu ka.",
+   "i": "Makan di sini atau dibawa pulang?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{店内|てんない}",
+     "tennai",
+     "di dalam toko"
+    ],
+    [
+     "お{持|も}ち{帰|かえ}り",
+     "omochikaeri",
+     "dibawa pulang"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "ここで、{食|た}べます。",
+   "r": "Koko de, tabemasu.",
+   "i": "Makan di sini.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ここ",
+     "koko",
+     "di sini"
+    ],
+    [
+     "{食|た}べます",
+     "tabemasu",
+     "makan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{全部|ぜんぶ}で、{700|ななひゃく}{円|えん}です。",
+   "r": "Zenbu de, nanahyaku en desu.",
+   "i": "Semuanya 700 yen.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{全部|ぜんぶ}",
+     "zenbu",
+     "semuanya"
+    ],
+    [
+     "{700|ななひゃく}",
+     "nanahyaku",
+     "700"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、どうぞ。",
+   "r": "Hai, douzo.",
+   "i": "Ya, ini.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "どうぞ",
+     "douzo",
+     "silakan / ini"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "お{待|ま}たせしました。ごゆっくり、どうぞ。",
+   "r": "Omatase shimashita. Goyukkuri, douzo.",
+   "i": "Maaf menunggu. Silakan bersantai.",
+   "act": "bow",
+   "s": [
+    "b",
+    "c"
+   ],
+   "v": [
+    [
+     "ごゆっくり",
+     "goyukkuri",
+     "silakan bersantai"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "いただきます。おいしい！",
+   "r": "Itadakimasu. Oishii!",
+   "i": "Selamat makan. Enak!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "いただきます",
+     "itadakimasu",
+     "ucapan sebelum makan"
+    ],
+    [
+     "おいしい",
+     "oishii",
+     "enak"
+    ]
+   ],
+   "em": "♥"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Gochuumon wa okimari desu ka\" artinya?",
+   "a": "Sudah menentukan pesanannya?",
+   "w": [
+    "Mau bayar tunai?",
+    "Mau duduk di mana?",
+    "Sudah pernah ke sini?"
+   ],
+   "f": "ご注文 (gochuumon) = pesanan, お決まりですか = sudah diputuskan?"
+  },
+  {
+   "q": "Apa arti お持ち帰り (omochikaeri)?",
+   "a": "Dibawa pulang",
+   "w": [
+    "Makan di tempat",
+    "Minta tambah",
+    "Minta bon"
+   ],
+   "f": "店内 (tennai) = di dalam toko, お持ち帰り = dibawa pulang."
+  },
+  {
+   "q": "Bagaimana cara membaca 700円?",
+   "a": "ななひゃくえん (nanahyaku en)",
+   "w": [
+    "しちひゃくえん (shichihyaku en)",
+    "ななびゃくえん (nanabyaku en)",
+    "ひちひゃくえん (hichihyaku en)"
+   ],
+   "f": "700 dibaca ななひゃく (nanahyaku). Perubahan bunyi seperti 300 (さんびゃく) atau 800 (はっぴゃく) tidak terjadi di sini."
+  },
+  {
+   "q": "Bagaimana cara memesan \"satu kopi panas\"?",
+   "a": "ホットコーヒーを、ひとつ、ください。",
+   "w": [
+    "ホットコーヒーを、ひとり、ください。",
+    "ホットコーヒーを、いっかい、ください。",
+    "ホットコーヒーが、ひとつ、いります。"
+   ],
+   "f": "Benda dihitung dengan ひとつ (hitotsu), orang dengan ひとり (hitori)."
+  },
+  {
+   "q": "\"Goyukkuri, douzo\" diucapkan saat apa?",
+   "a": "Saat mempersilakan pelanggan bersantai",
+   "w": [
+    "Saat pelanggan baru datang",
+    "Saat pelanggan membayar",
+    "Saat toko tutup"
+   ],
+   "f": "ごゆっくり = silakan bersantai / nikmati waktunya."
+  }
+ ]
+}

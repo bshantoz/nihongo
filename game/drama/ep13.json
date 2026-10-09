@@ -1,0 +1,264 @@
+{
+ "id": "ep13",
+ "scene": "kuyakusho",
+ "lines": [
+  {
+   "w": "m",
+   "j": "すみません、{住民票|じゅうみんひょう}を、{取|と}りたいです。",
+   "r": "Sumimasen, juuminhyou o, toritai desu.",
+   "i": "Permisi, saya ingin mengambil surat keterangan domisili.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{住民票|じゅうみんひょう}",
+     "juuminhyou",
+     "surat keterangan domisili"
+    ],
+    [
+     "{取|と}りたい",
+     "toritai",
+     "ingin mengambil"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "こんにちは。まず、{番号札|ばんごうふだ}を、{取|と}ってください。",
+   "r": "Konnichiwa. Mazu, bangoufuda o, totte kudasai.",
+   "i": "Selamat siang. Pertama, tolong ambil nomor antrean.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "まず",
+     "mazu",
+     "pertama"
+    ],
+    [
+     "{番号札|ばんごうふだ}",
+     "bangoufuda",
+     "nomor antrean"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、{取|と}りました。",
+   "r": "Hai, torimashita.",
+   "i": "Ya, sudah saya ambil.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{取|と}りました",
+     "torimashita",
+     "sudah mengambil"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{12|じゅうに}{番|ばん}の{方|かた}、どうぞ。",
+   "r": "Juuni ban no kata, douzo.",
+   "i": "Nomor 12, silakan.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{方|かた}",
+     "kata",
+     "orang (sopan)"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "{在留|ざいりゅう}カードを、{見|み}せてください。",
+   "r": "Zairyuu kaado o, misete kudasai.",
+   "i": "Tolong tunjukkan kartu izin tinggal.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{見|み}せる",
+     "miseru",
+     "menunjukkan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、どうぞ。",
+   "r": "Hai, douzo.",
+   "i": "Ya, silakan.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "どうぞ",
+     "douzo",
+     "silakan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "この{申請書|しんせいしょ}に、{名前|なまえ}と{住所|じゅうしょ}を、{書|か}いてください。",
+   "r": "Kono shinseisho ni, namae to juusho o, kaite kudasai.",
+   "i": "Tolong tulis nama dan alamat di formulir ini.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{申請書|しんせいしょ}",
+     "shinseisho",
+     "formulir permohonan"
+    ],
+    [
+     "{住所|じゅうしょ}",
+     "juusho",
+     "alamat"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{書|か}きました。お{願|ねが}いします。",
+   "r": "Kakimashita. Onegaishimasu.",
+   "i": "Sudah saya tulis. Mohon diproses.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{書|か}きました",
+     "kakimashita",
+     "sudah menulis"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{手数料|てすうりょう}は、{300|さんびゃく}{円|えん}です。",
+   "r": "Tesuuryou wa, sanbyaku en desu.",
+   "i": "Biayanya 300 yen.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{手数料|てすうりょう}",
+     "tesuuryou",
+     "biaya administrasi"
+    ],
+    [
+     "{300|さんびゃく}",
+     "sanbyaku",
+     "300"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、{300|さんびゃく}{円|えん}です。",
+   "r": "Hai, sanbyaku en desu.",
+   "i": "Ya, 300 yen.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{少々|しょうしょう}、お{待|ま}ちください。……お{待|ま}たせしました。{住民票|じゅうみんひょう}です。",
+   "r": "Shoushou, omachi kudasai. ...Omatase shimashita. Juuminhyou desu.",
+   "i": "Mohon tunggu sebentar. ...Maaf menunggu. Ini surat keterangan domisilinya.",
+   "act": "bow",
+   "s": [
+    "e"
+   ],
+   "v": [
+    [
+     "{少々|しょうしょう}",
+     "shoushou",
+     "sebentar (sopan)"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。",
+   "r": "Arigatou gozaimasu.",
+   "i": "Terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ありがとうございます",
+     "arigatou gozaimasu",
+     "terima kasih (sopan)"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Apa arti 住民票 (juuminhyou)?",
+   "a": "Surat keterangan domisili",
+   "w": [
+    "Kartu asuransi kesehatan",
+    "Surat izin kerja",
+    "Surat nikah"
+   ],
+   "f": "住民票 sering diminta saat mengurus bank, visa, atau pindah alamat."
+  },
+  {
+   "q": "\"Bangoufuda o totte kudasai\" artinya?",
+   "a": "Tolong ambil nomor antrean",
+   "w": [
+    "Tolong tunjukkan nomor ponsel",
+    "Tolong tulis nomor rekening",
+    "Tolong tunggu di luar"
+   ],
+   "f": "番号札 = nomor antrean, 取ってください = tolong ambil."
+  },
+  {
+   "q": "\"Zairyuu kaado o misete kudasai\" artinya?",
+   "a": "Tolong tunjukkan kartu izin tinggal",
+   "w": [
+    "Tolong serahkan paspor",
+    "Tolong salin kartu izin tinggal",
+    "Tolong foto kartu izin tinggal"
+   ],
+   "f": "見せてください = tolong tunjukkan."
+  },
+  {
+   "q": "Bagaimana cara membaca 300円?",
+   "a": "さんびゃくえん (sanbyaku en)",
+   "w": [
+    "さんひゃくえん (sanhyaku en)",
+    "みっひゃくえん (mippyaku en)",
+    "さんぴゃくえん (sanpyaku en)"
+   ],
+   "f": "300 dibaca さんびゃく (sanbyaku); 600 = ろっぴゃく, 800 = はっぴゃく."
+  },
+  {
+   "q": "Apa arti 手数料 (tesuuryou)?",
+   "a": "Biaya administrasi",
+   "w": [
+    "Biaya sewa",
+    "Uang jaminan",
+    "Denda"
+   ],
+   "f": "手数料 = biaya jasa/administrasi, di sini 300 yen."
+  }
+ ]
+}

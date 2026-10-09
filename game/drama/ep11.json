@@ -1,0 +1,295 @@
+{
+ "id": "ep11",
+ "scene": "keitai",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。{今日|きょう}は、どうなさいましたか。",
+   "r": "Irasshaimase. Kyou wa, dou nasaimashita ka.",
+   "i": "Selamat datang. Ada keperluan apa hari ini?",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{今日|きょう}",
+     "kyou",
+     "hari ini"
+    ],
+    [
+     "どうなさいましたか",
+     "dou nasaimashita ka",
+     "ada yang bisa dibantu? (sopan)"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "シムカードを、{買|か}いたいです。",
+   "r": "Shimu kaado o, kaitai desu.",
+   "i": "Saya ingin membeli kartu SIM.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "シムカード",
+     "shimu kaado",
+     "kartu SIM"
+    ],
+    [
+     "{買|か}いたい",
+     "kaitai",
+     "ingin membeli"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "スマホは、お{持|も}ちですか。",
+   "r": "Sumaho wa, omochi desu ka.",
+   "i": "Apakah Anda sudah punya ponsel?",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "スマホ",
+     "sumaho",
+     "ponsel pintar"
+    ],
+    [
+     "お{持|も}ちですか",
+     "omochi desu ka",
+     "punya? (sopan)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、{持|も}っています。これです。",
+   "r": "Hai, motte imasu. Kore desu.",
+   "i": "Ya, punya. Ini.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{持|も}っています",
+     "motte imasu",
+     "punya"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "プランは、{月|つき}{3000|さんぜん}{円|えん}で、{20|にじゅう}ギガです。",
+   "r": "Puran wa, tsuki sanzen en de, nijuu giga desu.",
+   "i": "Paketnya 3000 yen per bulan, 20 GB.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "プラン",
+     "puran",
+     "paket / plan"
+    ],
+    [
+     "{月|つき}",
+     "tsuki",
+     "per bulan"
+    ],
+    [
+     "ギガ",
+     "giga",
+     "GB (kuota)"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ちょっと、{高|たか}いです。もっと、{安|やす}いのは、ありますか。",
+   "r": "Chotto, takai desu. Motto, yasui no wa, arimasu ka.",
+   "i": "Agak mahal. Ada yang lebih murah?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{高|たか}い",
+     "takai",
+     "mahal"
+    ],
+    [
+     "{安|やす}い",
+     "yasui",
+     "murah"
+    ],
+    [
+     "もっと",
+     "motto",
+     "lebih"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "はい。{10|じゅう}ギガなら、{月|つき}{2000|にせん}{円|えん}です。",
+   "r": "Hai. Juu giga nara, tsuki nisen en desu.",
+   "i": "Ada. Kalau 10 GB, 2000 yen per bulan.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "〜なら",
+     "nara",
+     "kalau ..."
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "それに、します。",
+   "r": "Sore ni, shimasu.",
+   "i": "Saya ambil yang itu.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "それ",
+     "sore",
+     "itu"
+    ],
+    [
+     "〜にします",
+     "ni shimasu",
+     "saya pilih ..."
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "シムカードです。スマホに、{入|い}れてください。",
+   "r": "Shimu kaado desu. Sumaho ni, irete kudasai.",
+   "i": "Ini kartu SIM-nya. Tolong dimasukkan ke ponsel.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{入|い}れる",
+     "ireru",
+     "memasukkan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "こちらの{契約書|けいやくしょ}に、サインを、お{願|ねが}いします。",
+   "r": "Kochira no keiyakusho ni, sain o, onegaishimasu.",
+   "i": "Mohon tanda tangan di surat perjanjian ini.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{契約書|けいやくしょ}",
+     "keiyakusho",
+     "surat perjanjian"
+    ],
+    [
+     "サイン",
+     "sain",
+     "tanda tangan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい。これで、いいですか。",
+   "r": "Hai. Kore de, ii desu ka.",
+   "i": "Baik. Begini sudah cukup?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "これで",
+     "kore de",
+     "dengan ini"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "はい、{今日|きょう}から、{使|つか}えます。ありがとうございました。",
+   "r": "Hai, kyou kara, tsukaemasu. Arigatou gozaimashita.",
+   "i": "Ya, mulai hari ini sudah bisa dipakai. Terima kasih.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{使|つか}えます",
+     "tsukaemasu",
+     "bisa dipakai"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Apa arti シムカードを買いたいです?",
+   "a": "Saya ingin membeli kartu SIM",
+   "w": [
+    "Saya ingin menjual ponsel",
+    "Saya ingin memperbaiki ponsel",
+    "Saya ingin mengganti nomor"
+   ],
+   "f": "買いたい = ingin membeli."
+  },
+  {
+   "q": "Bagaimana cara membaca 3000円?",
+   "a": "さんぜんえん (sanzen en)",
+   "w": [
+    "さんせんえん (sansen en)",
+    "みっせんえん (missen en)",
+    "さんぜんいえん (sanzen ien)"
+   ],
+   "f": "3000 dibaca さんぜん (sanzen) dengan bunyi bersuara."
+  },
+  {
+   "q": "\"Chotto takai desu\" artinya?",
+   "a": "Agak mahal",
+   "w": [
+    "Agak murah",
+    "Agak jauh",
+    "Agak sulit"
+   ],
+   "f": "高い (takai) = mahal (juga bisa berarti tinggi), 安い (yasui) = murah."
+  },
+  {
+   "q": "Bagaimana cara meminta paket yang lebih murah?",
+   "a": "もっと、安いのは、ありますか。",
+   "w": [
+    "もっと、高いのは、ありますか。",
+    "もう、安いのは、ありますか。",
+    "ちょっと、安いのが、いります。"
+   ],
+   "f": "もっと = lebih, 安いのは ありますか = apakah ada yang murah?"
+  },
+  {
+   "q": "\"Kyou kara tsukaemasu\" artinya?",
+   "a": "Mulai hari ini sudah bisa dipakai",
+   "w": [
+    "Besok baru bisa dipakai",
+    "Hari ini terakhir dipakai",
+    "Hari ini belum bisa dipakai"
+   ],
+   "f": "〜から = mulai dari, 使えます = bisa dipakai."
+  }
+ ]
+}

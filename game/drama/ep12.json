@@ -1,0 +1,285 @@
+{
+ "id": "ep12",
+ "scene": "super",
+ "lines": [
+  {
+   "w": "m",
+   "j": "すみません、たまごは、どこに、ありますか。",
+   "r": "Sumimasen, tamago wa, doko ni, arimasu ka.",
+   "i": "Permisi, telur ada di mana?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "たまご",
+     "tamago",
+     "telur"
+    ],
+    [
+     "どこ",
+     "doko",
+     "di mana"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "たまごは、{3|さん}{番|ばん}の{通路|つうろ}です。{牛乳|ぎゅうにゅう}の、{隣|となり}です。",
+   "r": "Tamago wa, sanban no tsuurou desu. Gyuunyuu no, tonari desu.",
+   "i": "Telur ada di lorong nomor 3, di sebelah susu.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{通路|つうろ}",
+     "tsuurou",
+     "lorong"
+    ],
+    [
+     "{牛乳|ぎゅうにゅう}",
+     "gyuunyuu",
+     "susu sapi"
+    ],
+    [
+     "{隣|となり}",
+     "tonari",
+     "sebelah"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかりました。ありがとうございます。",
+   "r": "Wakarimashita. Arigatou gozaimasu.",
+   "i": "Saya mengerti. Terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "わかりました",
+     "wakarimashita",
+     "saya mengerti"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。レジぶくろは、いりますか。",
+   "r": "Irasshaimase. Rejibukuro wa, irimasu ka.",
+   "i": "Selamat datang. Perlu kantong plastik?",
+   "act": "bow",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "レジぶくろ",
+     "rejibukuro",
+     "kantong plastik kasir"
+    ],
+    [
+     "いりますか",
+     "irimasu ka",
+     "perlu?"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "いいえ、エコバッグを、{持|も}ってきました。",
+   "r": "Iie, ekobaggu o, mottekimashita.",
+   "i": "Tidak, saya bawa tas belanja sendiri.",
+   "act": "hop",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "エコバッグ",
+     "ekobaggu",
+     "tas belanja sendiri"
+    ],
+    [
+     "{持|も}ってきました",
+     "mottekimashita",
+     "sudah membawa"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ポイントカードは、お{持|も}ちですか。",
+   "r": "Pointo kaado wa, omochi desu ka.",
+   "i": "Apakah punya kartu poin?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ポイントカード",
+     "pointo kaado",
+     "kartu poin"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "いいえ、{持|も}っていません。",
+   "r": "Iie, motte imasen.",
+   "i": "Tidak, saya tidak punya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{持|も}っていません",
+     "motte imasen",
+     "tidak punya"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{合計|ごうけい}で、{1280|せんにひゃくはちじゅう}{円|えん}です。",
+   "r": "Goukei de, sen nihyaku hachijuu en desu.",
+   "i": "Totalnya 1280 yen.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{合計|ごうけい}",
+     "goukei",
+     "total"
+    ],
+    [
+     "{1280|せんにひゃくはちじゅう}",
+     "sen nihyaku hachijuu",
+     "1280"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{1300|せんさんびゃく}{円|えん}、どうぞ。",
+   "r": "Sen sanbyaku en, douzo.",
+   "i": "Ini 1300 yen.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{1300|せんさんびゃく}",
+     "sen sanbyaku",
+     "1300"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{20|にじゅう}{円|えん}の、おつりです。レシートです。",
+   "r": "Nijuu en no, otsuri desu. Reshiito desu.",
+   "i": "Kembaliannya 20 yen. Ini struknya.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "おつり",
+     "otsuri",
+     "uang kembalian"
+    ],
+    [
+     "レシート",
+     "reshiito",
+     "struk"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。",
+   "r": "Arigatou gozaimasu.",
+   "i": "Terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ありがとうございます",
+     "arigatou gozaimasu",
+     "terima kasih (sopan)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございました。また、どうぞ。",
+   "r": "Arigatou gozaimashita. Mata, douzo.",
+   "i": "Terima kasih. Silakan datang lagi.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "また",
+     "mata",
+     "lagi"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Tamago wa doko ni arimasu ka\" artinya?",
+   "a": "Telur ada di mana?",
+   "w": [
+    "Susu ada di mana?",
+    "Telur berapa harganya?",
+    "Kasir ada di mana?"
+   ],
+   "f": "たまご = telur, どこにありますか = ada di mana?"
+  },
+  {
+   "q": "Apa arti レジぶくろ (rejibukuro)?",
+   "a": "Kantong plastik di kasir",
+   "w": [
+    "Tas belanja kain",
+    "Kotak makan siang",
+    "Kantong sampah"
+   ],
+   "f": "Di Jepang kantong plastik kasir biasanya berbayar, jadi banyak orang membawa エコバッグ."
+  },
+  {
+   "q": "\"Pointo kaado wa omochi desu ka\" artinya?",
+   "a": "Apakah punya kartu poin?",
+   "w": [
+    "Mau bayar pakai kartu kredit?",
+    "Mau minta struk?",
+    "Mau tas belanja?"
+   ],
+   "f": "お持ちですか = apakah punya? (sopan)."
+  },
+  {
+   "q": "Bagaimana cara membaca 1300円?",
+   "a": "せんさんびゃくえん (sen sanbyaku en)",
+   "w": [
+    "せんさんひゃくえん (sen sanhyaku en)",
+    "いちさんびゃくえん (ichi sanbyaku en)",
+    "せんみっびゃくえん (sen mippyaku en)"
+   ],
+   "f": "300 dibaca さんびゃく (sanbyaku) dengan bunyi bersuara, 1000 cukup dibaca せん (sen)."
+  },
+  {
+   "q": "Apa arti おつり (otsuri)?",
+   "a": "Uang kembalian",
+   "w": [
+    "Uang muka",
+    "Uang tip",
+    "Uang pecahan"
+   ],
+   "f": "Kembalian dibaca おつり, struk dibaca レシート."
+  }
+ ]
+}

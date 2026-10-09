@@ -70,5 +70,50 @@
   "idn": "Di rumah sakit",
   "level": "N5",
   "desc": "Mendaftar di resepsionis dan menunggu dipanggil."
+ },
+ {
+  "id": "ep09",
+  "no": 9,
+  "ja": "カフェで",
+  "ro": "kafe de",
+  "idn": "Di kafe",
+  "level": "N5",
+  "desc": "Memesan kopi dan cheesecake, lalu membayar."
+ },
+ {
+  "id": "ep10",
+  "no": 10,
+  "ja": "{銀行|ぎんこう}で",
+  "ro": "ginkou de",
+  "idn": "Di bank",
+  "level": "N4",
+  "desc": "Membuka rekening dengan kartu izin tinggal."
+ },
+ {
+  "id": "ep11",
+  "no": 11,
+  "ja": "ケータイショップで",
+  "ro": "keetai shoppu de",
+  "idn": "Di toko ponsel",
+  "level": "N4",
+  "desc": "Membeli kartu SIM dan memilih paket yang lebih murah."
+ },
+ {
+  "id": "ep12",
+  "no": 12,
+  "ja": "スーパーで",
+  "ro": "suupaa de",
+  "idn": "Di supermarket",
+  "level": "N5",
+  "desc": "Bertanya letak telur dan membayar dengan tas sendiri."
+ },
+ {
+  "id": "ep13",
+  "no": 13,
+  "ja": "{区役所|くやくしょ}で",
+  "ro": "kuyakusho de",
+  "idn": "Di kantor kelurahan",
+  "level": "N4",
+  "desc": "Mengurus surat keterangan domisili (住民票)."
  }
 ]
