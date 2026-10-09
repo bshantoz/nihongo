@@ -216,7 +216,8 @@
       (g.asal ? '<p class="kbq-note" style="margin:0 0 4px">Bentuk asal: <span lang="ja">' + esc(g.asal) + '</span></p>' : '') +
       (p ? '<p class="kbq-note" style="margin:0">Paling sering di posisi ' + esc(p.pos) + '.</p>' : '') +
       '<div class="mb-kv">' + ex + '</div>' +
-      '<button type="button" class="kbq-btn" data-mb="jump" data-v="' + esc(g.rc) + '">Lihat semua ' + g.list.length + ' kanji</button></div></details>';
+      '<div class="kbq-row"><button type="button" class="kbq-btn" data-mb="jump" data-t="asal" data-v="' + esc(g.rc) + '">Lihat semua kanji ber-<span lang="ja">' + esc(g.rc) + '</span></button>' +
+      '<button type="button" class="kbq-btn alt" data-mb="jump" data-t="kartu" data-v="' + esc(g.rc) + '">Jadikan kartu hapalan</button></div></div></details>';
   }
 
   function secKatalog(C, st) {
@@ -326,7 +327,7 @@
         var a = t.getAttribute("data-mb"), v = t.getAttribute("data-v"), c = host._mbCtx;
         if (a === "sec") { state.sec = v; draw(host); }
         else if (a === "pos") { state.pos = v; draw(host); }
-        else if (a === "jump") { if (c.jump) c.jump(v); }
+        else if (a === "jump") { if (c.jump) c.jump(v, t.getAttribute("data-t")); }
         else if (a === "ans") { if (state.qz && state.qz.p < 0) { var z = state.qz; z.p = +v; if (+v === z.qs[z.i].a) z.s++; draw(host); } }
         else if (a === "next") { state.qz.i++; state.qz.p = -1; draw(host); }
         else if (a === "again") { state.qz = null; draw(host); }
