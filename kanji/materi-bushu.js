@@ -318,6 +318,7 @@
     }
     var C = build(ctx.DB);
     host._mbCtx = ctx;
+    if (ctx.open) { state.sec = "katalog"; state.q = ctx.open; state.pos = ""; } // tautan dalam: ?tab=materi&bushu=氵
     if (!host._mbBound) {
       host._mbBound = true;
       host.addEventListener("click", function (ev) {
@@ -338,6 +339,11 @@
       });
     }
     draw(host);
+    if (ctx.open) {
+      var d0 = host.querySelector("#mb-list details");
+      if (d0) { d0.open = true; try { d0.scrollIntoView({ block: "center" }); } catch (e) {} }
+      ctx.open = null;
+    }
   }
 
   function draw(host) {
