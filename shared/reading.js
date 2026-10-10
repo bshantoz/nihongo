@@ -10,8 +10,8 @@
   var LS = "nihongo_reading_done_";
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
-  function rb(s) { return K ? K.ruby(s) : esc(String(s).replace(/\{([^|}]+)\|[^}]+\}/g, "$1")); }
-  function rbo(s) { return rb(s).replace(/<span class="nk"[^>]*>([^<]*)<\/span>/g, "$1"); }
+  function rb(s) { return K ? (K.rubyW || K.ruby)(s) : esc(String(s).replace(/\{([^|}]+)\|[^}]+\}/g, "$1")); }
+  function rbo(s) { return rb(s).replace(/<span class="n[kw]"[^>]*>(.*?)<\/span>/g, "$1"); }
   function getDone(level) { try { return JSON.parse(localStorage.getItem(LS + level) || "{}"); } catch (e) { return {}; } }
   function setDone(level, id, score) { try { var d = getDone(level); d[id] = score; localStorage.setItem(LS + level, JSON.stringify(d)); } catch (e) {} }
 
@@ -65,7 +65,7 @@
     var data = cfg.data || [], level = cfg.level || "";
     var st = { type: "all", cur: -1, furi: true, tr: false, ans: {} };
     el.classList.add("rd-wrap");
-    if (K) K.attach(el);
+    if (K) { K.attach(el); if (cfg.gloss && K.setGloss) K.setGloss(cfg.gloss); }
 
     function list() {
       var done = getDone(level);
@@ -92,7 +92,7 @@
         '<span class="rd-tag">' + (TYPES[p.tipe] || p.tipe) + '</span> <span class="rd-tag2">' + esc(p.topik) + '</span>' +
         '<div class="rd-title">' + rb(p.judul) + '</div>' +
         '<div class="rd-text' + (st.furi ? "" : " rd-nofuri") + '">' + paras(p.teks, true) + '</div>' +
-        '<p class="rd-hint">Ketuk kanji untuk melihat arti, bacaan, susunan, dan bushu-nya.</p>' +
+        '<p class="rd-hint">Ketuk kata untuk melihat arti, bacaan, susunan, dan bushu-nya.</p>' +
         (st.tr ? '<div class="rd-tr">' + paras(p.terjemahan) + '</div>' : "");
       p.soal.forEach(function (q, qi) {
         var a = st.ans[qi];

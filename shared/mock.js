@@ -19,8 +19,8 @@
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function underline(s) { return esc(s).replace(/__(.+?)__/g, "<u>$1</u>"); }
-  function strip(h) { return String(h).replace(/<span class="nk"[^>]*>([^<]*)<\/span>/g, "$1"); }
-  function rb(s) { return K ? K.ruby(s) : esc(String(s).replace(/\{([^|}]+)\|[^}]+\}/g, "$1")); }
+  function strip(h) { return String(h).replace(/<span class="n[kw]"[^>]*>(.*?)<\/span>/g, "$1"); }
+  function rb(s) { return K ? (K.rubyW || K.ruby)(s) : esc(String(s).replace(/\{([^|}]+)\|[^}]+\}/g, "$1")); }
   function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function mmss(s) { s = Math.max(0, s); var m = Math.floor(s / 60), r = s % 60; return (m < 10 ? "0" : "") + m + ":" + (r < 10 ? "0" : "") + r; }
 
@@ -80,7 +80,7 @@
     var level = cfg.level || "N", Q = cfg.quiz || {}, READ = cfg.reading || [], CH = cfg.choukai || [];
     var LS = "nihongo_mock_" + level;
     el.classList.add("mk-wrap");
-    if (K) K.attach(el);
+    if (K) { K.attach(el); if (cfg.gloss && K.setGloss) K.setGloss(cfg.gloss); }
 
     // ---------- kolam soal per bagian ----------
     function quizPool(cats, sec) {
@@ -191,7 +191,7 @@
     function qBody(q, review) {
       var h = "";
       if (q.kind === "read") {
-        h += '<div class="mk-pass' + (ex.furi ? "" : " mk-nofuri") + '"><b>' + (K ? K.ruby(q.pass.judul) : esc(q.pass.judul)) + "</b>" +
+        h += '<div class="mk-pass' + (ex.furi ? "" : " mk-nofuri") + '"><b>' + (K ? (K.rubyW || K.ruby)(q.pass.judul) : esc(q.pass.judul)) + "</b>" +
           q.pass.teks.split("\n").map(function (p) { return "<p>" + rb(p) + "</p>"; }).join("") + "</div>";
       }
       if (q.kind === "listen") {

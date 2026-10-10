@@ -32,6 +32,20 @@
     }
     return out + plain(s.slice(last));
   }
+  // Per kata: {字幕|じまく} -> satu bagian yang bisa diketuk (arti kata + susunan bushu tiap kanji)
+  var GLOSS = {};
+  function setGloss(g) { for (var k in g) GLOSS[k] = g[k]; }
+  function rubyW(markup) {
+    var s = String(markup), re = /\{([^|}]+)\|([^}]+)\}/g, out = "", last = 0, m;
+    while ((m = re.exec(s))) {
+      out += esc(s.slice(last, m.index));
+      var has = KANJI_RE.test(m[1]);
+      var r = "<ruby>" + esc(m[1]) + "<rt>" + esc(m[2]) + "</rt></ruby>";
+      out += has ? '<span class="nw" data-w="' + esc(m[1] + "|" + m[2]) + '">' + r + "</span>" : r;
+      last = m.index + m[0].length;
+    }
+    return out + esc(s.slice(last));
+  }
   function strip(markup) { return String(markup).replace(/\{([^|}]+)\|([^}]+)\}/g, "$1"); }
 
   // ---------- data ----------
@@ -57,7 +71,10 @@
 
   var CSS = '' +
     '.nk{cursor:pointer;border-radius:3px}' +
-    '.nk:hover,.nk.nk-on{background:rgba(47,125,216,.2)}' +
+    '.nk:hover,.nk.nk-on,.nw:hover,.nw.nk-on{background:rgba(47,125,216,.2)}' +
+    '.nw{cursor:pointer;border-radius:3px}' +
+    '.nk-pop .nk-wrow{margin:6px 0;padding:6px 8px;border-radius:10px;background:rgba(127,127,127,.1)}' +
+    '.nk-pop .nk-rd{font-size:.82rem;opacity:.8;margin-bottom:2px}' +
     'ruby rt{font-size:.5em;opacity:.8;font-weight:400}' +
     '.nk-nofuri ruby rt{display:none}' +
     '.nk-pop{position:absolute;z-index:50;width:min(320px,calc(100% - 8px));box-sizing:border-box;padding:12px 14px;border:1.5px solid rgba(127,127,127,.5);border-radius:14px;' +
@@ -122,7 +139,29 @@
     return h;
   }
 
+  function wordCard(key) {
+    var i = key.indexOf("|"), base = key.slice(0, i), rd = key.slice(i + 1);
+    var arti = GLOSS[key];
+    var ks = Array.from(base).filter(function (c) { return KANJI_RE.test(c); });
+    if (!arti) arti = ks.map(function (c) { return MAP[c] ? MAP[c][4].split(",")[0] : c; }).join(" + ");
+    var h = '<div class="nk-hd"><div class="nk-big" style="font-size:' + (base.length > 3 ? "1.7rem" : "2.2rem") + '">' + esc(base) + '</div><div><span class="nk-rd">' + esc(rd) + '</span><br><span class="nk-ar">' + esc(arti) + "</span></div></div>";
+    h += '<div class="nk-r"><b>Susunan bushu:</b></div>';
+    ks.forEach(function (c) {
+      var r = MAP[c];
+      if (!r) { h += '<div class="nk-wrow"><b>' + esc(c) + '</b> <span class="nk-note">belum ada data</span></div>'; return; }
+      var rad = r[5] >= 0 ? RADS[r[5]] : null;
+      h += '<div class="nk-wrow"><button type="button" class="nk-chip" data-nk-comp="' + esc(c) + '">' + esc(c) + " " + esc(r[4].split(",")[0]) + "</button>";
+      if (rad) h += ' &rarr; <button type="button" class="nk-chip" data-nk-comp="' + esc(rad[0]) + '">' + esc(rad[0]) + " " + esc(rad[1]) + " (" + esc(rad[2]) + ")</button>";
+      if (r[7]) h += '<div class="nk-note">Susunan: ' + esc(r[7]) + "</div>";
+      h += "</div>";
+    });
+    var r0 = ks.length && MAP[ks[0]] && MAP[ks[0]][5] >= 0 ? RADS[MAP[ks[0]][5]] : null;
+    if (r0) h += '<div class="nk-ft"><span class="nk-note">Ketuk kanji atau bushu untuk detail.</span><a class="nk-link" href="' + bushuLink(r0[0]) + '" target="_blank" rel="noopener">Buka di Materi bushu &#8599;</a></div>';
+    return h;
+  }
+
   function cardFor(ch) {
+    if (ch.indexOf("w:") === 0) return wordCard(ch.slice(2));
     var kind = MAP[ch] ? "k" : "b";
     var html = kanjiCard(ch) || bushuCard(ch);
     if (!html) html = '<div class="nk-hd"><div class="nk-big">' + esc(ch) + '</div><div class="nk-ar">Belum ada data</div></div><div class="nk-note">Kanji ini belum ada di daftar N5 sampai N1.</div>';
@@ -159,7 +198,7 @@
       place();
     }
     function open(el) {
-      var ch = el.getAttribute("data-k");
+      var ch = el.getAttribute("data-w") ? "w:" + el.getAttribute("data-w") : el.getAttribute("data-k");
       if (anchor === el && pop) { close(); return; }
       close();
       ensure(function (ok) {
@@ -181,7 +220,7 @@
       var c = t.closest ? t.closest("[data-nk-comp]") : null;
       if (c && pop) { stack.push(c.getAttribute("data-nk-comp")); draw(); return; }
       if (pop && pop.contains(t)) return;
-      var k = t.closest ? t.closest(".nk") : null;
+      var k = t.closest ? t.closest(".nk,.nw") : null;
       if (k && root.contains(k)) { e.preventDefault(); open(k); return; }
       close();
     });
@@ -189,5 +228,5 @@
     root._nkClose = close;
   }
 
-  window.NihongoKanji = { ruby: ruby, plain: plain, strip: strip, ensure: ensure, attach: attach, esc: esc };
+  window.NihongoKanji = { ruby: ruby, rubyW: rubyW, setGloss: setGloss, plain: plain, strip: strip, ensure: ensure, attach: attach, esc: esc };
 })();
