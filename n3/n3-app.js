@@ -220,6 +220,7 @@
   function mountShared(id, mod, opts){
     var host = document.getElementById(id);
     if(!host) return;
+    if(opts.data && !opts.data.length){ host.innerHTML = "<p>Data belum termuat. Muat ulang halaman (Ctrl+F5).</p>"; return; }
     if(!window[mod]){ host.innerHTML = "<p>Modul " + mod + " belum termuat. Muat ulang halaman.</p>"; return; }
     window[mod].mount(host, opts);
   }
