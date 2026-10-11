@@ -8,10 +8,10 @@ window.N5_CHOUKAI = [
 
   {tipe:"kadai", judul:"Perkenalan Diri",
    dialog:[
-     {speaker:"A", gender:"L", jp:"はじめまして。田中です。どうぞよろしく。", romaji:"Hajimemashite. Tanaka desu. Douzo yoroshiku."},
-     {speaker:"B", gender:"P", jp:"はじめまして。リナです。よろしくお願いします。", romaji:"Hajimemashite. Rina desu. Yoroshiku onegaishimasu."},
-     {speaker:"A", gender:"L", jp:"リナさんは学生ですか。", romaji:"Rina-san wa gakusei desu ka."},
-     {speaker:"B", gender:"P", jp:"はい、学生です。大学で日本語を勉強しています。", romaji:"Hai, gakusei desu. Daigaku de nihongo o benkyou shite imasu."}
+     {speaker:"A", gender:"L", jp:"はじめまして。田中です。どうぞよろしく。", id:"Senang bertemu. Saya Tanaka. Mohon bantuannya.", romaji:"Hajimemashite. Tanaka desu. Douzo yoroshiku."},
+     {speaker:"B", gender:"P", jp:"はじめまして。リナです。よろしくお願いします。", id:"Senang bertemu. Saya Rina. Mohon bantuannya.", romaji:"Hajimemashite. Rina desu. Yoroshiku onegaishimasu."},
+     {speaker:"A", gender:"L", jp:"リナさんは学生ですか。", id:"Rina, apakah kamu pelajar?", romaji:"Rina-san wa gakusei desu ka."},
+     {speaker:"B", gender:"P", jp:"はい、学生です。大学で日本語を勉強しています。", id:"Ya, saya pelajar. Saya belajar bahasa Jepang di universitas.", romaji:"Hai, gakusei desu. Daigaku de nihongo o benkyou shite imasu."}
    ],
    pertanyaan:"リナさんは何をしていますか。",
    options:["大学で日本語を勉強しています", "会社で働いています", "病院で働いています", "学校で教えています"],
@@ -20,10 +20,10 @@ window.N5_CHOUKAI = [
 
   {tipe:"kadai", judul:"Belanja di Minimarket",
    dialog:[
-     {speaker:"店員", gender:"P", jp:"いらっしゃいませ。", romaji:"Irasshaimase."},
-     {speaker:"客", gender:"L", jp:"すみません、水はどこですか。", romaji:"Sumimasen, mizu wa doko desu ka."},
-     {speaker:"店員", gender:"P", jp:"水はあそこです。パンの隣にあります。", romaji:"Mizu wa asoko desu. Pan no tonari ni arimasu."},
-     {speaker:"客", gender:"L", jp:"ありがとうございます。", romaji:"Arigatou gozaimasu."}
+     {speaker:"店員", gender:"P", jp:"いらっしゃいませ。", id:"Selamat datang.", romaji:"Irasshaimase."},
+     {speaker:"客", gender:"L", jp:"すみません、水はどこですか。", id:"Permisi, di mana air minum?", romaji:"Sumimasen, mizu wa doko desu ka."},
+     {speaker:"店員", gender:"P", jp:"水はあそこです。パンの隣にあります。", id:"Air minum ada di sana. Di sebelah roti.", romaji:"Mizu wa asoko desu. Pan no tonari ni arimasu."},
+     {speaker:"客", gender:"L", jp:"ありがとうございます。", id:"Terima kasih.", romaji:"Arigatou gozaimasu."}
    ],
    pertanyaan:"水はどこにありますか。",
    options:["パンの隣", "レジの前", "店の外", "野菜の隣"],
@@ -32,9 +32,9 @@ window.N5_CHOUKAI = [
 
   {tipe:"kadai", judul:"Bertanya Arah",
    dialog:[
-     {speaker:"A", gender:"P", jp:"すみません、駅はどこですか。", romaji:"Sumimasen, eki wa doko desu ka."},
-     {speaker:"B", gender:"L", jp:"この道をまっすぐ行って、右に曲がってください。", romaji:"Kono michi o massugu itte, migi ni magatte kudasai."},
-     {speaker:"A", gender:"P", jp:"まっすぐ行って、右ですね。ありがとうございます。", romaji:"Massugu itte, migi desu ne. Arigatou gozaimasu."}
+     {speaker:"A", gender:"P", jp:"すみません、駅はどこですか。", id:"Permisi, di mana stasiun?", romaji:"Sumimasen, eki wa doko desu ka."},
+     {speaker:"B", gender:"L", jp:"この道をまっすぐ行って、右に曲がってください。", id:"Jalan lurus saja di jalan ini, lalu belok kanan.", romaji:"Kono michi o massugu itte, migi ni magatte kudasai."},
+     {speaker:"A", gender:"P", jp:"まっすぐ行って、右ですね。ありがとうございます。", id:"Lurus lalu kanan, ya. Terima kasih.", romaji:"Massugu itte, migi desu ne. Arigatou gozaimasu."}
    ],
    pertanyaan:"駅へ行くには、どうすればいいですか。",
    options:["まっすぐ行って、右に曲がる", "まっすぐ行って、左に曲がる", "右に曲がって、まっすぐ行く", "後ろに戻る"],
@@ -43,9 +43,9 @@ window.N5_CHOUKAI = [
 
   {tipe:"point", judul:"Suka dan Tidak Suka",
    dialog:[
-     {speaker:"A", gender:"L", jp:"リナさんは何のスポーツが好きですか。", romaji:"Rina-san wa nan no supootsu ga suki desu ka."},
-     {speaker:"B", gender:"P", jp:"テニスが好きです。でも、水泳はあまり好きじゃありません。", romaji:"Tenisu ga suki desu. Demo, suiei wa amari suki ja arimasen."},
-     {speaker:"A", gender:"L", jp:"そうですか。私もテニスが好きです。", romaji:"Sou desu ka. Watashi mo tenisu ga suki desu."}
+     {speaker:"A", gender:"L", jp:"リナさんは何のスポーツが好きですか。", id:"Rina, kamu suka olahraga apa?", romaji:"Rina-san wa nan no supootsu ga suki desu ka."},
+     {speaker:"B", gender:"P", jp:"テニスが好きです。でも、水泳はあまり好きじゃありません。", id:"Saya suka tenis. Tapi saya tidak begitu suka renang.", romaji:"Tenisu ga suki desu. Demo, suiei wa amari suki ja arimasen."},
+     {speaker:"A", gender:"L", jp:"そうですか。私もテニスが好きです。", id:"Begitu. Saya juga suka tenis.", romaji:"Sou desu ka. Watashi mo tenisu ga suki desu."}
    ],
    pertanyaan:"リナさんが好きなスポーツは何ですか。",
    options:["テニス", "水泳", "サッカー", "バスケットボール"],
@@ -54,9 +54,9 @@ window.N5_CHOUKAI = [
 
   {tipe:"point", judul:"Rencana Akhir Pekan",
    dialog:[
-     {speaker:"A", gender:"P", jp:"週末は何をしますか。", romaji:"Shuumatsu wa nani o shimasu ka."},
-     {speaker:"B", gender:"L", jp:"友達と映画を見ます。それから、晩ご飯を食べます。", romaji:"Tomodachi to eiga o mimasu. Sore kara, bangohan o tabemasu."},
-     {speaker:"A", gender:"P", jp:"楽しそうですね。", romaji:"Tanoshisou desu ne."}
+     {speaker:"A", gender:"P", jp:"週末は何をしますか。", id:"Akhir pekan ini kamu mau apa?", romaji:"Shuumatsu wa nani o shimasu ka."},
+     {speaker:"B", gender:"L", jp:"友達と映画を見ます。それから、晩ご飯を食べます。", id:"Menonton film bersama teman. Lalu makan malam.", romaji:"Tomodachi to eiga o mimasu. Sore kara, bangohan o tabemasu."},
+     {speaker:"A", gender:"P", jp:"楽しそうですね。", id:"Kedengarannya menyenangkan.", romaji:"Tanoshisou desu ne."}
    ],
    pertanyaan:"男の人は週末、最初に何をしますか。",
    options:["映画を見る", "晩ご飯を食べる", "勉強する", "買い物をする"],
@@ -65,9 +65,9 @@ window.N5_CHOUKAI = [
 
   {tipe:"point", judul:"Cuaca Hari Ini",
    dialog:[
-     {speaker:"A", gender:"L", jp:"今日は寒いですね。", romaji:"Kyou wa samui desu ne."},
-     {speaker:"B", gender:"P", jp:"そうですね。でも、明日はもっと寒くなるそうです。", romaji:"Sou desu ne. Demo, ashita wa motto samuku naru sou desu."},
-     {speaker:"A", gender:"L", jp:"じゃ、コートを着たほうがいいですね。", romaji:"Ja, kooto o kita hou ga ii desu ne."}
+     {speaker:"A", gender:"L", jp:"今日は寒いですね。", id:"Hari ini dingin ya.", romaji:"Kyou wa samui desu ne."},
+     {speaker:"B", gender:"P", jp:"そうですね。でも、明日はもっと寒くなるそうです。", id:"Benar. Tapi katanya besok akan lebih dingin.", romaji:"Sou desu ne. Demo, ashita wa motto samuku naru sou desu."},
+     {speaker:"A", gender:"L", jp:"じゃ、コートを着たほうがいいですね。", id:"Kalau begitu, sebaiknya memakai mantel.", romaji:"Ja, kooto o kita hou ga ii desu ne."}
    ],
    pertanyaan:"明日の天気はどうなりますか。",
    options:["今日よりもっと寒くなる", "今日より暖かくなる", "雨が降る", "雪が降る"],
@@ -76,9 +76,9 @@ window.N5_CHOUKAI = [
 
   {tipe:"point", judul:"Jam Buka Toko",
    dialog:[
-     {speaker:"A", gender:"P", jp:"このお店は何時から何時までですか。", romaji:"Kono omise wa nanji kara nanji made desu ka."},
-     {speaker:"B", gender:"L", jp:"9時から8時までです。日曜日は休みです。", romaji:"Kuji kara hachiji made desu. Nichiyoubi wa yasumi desu."},
-     {speaker:"A", gender:"P", jp:"わかりました。ありがとうございます。", romaji:"Wakarimashita. Arigatou gozaimasu."}
+     {speaker:"A", gender:"P", jp:"このお店は何時から何時までですか。", id:"Toko ini buka dari jam berapa sampai jam berapa?", romaji:"Kono omise wa nanji kara nanji made desu ka."},
+     {speaker:"B", gender:"L", jp:"9時から8時までです。日曜日は休みです。", id:"Dari jam 9 sampai jam 8. Hari Minggu libur.", romaji:"Kuji kara hachiji made desu. Nichiyoubi wa yasumi desu."},
+     {speaker:"A", gender:"P", jp:"わかりました。ありがとうございます。", id:"Baik, saya mengerti. Terima kasih.", romaji:"Wakarimashita. Arigatou gozaimasu."}
    ],
    pertanyaan:"この店は何曜日が休みですか。",
    options:["日曜日", "土曜日", "月曜日", "毎日"],
@@ -86,35 +86,35 @@ window.N5_CHOUKAI = [
    penjelasan:"「日曜日は休みです」と言っているので、休みの日は日曜日。"},
 
   {tipe:"sokuji", judul:"Respons Cepat 1",
-   dialog:[{speaker:"A", gender:"P", jp:"お誕生日はいつですか。", romaji:"Otanjoubi wa itsu desu ka."}],
+   dialog:[{speaker:"A", gender:"P", jp:"お誕生日はいつですか。", id:"Kapan ulang tahunmu?", romaji:"Otanjoubi wa itsu desu ka."}],
    pertanyaan:"最も自然な返事はどれですか。",
    options:["3月10日です。", "東京です。", "学生です。", "好きです。"],
    correct:0,
    penjelasan:"誕生日(日付)を聞かれているので、日付で答えるのが自然。"},
 
   {tipe:"sokuji", judul:"Respons Cepat 2",
-   dialog:[{speaker:"A", gender:"L", jp:"すみません、今何時ですか。", romaji:"Sumimasen, ima nanji desu ka."}],
+   dialog:[{speaker:"A", gender:"L", jp:"すみません、今何時ですか。", id:"Permisi, sekarang jam berapa?", romaji:"Sumimasen, ima nanji desu ka."}],
    pertanyaan:"最も自然な返事はどれですか。",
    options:["3時半です。", "3月です。", "3人です。", "3回です。"],
    correct:0,
    penjelasan:"時間を聞かれているので、「3時半です」のように時刻で答えるのが自然。"},
 
   {tipe:"sokuji", judul:"Respons Cepat 3",
-   dialog:[{speaker:"A", gender:"P", jp:"一緒にお昼ご飯を食べませんか。", romaji:"Issho ni ohirugohan o tabemasen ka."}],
+   dialog:[{speaker:"A", gender:"P", jp:"一緒にお昼ご飯を食べませんか。", id:"Mau makan siang bersama?", romaji:"Issho ni ohirugohan o tabemasen ka."}],
    pertanyaan:"最も自然な返事はどれですか。",
    options:["いいですね。何を食べましょうか。", "いいえ、もう朝です。", "それはおめでとうございます。", "昼ご飯は美味しくないです。"],
    correct:0,
    penjelasan:"誘いへの自然な返答は承諾＋提案の質問。「何を食べましょうか」が自然。"},
 
   {tipe:"sokuji", judul:"Respons Cepat 4",
-   dialog:[{speaker:"A", gender:"L", jp:"この問題、分かりますか。", romaji:"Kono mondai, wakarimasu ka."}],
+   dialog:[{speaker:"A", gender:"L", jp:"この問題、分かりますか。", id:"Soal ini, apakah kamu mengerti?", romaji:"Kono mondai, wakarimasu ka."}],
    pertanyaan:"最も自然な返事はどれですか。",
    options:["いいえ、分かりません。教えてください。", "はい、とても美味しいです。", "いいえ、高くないです。", "はい、とても元気です。"],
    correct:0,
    penjelasan:"分かるかどうか聞かれているので、分かる/分からないで答えるのが自然。"},
 
   {tipe:"sokuji", judul:"Respons Cepat 5",
-   dialog:[{speaker:"A", gender:"P", jp:"すみません、この席、空いていますか。", romaji:"Sumimasen, kono seki, aite imasu ka."}],
+   dialog:[{speaker:"A", gender:"P", jp:"すみません、この席、空いていますか。", id:"Permisi, apakah kursi ini kosong?", romaji:"Sumimasen, kono seki, aite imasu ka."}],
    pertanyaan:"最も自然な返事はどれですか。",
    options:["はい、どうぞ。", "いいえ、重いです。", "はい、おいしいです。", "いいえ、遠いです。"],
    correct:0,
