@@ -228,5 +228,13 @@
     root._nkClose = close;
   }
 
+  // Simpan bushu yang dituju sebelum pindah halaman (dipakai halaman bushu bila parameter URL hilang)
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest(".nk-link") : null;
+    if (!a) return;
+    var m = /[?&]bushu=([^&#]+)/.exec(a.getAttribute("href") || "");
+    if (m) { try { sessionStorage.setItem("kbq_bushu", decodeURIComponent(m[1])); } catch (err) {} }
+  }, true);
+
   window.NihongoKanji = { ruby: ruby, rubyW: rubyW, setGloss: setGloss, plain: plain, strip: strip, ensure: ensure, attach: attach, esc: esc };
 })();
