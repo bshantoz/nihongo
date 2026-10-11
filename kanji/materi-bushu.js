@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  var MIN_KANJI = 5;                 // bushu dengan >= 5 kanji di data
+  var MIN_KANJI = 1;                 // tampilkan semua bushu yang benar-benar dipakai (>= 1 kanji di data)
   var LV = ["N5", "N4", "N3", "N2", "N1"];
 
   var POS = [
@@ -174,8 +174,20 @@
     var has = {};
     DB.forEach(function (e) { has[e.k] = e; });
 
-    cache = { n: DB.length, groups: groups, posEx: posEx, fon: fonList, has: has };
+    cache = { n: DB.length, all: DB, groups: groups, posEx: posEx, fon: fonList, has: has };
     return cache;
+  }
+
+  // cari kanji di DB (bukan bushu) untuk pesan "tidak ketemu" yang lebih berguna
+  function findKanji(C, raw, q) {
+    if (!raw) return null;
+    if (C.has[raw]) return C.has[raw];
+    var hit = null;
+    C.all.some(function (e) {
+      if (e.k === raw || (e.rd && e.rd.indexOf(raw) >= 0) || (e.arti && e.arti.toLowerCase().indexOf(q) >= 0)) { hit = e; return true; }
+      return false;
+    });
+    return hit;
   }
 
   // ---------- bagian-bagian ----------
@@ -190,7 +202,7 @@
       '<p style="margin:0"><b>3. Mengingat.</b> Kanji dipecah menjadi bagian yang sudah dikenal. Contoh <span lang="ja">休</span> (kyuu, istirahat) = <span lang="ja">亻</span> (orang) + <span lang="ja">木</span> (pohon): orang bersandar di pohon.</p></div>' +
       '<div class="mb-tip">Bushu hanya petunjuk, bukan aturan pasti. Arti sebuah kanji bisa bergeser jauh dari arti bushunya, jadi selalu cocokkan dengan arti kanjinya.</div>' +
       '<div class="mb-h3">Isi tab ini</div>' +
-      '<p style="margin:0">Katalog memuat <b>' + C.groups.length + ' bushu</b> yang dipakai oleh paling sedikit ' + MIN_KANJI + ' kanji di data (total ' + wb.toLocaleString("id-ID") + ' kanji), diurutkan dari yang paling banyak dipakai. Bagian lain: tujuh posisi bushu, bushu yang mirip, bagian bunyi, dan latihan cepat.</p>';
+      '<p style="margin:0">Katalog memuat <b>' + C.groups.length + ' bushu</b>, yaitu semua bentuk yang benar-benar dipakai sebagai bagian kanji lain di data ini (total ' + wb.toLocaleString("id-ID") + ' kanji), diurutkan dari yang paling banyak dipakai. Kanji yang tidak pernah dipakai sebagai bushu kanji lain (misalnya <span lang="ja">円</span>) tidak masuk katalog ini, tapi tetap bisa dicari di tab Asal-usul kanji. Bagian lain: tujuh posisi bushu, bushu yang mirip, bagian bunyi, dan latihan cepat.</p>';
   }
 
   function secPosisi(C) {
@@ -225,11 +237,11 @@
     POS.forEach(function (p) { chips += '<button type="button" class="kbq-chip' + (st.pos === p.key ? " on" : "") + '" data-mb="pos" data-v="' + p.key + '">' + p.name.split(" ")[0] + '</button>'; });
     chips += "</div>";
     return '<p>' + C.groups.length + ' bushu, diurutkan menurut jumlah kanji di data. Ketuk satu bushu untuk melihat contoh kanji dan tombol ke kartu hapalan.</p>' +
-      '<div class="mb-find"><input type="search" placeholder="Cari bushu: bentuk, nama, atau arti" value="' + esc(st.q) + '" data-mb="find" aria-label="Cari bushu"></div>' +
+      '<div class="mb-find"><input type="search" placeholder="Cari bushu, atau tempel kanji/arti yang kamu cari" value="' + esc(st.q) + '" data-mb="find" aria-label="Cari bushu"></div>' +
       chips + '<div id="mb-list"></div>';
   }
   function fillKatalog(host, C, st) {
-    var q = st.q.trim().toLowerCase(), out = "", n = 0;
+    var raw = st.q.trim(), q = raw.toLowerCase(), out = "", n = 0;
     C.groups.forEach(function (g) {
       if (st.pos && g.pos !== st.pos) return;
       if (q && g.txt.indexOf(q) < 0) return;
@@ -237,7 +249,14 @@
       out += radHtml(g);
     });
     var box = host.querySelector("#mb-list");
-    if (box) box.innerHTML = n ? out : '<p>Tidak ada bushu yang cocok.</p>';
+    if (!box) return;
+    if (n) { box.innerHTML = out; return; }
+    var hit = q ? findKanji(C, raw, q) : null;
+    if (hit) {
+      box.innerHTML = '<p><span lang="ja">' + esc(raw) + '</span> bukan bushu &mdash; tidak dipakai sebagai bagian kanji lain di data ini, tapi ada kanji <span lang="ja">' + esc(hit.k) + '</span> (' + esc(hit.arti) + ') yang cocok. Lihat di <button type="button" class="kbq-sm" data-mb="jump" data-t="asal" data-v="' + esc(hit.k) + '">Asal-usul kanji</button> atau <button type="button" class="kbq-sm" data-mb="jump" data-t="kartu" data-v="' + esc(hit.k) + '">Kartu hapalan</button>.</p>';
+    } else {
+      box.innerHTML = '<p>Tidak ada bushu yang cocok' + (raw ? ' dengan "' + esc(raw) + '"' : "") + '.</p>';
+    }
   }
 
   function secMirip(C) {
