@@ -123,7 +123,7 @@
     }
     if (r[8]) h += '<div class="nk-note">' + (r[9] === "a" ? "Asal: " : "Cerita: ") + esc(r[8]) + "</div>";
     if (r[11]) h += '<div class="nk-note">' + esc(r[11]) + "</div>";
-    if (rad) h += '<div class="nk-ft"><span></span><a class="nk-link" href="' + bushuLink(rad[0]) + '" target="_blank" rel="noopener">Buka di Materi bushu &#8599;</a></div>';
+    if (rad) h += '<div class="nk-ft"><span></span><a class="nk-link" href="' + bushuLink(rad[0]) + '">Buka di Materi bushu &#8594;</a></div>';
     return h;
   }
 
@@ -135,7 +135,7 @@
     var h = '<div class="nk-hd"><div class="nk-big">' + esc(rad[0]) + '</div><div><span class="nk-ar">' + esc(rad[1]) + '</span><br><span>' + esc(rad[2]) + "</span></div></div>" +
       '<div class="nk-r"><b>Dipakai di</b> ' + list.length + " kanji. Contoh:</div><div class=\"nk-chips\">" +
       ex.map(function (r) { return '<button type="button" class="nk-chip" data-nk-comp="' + esc(r[1]) + '">' + esc(r[1]) + " " + esc(r[4].split(",")[0]) + "</button>"; }).join("") + "</div>" +
-      '<div class="nk-ft"><span></span><a class="nk-link" href="' + bushuLink(rad[0]) + '" target="_blank" rel="noopener">Buka di Materi bushu &#8599;</a></div>';
+      '<div class="nk-ft"><span></span><a class="nk-link" href="' + bushuLink(rad[0]) + '">Buka di Materi bushu &#8594;</a></div>';
     return h;
   }
 
@@ -156,7 +156,7 @@
       h += "</div>";
     });
     var r0 = ks.length && MAP[ks[0]] && MAP[ks[0]][5] >= 0 ? RADS[MAP[ks[0]][5]] : null;
-    if (r0) h += '<div class="nk-ft"><span class="nk-note">Ketuk kanji atau bushu untuk detail.</span><a class="nk-link" href="' + bushuLink(r0[0]) + '" target="_blank" rel="noopener">Buka di Materi bushu &#8599;</a></div>';
+    if (r0) h += '<div class="nk-ft"><span class="nk-note">Ketuk kanji atau bushu untuk detail.</span><a class="nk-link" href="' + bushuLink(r0[0]) + '">Buka di Materi bushu &#8594;</a></div>';
     return h;
   }
 
