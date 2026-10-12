@@ -1,0 +1,277 @@
+{
+ "id": "ep19",
+ "scene": "salon",
+ "g": "f",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。ご{予約|よやく}は、されていますか。",
+   "r": "Irasshaimase. Goyoyaku wa, sarete imasu ka.",
+   "i": "Selamat datang. Apakah sudah reservasi?",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "ご{予約|よやく}",
+     "goyoyaku",
+     "reservasi"
+    ],
+    [
+     "されていますか",
+     "sarete imasu ka",
+     "apakah sudah (sopan)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、{十一時|じゅういちじ}に、{予約|よやく}した、モチです。",
+   "r": "Hai, juuichiji ni, yoyaku shita, Mochi desu.",
+   "i": "Ya, saya Mochi yang reservasi jam sebelas.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{十一時|じゅういちじ}",
+     "juuichiji",
+     "jam sebelas"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "お{待|ま}ちしていました。こちらへ、どうぞ。",
+   "r": "Omachi shite imashita. Kochira e, douzo.",
+   "i": "Kami sudah menunggu. Silakan ke sini.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "お{待|ま}ちしていました",
+     "omachi shite imashita",
+     "kami sudah menunggu (sopan)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{今日|きょう}は、どうなさいますか。",
+   "r": "Kyou wa, dou nasaimasu ka.",
+   "i": "Hari ini mau diapakan?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "どうなさいますか",
+     "dou nasaimasu ka",
+     "mau bagaimana? (sangat sopan)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{髪|かみ}を、{短|みじか}く、してください。",
+   "r": "Kami o, mijikaku, shite kudasai.",
+   "i": "Tolong dipendekkan rambutnya.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{髪|かみ}",
+     "kami",
+     "rambut"
+    ],
+    [
+     "{短|みじか}く",
+     "mijikaku",
+     "pendek (bentuk adverbia)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "どのくらい、{切|き}りますか。",
+   "r": "Dono kurai, kirimasu ka.",
+   "i": "Mau dipotong seberapa?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "どのくらい",
+     "dono kurai",
+     "seberapa banyak"
+    ],
+    [
+     "{切|き}る",
+     "kiru",
+     "memotong"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{五|ご}センチぐらい、お{願|ねが}いします。",
+   "r": "Go senchi gurai, onegaishimasu.",
+   "i": "Sekitar lima senti, tolong.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "センチ",
+     "senchi",
+     "sentimeter"
+    ],
+    [
+     "ぐらい",
+     "gurai",
+     "kira-kira"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "かしこまりました。{長|なが}さは、これで、いいですか。",
+   "r": "Kashikomarimashita. Nagasa wa, kore de, ii desu ka.",
+   "i": "Baik. Panjangnya segini sudah cukup?",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{長|なが}さ",
+     "nagasa",
+     "panjang"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、ちょうど、いいです。",
+   "r": "Hai, choudo, ii desu.",
+   "i": "Ya, pas sekali.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "ちょうど",
+     "choudo",
+     "pas / tepat"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "おつかれさまでした。{終|お}わりました。",
+   "r": "Otsukaresama deshita. Owarimashita.",
+   "i": "Terima kasih sudah menunggu. Sudah selesai.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{終|お}わりました",
+     "owarimashita",
+     "sudah selesai"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わあ、かっこいい！ありがとうございます。",
+   "r": "Waa, kakkoii! Arigatou gozaimasu.",
+   "i": "Wah, keren! Terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "かっこいい",
+     "kakkoii",
+     "keren"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "{会計|かいけい}は、{4000|よんせん}{円|えん}です。",
+   "r": "Kaikei wa, yonsen en desu.",
+   "i": "Biayanya 4000 yen.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{会計|かいけい}",
+     "kaikei",
+     "pembayaran"
+    ],
+    [
+     "{4000|よんせん}",
+     "yonsen",
+     "4000"
+    ]
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Goyoyaku wa sarete imasu ka\" artinya?",
+   "a": "Apakah sudah reservasi?",
+   "w": [
+    "Sudah pernah ke sini?",
+    "Mau potong rambut?",
+    "Sudah makan?"
+   ],
+   "f": "予約 = reservasi. されていますか adalah bentuk sopan dari しています."
+  },
+  {
+   "q": "Bagaimana meminta rambut dipotong lebih pendek?",
+   "a": "髪を、短くしてください。",
+   "w": [
+    "髪を、長くしてください。",
+    "髪を、洗ってください。",
+    "髪を、染めてください。"
+   ],
+   "f": "短く = pendek (bentuk adverbia dari 短い)."
+  },
+  {
+   "q": "Apa arti どのくらい切りますか?",
+   "a": "Mau dipotong seberapa?",
+   "w": [
+    "Mau dipotong di mana?",
+    "Mau potong model apa?",
+    "Mau dipotong kapan?"
+   ],
+   "f": "どのくらい = seberapa banyak/berapa lama."
+  },
+  {
+   "q": "\"Choudo ii desu\" artinya?",
+   "a": "Pas sekali",
+   "w": [
+    "Kurang sedikit",
+    "Terlalu pendek",
+    "Sudah selesai"
+   ],
+   "f": "ちょうど = tepat/pas, sering dipakai untuk ukuran dan waktu."
+  },
+  {
+   "q": "Bagaimana cara membaca 4000円?",
+   "a": "よんせんえん (yonsen en)",
+   "w": [
+    "よんぜんえん (yonzen en)",
+    "しせんえん (shisen en)",
+    "よっせんえん (yossen en)"
+   ],
+   "f": "4000 dibaca よんせん, sedangkan 3000 dibaca さんぜん."
+  }
+ ]
+}

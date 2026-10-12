@@ -1,0 +1,294 @@
+{
+ "id": "ep20",
+ "scene": "kuukou",
+ "g": "f",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。パスポートを、お{願|ねが}いします。",
+   "r": "Irasshaimase. Pasupooto o, onegaishimasu.",
+   "i": "Selamat datang. Mohon paspornya.",
+   "act": "bow",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "パスポート",
+     "pasupooto",
+     "paspor"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、どうぞ。",
+   "r": "Hai, douzo.",
+   "i": "Ya, silakan.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "ジャカルタ{行|ゆ}きですね。{荷物|にもつ}は、いくつですか。",
+   "r": "Jakaruta yuki desu ne. Nimotsu wa, ikutsu desu ka.",
+   "i": "Tujuan Jakarta ya. Bagasinya berapa?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "〜{行|ゆ}き",
+     "yuki",
+     "tujuan ..."
+    ],
+    [
+     "{荷物|にもつ}",
+     "nimotsu",
+     "bagasi / barang"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "スーツケースが、ひとつです。",
+   "r": "Suutsukeesu ga, hitotsu desu.",
+   "i": "Satu koper.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "スーツケース",
+     "suutsukeesu",
+     "koper"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ここに、{置|お}いてください。{重|おも}さを、はかります。",
+   "r": "Koko ni, oite kudasai. Omosa o, hakarimasu.",
+   "i": "Tolong taruh di sini. Kami timbang beratnya.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{置|お}く",
+     "oku",
+     "menaruh"
+    ],
+    [
+     "{重|おも}さ",
+     "omosa",
+     "berat"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{20|にじゅう}キロですね。{大丈夫|だいじょうぶ}です。",
+   "r": "Nijuu kiro desu ne. Daijoubu desu.",
+   "i": "20 kilo ya. Tidak masalah.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "キロ",
+     "kiro",
+     "kilogram"
+    ],
+    [
+     "{大丈夫|だいじょうぶ}",
+     "daijoubu",
+     "tidak masalah"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{窓|まど}の{席|せき}は、ありますか。",
+   "r": "Mado no seki wa, arimasu ka.",
+   "i": "Apakah ada kursi dekat jendela?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{窓|まど}",
+     "mado",
+     "jendela"
+    ],
+    [
+     "{席|せき}",
+     "seki",
+     "kursi"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "はい、ございます。これが、{搭乗券|とうじょうけん}です。",
+   "r": "Hai, gozaimasu. Kore ga, toujouken desu.",
+   "i": "Ya, ada. Ini boarding pass-nya.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "ございます",
+     "gozaimasu",
+     "ada (sangat sopan)"
+    ],
+    [
+     "{搭乗券|とうじょうけん}",
+     "toujouken",
+     "boarding pass"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{搭乗口|とうじょうぐち}は、{12|じゅうに}{番|ばん}です。{出発|しゅっぱつ}は、{三時半|さんじはん}です。",
+   "r": "Toujouguchi wa, juuni ban desu. Shuppatsu wa, sanji han desu.",
+   "i": "Gerbangnya nomor 12. Berangkat jam setengah empat.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{搭乗口|とうじょうぐち}",
+     "toujouguchi",
+     "gerbang naik pesawat"
+    ],
+    [
+     "{出発|しゅっぱつ}",
+     "shuppatsu",
+     "keberangkatan"
+    ],
+    [
+     "{三時半|さんじはん}",
+     "sanji han",
+     "jam 3.30"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{何時|なんじ}から、のれますか。",
+   "r": "Nanji kara, noremasu ka.",
+   "i": "Mulai jam berapa bisa naik?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "のれます",
+     "noremasu",
+     "bisa naik"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{三時|さんじ}から、のれます。いってらっしゃいませ。",
+   "r": "Sanji kara, noremasu. Itterasshaimase.",
+   "i": "Bisa naik mulai jam tiga. Selamat jalan.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "いってらっしゃいませ",
+     "itterasshaimase",
+     "selamat jalan (sopan)"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。いってきます！",
+   "r": "Arigatou gozaimasu. Ittekimasu!",
+   "i": "Terima kasih. Aku berangkat!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "いってきます",
+     "ittekimasu",
+     "aku berangkat"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "よい、おかえりを、お{待|ま}ちしております。",
+   "r": "Yoi, okaeri o, omachi shite orimasu.",
+   "i": "Kami menunggu kepulangan Anda dengan baik.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "おかえり",
+     "okaeri",
+     "kepulangan"
+    ]
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Jakaruta yuki\" artinya?",
+   "a": "Tujuan Jakarta",
+   "w": [
+    "Datang dari Jakarta",
+    "Berhenti di Jakarta",
+    "Dekat Jakarta"
+   ],
+   "f": "〜行き (yuki) = tujuan ke ..."
+  },
+  {
+   "q": "Apa arti 荷物 (nimotsu) di bandara?",
+   "a": "Bagasi",
+   "w": [
+    "Paspor",
+    "Tiket",
+    "Kursi"
+   ],
+   "f": "荷物 = barang/bagasi. スーツケース = koper."
+  },
+  {
+   "q": "\"Mado no seki wa arimasu ka\" artinya?",
+   "a": "Apakah ada kursi dekat jendela?",
+   "w": [
+    "Apakah kursi ini kosong?",
+    "Apakah ada kursi lorong?",
+    "Apakah pesawat penuh?"
+   ],
+   "f": "窓 = jendela, 席 = kursi."
+  },
+  {
+   "q": "Apa arti 搭乗券 (toujouken)?",
+   "a": "Boarding pass",
+   "w": [
+    "Paspor",
+    "Tiket kereta",
+    "Kartu bagasi"
+   ],
+   "f": "搭乗 = naik pesawat, 券 = tiket."
+  },
+  {
+   "q": "\"Itterasshaimase\" diucapkan saat apa?",
+   "a": "Saat melepas orang yang akan pergi",
+   "w": [
+    "Saat menyambut tamu",
+    "Saat meminta maaf",
+    "Saat makan"
+   ],
+   "f": "いってらっしゃい = selamat jalan. Jawabannya いってきます (aku berangkat)."
+  }
+ ]
+}

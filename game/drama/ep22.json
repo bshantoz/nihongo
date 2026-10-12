@@ -1,0 +1,295 @@
+{
+ "id": "ep22",
+ "scene": "heya",
+ "g": "f",
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃい！{待|ま}ってたよ。",
+   "r": "Irasshai! Matteta yo.",
+   "i": "Selamat datang! Aku sudah menunggu.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "いらっしゃい",
+     "irasshai",
+     "selamat datang (santai)"
+    ],
+    [
+     "{待|ま}ってた",
+     "matteta",
+     "sudah menunggu"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "おじゃまします。{誕生日|たんじょうび}、おめでとう！",
+   "r": "Ojamashimasu. Tanjoubi, omedetou!",
+   "i": "Permisi. Selamat ulang tahun!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "おじゃまします",
+     "ojamashimasu",
+     "permisi (saat masuk rumah)"
+    ],
+    [
+     "{誕生日|たんじょうび}",
+     "tanjoubi",
+     "ulang tahun"
+    ],
+    [
+     "おめでとう",
+     "omedetou",
+     "selamat"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "ありがとう！うれしい！",
+   "r": "Arigatou! Ureshii!",
+   "i": "Terima kasih! Senang sekali!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "うれしい",
+     "ureshii",
+     "senang"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "m",
+   "j": "これ、プレゼント。{気|き}に{入|い}るといいけど。",
+   "r": "Kore, purezento. Ki ni iru to ii kedo.",
+   "i": "Ini hadiahnya. Semoga kamu suka.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "プレゼント",
+     "purezento",
+     "hadiah"
+    ],
+    [
+     "{気|き}に{入|い}る",
+     "ki ni iru",
+     "suka / cocok"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "わあ、{開|あ}けてもいい？",
+   "r": "Waa, akete mo ii?",
+   "i": "Wah, boleh kubuka?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{開|あ}ける",
+     "akeru",
+     "membuka"
+    ],
+    [
+     "〜てもいい？",
+     "te mo ii?",
+     "boleh ...?"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "うん、{開|あ}けてみて。",
+   "r": "Un, akete mite.",
+   "i": "Ya, coba buka.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "〜てみて",
+     "te mite",
+     "coba ..."
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "かわいい！ずっと、ほしかったんだ。",
+   "r": "Kawaii! Zutto, hoshikattan da.",
+   "i": "Lucu! Dari dulu aku menginginkannya.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ずっと",
+     "zutto",
+     "dari dulu / terus"
+    ],
+    [
+     "ほしかった",
+     "hoshikatta",
+     "dulu ingin"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "m",
+   "j": "よかった！ケーキも、{買|か}ってきたよ。",
+   "r": "Yokatta! Keeki mo, katte kita yo.",
+   "i": "Syukurlah! Aku juga bawa kue.",
+   "act": "hop",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{買|か}ってきた",
+     "katte kita",
+     "sudah membeli dan membawa"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "じゃあ、ろうそくに、{火|ひ}を、つけよう。",
+   "r": "Jaa, rousoku ni, hi o, tsukeyou.",
+   "i": "Kalau begitu, ayo kita nyalakan lilinnya.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "ろうそく",
+     "rousoku",
+     "lilin"
+    ],
+    [
+     "{火|ひ}をつける",
+     "hi o tsukeru",
+     "menyalakan api"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ハッピーバースデー、りんちゃん！",
+   "r": "Happii baasudee, Rin-chan!",
+   "i": "Selamat ulang tahun, Rin!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ハッピーバースデー",
+     "happii baasudee",
+     "selamat ulang tahun"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "ふーっ！ねがいごと、したよ。",
+   "r": "Fuu! Negaigoto, shita yo.",
+   "i": "Fuuh! Aku sudah membuat permohonan.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "ねがいごと",
+     "negaigoto",
+     "permohonan / harapan"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "{写真|しゃしん}、{撮|と}ろう！はい、チーズ！",
+   "r": "Shashin, torou! Hai, chiizu!",
+   "i": "Ayo foto! Satu, dua, cheese!",
+   "act": "hop",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{写真|しゃしん}",
+     "shashin",
+     "foto"
+    ],
+    [
+     "{撮|と}ろう",
+     "torou",
+     "ayo ambil (foto)"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Ojamashimasu\" diucapkan saat apa?",
+   "a": "Saat masuk ke rumah orang lain",
+   "w": [
+    "Saat keluar dari rumah",
+    "Saat makan",
+    "Saat berterima kasih"
+   ],
+   "f": "お邪魔します = permisi, mengganggu sebentar."
+  },
+  {
+   "q": "\"Tanjoubi omedetou\" artinya?",
+   "a": "Selamat ulang tahun",
+   "w": [
+    "Selamat tahun baru",
+    "Selamat pagi",
+    "Selamat makan"
+   ],
+   "f": "誕生日 = ulang tahun, おめでとう = selamat."
+  },
+  {
+   "q": "\"Akete mo ii?\" artinya?",
+   "a": "Boleh kubuka?",
+   "w": [
+    "Sudah kubuka",
+    "Tolong buka",
+    "Jangan dibuka"
+   ],
+   "f": "〜てもいい？ = boleh ...? (santai)."
+  },
+  {
+   "q": "Apa arti ずっとほしかったんだ?",
+   "a": "Dari dulu aku menginginkannya",
+   "w": [
+    "Aku sudah punya yang itu",
+    "Aku tidak suka yang ini",
+    "Aku baru melihatnya"
+   ],
+   "f": "ずっと = sejak lama, ほしかった = dulu ingin."
+  },
+  {
+   "q": "\"Hi o tsukeyou\" artinya?",
+   "a": "Ayo kita nyalakan api / lilinnya",
+   "w": [
+    "Ayo kita matikan lampu",
+    "Ayo kita nyanyi",
+    "Ayo kita potong kue"
+   ],
+   "f": "火をつける = menyalakan api. 〜よう = ajakan santai."
+  }
+ ]
+}

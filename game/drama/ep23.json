@@ -1,0 +1,272 @@
+{
+ "id": "ep23",
+ "scene": "wasure",
+ "lines": [
+  {
+   "w": "m",
+   "j": "すみません、{電車|でんしゃ}に、{傘|かさ}を、{忘|わす}れました。",
+   "r": "Sumimasen, densha ni, kasa o, wasuremashita.",
+   "i": "Permisi, payung saya tertinggal di kereta.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{電車|でんしゃ}",
+     "densha",
+     "kereta"
+    ],
+    [
+     "{傘|かさ}",
+     "kasa",
+     "payung"
+    ],
+    [
+     "{忘|わす}れる",
+     "wasureru",
+     "lupa / tertinggal"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "どの{電車|でんしゃ}ですか。{何時|なんじ}ごろですか。",
+   "r": "Dono densha desu ka. Nanji goro desu ka.",
+   "i": "Kereta yang mana? Kira-kira jam berapa?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ごろ",
+     "goro",
+     "sekitar (waktu)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{九時|くじ}ごろの、しんじゅくゆきです。",
+   "r": "Kuji goro no, Shinjuku yuki desu.",
+   "i": "Sekitar jam sembilan, tujuan Shinjuku.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{九時|くじ}",
+     "kuji",
+     "jam sembilan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{何色|なにいろ}の{傘|かさ}ですか。",
+   "r": "Nani iro no kasa desu ka.",
+   "i": "Payungnya warna apa?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{何色|なにいろ}",
+     "nani iro",
+     "warna apa"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{青|あお}くて、{大|おお}きい{傘|かさ}です。",
+   "r": "Aokute, ookii kasa desu.",
+   "i": "Payung besar warna biru.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{青|あお}い",
+     "aoi",
+     "biru"
+    ],
+    [
+     "{大|おお}きい",
+     "ookii",
+     "besar"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ほかに、{特徴|とくちょう}は、ありますか。",
+   "r": "Hoka ni, tokuchou wa, arimasu ka.",
+   "i": "Apakah ada ciri lainnya?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{特徴|とくちょう}",
+     "tokuchou",
+     "ciri khas"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{持|も}ち{手|て}が、{黄色|きいろ}いです。",
+   "r": "Mochite ga, kiiroi desu.",
+   "i": "Gagangnya kuning.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{持|も}ち{手|て}",
+     "mochite",
+     "gagang"
+    ],
+    [
+     "{黄色|きいろ}い",
+     "kiiroi",
+     "kuning"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ちょっと、{探|さが}してきます。{少々|しょうしょう}、お{待|ま}ちください。",
+   "r": "Chotto, sagashite kimasu. Shoushou, omachi kudasai.",
+   "i": "Saya cari dulu. Mohon tunggu sebentar.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{探|さが}す",
+     "sagasu",
+     "mencari"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "お{待|ま}たせしました。{青|あお}い{傘|かさ}が、ありました。これですか。",
+   "r": "Omatase shimashita. Aoi kasa ga, arimashita. Kore desu ka.",
+   "i": "Maaf menunggu. Ada payung biru. Apakah ini?",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "お{待|ま}たせしました",
+     "omatase shimashita",
+     "maaf sudah menunggu"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、それです！ありがとうございます。",
+   "r": "Hai, sore desu! Arigatou gozaimasu.",
+   "i": "Ya, itu dia! Terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "それ",
+     "sore",
+     "itu"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "こちらに、{名前|なまえ}と{電話番号|でんわばんごう}を、{書|か}いてください。",
+   "r": "Kochira ni, namae to denwa bangou o, kaite kudasai.",
+   "i": "Silakan tulis nama dan nomor telepon di sini.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{電話番号|でんわばんごう}",
+     "denwa bangou",
+     "nomor telepon"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい。これからは、{気|き}をつけます。",
+   "r": "Hai. Korekara wa, ki o tsukemasu.",
+   "i": "Baik. Mulai sekarang saya akan lebih hati-hati.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{気|き}をつける",
+     "ki o tsukeru",
+     "berhati-hati"
+    ],
+    [
+     "これからは",
+     "korekara wa",
+     "mulai sekarang"
+    ]
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Densha ni kasa o wasuremashita\" artinya?",
+   "a": "Payung saya tertinggal di kereta",
+   "w": [
+    "Saya membeli payung di kereta",
+    "Saya meminjam payung",
+    "Saya kehilangan tiket"
+   ],
+   "f": "忘れる = lupa/tertinggal, 傘 = payung."
+  },
+  {
+   "q": "Apa arti ごろ (goro) pada 九時ごろ?",
+   "a": "Sekitar",
+   "w": [
+    "Tepat",
+    "Setelah",
+    "Sebelum"
+   ],
+   "f": "ごろ = sekitar waktu tertentu. ぐらい dipakai untuk jumlah."
+  },
+  {
+   "q": "\"Nani iro no kasa desu ka\" artinya?",
+   "a": "Payungnya warna apa?",
+   "w": [
+    "Payungnya milik siapa?",
+    "Payungnya besar atau kecil?",
+    "Payungnya di mana?"
+   ],
+   "f": "何色 = warna apa."
+  },
+  {
+   "q": "Apa arti 持ち手 (mochite)?",
+   "a": "Gagang",
+   "w": [
+    "Ujung",
+    "Kain",
+    "Pegas"
+   ],
+   "f": "持ち手 = bagian yang dipegang; ciri khas yang membantu petugas mencari."
+  },
+  {
+   "q": "\"Ki o tsukemasu\" artinya?",
+   "a": "Saya akan berhati-hati",
+   "w": [
+    "Saya akan menunggu",
+    "Saya akan kembali",
+    "Saya akan lupa"
+   ],
+   "f": "気をつける = berhati-hati."
+  }
+ ]
+}

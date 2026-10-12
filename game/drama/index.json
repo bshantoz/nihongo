@@ -160,5 +160,50 @@
   "idn": "Di tepi sungai (curhat)",
   "level": "N3",
   "desc": "Curhat ke sahabat soal kerjaan, dengan bahasa gaul sehari-hari."
+ },
+ {
+  "id": "ep19",
+  "no": 19,
+  "ja": "{美容院|びよういん}で",
+  "ro": "biyouin de",
+  "idn": "Di salon rambut",
+  "level": "N4",
+  "desc": "Reservasi, minta rambut dipendekkan, lalu membayar."
+ },
+ {
+  "id": "ep20",
+  "no": 20,
+  "ja": "{空港|くうこう}で",
+  "ro": "kuukou de",
+  "idn": "Di bandara (check-in)",
+  "level": "N4",
+  "desc": "Check-in, menimbang koper, dan mencari gerbang keberangkatan."
+ },
+ {
+  "id": "ep21",
+  "no": 21,
+  "ja": "{会社|かいしゃ}で",
+  "ro": "kaisha de",
+  "idn": "Di kantor (lapor ke senior)",
+  "level": "N3",
+  "desc": "Melapor pekerjaan ke senior dengan bahasa sopan: 報連相."
+ },
+ {
+  "id": "ep22",
+  "no": 22,
+  "ja": "{誕生日|たんじょうび}パーティー",
+  "ro": "tanjoubi paatii",
+  "idn": "Pesta ulang tahun teman",
+  "level": "N4",
+  "desc": "Memberi hadiah, meniup lilin, dan berfoto bersama."
+ },
+ {
+  "id": "ep23",
+  "no": 23,
+  "ja": "{忘|わす}れ{物|もの}",
+  "ro": "wasuremono",
+  "idn": "Payung tertinggal di kereta",
+  "level": "N4",
+  "desc": "Mengurus payung yang tertinggal di loket barang hilang stasiun."
  }
 ]

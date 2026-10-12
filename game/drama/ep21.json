@@ -1,0 +1,311 @@
+{
+ "id": "ep21",
+ "scene": "kaisha",
+ "lines": [
+  {
+   "w": "m",
+   "j": "{先輩|せんぱい}、ちょっと、よろしいでしょうか。",
+   "r": "Senpai, chotto, yoroshii deshou ka.",
+   "i": "Senior, apakah boleh minta waktu sebentar?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{先輩|せんぱい}",
+     "senpai",
+     "senior"
+    ],
+    [
+     "よろしいでしょうか",
+     "yoroshii deshou ka",
+     "apakah boleh? (sopan)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ああ、いいよ。どうした？",
+   "r": "Aa, ii yo. Doushita?",
+   "i": "Ya, boleh. Ada apa?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "どうした",
+     "doushita",
+     "kenapa?"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{報告|ほうこく}が、あります。{先|さき}ほどの{作業|さぎょう}が、{終|お}わりました。",
+   "r": "Houkoku ga, arimasu. Sakihodo no sagyou ga, owarimashita.",
+   "i": "Ada laporan. Pekerjaan tadi sudah selesai.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{報告|ほうこく}",
+     "houkoku",
+     "laporan"
+    ],
+    [
+     "{先|さき}ほど",
+     "sakihodo",
+     "tadi"
+    ],
+    [
+     "{作業|さぎょう}",
+     "sagyou",
+     "pekerjaan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "そうか。{早|はや}いな。チェックは、した？",
+   "r": "Souka. Hayai na. Chekku wa, shita?",
+   "i": "Oh begitu. Cepat ya. Sudah dicek?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{早|はや}い",
+     "hayai",
+     "cepat"
+    ],
+    [
+     "チェック",
+     "chekku",
+     "pemeriksaan"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、{二回|にかい}、{確認|かくにん}しました。",
+   "r": "Hai, nikai, kakunin shimashita.",
+   "i": "Ya, sudah saya cek dua kali.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{二回|にかい}",
+     "nikai",
+     "dua kali"
+    ],
+    [
+     "{確認|かくにん}",
+     "kakunin",
+     "memeriksa / konfirmasi"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{数|かず}は、{合|あ}ってた？",
+   "r": "Kazu wa, atteta?",
+   "i": "Jumlahnya sudah cocok?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{数|かず}",
+     "kazu",
+     "jumlah"
+    ],
+    [
+     "{合|あ}ってた",
+     "atteta",
+     "sudah cocok"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{一|ひと}つ、{間違|まちが}いが、ありました。{直|なお}しました。",
+   "r": "Hitotsu, machigai ga, arimashita. Naoshimashita.",
+   "i": "Ada satu kesalahan. Sudah saya perbaiki.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{間違|まちが}い",
+     "machigai",
+     "kesalahan"
+    ],
+    [
+     "{直|なお}す",
+     "naosu",
+     "memperbaiki"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "よし。{次|つぎ}は、この{書類|しょるい}を、{部長|ぶちょう}に、{出|だ}して。",
+   "r": "Yoshi. Tsugi wa, kono shorui o, buchou ni, dashite.",
+   "i": "Bagus. Selanjutnya, serahkan dokumen ini ke kepala bagian.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{書類|しょるい}",
+     "shorui",
+     "dokumen"
+    ],
+    [
+     "{部長|ぶちょう}",
+     "buchou",
+     "kepala bagian"
+    ],
+    [
+     "{出|だ}す",
+     "dasu",
+     "menyerahkan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "かしこまりました。いつまでに、{出|だ}せば、よろしいですか。",
+   "r": "Kashikomarimashita. Itsu made ni, daseba, yoroshii desu ka.",
+   "i": "Baik. Paling lambat kapan harus saya serahkan?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "いつまでに",
+     "itsu made ni",
+     "paling lambat kapan"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{今日|きょう}の{五時|ごじ}までに、{頼|たの}む。",
+   "r": "Kyou no goji made ni, tanomu.",
+   "i": "Tolong sampai jam lima hari ini.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "〜までに",
+     "made ni",
+     "paling lambat ..."
+    ],
+    [
+     "{頼|たの}む",
+     "tanomu",
+     "tolong / minta"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{承知|しょうち}しました。わからない{時|とき}は、すぐ、{聞|き}きます。",
+   "r": "Shouchi shimashita. Wakaranai toki wa, sugu, kikimasu.",
+   "i": "Saya mengerti. Kalau tidak paham, saya langsung bertanya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{承知|しょうち}しました",
+     "shouchi shimashita",
+     "saya mengerti (sopan)"
+    ],
+    [
+     "すぐ",
+     "sugu",
+     "langsung"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "うん。ほうれんそうは、{大事|だいじ}だからな。",
+   "r": "Un. Hourensou wa, daiji dakara na.",
+   "i": "Ya. Soalnya lapor-kabar-konsultasi itu penting.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "ほうれんそう",
+     "hourensou",
+     "lapor, kabar, konsultasi (報連相)"
+    ],
+    [
+     "{大事|だいじ}",
+     "daiji",
+     "penting"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Chotto yoroshii deshou ka\" dipakai untuk apa?",
+   "a": "Meminta waktu dengan sopan",
+   "w": [
+    "Meminta uang",
+    "Meminta maaf",
+    "Berpamitan"
+   ],
+   "f": "よろしいでしょうか adalah bentuk sopan dari いいですか."
+  },
+  {
+   "q": "Apa arti 確認しました (kakunin shimashita)?",
+   "a": "Sudah saya cek / konfirmasi",
+   "w": [
+    "Sudah saya buang",
+    "Sudah saya lupakan",
+    "Sudah saya serahkan"
+   ],
+   "f": "確認 = memastikan/memeriksa kembali."
+  },
+  {
+   "q": "\"Itsu made ni daseba yoroshii desu ka\" artinya?",
+   "a": "Paling lambat kapan harus diserahkan?",
+   "w": [
+    "Siapa yang harus menyerahkan?",
+    "Di mana saya serahkan?",
+    "Berapa dokumen yang diserahkan?"
+   ],
+   "f": "〜までに = paling lambat sebelum ..., 出せば = kalau saya serahkan."
+  },
+  {
+   "q": "Apa arti 承知しました (shouchi shimashita)?",
+   "a": "Saya mengerti (sopan)",
+   "w": [
+    "Saya tidak setuju",
+    "Saya sedang bingung",
+    "Saya minta maaf"
+   ],
+   "f": "承知 dipakai ke atasan, lebih sopan dari わかりました."
+  },
+  {
+   "q": "Apa itu ほうれんそう (hourensou) di tempat kerja?",
+   "a": "Lapor, kabar, konsultasi",
+   "w": [
+    "Nama sayuran khas kantin",
+    "Jam istirahat",
+    "Rapat pagi"
+   ],
+   "f": "報告 (laporan), 連絡 (kabar), 相談 (konsultasi): budaya kerja dasar di Jepang."
+  }
+ ]
+}
