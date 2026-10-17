@@ -169,14 +169,34 @@ rt{font-family:var(--font-body);font-weight:500;font-size:.5em;color:var(--muted
 .prog.bar b{display:block;height:100%;background:var(--accent);transition:width .3s}
 .cn2{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion:reduce){.stage.swap #svg,.stage.swap .tl,.enter,.enter .breathe,.walkout,.lean,.tilt,.wave,.sway,.step,.jump{animation:none}}
+
+/* layar penuh untuk merekam */
+.top{display:flex;gap:8px;flex-wrap:wrap}
+#stageWrap{position:relative}
+#fsCap,#fsBar{display:none}
+#stageWrap.fs{position:fixed;inset:0;z-index:99999;background:#000;display:flex;align-items:center;justify-content:center;width:100vw;height:100vh;height:100dvh}
+#stageWrap.fs .stage{width:100%;height:100%;border:0;border-radius:0;background:#000;display:flex;align-items:center;justify-content:center}
+#stageWrap.fs #svg{width:100%;height:100%}
+#stageWrap.fs .tl{top:12px;bottom:auto;left:12px;font-size:13px}
+#stageWrap.fs #fsCap{display:block;position:absolute;left:0;right:0;bottom:0;padding:34px 18px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,0));text-align:center;color:#fff;pointer-events:none;line-height:1.35}
+#fsCap .fj{font-family:var(--font-display);font-weight:700;font-size:clamp(1.1rem,3.6vw,2.1rem);text-shadow:0 2px 6px rgba(0,0,0,.8);overflow-wrap:anywhere}
+#fsCap .fr{color:#ffc08a;font-size:clamp(.85rem,2.4vw,1.2rem);margin-top:3px;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+#fsCap .fi{color:rgba(255,255,255,.9);font-size:clamp(.85rem,2.4vw,1.2rem);margin-top:2px;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+#fsCap rt{font-size:.5em;color:#fff;opacity:.9}
+body.nofuri #fsCap rt{display:none}
+#stageWrap.fs #fsBar{display:flex;gap:8px;position:absolute;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:3;transition:opacity .3s}
+#stageWrap.fs.hidebar #fsBar{opacity:0;pointer-events:none}
+#fsBar button{border:1px solid rgba(255,255,255,.35);background:rgba(20,16,12,.6);color:#fff;border-radius:99px;min-width:40px;height:40px;padding:0 14px;font-size:14px;font-weight:700}
+#fsBar button[aria-pressed="false"]{opacity:.6}
+body.fsOn{overflow:hidden}
 </style>
 
 <div class="wrap">
   <header><h1 id="ttl"></h1></header>
   <div class="list" id="listV"><p class="msg">Memuat daftar episode…</p></div>
   <div id="epV" hidden class="wrap" style="padding:0">
-    <div class="top"><button type="button" class="btn" id="bList">← Daftar episode</button></div>
-    <div class="stage" id="stageBox"></div>
+    <div class="top"><button type="button" class="btn" id="bList">← Daftar episode</button><button type="button" class="btn" id="bFs" aria-label="Layar penuh untuk merekam">⛶ Layar penuh</button></div>
+    <div id="stageWrap"><div class="stage" id="stageBox"></div><div id="fsCap" aria-live="polite"></div><div id="fsBar" role="group" aria-label="Kontrol layar penuh"></div></div>
     <div class="panel" id="panel"></div>
     <div class="nav" id="nav"></div>
     <div class="opts" id="opts" role="group" aria-label="Pengaturan"></div>
@@ -471,6 +491,7 @@ var SCENES={station:{build:buildStation,cast:{m:{name:'Mochi',el:'mochi',em:'emM
 var $=function(id){return document.getElementById(id);};
 var INDEX=[],EP=null,EPI=null,LINES=[],QUIZ=[],CAST={};
 var idx=-1,mode='play',auto=false,spT=0,qi=0,qs=0,qlock=false,seq=0;
+var FS=false,FSN=false,CAP=true,barT=0;
 var MULTI=false,SEG=[],mountSeg=-1,stTok=0,curG='';
 var RM=false;try{RM=window.matchMedia('(prefers-reduced-motion:reduce)').matches;}catch(e){}
 var MOVES=['hop','bow','nod','lean','tilt','wave','sway','step','jump','enter','walkout'];
@@ -590,10 +611,43 @@ function paint(i,quiet){
   if(L.em){em.textContent=L.em;em.classList.add('on');setTimeout(function(){em.classList.remove('on');},1800);}else em.classList.remove('on');
 }
 
+
+/* ---------- Layar penuh (untuk merekam layar) ---------- */
+function capRender(){
+  var c=$('fsCap');if(!c)return;
+  if(!FS||!CAP||mode!=='play'||idx<0||idx>=LINES.length){c.innerHTML=idx>=LINES.length&&FS?'<div class="fj">おしまい</div>':'';return;}
+  var L=LINES[idx];
+  c.innerHTML='<div class="fj">'+rb(L.j)+'</div>'+(O.ro?'<div class="fr">'+esc(L.r)+'</div>':'')+(O.id?'<div class="fi">'+esc(L.i)+'</div>':'');
+}
+function barRender(){
+  var b=$('fsBar');if(!b)return;
+  b.innerHTML='<button type="button" id="fPrev" aria-label="Sebelumnya">‹</button><button type="button" id="fAuto" aria-pressed="'+auto+'">'+(auto?'⏸ Auto':'▶ Auto')+'</button><button type="button" id="fNext" aria-label="Lanjut">›</button><button type="button" id="fCap" aria-pressed="'+CAP+'">Teks</button><button type="button" id="fX" aria-label="Keluar layar penuh">✕</button>';
+}
+function showBar(){
+  var w=$('stageWrap');if(!w)return;w.classList.remove('hidebar');clearTimeout(barT);
+  barT=setTimeout(function(){if(FS)w.classList.add('hidebar');},3000);
+}
+function setFs(on){
+  var w=$('stageWrap');if(!w)return;
+  FS=on;w.classList.toggle('fs',on);document.body.classList.toggle('fsOn',on);
+  if(on){
+    barRender();capRender();showBar();
+    try{var r=w.requestFullscreen?w.requestFullscreen():(w.webkitRequestFullscreen?w.webkitRequestFullscreen():null);
+      if(r&&r.then)r.then(function(){FSN=true;try{screen.orientation.lock('landscape').catch(function(){});}catch(e){}}).catch(function(){});}catch(e){}
+  }else{
+    clearTimeout(barT);w.classList.remove('hidebar');$('fsCap').innerHTML='';
+    try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen();else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();}catch(e){}
+    try{screen.orientation.unlock();}catch(e){}
+    FSN=false;
+  }
+}
+document.addEventListener('fullscreenchange',function(){if(FS&&FSN&&!document.fullscreenElement)setFs(false);});
+document.addEventListener('webkitfullscreenchange',function(){if(FS&&FSN&&!document.webkitFullscreenElement)setFs(false);});
+
 /* ---------- Daftar episode ---------- */
 function setTitle(ja,small){$('ttl').innerHTML=ja+'<small>'+esc(small)+'</small>';}
 function showList(){
-  jaStop();seq++;EP=null;
+  jaStop();seq++;EP=null;if(FS)setFs(false);
   $('epV').hidden=true;$('listV').hidden=false;
   setTitle('ミニドラマ','mini drama · pilih episode');
   var lv=$('listV');
@@ -636,7 +690,7 @@ function render(){
   var p=$('panel'),n=$('nav');
   document.body.classList.toggle('nofuri',!O.fu);
   if(mode==='quiz'){renderQuiz();return;}
-  prep(idx);
+  prep(idx);capRender();
   var prog=LINES.length>24?'<span class="prog bar"><b style="width:'+Math.round(Math.min(Math.max(idx+1,0),LINES.length)/LINES.length*100)+'%"></b></span><span class="cn2">'+Math.min(Math.max(idx+1,0),LINES.length)+'/'+LINES.length+'</span>':'<span class="prog">'+LINES.map(function(_,k){return '<i'+(k<=idx?' class="d"':'')+'></i>';}).join('')+'</span>';
   if(idx<0){
     p.innerHTML='<div class="who"><span class="dot"></span>Episode '+EPI.no+'</div><div class="jp">'+rb(EPI.ja)+'</div><div class="id">'+esc(EPI.desc)+' Tiap kalimat ada furigana, romaji, dan artinya. Ketuk Mulai untuk memutar.</div>';
@@ -701,7 +755,14 @@ function answerQ(b){
 /* ---------- Event ---------- */
 document.addEventListener('click',function(e){
   var t=e.target,id=t.id,b;
-  if(id==='bStart')go(0);
+  if(FS&&t.closest&&t.closest('#stageWrap')&&!t.closest('#fsBar')){var w0=$('stageWrap');if(w0.classList.contains('hidebar'))showBar();else{w0.classList.add('hidebar');clearTimeout(barT);}return;}
+  if(id==='bFs')setFs(true);
+  else if(id==='fX')setFs(false);
+  else if(id==='fPrev'){if(idx>0)go(idx-1);showBar();}
+  else if(id==='fNext'){go(idx+1);showBar();}
+  else if(id==='fAuto'){auto=!auto;barRender();showBar();if(auto&&mode==='play'){if(idx<0||idx>=LINES.length)go(idx>=LINES.length?-1:0);else go(idx+1);}}
+  else if(id==='fCap'){CAP=!CAP;barRender();capRender();showBar();}
+  else if(id==='bStart')go(0);
   else if(id==='bNext')go(idx+1);
   else if(id==='bPrev'&&idx>0)go(idx-1);
   else if(id==='bSay'&&LINES[idx])speak(plain(LINES[idx].j),LINES[idx].w);
@@ -721,6 +782,7 @@ document.addEventListener('click',function(e){
 });
 document.addEventListener('change',function(e){if(e.target.id==='rate'){O.rate=parseFloat(e.target.value);saveO();}});
 document.addEventListener('keydown',function(e){
+  if(FS&&e.key==='Escape'){setFs(false);return;}
   if(e.ctrlKey||e.metaKey||e.altKey||mode!=='play'||!EP)return;
   if(e.key==='ArrowRight'||e.key==='Enter'){if(idx>=0&&idx<LINES.length&&document.activeElement.tagName!=='BUTTON')go(idx+1);}
   else if(e.key==='ArrowLeft'&&idx>0)go(idx-1);
