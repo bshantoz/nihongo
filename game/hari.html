@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Satu Hari Mochi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: panggung SVG di atas, panel dialog di bawahnya, kontrol kecil paling bawah; kuis menggantikan panel dialog */
+:root{
+  --bg:#f2f1ee; --surface:#ffffff; --ink:#241c16; --muted:#6e6358; --line:#ddd6cc;
+  --accent:#c4540f; --accent-ink:#ffffff; --tint:#fbe6d6;
+  --ok:#1f7a45; --ok-bg:#d6efdf; --bad:#b3342f; --bad-bg:#f9dad7;
+  --s-wall:#e3ece7; --s-floor:#cbd3cc; --s-shelf:#a8b3ad; --s-banner:#2f6f6a; --s-counter:#8c6b4f; --s-top:#d9c7b0; --s-reg:#4c5862; --s-glass:#bfe3f5; --s-navy:#2b4a7a; --s-sign:#f6f4ee; --s-signt:#2b2b3a;
+  --font-display:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
+  --font-body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17130f; --surface:#241d17; --ink:#f4ece3; --muted:#b6a898; --line:#3a2f26;
+  --accent:#f09a5a; --accent-ink:#17130f; --tint:#3f2a1c;
+  --ok:#7fdca5; --ok-bg:#173a27; --bad:#ff8c85; --bad-bg:#47201f;
+  --s-wall:#26332f; --s-floor:#1e2724; --s-shelf:#46544e; --s-banner:#2a5c58; --s-counter:#5d4633; --s-top:#8b7459; --s-reg:#39434b; --s-glass:#3d5666; --s-navy:#35568c; --s-sign:#2f3a44; --s-signt:#e8e2d6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17130f; --surface:#241d17; --ink:#f4ece3; --muted:#b6a898; --line:#3a2f26;
+  --accent:#f09a5a; --accent-ink:#17130f; --tint:#3f2a1c;
+  --ok:#7fdca5; --ok-bg:#173a27; --bad:#ff8c85; --bad-bg:#47201f;
+  --s-wall:#26332f; --s-floor:#1e2724; --s-shelf:#46544e; --s-banner:#2a5c58; --s-counter:#5d4633; --s-top:#8b7459; --s-reg:#39434b; --s-glass:#3d5666; --s-navy:#35568c; --s-sign:#2f3a44; --s-signt:#e8e2d6; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:20px 48px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:560px;margin-inline:auto;display:grid;gap:12px}
+h1{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(1.6rem,6vw,2.2rem);line-height:1.15}
+h1 small{display:block;font-family:var(--font-body);font-weight:500;font-size:.78rem;letter-spacing:.08em;color:var(--muted);margin-top:4px;text-transform:uppercase}
+.stage{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--s-wall);line-height:0}
+#svg{width:100%;height:auto;display:block}
+.wall{fill:var(--s-wall)}.floor{fill:var(--s-floor)}.shelf{fill:var(--s-shelf)}.banner{fill:var(--s-banner)}
+.cnt{fill:var(--s-counter)}.top{fill:var(--s-top)}.reg{fill:var(--s-reg)}.glass{fill:var(--s-glass)}
+.btxt{font-family:var(--font-display);font-weight:800;font-size:13px;fill:#fff;letter-spacing:.12em}
+.emo{font:800 20px var(--font-display);opacity:0;transition:opacity .2s}
+.emo.on{opacity:1}
+/* gerak karakter */
+.breathe{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.eyes{animation:blink 4.6s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.tailw{animation:tail 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:0% 100%}
+@keyframes tail{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}
+.mo{opacity:0}
+.talk .mo{animation:mouth .34s steps(1) infinite}
+@keyframes mouth{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+.hop{animation:hop .6s ease-out}
+@keyframes hop{0%{transform:translateY(0)}35%{transform:translateY(-12px)}70%{transform:translateY(0)}85%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+#clerk{transform-origin:290px 150px}
+.bow{animation:bow 1.1s ease-in-out}
+@keyframes bow{0%{transform:rotate(0)}35%,60%{transform:rotate(16deg)}100%{transform:rotate(0)}}
+.nod{animation:nod .7s ease-in-out}
+@keyframes nod{0%,100%{transform:translateY(0)}30%{transform:translateY(5px)}60%{transform:translateY(0)}}
+.item,.cash,.chg,.steam{opacity:0;transition:opacity .35s,transform .45s}
+.item{transform:translateY(-14px)}
+.s-items .item{opacity:1;transform:translateY(0)}
+.s-items .bk{opacity:0}
+.bk{transition:opacity .3s}
+.s-money .cash{opacity:1}
+.s-change .chg{opacity:1}
+.s-heat .mw{animation:shake .25s linear 4}
+@keyframes shake{0%,100%{transform:translateX(0)}50%{transform:translateX(1.5px)}}
+.s-heat .glow{opacity:1}
+.glow{opacity:0;transition:opacity .3s}
+.s-ding .steam{opacity:.9;animation:steam 1.6s ease-out}
+@keyframes steam{0%{transform:translateY(6px);opacity:0}30%{opacity:.9}100%{transform:translateY(-10px);opacity:0}}
+/* panel dialog */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:8px;min-height:120px;align-content:start}
+.who{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.dot.c{background:#2f8f8c}
+.jp{font-family:var(--font-display);font-weight:600;font-size:clamp(1.3rem,5.4vw,1.7rem);line-height:1.4;overflow-wrap:anywhere}
+.ro{color:var(--accent);font-size:.95rem;overflow-wrap:anywhere}
+.id{color:var(--ink);opacity:.85}
+.vocab{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:3px 10px;font-size:.82rem}
+.chip b{font-family:var(--font-display);font-weight:600}
+.nav{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 16px;font-weight:700}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.4;cursor:default}
+.prog{display:flex;gap:4px;flex:1;min-width:80px}
+.prog i{flex:1;height:5px;border-radius:99px;background:var(--line)}
+.prog i.d{background:var(--accent)}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.tg{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-size:.85rem;font-weight:500}
+.tg[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+select.tg{appearance:auto;color:inherit}
+.q{margin:0;font-weight:700}
+.qo{display:grid;gap:6px}
+.o{text-align:left;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);padding:10px 12px;min-height:44px;overflow-wrap:anywhere}
+.o.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.o.bad{background:var(--bad-bg);border-color:var(--bad)}
+.o:disabled{cursor:default}
+.fb{background:var(--tint);border-radius:10px;padding:10px 12px}
+.foot{color:var(--muted);font-size:.82rem;margin:0}
+@media (prefers-reduced-motion:reduce){.breathe,.eyes,.tailw,.talk .mo,.hop,.bow,.nod,.s-heat .mw,.s-ding .steam{animation:none}.talk .mo{opacity:.7}}
+[hidden]{display:none!important}
+.jp{line-height:1.95}
+ruby{ruby-position:over}
+rt{font-family:var(--font-body);font-weight:500;font-size:.5em;color:var(--muted);letter-spacing:0}
+.nofuri rt{display:none}
+.nofuri .jp{line-height:1.4}
+.top{display:flex;align-items:center;gap:8px}
+.list{display:grid;gap:10px}
+.ep{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;text-align:left;width:100%;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 14px}
+.ep:not(:disabled):hover{border-color:var(--accent)}
+.ep .no{grid-row:1/3;font-family:var(--font-display);font-weight:800;font-size:1.5rem;color:var(--accent);width:2.2ch;text-align:center}
+.ep .t{font-family:var(--font-display);font-weight:800;font-size:1.15rem;line-height:1.5}
+.ep .t small{font-family:var(--font-body);font-weight:500;font-size:.8rem;color:var(--muted);margin-left:6px}
+.ep .d{grid-column:2;font-size:.88rem;color:var(--muted);margin:0}
+.ep .st{grid-row:1/3;grid-column:3;font-size:.8rem;font-weight:700;color:var(--ok);text-align:right}
+.ep .lv{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:0 8px;font-size:.72rem;font-weight:700;color:var(--muted);margin-left:6px;vertical-align:middle}
+.ep:disabled{opacity:.55;cursor:default}
+.msg{color:var(--muted);padding:20px 4px;margin:0}
+.bnavy{fill:var(--s-navy)}.sign{fill:var(--s-sign)}
+.stxt{font:700 10px var(--font-display);fill:var(--s-signt)}
+.led{font:800 15px var(--font-display);fill:#ffb347;opacity:0;transition:opacity .35s}
+.s-plat .plat,.s-time .tim{opacity:1}
+.tkt{opacity:0;transform:translateX(34px);transition:opacity .35s,transform .5s}
+.s-ticket .tkt{opacity:1;transform:translateX(0)}
+.s-ticket .cash{opacity:0}
+.pp{opacity:0;transform:translateY(-8px);transition:opacity .35s,transform .45s}
+.s-a .pa,.s-b .pb,.s-c .pc,.s-d .pd,.s-e .pe{opacity:1;transform:none}
+.s-b .hb,.s-c .hc,.s-d .hd,.s-e .he{opacity:0}
+.sm{opacity:0}
+.s-b .sm{animation:steam 1.8s ease-out infinite}
+
+/* episode panjang: ganti latar, suasana waktu, gerak karakter */
+.stage{position:relative}
+.stage .tone{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;transition:background .6s}
+.stage.tn-sore .tone{background:rgba(255,150,70,.26)}
+.stage.tn-malam .tone{background:rgba(45,60,140,.46)}
+.stage.tn-siang .tone{background:rgba(255,244,190,.10)}
+.stage .tl{position:absolute;left:8px;bottom:8px;line-height:1.25;font-size:12px;background:rgba(20,16,12,.62);color:#fff;border-radius:99px;padding:4px 11px;pointer-events:none}
+.stage .tl b{font-family:var(--font-display);font-weight:800;letter-spacing:.04em;margin-right:4px}
+.stage.swap #svg{animation:sfade .6s ease-out}
+.stage.swap .tl{animation:tlpop .5s ease-out}
+@keyframes sfade{0%{opacity:0;transform:scale(1.025)}100%{opacity:1;transform:none}}
+@keyframes tlpop{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
+#mochi{transform-box:fill-box;transform-origin:50% 100%}
+.enter{animation:walkin 1s cubic-bezier(.25,.8,.3,1)}
+.enter .breathe{animation:bob .25s ease-in-out 4}
+@keyframes walkin{0%{transform:translateX(-110px);opacity:0}20%{opacity:1}100%{transform:translateX(0);opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.walkout{animation:walkout .42s ease-in forwards}
+@keyframes walkout{0%{transform:translateX(0);opacity:1}100%{transform:translateX(-90px);opacity:0}}
+.lean{animation:lean 1.1s ease-in-out}
+@keyframes lean{0%,100%{transform:translateX(0) rotate(0)}40%,65%{transform:translateX(7px) rotate(4deg)}}
+.tilt{animation:tilt .95s ease-in-out}
+@keyframes tilt{0%,100%{transform:rotate(0)}35%,65%{transform:rotate(-7deg)}}
+.wave{animation:wave .85s ease-in-out}
+@keyframes wave{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}45%{transform:rotate(8deg)}70%{transform:rotate(-6deg)}}
+.sway{animation:sway 1.2s ease-in-out}
+@keyframes sway{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.step{animation:step .9s ease-in-out}
+@keyframes step{0%,100%{transform:translateX(0)}45%,60%{transform:translateX(12px)}}
+.jump{animation:jump .8s ease-out}
+@keyframes jump{0%,100%{transform:translateY(0)}25%{transform:translateY(-20px)}50%{transform:translateY(0)}70%{transform:translateY(-8px)}}
+.prog.bar{height:5px;border-radius:99px;background:var(--line);overflow:hidden;align-self:center;display:block}
+.prog.bar b{display:block;height:100%;background:var(--accent);transition:width .3s}
+.cn2{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.stage.swap #svg,.stage.swap .tl,.enter,.enter .breathe,.walkout,.lean,.tilt,.wave,.sway,.step,.jump{animation:none}}
+
+/* layar penuh untuk merekam */
+.top{display:flex;gap:8px;flex-wrap:wrap}
+#stageWrap{position:relative}
+#fsCap,#fsBar{display:none}
+#stageWrap.fs{position:fixed;inset:0;z-index:99999;background:#000;display:flex;align-items:center;justify-content:center;width:100vw;height:100vh;height:100dvh}
+#stageWrap.fs .stage{width:100%;height:100%;border:0;border-radius:0;background:#000;display:flex;align-items:center;justify-content:center}
+#stageWrap.fs #svg{width:100%;height:100%}
+#stageWrap.fs .tl{top:12px;bottom:auto;left:12px;font-size:13px}
+#stageWrap.fs #fsCap{display:block;position:absolute;left:0;right:0;bottom:0;padding:34px 18px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,0));text-align:center;color:#fff;pointer-events:none;line-height:1.35}
+#fsCap .fj{font-family:var(--font-display);font-weight:700;font-size:clamp(1.1rem,3.6vw,2.1rem);text-shadow:0 2px 6px rgba(0,0,0,.8);overflow-wrap:anywhere}
+#fsCap .fr{color:#ffc08a;font-size:clamp(.85rem,2.4vw,1.2rem);margin-top:3px;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+#fsCap .fi{color:rgba(255,255,255,.9);font-size:clamp(.85rem,2.4vw,1.2rem);margin-top:2px;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+#fsCap rt{font-size:.5em;color:#fff;opacity:.9}
+body.nofuri #fsCap rt{display:none}
+#stageWrap.fs #fsBar{display:flex;gap:8px;position:absolute;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:3;transition:opacity .3s}
+#stageWrap.fs.hidebar #fsBar{opacity:0;pointer-events:none}
+#fsBar button{border:1px solid rgba(255,255,255,.35);background:rgba(20,16,12,.6);color:#fff;border-radius:99px;min-width:40px;height:40px;padding:0 14px;font-size:14px;font-weight:700}
+#fsBar button[aria-pressed="false"]{opacity:.6}
+body.fsOn{overflow:hidden;height:100vh;margin:0}
+</style>
+
+<div class="wrap">
+  <header><h1 id="ttl"></h1></header>
+  <div class="list" id="listV"><p class="msg">Memuat daftar episode…</p></div>
+  <div id="epV" hidden class="wrap" style="padding:0">
+    <div class="top"><button type="button" class="btn" id="bList">← Daftar episode</button><button type="button" class="btn" id="bFs" aria-label="Layar penuh untuk merekam">⛶ Layar penuh</button></div>
+    <div id="stageWrap"><div class="stage" id="stageBox"></div><div id="fsCap" aria-live="polite"></div><div id="fsBar" role="group" aria-label="Kontrol layar penuh"></div></div>
+    <div class="panel" id="panel"></div>
+    <div class="nav" id="nav"></div>
+    <div class="opts" id="opts" role="group" aria-label="Pengaturan"></div>
+  </div>
+  <p class="foot">Suara memakai file audio atau pengisi suara Jepang bawaan browser, jadi kualitasnya bergantung pada perangkat.</p>
+</div>
+
+<script>window.__CFG={"long": true, "ja": "モチの一日", "small": "cerita panjang · pilih cerita", "noun": "Cerita"};</script>
+<script>
+function shelfUnit(x,y,w,rows,seed){
+  var cols=['#e9806e','#f2c14e','#6fb98f','#6aa0d9','#b58bd6','#f09a5a','#d9d9d9'],s='',k=seed;
+  for(var r=0;r<rows;r++){
+    var yy=y+r*30;
+    for(var cx=x+4;cx<x+w-14;cx+=14){k=(k*37+11)%97;var h=14+(k%9);s+='<rect x="'+cx+'" y="'+(yy+26-h)+'" width="11" height="'+h+'" rx="2" fill="'+cols[k%cols.length]+'" opacity=".9"/>';}
+    s+='<rect class="shelf" x="'+x+'" y="'+(yy+26)+'" width="'+w+'" height="4" rx="1"/>';
+  }
+  return s;
+}
+var MOCHI='<g class="tailw"><path d="M45 54C58 54 60 40 54 34" fill="none" stroke="#5a3a22" stroke-width="7" stroke-linecap="round"/><path d="M45 54C58 54 60 40 54 34" fill="none" stroke="#f2a65a" stroke-width="4.6" stroke-linecap="round"/></g>'+
+ '<ellipse cx="32" cy="50" rx="16" ry="12.5" fill="#f2a65a" stroke="#5a3a22" stroke-width="1.6"/><ellipse cx="32" cy="53" rx="8.5" ry="8" fill="#fff3e0"/>'+
+ '<ellipse cx="25" cy="59.5" rx="5" ry="3" fill="#fff3e0" stroke="#5a3a22" stroke-width="1.3"/><ellipse cx="39" cy="59.5" rx="5" ry="3" fill="#fff3e0" stroke="#5a3a22" stroke-width="1.3"/>'+
+ '<g id="mhead"><path d="M17.5 24L19 7.5L31 17.5Z" fill="#f2a65a" stroke="#5a3a22" stroke-width="1.6" stroke-linejoin="round"/><path d="M21 19L21.6 12.5L26.5 17Z" fill="#f7b6b6"/>'+
+ '<path d="M46.5 24L45 7.5L33 17.5Z" fill="#f2a65a" stroke="#5a3a22" stroke-width="1.6" stroke-linejoin="round"/><path d="M43 19L42.4 12.5L37.5 17Z" fill="#f7b6b6"/>'+
+ '<ellipse cx="32" cy="29" rx="16" ry="13.5" fill="#f2a65a" stroke="#5a3a22" stroke-width="1.6"/><path d="M32 16.5V21M27 17.5L28 21M37 17.5L36 21" stroke="#c9772e" stroke-width="1.6" stroke-linecap="round"/>'+
+ '<ellipse cx="32" cy="34" rx="7.5" ry="5.2" fill="#fff3e0"/>'+
+ '<g class="eyes"><ellipse cx="25" cy="28.5" rx="2.1" ry="2.8" fill="#3b2415"/><ellipse cx="39" cy="28.5" rx="2.1" ry="2.8" fill="#3b2415"/><circle cx="25.7" cy="27.4" r=".8" fill="#fff"/><circle cx="39.7" cy="27.4" r=".8" fill="#fff"/></g>'+
+ '<path d="M30.2 32.4H33.8L32 34.4Z" fill="#e58a8a"/><path d="M32 34.4V36M32 36Q30.3 37.6 28.6 36.3M32 36Q33.7 37.6 35.4 36.3" fill="none" stroke="#5a3a22" stroke-width="1.1" stroke-linecap="round"/>'+
+ '<ellipse class="mo" cx="32" cy="38.2" rx="2" ry="2.3" fill="#7a2a10"/>'+
+ '<path d="M18 32L10.5 30.5M18 34.5L10.5 35.5M46 32L53.5 30.5M46 34.5L53.5 35.5" stroke="#5a3a22" stroke-width=".9" stroke-linecap="round" opacity=".55"/></g>';
+function hatSvg(hat,c1,c2){
+  if(hat==='none')return '<path d="M265 84C262 62 277 53 292 53C307 53 318 62 315 84C309 72 298 67 290 67C281 67 271 72 265 84Z" fill="#3a2f2a"/>';
+  if(hat==='girl')return '<path d="M263 86C260 62 276 52 291 52C307 52 320 62 317 86C311 72 299 66 290 66C281 66 270 72 263 86Z" fill="#4a2f24"/><path d="M264 84C260 100 260 112 266 120L276 114C271 106 271 96 271 86Z" fill="#4a2f24"/><path d="M316 84C320 100 320 112 314 120L304 114C309 106 309 96 309 86Z" fill="#4a2f24"/><circle cx="272" cy="64" r="4.6" fill="#f08fb0"/><circle cx="279" cy="62" r="4.6" fill="#f08fb0"/><circle cx="275.5" cy="63.5" r="2" fill="#d9567f"/>';
+  if(hat==='chef')return '<ellipse cx="290" cy="50" rx="21" ry="13" fill="#fff" stroke="#d8d2c6"/><rect x="268" y="56" width="44" height="14" rx="3" fill="#fff" stroke="#d8d2c6"/><path d="M270 66H310" stroke="#d8d2c6"/>';
+  if(hat==='nurse')return '<path d="M265 84C262 62 277 53 292 53C307 53 318 62 315 84C309 72 298 67 290 67C281 67 271 72 265 84Z" fill="#3a2f2a"/><path d="M272 66Q290 50 308 66L306 71H274Z" fill="#fff" stroke="#d8d2c6"/><path d="M290 58V66M286 62H294" stroke="#d9534f" stroke-width="2.4" stroke-linecap="round"/>';
+  var s='<path d="M266 80C268 60 280 54 292 54C306 54 314 62 314 80Z" fill="'+c1+'"/><path d="M298 78H326Q329 83 323 84H298Z" fill="'+c2+'"/>';
+  if(hat==='police')s+='<circle cx="290" cy="68" r="3.4" fill="#e9c24a" stroke="#b8932c"/>';
+  return s;
+}
+function clerkSvg(c1,c2,hat){
+  var h='';
+  /* kasir */
+  h+='<g id="clerk"><g class="breathe">'+
+     '<rect x="250" y="124" width="16" height="30" rx="8" fill="'+c1+'"/><rect x="314" y="124" width="16" height="30" rx="8" fill="'+c1+'"/>'+
+     '<path d="M255 156C255 130 270 119 290 119C310 119 325 130 325 156Z" fill="'+c1+'"/><polygon points="277,119 290,136 303,119" fill="#fff"/><rect x="304" y="130" width="14" height="8" rx="1.5" fill="#fff"/>'+
+     '<rect x="284" y="104" width="12" height="17" fill="#f2cfae"/>'+
+     '<g id="chead"><circle cx="266" cy="90" r="4" fill="#f2cfae"/><circle cx="314" cy="90" r="4" fill="#f2cfae"/><circle cx="290" cy="88" r="24" fill="#f2cfae"/>'+
+     hatSvg(hat,c1,c2)+
+     '<path d="M268 80Q268 92 271 98M312 80Q312 90 309 98" stroke="#2b2b3a" stroke-width="4" fill="none" stroke-linecap="round"/>'+
+     '<g class="eyes"><ellipse cx="282" cy="89" rx="2.6" ry="3.4" fill="#2b2b3a"/><ellipse cx="298" cy="89" rx="2.6" ry="3.4" fill="#2b2b3a"/></g>'+
+     '<path d="M278 82Q282 79 286 82M294 82Q298 79 302 82" stroke="#2b2b3a" stroke-width="1.4" fill="none" stroke-linecap="round"/>'+
+     '<circle cx="276" cy="97" r="4" fill="#f09a8c" opacity=".5"/><circle cx="304" cy="97" r="4" fill="#f09a8c" opacity=".5"/>'+
+     '<path d="M284 99Q290 105 296 99" stroke="#7a2f2f" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse class="mo" cx="290" cy="101" rx="4.2" ry="4.6" fill="#7a2f2f"/></g>'+
+     '</g></g>';
+  return h;
+}
+function mochiSvg(basket){
+  var h='';
+  /* Mochi */
+  h+='<g id="mochi"><g class="breathe"><svg x="38" y="118" width="116" height="116" viewBox="0 0 64 64" overflow="visible">'+MOCHI+'</svg>';
+  if(basket)h+='<g class="bk"><rect x="124" y="198" width="38" height="26" rx="4" fill="#c9a26b" stroke="#8a6a3a" stroke-width="1.5"/><path d="M129 198Q143 182 157 198" fill="none" stroke="#8a6a3a" stroke-width="2.5"/><rect x="130" y="188" width="14" height="10" rx="2" fill="#e9806e"/><rect x="146" y="184" width="8" height="14" rx="2" fill="#6aa0d9"/></g>';
+  h+='</g></g>';
+  return h;
+}
+function buildKonbini(){
+  var h='<svg viewBox="0 0 400 240" id="svg" role="img" aria-label="Mochi si kucing berbelanja di minimarket dan dilayani seorang kasir">';
+  h+='<rect class="wall" width="400" height="172"/><rect class="floor" y="172" width="400" height="68"/>';
+  h+=shelfUnit(14,36,140,4,3)+shelfUnit(220,36,170,4,7);
+  h+='<rect class="banner" width="400" height="24"/><text class="btxt" x="200" y="17" text-anchor="middle">コンビニ</text><rect x="40" y="28" width="320" height="3" rx="1.5" fill="#fff" opacity=".6"/>';
+  var c1='#2f8f8c',c2='#256e6c';
+  h+=clerkSvg(c1,c2);
+  /* meja kasir */
+  h+='<rect class="cnt" x="150" y="156" width="250" height="84"/><rect class="top" x="144" y="148" width="262" height="10" rx="3"/>';
+  h+='<g class="mw"><rect x="156" y="116" width="52" height="32" rx="4" fill="#cfd5d9"/><rect x="162" y="121" width="30" height="22" rx="2" class="glass"/><rect class="glow" x="162" y="121" width="30" height="22" rx="2" fill="#ffd36e"/><circle cx="200" cy="126" r="2.5" fill="#8a949a"/><circle cx="200" cy="134" r="2.5" fill="#8a949a"/></g>';
+  h+='<g class="steam" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity="0"><path d="M170 112Q166 104 171 98M182 112Q178 104 183 98M194 112Q190 104 195 98"/></g>';
+  h+='<g class="reg"><rect x="338" y="118" width="46" height="30" rx="4"/><rect x="344" y="122" width="34" height="12" rx="2" class="glass"/></g>';
+  h+='<g class="item"><rect x="216" y="132" width="30" height="16" rx="3" fill="#e9806e"/><rect x="220" y="136" width="22" height="8" rx="2" fill="#fff" opacity=".85"/><rect x="250" y="126" width="9" height="22" rx="3" fill="#6aa0d9"/><rect x="251.5" y="122" width="6" height="5" rx="1.5" fill="#f2c14e"/></g>';
+  h+='<g class="cash"><rect x="262" y="141" width="26" height="7" rx="1.5" fill="#d8c98a" stroke="#a6954f" stroke-width="1"/><text x="275" y="147" font-size="6" text-anchor="middle" fill="#6b5d1c" font-family="sans-serif">1000</text></g>';
+  h+='<g class="chg"><circle cx="300" cy="145" r="3.6" fill="#d9b44a"/><circle cx="307" cy="146" r="3.6" fill="#c9c9c9"/><circle cx="314" cy="145" r="3.6" fill="#d9b44a"/></g>';
+  h+=mochiSvg(true);
+  /* emote */
+  h+='<text class="emo" id="emM" x="106" y="108" text-anchor="middle" fill="#c4540f"></text><text class="emo" id="emC" x="290" y="46" text-anchor="middle" fill="'+c1+'"></text>';
+  h+='</svg>';
+  return h;
+}
+function buildStation(){
+  var h='<svg viewBox="0 0 400 240" id="svg" role="img" aria-label="Mochi si kucing membeli tiket kereta di loket stasiun dan dilayani seorang petugas">';
+  h+='<rect class="wall" width="400" height="172"/><rect class="floor" y="172" width="400" height="68"/>';
+  h+='<path d="M0 198H400M0 222H400M70 172L40 240M200 172V240M330 172L360 240" stroke="#000" stroke-opacity=".07" fill="none"/>';
+  h+='<rect class="bnavy" width="400" height="24"/><text class="btxt" x="200" y="17" text-anchor="middle">駅</text><rect x="40" y="28" width="320" height="3" rx="1.5" fill="#fff" opacity=".6"/>';
+  /* peta jalur */
+  h+='<rect class="sign" x="18" y="38" width="120" height="76" rx="5"/><text class="stxt" x="78" y="53" text-anchor="middle">路線図</text>';
+  h+='<path d="M30 94H54V72H102V94H126" fill="none" stroke="#2f8f8c" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>';
+  h+='<g fill="#fff" stroke="#2b2b3a" stroke-width="1.4"><circle cx="30" cy="94" r="3.5"/><circle cx="54" cy="72" r="3.5"/><circle cx="78" cy="72" r="3.5"/><circle cx="126" cy="94" r="3.5"/></g><circle cx="102" cy="72" r="5.2" fill="#e9806e" stroke="#2b2b3a" stroke-width="1.4"/>';
+  h+='<text class="stxt" x="102" y="108" text-anchor="middle">新宿</text>';
+  /* papan keberangkatan */
+  h+='<rect class="reg" x="160" y="38" width="104" height="52" rx="5"/><text x="212" y="49" text-anchor="middle" font-size="7" fill="#9fb0bb" font-family="sans-serif">発車案内</text>';
+  h+='<text class="led plat" x="212" y="66" text-anchor="middle">3番線</text><text class="led tim" x="212" y="83" text-anchor="middle" font-size="13">10:15 新宿</text>';
+  /* jam */
+  h+='<circle cx="352" cy="62" r="17" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 62V50M352 62L360 66" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="62" r="1.8" fill="#2b2b3a"/>';
+  var c1='#2b4a7a',c2='#1f3558';
+  h+=clerkSvg(c1,c2);
+  h+='<rect class="cnt" x="150" y="156" width="250" height="84"/><rect class="top" x="144" y="148" width="262" height="10" rx="3"/>';
+  h+='<g class="reg"><rect x="338" y="110" width="46" height="38" rx="4"/><rect x="344" y="115" width="34" height="14" rx="2" class="glass"/><rect x="350" y="136" width="22" height="3" rx="1.5" fill="#9fb0bb"/></g>';
+  h+='<g class="cash"><circle cx="258" cy="144" r="4.2" fill="#d9b44a" stroke="#a6954f"/><circle cx="268" cy="145" r="4.2" fill="#c9c9c9" stroke="#9a9a9a"/><circle cx="278" cy="144" r="3.4" fill="#d9b44a" stroke="#a6954f"/><circle cx="286" cy="145" r="3.4" fill="#d9b44a" stroke="#a6954f"/></g>';
+  h+='<g class="tkt"><rect x="176" y="136" width="30" height="14" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><rect x="176" y="136" width="8" height="14" rx="2" fill="#e9806e"/><text x="195" y="146" font-size="7" text-anchor="middle" fill="#6b5d1c" font-family="sans-serif">240</text></g>';
+  h+=mochiSvg(false);
+  h+='<text class="emo" id="emM" x="106" y="108" text-anchor="middle" fill="#c4540f"></text><text class="emo" id="emC" x="290" y="46" text-anchor="middle" fill="'+c1+'"></text>';
+  h+='</svg>';
+  return h;
+}
+
+/* ---------- Adegan tempat lain: meja, penjaga, dan properti dengan status a-e ---------- */
+var mt=function(x,y,t,sz){return '<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+(sz||9)+'" fill="#4a3520" font-weight="700" font-family="Shippori Mincho,serif">'+t+'</text>';};
+var PLACES={
+ restoran:{aria:'Mochi memesan ramen di kedai ramen dan dilayani seorang pelayan',bn:'らーめん',bc:'#a63a2f',hat:'chef',c1:'#f1efe9',c2:'#cfc9bd',ec:'#a63a2f',name:'Pelayan 店員 (ten’in)',
+  bg:function(){return '<g><rect x="26" y="30" width="30" height="42" fill="#2b3a67"/><rect x="60" y="30" width="30" height="42" fill="#2b3a67"/><rect x="94" y="30" width="30" height="42" fill="#2b3a67"/><text x="41" y="58" text-anchor="middle" font-size="16" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">ら</text><text x="75" y="58" text-anchor="middle" font-size="16" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">ー</text><text x="109" y="58" text-anchor="middle" font-size="16" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">め</text></g>'+
+   '<rect x="146" y="40" width="96" height="62" rx="4" fill="#d8c39a" stroke="#a88a56" stroke-width="2"/>'+mt(194,56,'メニュー',9)+mt(194,72,'らーめん 800',9)+mt(194,85,'ぎょうざ 400',9)+mt(194,97,'ごはん 200',9)+
+   '<ellipse cx="362" cy="62" rx="14" ry="19" fill="#d9453a"/><rect x="354" y="40" width="16" height="4" fill="#5a3a22"/><text x="362" y="68" text-anchor="middle" font-size="15" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">麺</text>';},
+  props:function(){return '<g class="pp pa hb"><rect x="212" y="130" width="28" height="18" rx="2" fill="#f4ead2" stroke="#c9a46b"/><path d="M217 136H235M217 141H231" stroke="#8a6a3a" stroke-width="1.4"/></g>'+
+   '<g class="pp pb"><path d="M210 134H250Q248 150 230 150Q212 150 210 134Z" fill="#c9503f" stroke="#7a2a1f" stroke-width="1.4"/><ellipse cx="230" cy="134" rx="20" ry="4.5" fill="#f2c14e"/><circle cx="222" cy="133" r="3.6" fill="#fff" stroke="#e9806e"/><path d="M232 132Q238 134 244 132" stroke="#8a6a3a" fill="none"/><rect x="258" y="130" width="11" height="18" rx="2" fill="#bfe3f5" opacity=".85" stroke="#8aa7b5"/></g>'+
+   '<g class="sm" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M220 126Q216 118 221 112M232 126Q228 118 233 112M244 126Q240 118 245 112"/></g>'+
+   '<g class="pp pc"><rect x="276" y="136" width="24" height="12" fill="#fff" stroke="#bdbdbd"/><path d="M280 140H296M280 144H292" stroke="#999"/></g>';}},
+ yakkyoku:{aria:'Mochi membeli obat di apotek dan dilayani seorang apoteker',bn:'薬局',bc:'#2f8f6a',hat:'none',c1:'#eef0ee',c2:'#cfd5d1',ec:'#2f8f6a',name:'Apoteker 薬剤師 (yakuzaishi)',
+  bg:function(){return shelfUnit(14,36,140,4,5)+shelfUnit(214,36,110,4,9)+'<path d="M368 46h12v14h14v12h-14v14h-12V72h-14V60h14z" fill="#3aa86a"/>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="141" width="40" height="6" rx="3" fill="#fff" stroke="#8a949a"/><rect x="244" y="142.5" width="8" height="3" rx="1.5" fill="#e9806e"/></g>'+
+   '<g class="pp pb"><rect x="218" y="124" width="28" height="24" rx="2" fill="#fff" stroke="#3aa86a" stroke-width="1.6"/><path d="M232 129v14M225 136h14" stroke="#3aa86a" stroke-width="3.2"/></g>'+
+   '<g class="pp pc"><circle cx="262" cy="144" r="4.2" fill="#d9b44a" stroke="#a6954f"/><circle cx="272" cy="145" r="4.2" fill="#c9c9c9" stroke="#9a9a9a"/><circle cx="282" cy="144" r="3.4" fill="#d9b44a" stroke="#a6954f"/></g>';}},
+ yuubin:{aria:'Mochi mengirim paket ke Indonesia di kantor pos dan dilayani seorang petugas',bn:'〒 郵便局',bc:'#d9453a',hat:'cap',c1:'#d9453a',c2:'#a8322a',ec:'#d9453a',name:'Petugas pos 局員 (kyokuin)',
+  bg:function(){return '<rect x="22" y="38" width="112" height="70" rx="5" class="sign"/><text class="stxt" x="78" y="56" text-anchor="middle">EMS · 航空便</text><path d="M44 86L96 74L116 64L100 82L108 94L96 88L72 98L74 86Z" fill="#6aa0d9" stroke="#2b2b3a" stroke-width="1.2" stroke-linejoin="round"/>'+
+   '<rect x="168" y="96" width="40" height="52" fill="#c9a26b" stroke="#8a6a3a"/><rect x="178" y="70" width="48" height="40" fill="#d8b47a" stroke="#8a6a3a"/><circle cx="352" cy="62" r="18" fill="#d9453a"/><text x="352" y="69" text-anchor="middle" font-size="22" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">〒</text>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="124" width="40" height="24" rx="2" fill="#d8b47a" stroke="#8a6a3a" stroke-width="1.5"/><path d="M214 134H254M234 124V148" stroke="#b58b4a" stroke-width="3"/><rect x="238" y="136" width="12" height="8" fill="#fff"/></g>'+
+   '<g class="pp pd"><rect x="214" y="124" width="14" height="5" fill="#d9453a"/><rect x="214" y="129" width="14" height="3" fill="#2b4a7a"/></g>'+
+   '<g class="pp pb"><rect x="262" y="134" width="34" height="14" rx="2" fill="#9aa7ae"/><rect x="268" y="137" width="16" height="7" fill="#bfe3f5"/><text x="276" y="143" text-anchor="middle" font-size="6" fill="#2b2b3a" font-family="sans-serif">2.0kg</text></g>'+
+   '<g class="pp pc"><rect x="300" y="139" width="26" height="9" fill="#d8c98a" stroke="#a6954f"/><text x="313" y="146" text-anchor="middle" font-size="6" fill="#6b5d1c" font-family="sans-serif">4500</text></g>';}},
+ kouban:{aria:'Mochi bertanya jalan ke stasiun di pos polisi dan dijawab seorang polisi',bn:'交番',bc:'#27375c',hat:'police',c1:'#27375c',c2:'#1b2742',ec:'#27375c',name:'Polisi 警察官 (keisatsukan)',
+  bg:function(){return '<rect x="22" y="38" width="118" height="74" rx="5" class="sign"/><path d="M34 60H128M34 86H128M62 44V106M100 44V106" stroke="#9fb0bb" stroke-width="3"/><path d="M40 98H62V60H100" fill="none" stroke="#e9806e" stroke-width="2" stroke-dasharray="3 2"/><circle cx="100" cy="60" r="4.5" fill="#d9453a"/><text class="stxt" x="116" y="53" text-anchor="middle" font-size="8">地図</text>'+
+   '<circle cx="204" cy="56" r="15" fill="#d9453a"/><circle cx="204" cy="56" r="15" fill="none" stroke="#fff" stroke-width="2" opacity=".6"/><rect x="176" y="78" width="56" height="20" rx="3" class="sign"/><text class="stxt" x="204" y="92" text-anchor="middle" font-size="12">交番</text>';},
+  props:function(){return '<g class="pp pa"><rect x="212" y="130" width="46" height="18" fill="#f6f4ee" stroke="#8a949a"/><path d="M216 140H254M234 132V146" stroke="#9fb0bb" stroke-width="2.2"/><circle cx="224" cy="140" r="2.4" fill="#2f8f8c"/></g>'+
+   '<g class="pp pb"><path d="M224 140H234V136H250V143" fill="none" stroke="#e9806e" stroke-width="2.4" stroke-dasharray="3 2"/><circle cx="250" cy="143" r="3.2" fill="#d9453a"/></g>';}},
+ fukuya:{aria:'Mochi membeli kemeja di toko pakaian dan dilayani seorang penjaga toko',bn:'ようふく',bc:'#c0587a',hat:'none',c1:'#c0587a',c2:'#963f5c',ec:'#c0587a',name:'Penjaga toko 店員 (ten’in)',
+  bg:function(){var s='<path d="M20 58H156" stroke="#8a949a" stroke-width="3" stroke-linecap="round"/>',cols=['#e9806e','#6aa0d9','#f2c14e','#6fb98f','#b58bd6','#ffffff'],i;for(i=0;i<6;i++){var x=32+i*21;s+='<path d="M'+x+' 58L'+(x-8)+' 66V98H'+(x+8)+'V66Z" fill="'+cols[i]+'" stroke="#00000022"/>';}
+   return s+'<rect x="344" y="38" width="46" height="96" rx="4" fill="#bfe3f5" stroke="#8a949a" stroke-width="3" opacity=".9"/><path d="M352 60L382 40M352 90L382 60" stroke="#fff" stroke-width="4" opacity=".6"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="212" y="132" width="34" height="16" rx="3" fill="#e9806e"/><path d="M222 132L229 140L236 132" fill="#fff" stroke="#fff"/><rect x="246" y="128" width="14" height="10" rx="1" fill="#fff" stroke="#bdbdbd"/><text x="253" y="135" text-anchor="middle" font-size="5" font-family="sans-serif" fill="#333">2900</text></g>'+
+   '<g class="pp pb"><rect x="212" y="132" width="34" height="16" rx="3" fill="#6aa0d9"/><path d="M222 132L229 140L236 132" fill="#fff" stroke="#fff"/><rect x="246" y="128" width="14" height="10" rx="1" fill="#fff" stroke="#bdbdbd"/><text x="253" y="135" text-anchor="middle" font-size="5" font-family="sans-serif" fill="#333">1500</text></g>'+
+   '<g class="pp pc"><rect x="268" y="136" width="14" height="12" rx="2" fill="#6aa0d9"/><rect x="284" y="136" width="14" height="12" rx="2" fill="#fff" stroke="#bdbdbd"/></g>'+
+   '<g class="pp pd"><rect x="304" y="126" width="24" height="22" rx="2" fill="#c0587a"/><path d="M310 126Q316 116 322 126" fill="none" stroke="#963f5c" stroke-width="2"/></g>';}},
+ byouin:{aria:'Mochi mendaftar di resepsionis rumah sakit dan dilayani seorang petugas',bn:'病院',bc:'#2f8f8c',hat:'nurse',c1:'#e9f1f1',c2:'#c3d4d4',ec:'#2f8f8c',name:'Resepsionis 受付 (uketsuke)',
+  bg:function(){return '<rect x="22" y="38" width="112" height="70" rx="5" class="sign"/><path d="M78 50h8v10h10v8H86v10h-8V68H68v-8h10z" fill="#3aa86a"/><text class="stxt" x="78" y="100" text-anchor="middle" font-size="9">受付・会計</text>'+
+   '<rect class="reg" x="160" y="38" width="104" height="52" rx="5"/><text x="212" y="49" text-anchor="middle" font-size="7" fill="#9fb0bb" font-family="sans-serif">診察番号</text><text class="pp pd" x="212" y="78" text-anchor="middle" style="font:800 24px Shippori Mincho,serif;fill:#ffb347">12番</text>'+
+   '<circle cx="352" cy="62" r="17" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 62V50M352 62L360 66" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="62" r="1.8" fill="#2b2b3a"/>';},
+  props:function(){return '<g class="pp pa"><rect x="212" y="134" width="26" height="14" rx="2" fill="#fff" stroke="#8a949a"/><rect x="212" y="134" width="26" height="4" fill="#3aa86a"/><rect x="216" y="141" width="10" height="3" fill="#bdbdbd"/></g>'+
+   '<g class="pp pb"><rect x="246" y="130" width="30" height="18" fill="#fff" stroke="#bdbdbd"/><path d="M250 136H272M250 141H268" stroke="#8a949a"/><path d="M270 126L280 142" stroke="#2b4a7a" stroke-width="2.4" stroke-linecap="round"/></g>'+
+   '<g class="pp pc"><rect x="288" y="132" width="20" height="16" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><text x="298" y="144" text-anchor="middle" font-size="9" font-weight="700" fill="#6b5d1c" font-family="sans-serif">12</text></g>';}},
+ kafe:{aria:'Mochi memesan kopi dan kue di kafe dan dilayani seorang barista',bn:'カフェ',bc:'#6b4a2f',hat:'none',c1:'#7a5234',c2:'#5a3a22',ec:'#6b4a2f',name:'Barista 店員 (ten’in)',
+  bg:function(){var w=function(x,y,t,sz){return '<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+(sz||9)+'" fill="#fff" font-weight="700" font-family="Shippori Mincho,serif">'+t+'</text>';};
+   return '<rect x="22" y="36" width="122" height="78" rx="5" fill="#2f3b35" stroke="#8a6a3a" stroke-width="3"/>'+w(83,52,'メニュー',10)+w(83,68,'コーヒー 400',9)+w(83,82,'こうちゃ 350',9)+w(83,96,'ケーキ 300',9)+
+   '<circle cx="352" cy="62" r="18" fill="#f6e7c8" stroke="#8a6a3a" stroke-width="2"/><path d="M342 56H362V66Q362 74 352 74Q342 74 342 66Z" fill="#7a5234"/><path d="M362 58Q368 58 368 64Q368 70 362 70" fill="none" stroke="#7a5234" stroke-width="2"/>'+
+   '<path d="M170 40Q176 52 170 64M182 40Q188 52 182 64" fill="none" stroke="#c9a46b" stroke-width="2" stroke-linecap="round"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="212" y="128" width="30" height="20" rx="2" fill="#f4ead2" stroke="#c9a46b"/><path d="M217 134H237M217 139H233" stroke="#8a6a3a" stroke-width="1.4"/></g>'+
+   '<g class="pp pb"><path d="M214 132H240V140Q240 148 227 148Q214 148 214 140Z" fill="#fff" stroke="#8a949a" stroke-width="1.4"/><ellipse cx="227" cy="132" rx="13" ry="3" fill="#6b4a2f"/><path d="M240 134Q247 134 247 140Q247 145 240 145" fill="none" stroke="#8a949a" stroke-width="2"/></g>'+
+   '<g class="sm" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M220 126Q216 118 221 112M232 126Q228 118 233 112"/></g>'+
+   '<g class="pp pc"><ellipse cx="270" cy="146" rx="17" ry="4" fill="#fff" stroke="#bdbdbd"/><path d="M256 144L284 144L270 130Z" fill="#f6dfa4" stroke="#c9a46b" stroke-width="1.2"/><circle cx="270" cy="129" r="3" fill="#d9453a"/></g>'+
+   '<g class="pp pd"><rect x="296" y="132" width="22" height="16" fill="#fff" stroke="#bdbdbd"/><path d="M300 138H314M300 143H310" stroke="#999"/></g>';}},
+ ginkou:{aria:'Mochi membuka rekening di bank dan dilayani seorang petugas bank',bn:'銀行',bc:'#1f4e79',hat:'none',c1:'#2b4a7a',c2:'#1f3558',ec:'#1f4e79',name:'Petugas bank 銀行員 (ginkouin)',
+  bg:function(){return '<rect x="26" y="40" width="60" height="74" rx="5" fill="#9fb0bb" stroke="#6f8089" stroke-width="2"/><rect x="34" y="48" width="44" height="26" rx="2" class="glass"/><rect x="40" y="82" width="32" height="6" rx="2" fill="#6f8089"/><rect x="40" y="94" width="32" height="12" rx="2" fill="#6f8089"/><text x="56" y="64" text-anchor="middle" font-size="9" fill="#9fe0c0" font-family="sans-serif">ATM</text>'+
+   '<rect class="reg" x="130" y="38" width="104" height="52" rx="5"/><text x="182" y="49" text-anchor="middle" font-size="7" fill="#9fb0bb" font-family="sans-serif">窓口案内</text><text x="182" y="76" text-anchor="middle" style="font:800 22px Shippori Mincho,serif;fill:#ffb347">3番</text>'+
+   '<circle cx="352" cy="62" r="19" fill="#f2c14e" stroke="#b8932c" stroke-width="2"/><text x="352" y="70" text-anchor="middle" font-size="22" fill="#7a5f10" font-weight="800" font-family="Shippori Mincho,serif">円</text>';},
+  props:function(){return '<g class="pp pa hb"><rect x="212" y="128" width="34" height="20" rx="3" fill="#dff3e6" stroke="#6fb98f" stroke-width="1.4"/><rect x="216" y="132" width="10" height="12" rx="1" fill="#bfe3f5"/><path d="M230 135H242M230 140H240" stroke="#6f8089" stroke-width="1.4"/></g>'+
+   '<g class="pp pb"><rect x="212" y="130" width="30" height="18" fill="#fff" stroke="#bdbdbd"/><path d="M216 136H238M216 141H234" stroke="#8a949a"/><path d="M240 124L250 140" stroke="#2b4a7a" stroke-width="2.4" stroke-linecap="round"/></g>'+
+   '<g class="pp pc"><rect x="258" y="130" width="26" height="18" rx="2" fill="#2b6fb3" stroke="#1f4e79"/><rect x="262" y="134" width="12" height="3" fill="#fff" opacity=".8"/></g>'+
+   '<g class="pp pd"><rect x="290" y="134" width="24" height="14" rx="2" fill="#f2c14e" stroke="#b8932c"/><rect x="293" y="138" width="6" height="5" fill="#fff6d0"/></g>';}},
+ keitai:{aria:'Mochi membeli kartu SIM di toko ponsel dan dilayani seorang petugas',bn:'ケータイ',bc:'#6a4fc4',hat:'none',c1:'#f1f0fa',c2:'#cfcbe6',ec:'#6a4fc4',name:'Petugas toko 店員 (ten’in)',
+  bg:function(){var s='<rect x="20" y="38" width="124" height="74" rx="5" class="sign"/>',i;for(i=0;i<5;i++){s+='<rect x="'+(30+i*22)+'" y="52" width="14" height="26" rx="3" fill="#2b2b3a"/><rect x="'+(32+i*22)+'" y="55" width="10" height="19" rx="1.5" fill="'+['#6aa0d9','#e9806e','#6fb98f','#f2c14e','#b58bd6'][i]+'"/>';}
+   return s+'<text class="stxt" x="82" y="100" text-anchor="middle" font-size="9">SIM・スマホ</text><rect x="160" y="40" width="100" height="46" rx="5" fill="#6a4fc4"/><text x="210" y="60" text-anchor="middle" font-size="10" fill="#fff" font-weight="700" font-family="Shippori Mincho,serif">かんたん</text><text x="210" y="76" text-anchor="middle" font-size="10" fill="#fff" font-weight="700" font-family="Shippori Mincho,serif">ケータイ</text><rect x="338" y="40" width="30" height="58" rx="6" fill="#2b2b3a"/><rect x="342" y="46" width="22" height="42" rx="2" fill="#bfe3f5"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="214" y="124" width="18" height="24" rx="3" fill="#2b2b3a"/><rect x="216" y="128" width="14" height="16" rx="1" fill="#6aa0d9"/></g>'+
+   '<g class="pp pb"><rect x="214" y="128" width="40" height="20" fill="#fff" stroke="#bdbdbd"/><text x="234" y="140" text-anchor="middle" font-size="8" font-weight="700" fill="#4a3a8a" font-family="Shippori Mincho,serif">3000円</text><path d="M218 144H250" stroke="#8a949a"/></g>'+
+   '<g class="pp pc"><path d="M262 130H280L284 134V148H262Z" fill="#f2c14e" stroke="#b8932c" stroke-width="1.4"/><rect x="268" y="136" width="10" height="8" rx="1" fill="#fff6d0" stroke="#b8932c"/></g>'+
+   '<g class="pp pd"><rect x="292" y="128" width="30" height="20" fill="#fff" stroke="#bdbdbd"/><path d="M296 134H318M296 139H312" stroke="#8a949a"/><path d="M298 145Q304 140 308 145T316 144" fill="none" stroke="#2b4a7a" stroke-width="1.6"/></g>';}},
+ super:{aria:'Mochi berbelanja di supermarket dan membayar di kasir dengan tas belanja sendiri',bn:'スーパー',bc:'#2f8f4a',hat:'cap',c1:'#2f8f4a',c2:'#236e39',ec:'#2f8f4a',name:'Kasir レジ係 (rejigakari)',
+  bg:function(){return shelfUnit(18,40,120,3,13)+'<rect x="150" y="38" width="108" height="40" rx="5" class="sign"/><text class="stxt" x="204" y="55" text-anchor="middle" font-size="9">3番</text><text class="stxt" x="204" y="70" text-anchor="middle" font-size="7.5">たまご・ぎゅうにゅう</text>'+
+   '<path d="M346 44L384 44L384 70L346 70L340 57Z" fill="#d9453a"/><text x="364" y="62" text-anchor="middle" font-size="12" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">特売</text>';},
+  props:function(){return '<g class="pp pa hb"><rect x="212" y="134" width="30" height="14" rx="3" fill="#f6e7c8" stroke="#c9a46b"/><ellipse cx="222" cy="141" rx="4" ry="5" fill="#fff"/><ellipse cx="232" cy="141" rx="4" ry="5" fill="#fff"/></g>'+
+   '<g class="pp pb"><path d="M210 132H250L246 148H214Z" fill="#c9a26b" stroke="#8a6a3a" stroke-width="1.4"/><rect x="218" y="120" width="10" height="14" rx="2" fill="#fff" stroke="#8a949a"/><rect x="232" y="124" width="14" height="10" rx="3" fill="#e0b46a"/></g>'+
+   '<g class="pp pc"><path d="M262 148L266 130H286L290 148Z" fill="#6fb98f" stroke="#3f7f5f" stroke-width="1.4"/><path d="M270 130Q276 122 282 130" fill="none" stroke="#3f7f5f" stroke-width="2"/></g>'+
+   '<g class="pp pd"><rect x="298" y="128" width="20" height="20" fill="#fff" stroke="#bdbdbd"/><path d="M302 134H314M302 139H314M302 144H310" stroke="#999"/></g>';}},
+ kuyakusho:{aria:'Mochi mengurus surat keterangan domisili di kantor kelurahan dan dilayani seorang petugas',bn:'区役所',bc:'#4a5d7a',hat:'none',c1:'#4a5d7a',c2:'#37465c',ec:'#4a5d7a',name:'Petugas 職員 (shokuin)',
+  bg:function(){return '<rect x="20" y="38" width="110" height="74" rx="5" class="sign"/><text class="stxt" x="75" y="58" text-anchor="middle" font-size="10">住民票・証明書</text><path d="M34 74H116M34 88H116M34 100H96" stroke="#9fb0bb" stroke-width="3"/>'+
+   '<rect class="reg" x="160" y="38" width="104" height="52" rx="5"/><text x="212" y="49" text-anchor="middle" font-size="7" fill="#9fb0bb" font-family="sans-serif">呼出</text><text x="212" y="78" text-anchor="middle" style="font:800 24px Shippori Mincho,serif;fill:#ffb347">12番</text>'+
+   '<circle cx="352" cy="62" r="17" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 62V50M352 62L360 66" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="62" r="1.8" fill="#2b2b3a"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="212" y="130" width="24" height="18" rx="2" fill="#fff" stroke="#8a949a"/><text x="224" y="143" text-anchor="middle" font-size="10" font-weight="700" fill="#4a5d7a" font-family="sans-serif">12</text></g>'+
+   '<g class="pp pb he"><rect x="244" y="130" width="32" height="18" rx="2" fill="#dff3e6" stroke="#6fb98f" stroke-width="1.4"/><rect x="248" y="134" width="9" height="11" fill="#bfe3f5"/><path d="M260 137H272M260 142H270" stroke="#6f8089" stroke-width="1.3"/></g>'+
+   '<g class="pp pc he"><rect x="282" y="128" width="26" height="20" fill="#fff" stroke="#bdbdbd"/><path d="M286 134H304M286 139H300" stroke="#8a949a"/><path d="M300 124L308 138" stroke="#2b4a7a" stroke-width="2.2" stroke-linecap="round"/></g>'+
+   '<g class="pp pd he"><circle cx="314" cy="145" r="4" fill="#c9c9c9" stroke="#9a9a9a"/><circle cx="322" cy="146" r="4" fill="#c9c9c9" stroke="#9a9a9a"/><circle cx="318" cy="140" r="4" fill="#d9b44a" stroke="#a6954f"/></g>'+
+   '<g class="pp pe"><rect x="212" y="122" width="38" height="26" rx="2" fill="#fff" stroke="#8a949a" stroke-width="1.4"/><text x="231" y="133" text-anchor="middle" font-size="7" font-weight="700" fill="#4a5d7a" font-family="Shippori Mincho,serif">住民票</text><path d="M217 139H245M217 143H240" stroke="#9fb0bb"/></g>';}},
+ kouen:{aria:'Mochi bertemu temannya Yui di taman dan mengobrol santai',bn:'こうえん',bc:'#3f8f4f',hat:'girl',c1:'#e9806e',c2:'#c4604f',ec:'#e9806e',name:'Teman ゆい (Yui)',sky:'#cfe8f7',gr:'#b9d9a0',
+  bg:function(){return '<ellipse cx="60" cy="52" rx="34" ry="24" fill="#fff" opacity=".9"/><ellipse cx="90" cy="60" rx="26" ry="16" fill="#fff" opacity=".9"/><circle cx="352" cy="62" r="17" fill="#ffd36e"/>'+
+   '<rect x="168" y="88" width="10" height="64" fill="#8a6a3a"/><circle cx="173" cy="74" r="34" fill="#5fa86a"/><circle cx="150" cy="92" r="20" fill="#74bb7e"/><circle cx="198" cy="92" r="20" fill="#74bb7e"/>'+
+   '<path d="M20 150Q60 130 110 150" fill="#8cc67f"/>';},
+  fg:function(){return '<rect x="150" y="156" width="250" height="84" rx="16" fill="#5fa86a"/><rect x="144" y="148" width="262" height="14" rx="7" fill="#7cc486"/>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="128" width="14" height="20" rx="3" fill="#d9453a" stroke="#8a2a22"/><rect x="214" y="134" width="14" height="6" fill="#fff"/><ellipse cx="221" cy="128" rx="7" ry="2" fill="#c9c9c9"/></g>'+
+   '<g class="pp pc"><rect x="262" y="124" width="18" height="24" rx="3" fill="#2b2b3a"/><rect x="264" y="128" width="14" height="16" rx="1" fill="#6fd29a"/><text x="271" y="139" text-anchor="middle" font-size="6" font-weight="700" fill="#fff" font-family="sans-serif">LINE</text></g>';}},
+ ekimae:{aria:'Mochi bertemu temannya Kenta di depan stasiun untuk pergi nonton film',bn:'駅前',bc:'#2b4a7a',hat:'none',c1:'#6b7a8f',c2:'#4b5a6f',ec:'#6b7a8f',name:'Teman けんた (Kenta)',sky:'#d9e8f3',gr:'#c9c9c4',
+  bg:function(){return '<rect x="20" y="40" width="150" height="110" fill="#e8e4da" stroke="#b9b3a3" stroke-width="2"/><rect x="34" y="54" width="122" height="30" rx="3" fill="#2b4a7a"/><text x="95" y="75" text-anchor="middle" font-size="15" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">駅</text><path d="M34 96H156M34 116H156" stroke="#bdb7a8" stroke-width="3"/>'+
+   '<circle cx="352" cy="64" r="18" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 64V51M352 64L360 68" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="64" r="1.8" fill="#2b2b3a"/>'+
+   '<rect x="206" y="50" width="70" height="40" rx="4" fill="#d9453a"/><text x="241" y="68" text-anchor="middle" font-size="10" fill="#fff" font-weight="700" font-family="Shippori Mincho,serif">らーめん</text><text x="241" y="82" text-anchor="middle" font-size="8" fill="#fff" font-family="Shippori Mincho,serif">500m</text>';},
+  fg:function(){return '<rect x="150" y="158" width="250" height="82" rx="4" fill="#9aa3a8"/><rect x="144" y="150" width="262" height="10" rx="3" fill="#b7bfc4"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="214" y="124" width="18" height="24" rx="3" fill="#2b2b3a"/><rect x="216" y="128" width="14" height="16" rx="1" fill="#bfe3f5"/><text x="223" y="139" text-anchor="middle" font-size="5.5" font-weight="700" fill="#2b2b3a" font-family="sans-serif">13:00</text></g>'+
+   '<g class="pp pb"><rect x="214" y="132" width="26" height="14" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><rect x="244" y="130" width="26" height="14" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><path d="M218 138H236M248 136H266" stroke="#8a6a3a" stroke-width="1.4"/></g>'+
+   '<g class="pp pc"><path d="M284 134H312Q310 148 298 148Q286 148 284 134Z" fill="#c9503f" stroke="#7a2a1f" stroke-width="1.4"/><ellipse cx="298" cy="134" rx="14" ry="3.5" fill="#f2c14e"/></g>';}},
+ izakaya:{aria:'Mochi makan malam di izakaya bersama temannya Aya',bn:'居酒屋',bc:'#a63a2f',hat:'girl',c1:'#8bb8d9',c2:'#6f9bbd',ec:'#8bb8d9',name:'Teman あや (Aya)',sky:'#6a4030',gr:'#3a2a22',
+  bg:function(){var s='',i,t=['からあげ','やきとり','えだまめ','ビール'];
+   for(i=0;i<4;i++)s+='<rect x="'+(24+i*34)+'" y="40" width="28" height="64" rx="2" fill="#f4ead2"/><text x="'+(38+i*34)+'" y="56" text-anchor="middle" style="font:700 8px Shippori Mincho,serif;fill:#6a3a22" transform="rotate(0)">'+t[i].charAt(0)+'</text><text x="'+(38+i*34)+'" y="68" text-anchor="middle" style="font:700 8px Shippori Mincho,serif;fill:#6a3a22">'+t[i].charAt(1)+'</text><text x="'+(38+i*34)+'" y="80" text-anchor="middle" style="font:700 8px Shippori Mincho,serif;fill:#6a3a22">'+t[i].charAt(2)+'</text>'+(t[i].length>3?'<text x="'+(38+i*34)+'" y="92" text-anchor="middle" style="font:700 8px Shippori Mincho,serif;fill:#6a3a22">'+t[i].charAt(3)+'</text>':'');
+   return s+'<circle cx="190" cy="62" r="18" fill="#d9453a"/><rect x="180" y="40" width="20" height="4" fill="#5a3a22"/><text x="190" y="68" text-anchor="middle" font-size="16" fill="#fff" font-weight="800" font-family="Shippori Mincho,serif">酒</text><circle cx="352" cy="62" r="17" fill="#d9453a"/><rect x="344" y="42" width="16" height="4" fill="#5a3a22"/>';},
+  fg:function(){return '<rect x="150" y="158" width="250" height="82" fill="#a9774a"/><rect x="144" y="150" width="262" height="10" rx="3" fill="#c99565"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="214" y="128" width="26" height="20" rx="2" fill="#f4ead2" stroke="#c9a46b"/><path d="M219 134H235M219 139H231" stroke="#8a6a3a" stroke-width="1.4"/></g>'+
+   '<g class="pp pb"><path d="M212 128H228L226 148H214Z" fill="#f2c14e" stroke="#b8932c"/><rect x="212" y="125" width="16" height="5" rx="2" fill="#fff"/><path d="M228 132Q234 132 234 138Q234 143 228 143" fill="none" stroke="#b8932c" stroke-width="2"/><path d="M242 132H256L254 148H244Z" fill="#b5774a" opacity=".9" stroke="#7a4a22"/></g>'+
+   '<g class="pp pc"><ellipse cx="282" cy="146" rx="16" ry="4" fill="#fff" stroke="#bdbdbd"/><circle cx="274" cy="140" r="5" fill="#d9a04a"/><circle cx="283" cy="138" r="5" fill="#d9a04a"/><circle cx="291" cy="141" r="5" fill="#d9a04a"/><ellipse cx="312" cy="146" rx="12" ry="3.5" fill="#fff" stroke="#bdbdbd"/><ellipse cx="308" cy="142" rx="3" ry="2" fill="#6fb98f"/><ellipse cx="315" cy="142" rx="3" ry="2" fill="#6fb98f"/></g>'+
+   '<g class="pp pd"><path d="M208 152L240 120M214 154L246 124" stroke="#c9a26b" stroke-width="2"/><circle cx="222" cy="138" r="3.4" fill="#b5522a"/><circle cx="229" cy="131" r="3.4" fill="#b5522a"/></g>';}},
+ eigakan:{aria:'Mochi berkencan dengan pacarnya Mio di bioskop',bn:'映画館',bc:'#7a2f4a',hat:'girl',c1:'#f2a6c0',c2:'#d9809f',ec:'#d9809f',name:'Pacar みお (Mio)',sky:'#2a2438',gr:'#5a2f3f',
+  bg:function(){var s='',cols=['#e9806e','#6aa0d9','#f2c14e'],i;for(i=0;i<3;i++)s+='<rect x="'+(24+i*46)+'" y="38" width="38" height="58" rx="2" fill="'+cols[i]+'" stroke="#fff" stroke-width="2"/><circle cx="'+(43+i*46)+'" cy="62" r="9" fill="#fff" opacity=".6"/><rect x="'+(30+i*46)+'" y="80" width="26" height="4" fill="#fff" opacity=".7"/>';
+   return s+'<rect x="170" y="40" width="96" height="44" rx="5" fill="#15121f" stroke="#ffb347" stroke-width="2"/><text x="218" y="58" text-anchor="middle" font-size="8" fill="#ffb347" font-family="sans-serif">NOW SHOWING</text><text x="218" y="76" text-anchor="middle" style="font:800 14px Shippori Mincho,serif;fill:#ffb347">チケット</text><circle cx="352" cy="62" r="16" fill="#ffd36e"/><path d="M345 56L360 62L345 68Z" fill="#7a2f4a"/>';},
+  fg:function(){var s='<rect x="150" y="158" width="250" height="82" fill="#c9433a"/>',i;for(i=0;i<8;i++)s+='<rect x="'+(158+i*30)+'" y="158" width="14" height="82" fill="#fff" opacity=".85"/>';return s+'<rect x="144" y="150" width="262" height="10" rx="3" fill="#f3d9a0"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="214" y="130" width="28" height="16" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><rect x="246" y="130" width="28" height="16" rx="2" fill="#f6e7c8" stroke="#c9a46b"/><path d="M219 136H237M251 136H269" stroke="#8a6a3a" stroke-width="1.4"/></g>'+
+   '<g class="pp pb"><path d="M286 128H312L309 148H289Z" fill="#fff" stroke="#c9433a" stroke-width="1.4"/><path d="M290 128L292 148M298 128V148M306 128L304 148" stroke="#c9433a" stroke-width="2"/><circle cx="292" cy="126" r="5" fill="#fff3cf"/><circle cx="300" cy="124" r="5.4" fill="#fff3cf"/><circle cx="308" cy="126" r="5" fill="#fff3cf"/></g>'+
+   '<g class="pp pc"><path d="M216 132H230L228 148H218Z" fill="#6aa0d9" stroke="#2b4a7a"/><path d="M226 132L232 120" stroke="#d9453a" stroke-width="2"/><path d="M240 132H254L252 148H242Z" fill="#e9806e" stroke="#a8322a"/><path d="M250 132L256 120" stroke="#d9453a" stroke-width="2"/></g>';}},
+ kawara:{aria:'Mochi curhat kepada sahabatnya Takumi di tepi sungai saat senja',bn:'かわぞい',bc:'#c4540f',hat:'none',c1:'#3f6a8a',c2:'#2c4f69',ec:'#3f6a8a',name:'Sahabat たくみ (Takumi)',sky:'#f4b983',gr:'#6f9a64',
+  bg:function(){return '<circle cx="300" cy="96" r="30" fill="#ffd9a0" opacity=".9"/><circle cx="300" cy="96" r="20" fill="#ffe9c0"/><rect x="0" y="112" width="400" height="44" fill="#6aa0c9" opacity=".85"/><path d="M0 118H400M0 130H400M0 142H400" stroke="#fff" stroke-opacity=".35"/><path d="M20 112V84H110V112" fill="none" stroke="#5a3a52" stroke-width="5"/><path d="M20 84H110" stroke="#5a3a52" stroke-width="7"/><path d="M60 50Q66 44 72 50M78 44Q84 38 90 44" fill="none" stroke="#5a3a52" stroke-width="2"/>';},
+  fg:function(){return '<rect x="150" y="160" width="250" height="80" rx="10" fill="#6f9a64"/><rect x="144" y="150" width="262" height="6" rx="3" fill="#8a949a"/><rect x="170" y="150" width="5" height="22" fill="#8a949a"/><rect x="250" y="150" width="5" height="22" fill="#8a949a"/><rect x="340" y="150" width="5" height="22" fill="#8a949a"/>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="128" width="14" height="20" rx="3" fill="#6b4a2f" stroke="#3a2a22"/><rect x="214" y="134" width="14" height="6" fill="#f6e7c8"/><ellipse cx="221" cy="128" rx="7" ry="2" fill="#c9c9c9"/></g>'+
+   '<g class="pp pb"><path d="M254 150L296 100" stroke="#5a3a22" stroke-width="3" stroke-linecap="round"/><path d="M296 100Q310 104 308 124" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="308" cy="126" r="2.4" fill="#d9453a"/></g>';}},
+ salon:{aria:'Mochi memotong rambut di salon dan dilayani seorang penata rambut',bn:'びよういん',bc:'#b5527a',hat:'girl',c1:'#3a3a46',c2:'#2a2a34',ec:'#b5527a',name:'Penata rambut 美容師 (biyoushi)',
+  bg:function(){return '<rect x="22" y="36" width="96" height="84" rx="14" fill="#bfe3f5" stroke="#b5527a" stroke-width="4"/><path d="M40 50L60 40M36 74L84 44" stroke="#fff" stroke-width="5" opacity=".6"/>'+
+   '<rect x="150" y="40" width="10" height="26" rx="3" fill="#e9806e"/><rect x="164" y="46" width="10" height="20" rx="3" fill="#6aa0d9"/><rect x="178" y="42" width="10" height="24" rx="3" fill="#6fb98f"/><rect x="146" y="66" width="48" height="4" rx="2" fill="#a88a56"/>'+
+   '<circle cx="352" cy="62" r="18" fill="#fff" stroke="#b5527a" stroke-width="2"/><path d="M342 52L362 72M362 52L342 72" stroke="#b5527a" stroke-width="3" stroke-linecap="round"/><circle cx="342" cy="52" r="3.5" fill="none" stroke="#b5527a" stroke-width="2"/><circle cx="342" cy="72" r="3.5" fill="none" stroke="#b5527a" stroke-width="2"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="212" y="126" width="30" height="22" rx="2" fill="#fff" stroke="#b5527a" stroke-width="1.4"/><text x="227" y="136" text-anchor="middle" font-size="6" font-weight="700" fill="#b5527a" font-family="Shippori Mincho,serif">カット</text><path d="M217 141H237" stroke="#bbb"/></g>'+
+   '<g class="pp pb"><path d="M214 148L236 124M222 150L240 130" stroke="#8a949a" stroke-width="2.4" stroke-linecap="round"/><circle cx="216" cy="146" r="3.4" fill="none" stroke="#b5527a" stroke-width="2"/><rect x="250" y="136" width="30" height="8" rx="2" fill="#e9806e"/><path d="M254 144V148M260 144V148M266 144V148M272 144V148" stroke="#e9806e" stroke-width="1.6"/></g>'+
+   '<g class="pp pc"><circle cx="300" cy="136" r="11" fill="#bfe3f5" stroke="#b5527a" stroke-width="2.4"/><path d="M300 147V152" stroke="#b5527a" stroke-width="3"/></g>'+
+   '<g class="pp pd"><rect x="312" y="130" width="18" height="18" fill="#fff" stroke="#bdbdbd"/><path d="M316 136H326M316 141H324" stroke="#999"/></g>';}},
+ kuukou:{aria:'Mochi melakukan check-in di bandara dan dilayani seorang petugas',bn:'空港',bc:'#2b6fb3',hat:'girl',c1:'#2b6fb3',c2:'#1f4e79',ec:'#2b6fb3',name:'Petugas bandara 係員 (kakariin)',
+  bg:function(){return '<rect class="reg" x="22" y="38" width="130" height="62" rx="5"/><text x="87" y="49" text-anchor="middle" font-size="7" fill="#9fb0bb" font-family="sans-serif">出発 DEPARTURES</text><text x="87" y="66" text-anchor="middle" style="font:700 10px Shippori Mincho,serif;fill:#ffb347">ジャカルタ 15:30</text><text x="87" y="82" text-anchor="middle" style="font:700 10px Shippori Mincho,serif;fill:#9fe0c0">12番ゲート</text>'+
+   '<path d="M214 78L262 62L282 46L274 68L284 80L270 76L246 88L248 74Z" fill="#6aa0d9" stroke="#2b2b3a" stroke-width="1.2" stroke-linejoin="round"/><circle cx="352" cy="62" r="17" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 62V50M352 62L360 66" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="62" r="1.8" fill="#2b2b3a"/>';},
+  props:function(){return '<g class="pp pa hb"><rect x="214" y="126" width="24" height="22" rx="2" fill="#2f4a7a" stroke="#1f3558"/><circle cx="226" cy="134" r="5" fill="none" stroke="#e9c24a" stroke-width="1.4"/><path d="M219 143H233" stroke="#e9c24a"/></g>'+
+   '<g class="pp pb"><rect x="250" y="130" width="40" height="18" rx="2" fill="#9aa7ae"/><rect x="254" y="134" width="18" height="8" fill="#bfe3f5"/><text x="283" y="142" text-anchor="middle" font-size="6" fill="#2b2b3a" font-family="sans-serif">20kg</text></g>'+
+   '<g class="pp pc"><rect x="296" y="128" width="30" height="20" rx="2" fill="#fff" stroke="#bdbdbd"/><rect x="296" y="128" width="9" height="20" fill="#2b6fb3"/><path d="M309 136H322M309 141H320" stroke="#8a949a"/></g>';}},
+ kaisha:{aria:'Mochi melapor kepada senior di kantor',bn:'会社',bc:'#4a5d7a',hat:'none',c1:'#3f4a5a',c2:'#2c3542',ec:'#4a5d7a',name:'Senior 先輩 (senpai)',
+  bg:function(){return '<rect x="20" y="38" width="118" height="70" rx="3" fill="#fff" stroke="#8a949a" stroke-width="3"/><path d="M32 54H96M32 68H112M32 82H88M32 96H104" stroke="#9fb0bb" stroke-width="3"/><circle cx="118" cy="56" r="5" fill="#d9453a"/>'+
+   '<rect x="170" y="40" width="80" height="60" fill="#bfe3f5" stroke="#8a949a" stroke-width="3"/><path d="M170 54H250M170 68H250M170 82H250" stroke="#8a949a" stroke-width="2" opacity=".6"/><circle cx="352" cy="62" r="17" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 62V50M352 62L360 66" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="62" r="1.8" fill="#2b2b3a"/>';},
+  fg:function(){return '<rect x="150" y="158" width="250" height="82" fill="#b9bdc2"/><rect x="144" y="150" width="262" height="10" rx="3" fill="#d8dce0"/><rect x="330" y="118" width="46" height="30" rx="3" fill="#2b2b3a"/><rect x="334" y="122" width="38" height="22" fill="#9fd3ff"/><rect x="346" y="148" width="14" height="4" fill="#2b2b3a"/>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="128" width="26" height="20" fill="#fff" stroke="#bdbdbd"/><path d="M219 134H235M219 139H231" stroke="#8a949a"/><rect x="214" y="128" width="26" height="4" fill="#4a5d7a"/></g>'+
+   '<g class="pp pb"><circle cx="262" cy="138" r="9" fill="#3aa86a"/><path d="M257 138L261 142L268 133" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>'+
+   '<g class="pp pc"><rect x="278" y="126" width="22" height="22" fill="#f4ead2" stroke="#c9a46b"/><path d="M282 132H296M282 137H294M282 142H290" stroke="#8a6a3a"/></g>'+
+   '<g class="pp pd"><circle cx="312" cy="140" r="8" fill="#d9453a" stroke="#8a2a22"/><text x="312" y="144" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" font-family="Shippori Mincho,serif">印</text></g>';}},
+ heya:{aria:'Mochi merayakan ulang tahun temannya Rin di rumahnya',bn:'たんじょうび',bc:'#d9567f',hat:'girl',c1:'#f2b84a',c2:'#d99a2a',ec:'#d9567f',name:'Teman りん (Rin)',sky:'#fbe9ef',gr:'#e8c9b3',
+  bg:function(){var s='',cols=['#e9806e','#6aa0d9','#f2c14e','#6fb98f','#b58bd6'],i;for(i=0;i<5;i++)s+='<ellipse cx="'+(30+i*26)+'" cy="'+(70+(i%2)*10)+'" rx="12" ry="15" fill="'+cols[i]+'"/><path d="M'+(30+i*26)+' '+(85+(i%2)*10)+'Q'+(26+i*26)+' 112 '+(32+i*26)+' 128" fill="none" stroke="#8a949a"/>';
+   return s+'<path d="M170 40L186 52L202 40L218 52L234 40L250 52L266 40" fill="none" stroke="#d9567f" stroke-width="3"/><rect x="176" y="56" width="90" height="26" rx="4" fill="#fff" stroke="#d9567f" stroke-width="2"/><text x="221" y="73" text-anchor="middle" style="font:800 11px Shippori Mincho,serif;fill:#d9567f">おたんじょうび</text><circle cx="352" cy="62" r="17" fill="#ffd36e"/>';},
+  fg:function(){return '<ellipse cx="274" cy="200" rx="130" ry="46" fill="#f5b8cc"/><rect x="150" y="156" width="250" height="84" fill="#f5b8cc"/><rect x="144" y="148" width="262" height="12" rx="6" fill="#fff"/>';},
+  props:function(){return '<g class="pp pa"><rect x="214" y="130" width="26" height="18" rx="2" fill="#6aa0d9"/><rect x="224" y="130" width="6" height="18" fill="#f2c14e"/><path d="M227 130Q220 122 224 120M227 130Q234 122 230 120" fill="none" stroke="#f2c14e" stroke-width="2"/></g>'+
+   '<g class="pp pb"><rect x="254" y="132" width="38" height="16" rx="3" fill="#fff4e0" stroke="#e0b88a"/><rect x="254" y="132" width="38" height="6" rx="3" fill="#f5a8c0"/><circle cx="262" cy="130" r="3" fill="#d9453a"/><rect x="272" y="122" width="3" height="10" fill="#6aa0d9"/><rect x="282" y="122" width="3" height="10" fill="#f2c14e"/></g>'+
+   '<g class="pp pc"><ellipse cx="273.5" cy="119" rx="2.6" ry="4" fill="#ffb347"/><ellipse cx="283.5" cy="119" rx="2.6" ry="4" fill="#ffb347"/><ellipse cx="273.5" cy="119" rx="7" ry="8" fill="#ffd36e" opacity=".35"/><ellipse cx="283.5" cy="119" rx="7" ry="8" fill="#ffd36e" opacity=".35"/></g>'+
+   '<g class="pp pd"><rect x="304" y="128" width="22" height="20" fill="#fff" stroke="#bdbdbd"/><rect x="307" y="131" width="16" height="12" fill="#bfe3f5"/><circle cx="315" cy="136" r="3" fill="#e9806e"/></g>';}},
+ wasure:{aria:'Mochi mengurus payung yang tertinggal di kereta di loket barang hilang stasiun',bn:'忘れ物取扱所',bc:'#7a5a2f',hat:'cap',c1:'#2b4a7a',c2:'#1f3558',ec:'#2b4a7a',name:'Petugas 駅員 (ekiin)',
+  bg:function(){var s='<rect x="20" y="40" width="150" height="70" fill="#d8c39a" stroke="#a88a56" stroke-width="2"/><path d="M20 76H170" stroke="#a88a56" stroke-width="3"/>',cols=['#6aa0d9','#e9806e','#6fb98f','#f2c14e','#b58bd6'],i;
+   for(i=0;i<5;i++)s+='<path d="M'+(36+i*26)+' 72Q'+(36+i*26)+' 52 '+(48+i*26)+' 52Q'+(60+i*26)+' 52 '+(60+i*26)+' 72Z" fill="'+cols[i]+'" opacity=".9"/><path d="M'+(48+i*26)+' 72V86" stroke="#5a3a22" stroke-width="2"/>';
+   return s+'<rect x="190" y="46" width="70" height="52" rx="4" fill="#c9a26b" stroke="#8a6a3a" stroke-width="2"/><rect x="198" y="58" width="54" height="18" fill="#9aa7ae"/><circle cx="352" cy="62" r="17" class="sign" stroke="#8a949a" stroke-width="2"/><path d="M352 62V50M352 62L360 66" stroke="#2b2b3a" stroke-width="2" stroke-linecap="round"/><circle cx="352" cy="62" r="1.8" fill="#2b2b3a"/>';},
+  props:function(){return '<g class="pp pa"><path d="M212 134Q226 112 240 134Z" fill="#9aa7ae" stroke="#6f8089" stroke-width="1.4"/><path d="M226 134V150" stroke="#5a3a22" stroke-width="2.4"/><path d="M226 150Q226 154 231 152" fill="none" stroke="#5a3a22" stroke-width="2.4"/></g>'+
+   '<g class="pp pb hb"><rect x="254" y="130" width="30" height="18" fill="#fff" stroke="#bdbdbd"/><path d="M258 136H280M258 141H276" stroke="#8a949a"/></g>'+
+   '<g class="pp pc"><path d="M214 140Q234 106 254 140Z" fill="#2b9fe0" stroke="#1f4e79" stroke-width="1.6"/><path d="M234 140V156" stroke="#f2c14e" stroke-width="3.2"/></g>'+
+   '<g class="pp pd"><rect x="262" y="130" width="30" height="18" fill="#fff" stroke="#bdbdbd"/><path d="M266 136H288M266 141H284" stroke="#8a949a"/><path d="M274 126L282 142" stroke="#2b4a7a" stroke-width="2.2" stroke-linecap="round"/></g>';}}
+};
+function buildPlace(id,ov){
+  var P=PLACES[id];if(ov)P=Object.assign({},P,ov);
+  var h='<svg viewBox="0 0 400 240" id="svg" role="img" aria-label="'+P.aria+'">';
+  h+='<rect class="wall" width="400" height="172"'+(P.sky?' style="fill:'+P.sky+'"':'')+'/><rect class="floor" y="172" width="400" height="68"'+(P.gr?' style="fill:'+P.gr+'"':'')+'/>';
+  h+='<path d="M0 198H400M0 222H400M70 172L40 240M200 172V240M330 172L360 240" stroke="#000" stroke-opacity=".07" fill="none"/>';
+  h+=P.bg();
+  h+='<rect width="400" height="24" fill="'+P.bc+'"/><text class="btxt" x="200" y="17" text-anchor="middle">'+P.bn+'</text><rect x="40" y="28" width="320" height="3" rx="1.5" fill="#fff" opacity=".6"/>';
+  h+=clerkSvg(P.c1,P.c2,P.hat);
+  h+=P.fg?P.fg():'<rect class="cnt" x="150" y="156" width="250" height="84"/><rect class="top" x="144" y="148" width="262" height="10" rx="3"/>';
+  h+=P.props();
+  h+=mochiSvg(false);
+  h+='<text class="emo" id="emM" x="106" y="108" text-anchor="middle" fill="#c4540f"></text><text class="emo" id="emC" x="290" y="46" text-anchor="middle" fill="'+P.ec+'"></text>';
+  h+='</svg>';
+  return h;
+}
+
+/* ---------- Pengaturan data ---------- */
+var DRAMA_BASE='https://bshantoz.github.io/nihongo/game/drama/';
+
+var SCENES={station:{build:buildStation,cast:{m:{name:'Mochi',el:'mochi',em:'emM',dot:''},c:{name:'Petugas 駅員 (ekiin)',el:'clerk',em:'emC',dot:' c'}}},konbini:{build:buildKonbini,cast:{m:{name:'Mochi',el:'mochi',em:'emM',dot:''},c:{name:'Kasir 店員 (ten’in)',el:'clerk',em:'emC',dot:' c'}}}};
+
+/* ---------- Status ---------- */
+(function(){for(var id in PLACES)(function(id){var P=PLACES[id];SCENES[id]={build:function(ov){return buildPlace(id,ov);},cast:{m:{name:'Mochi',el:'mochi',em:'emM',dot:''},c:{name:P.name,el:'clerk',em:'emC',dot:' c'}}};})(id);})();
+var $=function(id){return document.getElementById(id);};
+var INDEX=[],EP=null,EPI=null,LINES=[],QUIZ=[],CAST={};
+var idx=-1,mode='play',auto=false,spT=0,qi=0,qs=0,qlock=false,seq=0;
+var CFG=window.__CFG||{};
+var FS=false,FSN=false,CAP=true,barT=0;
+var MULTI=false,SEG=[],mountSeg=-1,stTok=0,curG='';
+var RM=false;try{RM=window.matchMedia('(prefers-reduced-motion:reduce)').matches;}catch(e){}
+var MOVES=['hop','bow','nod','lean','tilt','wave','sway','step','jump','enter','walkout'];
+var O={ro:true,id:true,vo:true,fu:true,rate:.85},PROG={};
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+try{var _o=JSON.parse(lsGet('drama-opts')||'{}');for(var _k in _o)if(_k in O)O[_k]=_o[_k];PROG=JSON.parse(lsGet('drama-prog')||'{}')||{};}catch(e){}
+function saveO(){lsSet('drama-opts',JSON.stringify(O));}
+function saveP(){lsSet('drama-prog',JSON.stringify(PROG));}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+/* {kanji|bacaan} -> <ruby>; teks suara = bacaan kana */
+function rb(s){return esc(s).replace(/\{([^|}]+)\|([^}]+)\}/g,'<ruby>$1<rt>$2</rt></ruby>');}
+function plain(s){return String(s).replace(/\{([^|}]+)\|([^}]+)\}/g,'$2').replace(/〜/g,'');}
+function getJSON(name){
+  var inl=window.__DRAMA;if(inl&&inl[name])return Promise.resolve(inl[name]);
+  return fetch(DRAMA_BASE+name+'.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});
+}
+
+/* ---------- Suara: file mp3 -> suara browser -> TTS online ---------- */
+var AUD_BASE='https://bshantoz.github.io/nihongo/game/audio/';
+var AUD=null,JS={au:null};
+function h32(s,seed){var b=unescape(encodeURIComponent(s)),h=seed>>>0,i;for(i=0;i<b.length;i++){h^=b.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}return h;}
+function jaKey(who,t){var s=who+'|'+t;return ('00000000'+h32(s,0x811c9dc5).toString(16)).slice(-8)+('00000000'+h32(s,0x9747b28c).toString(16)).slice(-8);}
+try{fetch(AUD_BASE+'manifest.json').then(function(r){return r.ok?r.json():[];}).then(function(a){AUD={};a.forEach(function(k){AUD[k]=1;});}).catch(function(){});}catch(e){}
+function jaVoices(){try{return (window.speechSynthesis&&speechSynthesis.getVoices?speechSynthesis.getVoices():[]).filter(function(x){return /^ja/i.test(x.lang);});}catch(e){return [];}}
+function jaStop(){try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}try{if(JS.au)JS.au.pause();}catch(e){}}
+function jaPlay(url,rate,o,onfail){
+  try{
+    if(!JS.au)JS.au=new Audio();
+    var a=JS.au,pr=Math.min(1.25,Math.max(.6,rate/.85)),failed=false;
+    var fail=function(){if(failed)return;failed=true;if(onfail)onfail();};
+    a.onended=function(){if(o.end)o.end();};
+    a.onerror=fail;
+    a.src=url;a.defaultPlaybackRate=pr;a.playbackRate=pr;
+    var p=a.play();if(p&&p.catch)p.catch(fail);
+    return true;
+  }catch(e){return false;}
+}
+function jaFallback(text,o,rate){
+  var vs=jaVoices();
+  if(vs.length&&window.SpeechSynthesisUtterance){
+    try{
+      var u=new SpeechSynthesisUtterance(text);u.lang='ja-JP';u.rate=rate;if(o.pitch)u.pitch=o.pitch;
+      u.voice=o.pick?o.pick(vs):vs[0];
+      if(o.end){u.onend=o.end;u.onerror=o.end;}
+      speechSynthesis.speak(u);return 'browser';
+    }catch(e){}
+  }
+  if(jaPlay('https://translate.google.com/translate_tts?ie=UTF8&client=tw-ob&tl=ja&q='+encodeURIComponent(text),rate,o,function(){if(o.end)o.end();}))return 'online';
+  if(o.end)o.end();return '';
+}
+function jaSay(text,o){
+  o=o||{};var rate=o.rate||.85;jaStop();
+  var key=jaKey(o.who||'n',text);
+  if((!AUD||AUD[key]!==0)&&jaPlay(AUD_BASE+key+'.mp3',rate,o,function(){jaFallback(text,o,rate);}))return 'mp3';
+  return jaFallback(text,o,rate);
+}
+function speak(text,who,done){
+  var fin=false,end=function(){if(fin)return;fin=true;setTalk(null);if(done)done();};
+  var dur=Math.max(1200,text.length*140/O.rate*.85);
+  setTalk(who);
+  if(O.vo){
+    var vw=(who==='c'&&curG==='f')?'f':who;
+    var r=jaSay(text,{rate:O.rate,who:vw,pitch:vw==='m'?1.5:vw==='f'?1.25:1.0,end:end,pick:function(vs){return vs.length===1?vs[0]:(who==='m'?vs[vs.length-1]:vs[0]);}});
+    if(r){setTimeout(end,dur+6000);return;}
+  }
+  setTimeout(end,dur);
+}
+function setTalk(who){
+  for(var k in CAST){var el=$(CAST[k].el);if(el)el.classList.toggle('talk',k===who);}
+}
+function act(el,cls){MOVES.forEach(function(m){el.classList.remove(m);});void el.getBoundingClientRect();el.classList.add(cls);}
+/* ---------- Episode panjang: banyak latar berurutan (ditandai line.seg) ---------- */
+function segOf(i){var k=0,j;for(j=0;j<SEG.length;j++)if(SEG[j]<=i)k=j;return k;}
+function segInfo(i){return LINES[SEG[segOf(i)]].seg;}
+function castFor(st){
+  var S=SCENES[st.p],c={m:S.cast.m,c:S.cast.c};
+  if(st.cn)c.c={name:st.cn,el:S.cast.c.el,em:S.cast.c.em,dot:S.cast.c.dot};
+  return c;
+}
+function prep(i){
+  if(!MULTI)return;
+  var st=segInfo(Math.min(Math.max(i,0),LINES.length-1));
+  CAST=castFor(st);curG=st.g||EP.g||'';
+}
+function mount(k){
+  var st=LINES[SEG[k]].seg,S=SCENES[st.p],box=$('stageBox');
+  box.innerHTML=S.build(st.ov)+'<div class="tone"></div><div class="tl"><b>'+esc(st.t)+'</b> '+esc(st.l)+'</div>';
+  box.className='stage tn-'+(st.tone||'pagi');
+  if(!RM){box.classList.remove('swap');void box.offsetWidth;box.classList.add('swap');}
+  CAST=castFor(st);curG=st.g||EP.g||'';mountSeg=k;
+}
+function scene(i,quiet){
+  if(MULTI&&!quiet&&!RM&&mountSeg>=0&&segOf(Math.max(i,0))!==mountSeg&&$('mochi')){
+    var tok=++stTok;act($('mochi'),'walkout');
+    setTimeout(function(){if(tok===stTok)paint(i,quiet);},420);
+    return;
+  }
+  stTok++;paint(i,quiet);
+}
+function paint(i,quiet){
+  var n=Math.min(Math.max(i,0),LINES.length-1),entered=false;
+  if(MULTI&&segOf(n)!==mountSeg){mount(segOf(n));entered=true;}
+  var s=$('svg');if(!s)return;
+  var st=[],j,from=MULTI?SEG[segOf(n)]:0;
+  for(j=from;j<=i&&j<LINES.length;j++)(LINES[j].s||[]).forEach(function(x){st.push('s-'+x);});
+  s.setAttribute('class',st.join(' '));
+  var L=LINES[i];if(!L||quiet)return;
+  var c=CAST[L.w],target=$(c.el);
+  var mv=MOVES.indexOf(L.act)>=0&&L.act!=='enter'&&L.act!=='walkout'?L.act:'nod';
+  if(entered&&!RM){
+    act($('mochi'),'enter');
+    if(L.w==='m')setTimeout(function(){if(i===idx)act(target,mv);},1050);else act(target,mv);
+  }else act(target,mv);
+  var em=$(c.em),other=$(CAST[L.w==='m'?'c':'m'].em);
+  other.classList.remove('on');
+  if(L.em){em.textContent=L.em;em.classList.add('on');setTimeout(function(){em.classList.remove('on');},1800);}else em.classList.remove('on');
+}
+
+
+/* ---------- Layar penuh (untuk merekam layar) ---------- */
+function capRender(){
+  var c=$('fsCap');if(!c)return;
+  if(!FS||!CAP||mode!=='play'||idx<0||idx>=LINES.length){c.innerHTML=idx>=LINES.length&&FS?'<div class="fj">おしまい</div>':'';return;}
+  var L=LINES[idx];
+  c.innerHTML='<div class="fj">'+rb(L.j)+'</div>'+(O.ro?'<div class="fr">'+esc(L.r)+'</div>':'')+(O.id?'<div class="fi">'+esc(L.i)+'</div>':'');
+}
+function barRender(){
+  var b=$('fsBar');if(!b)return;
+  b.innerHTML='<button type="button" id="fPrev" aria-label="Sebelumnya">‹</button><button type="button" id="fAuto" aria-pressed="'+auto+'">'+(auto?'⏸ Auto':'▶ Auto')+'</button><button type="button" id="fNext" aria-label="Lanjut">›</button><button type="button" id="fCap" aria-pressed="'+CAP+'">Teks</button><button type="button" id="fX" aria-label="Keluar layar penuh">✕</button>';
+}
+function showBar(){
+  var w=$('stageWrap');if(!w)return;w.classList.remove('hidebar');clearTimeout(barT);
+  barT=setTimeout(function(){if(FS)w.classList.add('hidebar');},3000);
+}
+var FSEL=null,FSSAVE=null,FSDOC=document;
+try{if(window.frameElement&&window.frameElement.ownerDocument)FSDOC=window.frameElement.ownerDocument;}catch(e){}
+function fsActive(){return !!(FSDOC.fullscreenElement||FSDOC.webkitFullscreenElement);}
+function fsPseudoFrame(on){
+  /* cadangan bila Fullscreen API ditolak: besarkan iframe pembungkus (same-origin srcdoc) sampai memenuhi layar */
+  var f=null;try{f=window.frameElement;}catch(e){}
+  if(!f)return;
+  try{
+    if(on){
+      FSSAVE={p:f.style.position,t:f.style.top,l:f.style.left,w:f.style.width,h:f.style.height,z:f.style.zIndex};
+      var pw=window.parent;
+      f.style.position='fixed';f.style.top='0';f.style.left='0';f.style.width=pw.innerWidth+'px';f.style.height=pw.innerHeight+'px';f.style.zIndex='2147483000';
+    }else if(FSSAVE){
+      f.style.position=FSSAVE.p;f.style.top=FSSAVE.t;f.style.left=FSSAVE.l;f.style.width=FSSAVE.w;f.style.height=FSSAVE.h;f.style.zIndex=FSSAVE.z;FSSAVE=null;
+    }
+  }catch(e){}
+}
+function setFs(on){
+  var w=$('stageWrap');if(!w)return;
+  FS=on;w.classList.toggle('fs',on);document.body.classList.toggle('fsOn',on);
+  if(on){
+    barRender();capRender();showBar();
+    var t=null;try{t=window.frameElement;}catch(e){}t=t||w;
+    FSEL=t;
+    try{
+      var rq=t.requestFullscreen||t.webkitRequestFullscreen,r=rq?rq.call(t):null;
+      if(r&&r.then)r.then(function(){FSN=true;try{window.parent.screen.orientation.lock('landscape').catch(function(){});}catch(e){}}).catch(function(){fsPseudoFrame(true);});
+      else if(rq)FSN=true;
+      else fsPseudoFrame(true);
+    }catch(e){fsPseudoFrame(true);}
+  }else{
+    clearTimeout(barT);w.classList.remove('hidebar');$('fsCap').innerHTML='';
+    try{if(fsActive()){if(FSDOC.exitFullscreen)FSDOC.exitFullscreen();else if(FSDOC.webkitExitFullscreen)FSDOC.webkitExitFullscreen();}}catch(e){}
+    fsPseudoFrame(false);
+    try{window.parent.screen.orientation.unlock();}catch(e){}
+    FSN=false;
+  }
+}
+function onFsChange(){if(FS&&FSN&&!fsActive())setFs(false);}
+FSDOC.addEventListener('fullscreenchange',onFsChange);
+FSDOC.addEventListener('webkitfullscreenchange',onFsChange);
+
+/* ---------- Daftar episode ---------- */
+function dno(e){return CFG.long?INDEX.indexOf(e)+1:e.no;}
+function setTitle(ja,small){$('ttl').innerHTML=ja+'<small>'+esc(small)+'</small>';}
+function showList(){
+  jaStop();seq++;EP=null;if(FS)setFs(false);
+  $('epV').hidden=true;$('listV').hidden=false;
+  setTitle(CFG.ja||'ミニドラマ',CFG.small||'mini drama · pilih episode');
+  var lv=$('listV');
+  if(!INDEX.length){lv.innerHTML='<p class="msg">Memuat daftar episode…</p>';return;}
+  lv.innerHTML=INDEX.map(function(e){
+    var p=PROG[e.id]||{},st=e.soon?'Segera':(p.best!=null?'✓ '+p.best+'/'+p.of:(p.seen?'✓':''));
+    return '<button type="button" class="ep" data-ep="'+e.id+'"'+(e.soon?' disabled':'')+'><span class="no">'+dno(e)+'</span><span class="t">'+rb(e.ja)+'<small>'+esc(e.ro)+' · '+esc(e.idn)+'</small><span class="lv">'+esc(e.level)+'</span></span><span class="st">'+esc(st)+'</span><p class="d">'+esc(e.desc)+'</p></button>';
+  }).join('');
+}
+function loadIndex(){
+  getJSON('index').then(function(d){INDEX=d.filter(function(x){var lg=x.kind==='long';return CFG.long?lg:!lg;});showList();}).catch(function(err){
+    $('listV').innerHTML='<p class="msg">Daftar episode belum bisa dimuat ('+esc(err&&err.message)+').</p><button type="button" class="btn" id="bRetry">Coba lagi</button>';
+  });
+}
+function openEp(id){
+  var meta=INDEX.filter(function(e){return e.id===id;})[0];if(!meta)return;
+  $('listV').innerHTML='<p class="msg">Memuat episode…</p>';
+  getJSON(id).then(function(d){
+    EP=d;EPI=meta;LINES=d.lines;QUIZ=d.quiz;
+    MULTI=!!d.multi;SEG=[];mountSeg=-1;stTok++;
+    if(MULTI){LINES.forEach(function(l,k){if(l.seg)SEG.push(k);});mount(0);$('stageBox').classList.remove('swap');}
+    else{CAST=SCENES[d.scene].cast;curG=d.g||'';$('stageBox').className='stage';$('stageBox').innerHTML=SCENES[d.scene].build();}
+    idx=-1;mode='play';auto=false;seq++;
+    $('listV').hidden=true;$('epV').hidden=false;
+    setTitle(rb(meta.ja),(CFG.noun||'Episode')+' '+dno(meta)+' · '+meta.ro+' · '+meta.idn);
+    renderOpts();render();scene(0,MULTI);
+    window.scrollTo&&window.scrollTo(0,0);
+  }).catch(function(err){
+    showList();$('listV').insertAdjacentHTML('afterbegin','<p class="msg">Episode belum bisa dimuat ('+esc(err&&err.message)+').</p>');
+  });
+}
+function nextEp(){
+  var k=INDEX.map(function(e){return e.id;}).indexOf(EPI.id),n=INDEX[k+1];
+  return n&&!n.soon?n:null;
+}
+
+/* ---------- Tampilan episode ---------- */
+function who(L){var c=CAST[L.w];return '<div class="who"><span class="dot'+c.dot+'"></span>'+esc(c.name)+'</div>';}
+function render(){
+  var p=$('panel'),n=$('nav');
+  document.body.classList.toggle('nofuri',!O.fu);
+  if(mode==='quiz'){renderQuiz();return;}
+  prep(idx);capRender();
+  var prog=LINES.length>24?'<span class="prog bar"><b style="width:'+Math.round(Math.min(Math.max(idx+1,0),LINES.length)/LINES.length*100)+'%"></b></span><span class="cn2">'+Math.min(Math.max(idx+1,0),LINES.length)+'/'+LINES.length+'</span>':'<span class="prog">'+LINES.map(function(_,k){return '<i'+(k<=idx?' class="d"':'')+'></i>';}).join('')+'</span>';
+  if(idx<0){
+    p.innerHTML='<div class="who"><span class="dot"></span>'+(CFG.noun||'Episode')+' '+dno(EPI)+'</div><div class="jp">'+rb(EPI.ja)+'</div><div class="id">'+esc(EPI.desc)+' Tiap kalimat ada furigana, romaji, dan artinya. Ketuk Mulai untuk memutar.</div>';
+    n.innerHTML=prog+'<button type="button" class="btn pri" id="bStart">Mulai</button>';
+    return;
+  }
+  if(idx>=LINES.length){
+    p.innerHTML='<div class="who"><span class="dot"></span>Selesai</div><div class="jp">Adegan selesai</div><div class="id">Ada kuis mini '+QUIZ.length+' soal dari percakapan tadi.</div>';
+    n.innerHTML='<button type="button" class="btn" id="bAgain">Ulangi adegan</button><button type="button" class="btn pri" id="bQuiz">Kuis mini</button>';
+    return;
+  }
+  var L=LINES[idx];
+  p.innerHTML=who(L)+'<div class="jp">'+rb(L.j)+'</div>'+(O.ro?'<div class="ro">'+esc(L.r)+'</div>':'')+(O.id?'<div class="id">'+esc(L.i)+'</div>':'')+
+    '<div class="vocab">'+L.v.map(function(v,k){return '<button type="button" class="chip" data-v="'+k+'"><b>'+rb(v[0])+'</b> '+(O.ro?esc(v[1])+' · ':'')+esc(v[2])+'</button>';}).join('')+'</div>';
+  n.innerHTML='<button type="button" class="btn" id="bPrev"'+(idx===0?' disabled':'')+'>←</button>'+prog+'<button type="button" class="btn" id="bSay">🔊</button><button type="button" class="btn pri" id="bNext">'+(idx===LINES.length-1?'Selesai':'Lanjut')+'</button>';
+}
+function renderOpts(){
+  var r=O.rate;
+  $('opts').innerHTML='<button type="button" class="tg" data-t="fu" aria-pressed="'+O.fu+'">Furigana</button><button type="button" class="tg" data-t="ro" aria-pressed="'+O.ro+'">Romaji</button><button type="button" class="tg" data-t="id" aria-pressed="'+O.id+'">Terjemahan</button><button type="button" class="tg" data-t="vo" aria-pressed="'+O.vo+'">Suara</button><button type="button" class="tg" data-t="au" aria-pressed="'+auto+'">Otomatis</button>'+
+   '<select class="tg" id="rate" aria-label="Kecepatan suara"><option value="0.7"'+(r===.7?' selected':'')+'>Pelan</option><option value="0.85"'+(r===.85?' selected':'')+'>Normal</option><option value="1"'+(r===1?' selected':'')+'>Cepat</option></select>';
+}
+function go(i){
+  idx=i;seq++;var my=seq;
+  jaStop();setTalk(null);render();
+  if(i<0&&MULTI)scene(0,true);
+  if(i>=0&&i<LINES.length){
+    scene(i);
+    speak(plain(LINES[i].j),LINES[i].w,function(){
+      if(auto&&my===seq&&mode==='play'){setTimeout(function(){if(my===seq)go(idx+1);},800);}
+    });
+  }else if(i>=LINES.length){
+    scene(LINES.length-1);
+    var p=PROG[EP.id]||(PROG[EP.id]={});p.seen=true;saveP();
+  }
+}
+/* ---------- Kuis ---------- */
+function shuffle(a){for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),t=a[j];a[j]=a[k];a[k]=t;}return a;}
+function startQuiz(){mode='quiz';qi=0;qs=0;qlock=false;renderQuiz();}
+function renderQuiz(){
+  var p=$('panel'),n=$('nav');
+  if(qi>=QUIZ.length){
+    var pr=PROG[EP.id]||(PROG[EP.id]={}),rec=pr.best==null||qs>pr.best;
+    if(rec){pr.best=qs;}pr.of=QUIZ.length;pr.seen=true;saveP();
+    p.innerHTML='<div class="who"><span class="dot"></span>Hasil kuis</div><div class="jp">'+qs+' / '+QUIZ.length+' benar</div><div class="id">'+(qs===QUIZ.length?'Sempurna! すばらしい (subarashii).':'Ulangi adegan untuk melatih telinga, lalu coba lagi.')+(rec&&qs>0?' Rekor baru.':'')+'</div>';
+    var nx=nextEp();
+    n.innerHTML='<button type="button" class="btn" id="bAgain">Ulangi adegan</button><button type="button" class="btn" id="bQuizAgain">Kuis lagi</button>'+(nx?'<button type="button" class="btn pri" id="bNextEp" data-ep="'+nx.id+'">Episode '+nx.no+' →</button>':'<button type="button" class="btn pri" id="bList2">Daftar episode</button>');
+    return;
+  }
+  var q=QUIZ[qi];
+  p.innerHTML='<div class="who"><span class="dot"></span>Kuis '+(qi+1)+'/'+QUIZ.length+'</div><p class="q">'+esc(q.q)+'</p><div class="qo">'+shuffle([q.a].concat(q.w)).map(function(o){return '<button type="button" class="o" data-o="'+esc(o)+'">'+esc(o)+'</button>';}).join('')+'</div><div id="fb"></div>';
+  n.innerHTML='';qlock=false;
+}
+function answerQ(b){
+  if(qlock)return;qlock=true;
+  var q=QUIZ[qi],ok=b.getAttribute('data-o')===q.a;
+  Array.prototype.forEach.call(document.querySelectorAll('.o'),function(x){x.disabled=true;if(x.getAttribute('data-o')===q.a)x.classList.add('ok');});
+  if(ok)qs++;else b.classList.add('bad');
+  $('fb').innerHTML='<div class="fb"><b>'+(ok?'Benar!':'Kurang tepat.')+'</b> '+esc(q.f)+'</div>';
+  $('nav').innerHTML='<button type="button" class="btn pri" id="bQnext">'+(qi===QUIZ.length-1?'Lihat hasil':'Lanjut')+'</button>';
+}
+
+/* ---------- Event ---------- */
+document.addEventListener('click',function(e){
+  var t=e.target,id=t.id,b;
+  if(FS&&t.closest&&t.closest('#stageWrap')&&!t.closest('#fsBar')){var w0=$('stageWrap');if(w0.classList.contains('hidebar'))showBar();else{w0.classList.add('hidebar');clearTimeout(barT);}return;}
+  if(id==='bFs')setFs(true);
+  else if(id==='fX')setFs(false);
+  else if(id==='fPrev'){if(idx>0)go(idx-1);showBar();}
+  else if(id==='fNext'){go(idx+1);showBar();}
+  else if(id==='fAuto'){auto=!auto;barRender();showBar();if(auto&&mode==='play'){if(idx<0||idx>=LINES.length)go(idx>=LINES.length?-1:0);else go(idx+1);}}
+  else if(id==='fCap'){CAP=!CAP;barRender();capRender();showBar();}
+  else if(id==='bStart')go(0);
+  else if(id==='bNext')go(idx+1);
+  else if(id==='bPrev'&&idx>0)go(idx-1);
+  else if(id==='bSay'&&LINES[idx])speak(plain(LINES[idx].j),LINES[idx].w);
+  else if(id==='bAgain'){mode='play';go(-1);}
+  else if(id==='bQuiz'||id==='bQuizAgain')startQuiz();
+  else if(id==='bQnext'){qi++;renderQuiz();}
+  else if(id==='bList'||id==='bList2')showList();
+  else if(id==='bRetry')loadIndex();
+  else if((b=t.closest&&t.closest('[data-ep]')))openEp(b.getAttribute('data-ep'));
+  else if((b=t.closest&&t.closest('[data-o]')))answerQ(b);
+  else if((b=t.closest&&t.closest('[data-v]'))){var v=LINES[idx].v[+b.getAttribute('data-v')];speak(plain(v[0]),'n');}
+  else if((b=t.closest&&t.closest('[data-t]'))){
+    var k=b.getAttribute('data-t');
+    if(k==='au')auto=!auto;else{O[k]=!O[k];if(k==='vo'&&!O.vo)jaStop();saveO();}
+    renderOpts();if(mode==='play')render();
+  }
+});
+document.addEventListener('change',function(e){if(e.target.id==='rate'){O.rate=parseFloat(e.target.value);saveO();}});
+document.addEventListener('keydown',function(e){
+  if(FS&&e.key==='Escape'){setFs(false);return;}
+  if(e.ctrlKey||e.metaKey||e.altKey||mode!=='play'||!EP)return;
+  if(e.key==='ArrowRight'||e.key==='Enter'){if(idx>=0&&idx<LINES.length&&document.activeElement.tagName!=='BUTTON')go(idx+1);}
+  else if(e.key==='ArrowLeft'&&idx>0)go(idx-1);
+});
+loadIndex();
+
+</script>
+</body>
+</html>

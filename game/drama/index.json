@@ -208,11 +208,12 @@
  },
  {
   "id": "ep24",
-  "no": 24,
+  "no": 1,
   "ja": "{一日|いちにち}の{散歩|さんぽ}",
   "ro": "ichinichi no sanpo",
   "idn": "Satu hari Mochi di kota (±10 menit)",
   "level": "N4",
-  "desc": "Mochi sehari penuh: minimarket, stasiun, taman, kafe, supermarket, tepi sungai, izakaya, lalu pulang. Latar berganti sesuai waktu."
+  "desc": "Mochi sehari penuh: minimarket, stasiun, taman, kafe, supermarket, tepi sungai, izakaya, lalu pulang. Latar berganti sesuai waktu.",
+  "kind": "long"
  }
 ]

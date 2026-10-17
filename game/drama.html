@@ -188,7 +188,7 @@ body.nofuri #fsCap rt{display:none}
 #stageWrap.fs.hidebar #fsBar{opacity:0;pointer-events:none}
 #fsBar button{border:1px solid rgba(255,255,255,.35);background:rgba(20,16,12,.6);color:#fff;border-radius:99px;min-width:40px;height:40px;padding:0 14px;font-size:14px;font-weight:700}
 #fsBar button[aria-pressed="false"]{opacity:.6}
-body.fsOn{overflow:hidden}
+body.fsOn{overflow:hidden;height:100vh;margin:0}
 </style>
 
 <div class="wrap">
@@ -491,6 +491,7 @@ var SCENES={station:{build:buildStation,cast:{m:{name:'Mochi',el:'mochi',em:'emM
 var $=function(id){return document.getElementById(id);};
 var INDEX=[],EP=null,EPI=null,LINES=[],QUIZ=[],CAST={};
 var idx=-1,mode='play',auto=false,spT=0,qi=0,qs=0,qlock=false,seq=0;
+var CFG=window.__CFG||{};
 var FS=false,FSN=false,CAP=true,barT=0;
 var MULTI=false,SEG=[],mountSeg=-1,stTok=0,curG='';
 var RM=false;try{RM=window.matchMedia('(prefers-reduced-motion:reduce)').matches;}catch(e){}
@@ -627,38 +628,64 @@ function showBar(){
   var w=$('stageWrap');if(!w)return;w.classList.remove('hidebar');clearTimeout(barT);
   barT=setTimeout(function(){if(FS)w.classList.add('hidebar');},3000);
 }
+var FSEL=null,FSSAVE=null,FSDOC=document;
+try{if(window.frameElement&&window.frameElement.ownerDocument)FSDOC=window.frameElement.ownerDocument;}catch(e){}
+function fsActive(){return !!(FSDOC.fullscreenElement||FSDOC.webkitFullscreenElement);}
+function fsPseudoFrame(on){
+  /* cadangan bila Fullscreen API ditolak: besarkan iframe pembungkus (same-origin srcdoc) sampai memenuhi layar */
+  var f=null;try{f=window.frameElement;}catch(e){}
+  if(!f)return;
+  try{
+    if(on){
+      FSSAVE={p:f.style.position,t:f.style.top,l:f.style.left,w:f.style.width,h:f.style.height,z:f.style.zIndex};
+      var pw=window.parent;
+      f.style.position='fixed';f.style.top='0';f.style.left='0';f.style.width=pw.innerWidth+'px';f.style.height=pw.innerHeight+'px';f.style.zIndex='2147483000';
+    }else if(FSSAVE){
+      f.style.position=FSSAVE.p;f.style.top=FSSAVE.t;f.style.left=FSSAVE.l;f.style.width=FSSAVE.w;f.style.height=FSSAVE.h;f.style.zIndex=FSSAVE.z;FSSAVE=null;
+    }
+  }catch(e){}
+}
 function setFs(on){
   var w=$('stageWrap');if(!w)return;
   FS=on;w.classList.toggle('fs',on);document.body.classList.toggle('fsOn',on);
   if(on){
     barRender();capRender();showBar();
-    try{var r=w.requestFullscreen?w.requestFullscreen():(w.webkitRequestFullscreen?w.webkitRequestFullscreen():null);
-      if(r&&r.then)r.then(function(){FSN=true;try{screen.orientation.lock('landscape').catch(function(){});}catch(e){}}).catch(function(){});}catch(e){}
+    var t=null;try{t=window.frameElement;}catch(e){}t=t||w;
+    FSEL=t;
+    try{
+      var rq=t.requestFullscreen||t.webkitRequestFullscreen,r=rq?rq.call(t):null;
+      if(r&&r.then)r.then(function(){FSN=true;try{window.parent.screen.orientation.lock('landscape').catch(function(){});}catch(e){}}).catch(function(){fsPseudoFrame(true);});
+      else if(rq)FSN=true;
+      else fsPseudoFrame(true);
+    }catch(e){fsPseudoFrame(true);}
   }else{
     clearTimeout(barT);w.classList.remove('hidebar');$('fsCap').innerHTML='';
-    try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen();else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();}catch(e){}
-    try{screen.orientation.unlock();}catch(e){}
+    try{if(fsActive()){if(FSDOC.exitFullscreen)FSDOC.exitFullscreen();else if(FSDOC.webkitExitFullscreen)FSDOC.webkitExitFullscreen();}}catch(e){}
+    fsPseudoFrame(false);
+    try{window.parent.screen.orientation.unlock();}catch(e){}
     FSN=false;
   }
 }
-document.addEventListener('fullscreenchange',function(){if(FS&&FSN&&!document.fullscreenElement)setFs(false);});
-document.addEventListener('webkitfullscreenchange',function(){if(FS&&FSN&&!document.webkitFullscreenElement)setFs(false);});
+function onFsChange(){if(FS&&FSN&&!fsActive())setFs(false);}
+FSDOC.addEventListener('fullscreenchange',onFsChange);
+FSDOC.addEventListener('webkitfullscreenchange',onFsChange);
 
 /* ---------- Daftar episode ---------- */
+function dno(e){return CFG.long?INDEX.indexOf(e)+1:e.no;}
 function setTitle(ja,small){$('ttl').innerHTML=ja+'<small>'+esc(small)+'</small>';}
 function showList(){
   jaStop();seq++;EP=null;if(FS)setFs(false);
   $('epV').hidden=true;$('listV').hidden=false;
-  setTitle('ミニドラマ','mini drama · pilih episode');
+  setTitle(CFG.ja||'ミニドラマ',CFG.small||'mini drama · pilih episode');
   var lv=$('listV');
   if(!INDEX.length){lv.innerHTML='<p class="msg">Memuat daftar episode…</p>';return;}
   lv.innerHTML=INDEX.map(function(e){
     var p=PROG[e.id]||{},st=e.soon?'Segera':(p.best!=null?'✓ '+p.best+'/'+p.of:(p.seen?'✓':''));
-    return '<button type="button" class="ep" data-ep="'+e.id+'"'+(e.soon?' disabled':'')+'><span class="no">'+e.no+'</span><span class="t">'+rb(e.ja)+'<small>'+esc(e.ro)+' · '+esc(e.idn)+'</small><span class="lv">'+esc(e.level)+'</span></span><span class="st">'+esc(st)+'</span><p class="d">'+esc(e.desc)+'</p></button>';
+    return '<button type="button" class="ep" data-ep="'+e.id+'"'+(e.soon?' disabled':'')+'><span class="no">'+dno(e)+'</span><span class="t">'+rb(e.ja)+'<small>'+esc(e.ro)+' · '+esc(e.idn)+'</small><span class="lv">'+esc(e.level)+'</span></span><span class="st">'+esc(st)+'</span><p class="d">'+esc(e.desc)+'</p></button>';
   }).join('');
 }
 function loadIndex(){
-  getJSON('index').then(function(d){INDEX=d;showList();}).catch(function(err){
+  getJSON('index').then(function(d){INDEX=d.filter(function(x){var lg=x.kind==='long';return CFG.long?lg:!lg;});showList();}).catch(function(err){
     $('listV').innerHTML='<p class="msg">Daftar episode belum bisa dimuat ('+esc(err&&err.message)+').</p><button type="button" class="btn" id="bRetry">Coba lagi</button>';
   });
 }
@@ -672,7 +699,7 @@ function openEp(id){
     else{CAST=SCENES[d.scene].cast;curG=d.g||'';$('stageBox').className='stage';$('stageBox').innerHTML=SCENES[d.scene].build();}
     idx=-1;mode='play';auto=false;seq++;
     $('listV').hidden=true;$('epV').hidden=false;
-    setTitle(rb(meta.ja),'Episode '+meta.no+' · '+meta.ro+' · '+meta.idn);
+    setTitle(rb(meta.ja),(CFG.noun||'Episode')+' '+dno(meta)+' · '+meta.ro+' · '+meta.idn);
     renderOpts();render();scene(0,MULTI);
     window.scrollTo&&window.scrollTo(0,0);
   }).catch(function(err){
@@ -693,7 +720,7 @@ function render(){
   prep(idx);capRender();
   var prog=LINES.length>24?'<span class="prog bar"><b style="width:'+Math.round(Math.min(Math.max(idx+1,0),LINES.length)/LINES.length*100)+'%"></b></span><span class="cn2">'+Math.min(Math.max(idx+1,0),LINES.length)+'/'+LINES.length+'</span>':'<span class="prog">'+LINES.map(function(_,k){return '<i'+(k<=idx?' class="d"':'')+'></i>';}).join('')+'</span>';
   if(idx<0){
-    p.innerHTML='<div class="who"><span class="dot"></span>Episode '+EPI.no+'</div><div class="jp">'+rb(EPI.ja)+'</div><div class="id">'+esc(EPI.desc)+' Tiap kalimat ada furigana, romaji, dan artinya. Ketuk Mulai untuk memutar.</div>';
+    p.innerHTML='<div class="who"><span class="dot"></span>'+(CFG.noun||'Episode')+' '+dno(EPI)+'</div><div class="jp">'+rb(EPI.ja)+'</div><div class="id">'+esc(EPI.desc)+' Tiap kalimat ada furigana, romaji, dan artinya. Ketuk Mulai untuk memutar.</div>';
     n.innerHTML=prog+'<button type="button" class="btn pri" id="bStart">Mulai</button>';
     return;
   }
