@@ -1,0 +1,1517 @@
+{
+ "id": "ep24",
+ "scene": "konbini",
+ "multi": true,
+ "lines": [
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。おはようございます。",
+   "r": "Irasshaimase. Ohayou gozaimasu.",
+   "i": "Selamat datang. Selamat pagi.",
+   "act": "bow",
+   "s": [],
+   "v": [],
+   "seg": {
+    "p": "konbini",
+    "t": "07:45",
+    "l": "朝 · Minimarket",
+    "tone": "pagi"
+   }
+  },
+  {
+   "w": "m",
+   "j": "おはようございます。{朝|あさ}ごはんを、{買|か}いに{来|き}ました。",
+   "r": "Ohayou gozaimasu. Asagohan o, kai ni kimashita.",
+   "i": "Selamat pagi. Saya datang untuk membeli sarapan.",
+   "act": "step",
+   "s": [],
+   "v": [
+    [
+     "{朝|あさ}ごはん",
+     "asagohan",
+     "sarapan"
+    ],
+    [
+     "{買|か}いに{来|き}ました",
+     "kai ni kimashita",
+     "datang untuk membeli"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "おにぎりを{二|ふた}つと、サンドイッチを、お{願|ねが}いします。",
+   "r": "Onigiri o futatsu to, sandoitchi o, onegaishimasu.",
+   "i": "Tolong dua onigiri dan satu sandwich.",
+   "act": "hop",
+   "s": [
+    "items"
+   ],
+   "v": [
+    [
+     "{二|ふた}つ",
+     "futatsu",
+     "dua buah"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "サンドイッチは、{温|あたた}めますか。",
+   "r": "Sandoitchi wa, atatamemasu ka.",
+   "i": "Sandwichnya mau dihangatkan?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{温|あたた}めます",
+     "atatamemasu",
+     "menghangatkan"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、お{願|ねが}いします。{温|あたた}かいのが、{好|す}きです。",
+   "r": "Hai, onegaishimasu. Atatakai no ga, suki desu.",
+   "i": "Ya, tolong. Saya suka yang hangat.",
+   "act": "nod",
+   "s": [
+    "heat"
+   ],
+   "v": [
+    [
+     "{温|あたた}かい",
+     "atatakai",
+     "hangat"
+    ],
+    [
+     "{好|す}き",
+     "suki",
+     "suka"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "コーヒーも、いかがですか。ホットが、おいしいですよ。",
+   "r": "Koohii mo, ikaga desu ka. Hotto ga, oishii desu yo.",
+   "i": "Kopinya juga bagaimana? Yang panas enak lho.",
+   "act": "nod",
+   "s": [
+    "ding"
+   ],
+   "v": [
+    [
+     "いかがですか",
+     "ikaga desu ka",
+     "bagaimana? (sopan)"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "じゃあ、ホットコーヒーも、お{願|ねが}いします。",
+   "r": "Jaa, hotto koohii mo, onegaishimasu.",
+   "i": "Kalau begitu, kopi panas juga, tolong.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{全部|ぜんぶ}で、{680|ろっぴゃくはちじゅう}{円|えん}です。",
+   "r": "Zenbu de, roppyaku hachijuu en desu.",
+   "i": "Semuanya 680 yen.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{全部|ぜんぶ}で",
+     "zenbu de",
+     "totalnya"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{千円|せんえん}で、お{願|ねが}いします。",
+   "r": "Sen'en de, onegaishimasu.",
+   "i": "Saya bayar pakai 1.000 yen.",
+   "act": "hop",
+   "s": [
+    "money"
+   ],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{千円|せんえん}、お{預|あず}かりします。{320|さんびゃくにじゅう}{円|えん}の、お{返|かえ}しです。いってらっしゃい。",
+   "r": "Sen'en, oazukari shimasu. Sanbyaku nijuu en no, okaeshi desu. Itterasshai.",
+   "i": "Saya terima 1.000 yen. Kembaliannya 320 yen. Hati-hati di jalan.",
+   "act": "bow",
+   "s": [
+    "change"
+   ],
+   "v": [
+    [
+     "お{返|かえ}し",
+     "okaeshi",
+     "kembalian"
+    ],
+    [
+     "いってらっしゃい",
+     "itterasshai",
+     "hati-hati (kepada yang pergi)"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "すみません、{渋谷|しぶや}まで、{切符|きっぷ}を、お{願|ねが}いします。",
+   "r": "Sumimasen, Shibuya made, kippu o, onegaishimasu.",
+   "i": "Permisi, tolong tiket sampai Shibuya.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{渋谷|しぶや}",
+     "Shibuya",
+     "Shibuya (daerah di Tokyo)"
+    ],
+    [
+     "{切符|きっぷ}",
+     "kippu",
+     "tiket"
+    ]
+   ],
+   "seg": {
+    "p": "station",
+    "t": "08:15",
+    "l": "朝 · Stasiun",
+    "tone": "pagi"
+   }
+  },
+  {
+   "w": "c",
+   "j": "{片道|かたみち}ですか、{往復|おうふく}ですか。",
+   "r": "Katamichi desu ka, oufuku desu ka.",
+   "i": "Sekali jalan atau pulang-pergi?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{片道|かたみち}",
+     "katamichi",
+     "sekali jalan"
+    ],
+    [
+     "{往復|おうふく}",
+     "oufuku",
+     "pulang-pergi"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{往復|おうふく}で、お{願|ねが}いします。",
+   "r": "Oufuku de, onegaishimasu.",
+   "i": "Pulang-pergi, tolong.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{往復|おうふく}ですね。{480|よんひゃくはちじゅう}{円|えん}です。",
+   "r": "Oufuku desu ne. Yonhyaku hachijuu en desu.",
+   "i": "Pulang-pergi ya. 480 yen.",
+   "act": "nod",
+   "s": [
+    "money"
+   ],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "はい、これで、お{願|ねが}いします。",
+   "r": "Hai, kore de, onegaishimasu.",
+   "i": "Ya, tolong pakai ini.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございます。はい、{切符|きっぷ}です。{気|き}をつけて。",
+   "r": "Arigatou gozaimasu. Hai, kippu desu. Ki o tsukete.",
+   "i": "Terima kasih. Ini tiketnya. Hati-hati.",
+   "act": "bow",
+   "s": [
+    "ticket"
+   ],
+   "v": [
+    [
+     "{気|き}をつけて",
+     "ki o tsukete",
+     "hati-hati"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "{何番線|なんばんせん}ですか。",
+   "r": "Nanbansen desu ka.",
+   "i": "Peron nomor berapa?",
+   "act": "tilt",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{二番線|にばんせん}です。{階段|かいだん}を{下|お}りて、{左|ひだり}です。",
+   "r": "Nibansen desu. Kaidan o orite, hidari desu.",
+   "i": "Peron 2. Turun tangga, lalu ke kiri.",
+   "act": "nod",
+   "s": [
+    "plat"
+   ],
+   "v": [
+    [
+     "{階段|かいだん}",
+     "kaidan",
+     "tangga"
+    ],
+    [
+     "{下|お}りて",
+     "orite",
+     "turun lalu"
+    ],
+    [
+     "{左|ひだり}",
+     "hidari",
+     "kiri"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{次|つぎ}の{電車|でんしゃ}は、{何時|なんじ}ですか。",
+   "r": "Tsugi no densha wa, nanji desu ka.",
+   "i": "Kereta berikutnya jam berapa?",
+   "act": "hop",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{8|はち}{時|じ}{30|さんじっ}{分|ぷん}です。{十五分|じゅうごふん}ぐらい、{待|ま}ちます。",
+   "r": "Hachiji sanjuppun desu. Juugofun gurai, machimasu.",
+   "i": "Jam 8.30. Menunggu sekitar 15 menit.",
+   "act": "nod",
+   "s": [
+    "time"
+   ],
+   "v": [
+    [
+     "{待|ま}ちます",
+     "machimasu",
+     "menunggu"
+    ],
+    [
+     "ぐらい",
+     "gurai",
+     "sekitar"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。{行|い}ってきます。",
+   "r": "Arigatou gozaimasu. Ittekimasu.",
+   "i": "Terima kasih. Saya berangkat dulu.",
+   "act": "wave",
+   "s": [],
+   "v": [
+    [
+     "{行|い}ってきます",
+     "ittekimasu",
+     "aku berangkat (lalu kembali)"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "あ、ゆいちゃん！ここ、ここ！",
+   "r": "A, Yui-chan! Koko, koko!",
+   "i": "Ah, Yui! Di sini, di sini!",
+   "act": "wave",
+   "s": [],
+   "v": [],
+   "em": "!",
+   "seg": {
+    "p": "kouen",
+    "t": "10:30",
+    "l": "昼前 · Taman",
+    "tone": "siang",
+    "g": "f"
+   }
+  },
+  {
+   "w": "c",
+   "j": "モチ、おはよう！{早|はや}かったね。",
+   "r": "Mochi, ohayou! Hayakatta ne.",
+   "i": "Mochi, selamat pagi! Kamu cepat ya.",
+   "act": "hop",
+   "s": [
+    "♪"
+   ],
+   "v": [
+    [
+     "{早|はや}かった",
+     "hayakatta",
+     "cepat / lebih awal"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{電車|でんしゃ}が、すいていたから。",
+   "r": "Densha ga, suiteita kara.",
+   "i": "Karena keretanya sepi.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "すいている",
+     "suiteiru",
+     "sepi / lengang"
+    ],
+    [
+     "から",
+     "kara",
+     "karena"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{今日|きょう}は、いい{天気|てんき}だね。{少|すこ}し、{散歩|さんぽ}しない？",
+   "r": "Kyou wa, ii tenki da ne. Sukoshi, sanpo shinai?",
+   "i": "Hari ini cuacanya bagus ya. Jalan-jalan sebentar yuk?",
+   "act": "step",
+   "s": [],
+   "v": [
+    [
+     "{散歩|さんぽ}",
+     "sanpo",
+     "jalan-jalan santai"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "いいね。{紅葉|もみじ}が、きれいだね。",
+   "r": "Ii ne. Momiji ga, kirei da ne.",
+   "i": "Boleh. Daun musim gugurnya indah ya.",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{紅葉|もみじ}",
+     "momiji",
+     "daun merah musim gugur"
+    ],
+    [
+     "きれい",
+     "kirei",
+     "indah / cantik"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ほんとだ。ジュース、{飲|の}む？さっき、{買|か}ったの。",
+   "r": "Honto da. Juusu, nomu? Sakki, katta no.",
+   "i": "Benar. Mau minum jus? Tadi aku beli.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "ありがとう。{冷|つめ}たくて、おいしい！",
+   "r": "Arigatou. Tsumetakute, oishii!",
+   "i": "Terima kasih. Dingin dan enak!",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{冷|つめ}たい",
+     "tsumetai",
+     "dingin"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "ねえ、もうすぐ{試験|しけん}でしょ？{勉強|べんきょう}は、どう？",
+   "r": "Nee, mou sugu shiken desho? Benkyou wa, dou?",
+   "i": "Hei, sebentar lagi ujian, kan? Belajarnya gimana?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "もうすぐ",
+     "mou sugu",
+     "sebentar lagi"
+    ],
+    [
+     "{試験|しけん}",
+     "shiken",
+     "ujian"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "まあまあかな。{漢字|かんじ}が、{難|むずか}しいんだ。",
+   "r": "Maa maa kana. Kanji ga, muzukashii n da.",
+   "i": "Lumayan lah. Kanjinya susah.",
+   "act": "sway",
+   "s": [],
+   "v": [
+    [
+     "まあまあ",
+     "maa maa",
+     "lumayan"
+    ],
+    [
+     "{難|むずか}しい",
+     "muzukashii",
+     "sulit"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ごめん、わたし、これから、バイトなんだ。{夕方|ゆうがた}、また{会|あ}おう。",
+   "r": "Gomen, watashi, korekara, baito nanda. Yuugata, mata aou.",
+   "i": "Maaf, aku sekarang harus kerja paruh waktu. Sore nanti ketemu lagi ya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "バイト",
+     "baito",
+     "kerja paruh waktu"
+    ],
+    [
+     "{夕方|ゆうがた}",
+     "yuugata",
+     "sore hari"
+    ],
+    [
+     "{会|あ}おう",
+     "aou",
+     "ayo bertemu"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかった。じゃあ、あとで、ライン、するね。",
+   "r": "Wakatta. Jaa, ato de, rain, suru ne.",
+   "i": "Oke. Nanti aku kabari lewat LINE ya.",
+   "act": "hop",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "あとで",
+     "ato de",
+     "nanti"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "うん！またね！",
+   "r": "Un! Mata ne!",
+   "i": "Ya! Sampai nanti!",
+   "act": "wave",
+   "s": [
+    "♪"
+   ],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。ご{注文|ちゅうもん}は、お{決|き}まりですか。",
+   "r": "Irasshaimase. Gochuumon wa, okimari desu ka.",
+   "i": "Selamat datang. Sudah menentukan pesanannya?",
+   "act": "bow",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "ご{注文|ちゅうもん}",
+     "gochuumon",
+     "pesanan"
+    ],
+    [
+     "お{決|き}まり",
+     "okimari",
+     "sudah diputuskan"
+    ]
+   ],
+   "seg": {
+    "p": "kafe",
+    "t": "12:30",
+    "l": "昼 · Kafe",
+    "tone": "siang"
+   }
+  },
+  {
+   "w": "m",
+   "j": "ええと、カフェラテを、ください。",
+   "r": "Eeto, kafe rate o, kudasai.",
+   "i": "Hmm, tolong kafe latte.",
+   "act": "tilt",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "サイズは、どうしますか。",
+   "r": "Saizu wa, dou shimasu ka.",
+   "i": "Ukurannya mau yang mana?",
+   "act": "nod",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "ふつうの、サイズで、お{願|ねが}いします。",
+   "r": "Futsuu no, saizu de, onegaishimasu.",
+   "i": "Ukuran biasa, tolong.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ふつう",
+     "futsuu",
+     "biasa"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ランチセットも、ありますよ。パスタと、サラダです。",
+   "r": "Ranchi setto mo, arimasu yo. Pasuta to, sarada desu.",
+   "i": "Ada juga paket makan siang. Pasta dan salad.",
+   "act": "nod",
+   "s": [
+    "♪"
+   ],
+   "v": [
+    [
+     "ランチセット",
+     "ranchi setto",
+     "paket makan siang"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "じゃあ、ランチセットに、します。{飲|の}み{物|もの}は、ラテで。",
+   "r": "Jaa, ranchi setto ni, shimasu. Nomimono wa, rate de.",
+   "i": "Kalau begitu, saya ambil paket makan siang. Minumannya latte.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{飲|の}み{物|もの}",
+     "nomimono",
+     "minuman"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "かしこまりました。ここで、お{召|め}し{上|あ}がりですか。",
+   "r": "Kashikomarimashita. Koko de, omeshiagari desu ka.",
+   "i": "Baik. Makan di sini?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "かしこまりました",
+     "kashikomarimashita",
+     "baik, dimengerti (sangat sopan)"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、ここで、{食|た}べます。",
+   "r": "Hai, koko de, tabemasu.",
+   "i": "Ya, makan di sini.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{全部|ぜんぶ}で、{1200|せんにひゃく}{円|えん}です。",
+   "r": "Zenbu de, sen nihyaku en desu.",
+   "i": "Semuanya 1.200 yen.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "はい、どうぞ。",
+   "r": "Hai, douzo.",
+   "i": "Ya, silakan (ini uangnya).",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "お{待|ま}たせしました。ごゆっくり、どうぞ。",
+   "r": "Omatase shimashita. Goyukkuri, douzo.",
+   "i": "Maaf menunggu. Silakan bersantai.",
+   "act": "bow",
+   "s": [
+    "b",
+    "c"
+   ],
+   "v": [
+    [
+     "ごゆっくり",
+     "goyukkuri",
+     "silakan santai"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "いただきます。ん、おいしい！",
+   "r": "Itadakimasu. N, oishii!",
+   "i": "Selamat makan. Hmm, enak!",
+   "act": "hop",
+   "s": [],
+   "v": [],
+   "em": "♥"
+  },
+  {
+   "w": "m",
+   "j": "すみません、カレーのルーは、どこにありますか。",
+   "r": "Sumimasen, karee no ruu wa, doko ni arimasu ka.",
+   "i": "Permisi, bumbu instan kari ada di mana?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "カレーのルー",
+     "karee no ruu",
+     "bumbu kari instan (blok)"
+    ]
+   ],
+   "em": "?",
+   "seg": {
+    "p": "super",
+    "t": "16:30",
+    "l": "夕方 · Supermarket",
+    "tone": "sore"
+   }
+  },
+  {
+   "w": "c",
+   "j": "カレーのルーは、五番の{通路|つうろ}です。{野菜|やさい}の、{隣|となり}です。",
+   "r": "Karee no ruu wa, gobanno tsuuro desu. Yasai no, tonari desu.",
+   "i": "Bumbu kari ada di lorong nomor 5, di sebelah sayuran.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{通路|つうろ}",
+     "tsuuro",
+     "lorong"
+    ],
+    [
+     "{野菜|やさい}",
+     "yasai",
+     "sayuran"
+    ],
+    [
+     "{隣|となり}",
+     "tonari",
+     "sebelah"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。{明日|あした}は、{家|いえ}で、カレーを{作|つく}ります。",
+   "r": "Arigatou gozaimasu. Ashita wa, ie de, karee o tsukurimasu.",
+   "i": "Terima kasih. Besok saya akan memasak kari di rumah.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{作|つく}ります",
+     "tsukurimasu",
+     "membuat / memasak"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "いらっしゃいませ。ふくろは、いりますか。",
+   "r": "Irasshaimase. Fukuro wa, irimasu ka.",
+   "i": "Selamat datang. Perlu kantong plastik?",
+   "act": "bow",
+   "s": [
+    "b"
+   ],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "いいえ、エコバッグが、あります。",
+   "r": "Iie, eko baggu ga, arimasu.",
+   "i": "Tidak, saya punya tas belanja sendiri.",
+   "act": "hop",
+   "s": [
+    "c"
+   ],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "ポイントカードは、お{持|も}ちですか。",
+   "r": "Pointo kaado wa, omochi desu ka.",
+   "i": "Apakah Anda punya kartu poin?",
+   "act": "nod",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、あります。これです。",
+   "r": "Hai, arimasu. Kore desu.",
+   "i": "Ya, ada. Ini dia.",
+   "act": "step",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{合計|ごうけい}で、{1580|せんごひゃくはちじゅう}{円|えん}です。",
+   "r": "Goukei de, sen gohyaku hachijuu en desu.",
+   "i": "Totalnya 1.580 yen.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{合計|ごうけい}",
+     "goukei",
+     "total"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{2000|にせん}{円|えん}で、お{願|ねが}いします。",
+   "r": "Nisen'en de, onegaishimasu.",
+   "i": "Saya bayar pakai 2.000 yen.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{420|よんひゃくにじゅう}{円|えん}の、おつりです。レシートも、どうぞ。",
+   "r": "Yonhyaku nijuu en no, otsuri desu. Reshiito mo, douzo.",
+   "i": "Kembaliannya 420 yen. Ini struknya juga.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。",
+   "r": "Arigatou gozaimasu.",
+   "i": "Terima kasih banyak.",
+   "act": "nod",
+   "s": [
+    "♪"
+   ],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "モチ、おそいよ。{待|ま}ってたよ。",
+   "r": "Mochi, osoi yo. Matteta yo.",
+   "i": "Mochi, lama banget. Aku sudah menunggu.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "おそい",
+     "osoi",
+     "lambat / telat"
+    ]
+   ],
+   "seg": {
+    "p": "kawara",
+    "t": "17:45",
+    "l": "夕焼け · Tepi sungai",
+    "tone": "sore",
+    "g": "f",
+    "cn": "Teman ゆい (Yui)",
+    "ov": {
+     "hat": "girl",
+     "name": "Teman ゆい (Yui)"
+    }
+   }
+  },
+  {
+   "w": "m",
+   "j": "ごめん、スーパーで、{買|か}い{物|もの}してたんだ。",
+   "r": "Gomen, suupaa de, kaimono shitetan da.",
+   "i": "Maaf, tadi belanja dulu di supermarket.",
+   "act": "wave",
+   "s": [],
+   "v": [
+    [
+     "{買|か}い{物|もの}",
+     "kaimono",
+     "belanja"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{夕焼|ゆうや}け、きれいだね。{空|そら}が、オレンジ{色|いろ}。",
+   "r": "Yuuyake, kirei da ne. Sora ga, orenji iro.",
+   "i": "Langit senjanya indah ya. Langitnya berwarna oranye.",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{夕焼|ゆうや}け",
+     "yuuyake",
+     "langit senja"
+    ],
+    [
+     "{空|そら}",
+     "sora",
+     "langit"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ほんとだ。{日本|にほん}に{来|き}て、{初|はじ}めて、ゆっくり{空|そら}を{見|み}た。",
+   "r": "Honto da. Nihon ni kite, hajimete, yukkuri sora o mita.",
+   "i": "Benar. Sejak datang ke Jepang, baru pertama kali melihat langit dengan santai.",
+   "act": "sway",
+   "s": [],
+   "v": [
+    [
+     "{初|はじ}めて",
+     "hajimete",
+     "untuk pertama kali"
+    ],
+    [
+     "ゆっくり",
+     "yukkuri",
+     "pelan-pelan / santai"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{毎日|まいにち}、{忙|いそが}しいもんね。",
+   "r": "Mainichi, isogashii mon ne.",
+   "i": "Tiap hari sibuk sih ya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{忙|いそが}しい",
+     "isogashii",
+     "sibuk"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "うん。でも、{日本|にほん}の{生活|せいかつ}にも、{少|すこ}し、{慣|な}れてきた。",
+   "r": "Un. Demo, Nihon no seikatsu ni mo, sukoshi, narete kita.",
+   "i": "Ya. Tapi aku mulai agak terbiasa dengan kehidupan di Jepang.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{生活|せいかつ}",
+     "seikatsu",
+     "kehidupan sehari-hari"
+    ],
+    [
+     "{慣|な}れてきた",
+     "narete kita",
+     "jadi terbiasa"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "よかった。{最初|さいしょ}は、{不安|ふあん}だったでしょ？",
+   "r": "Yokatta. Saisho wa, fuan datta desho?",
+   "i": "Syukurlah. Awalnya cemas, kan?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{最初|さいしょ}",
+     "saisho",
+     "awalnya"
+    ],
+    [
+     "{不安|ふあん}",
+     "fuan",
+     "cemas"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "うん。{言葉|ことば}も、{食|た}べ{物|もの}も、ぜんぶ、{初|はじ}めてだったから。",
+   "r": "Un. Kotoba mo, tabemono mo, zenbu, hajimete datta kara.",
+   "i": "Ya. Bahasa dan makanan, semuanya serba pertama kali.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{言葉|ことば}",
+     "kotoba",
+     "bahasa / kata"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "でも、{今|いま}は、だいじょうぶ。モチ、がんばってるよ。",
+   "r": "Demo, ima wa, daijoubu. Mochi, ganbatteru yo.",
+   "i": "Tapi sekarang sudah tidak apa-apa. Mochi sudah berusaha keras kok.",
+   "act": "nod",
+   "s": [
+    "♪"
+   ],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "ありがとう、ゆい。……おなか、すいたね。ごはん、{行|い}こう！",
+   "r": "Arigatou, Yui. ...Onaka, suita ne. Gohan, ikou!",
+   "i": "Terima kasih, Yui. ...Perutku lapar ya. Ayo makan!",
+   "act": "jump",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "おなかが、すいた",
+     "onaka ga suita",
+     "lapar"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "いいね！あそこの{居酒屋|いざかや}に、{行|い}こう！",
+   "r": "Ii ne! Asoko no izakaya ni, ikou!",
+   "i": "Boleh! Ayo ke izakaya di sana!",
+   "act": "hop",
+   "s": [
+    "♪"
+   ],
+   "v": [
+    [
+     "{居酒屋|いざかや}",
+     "izakaya",
+     "kedai makan-minum ala Jepang"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{何|なに}、{飲|の}む？とりあえず、ビール？",
+   "r": "Nani, nomu? Toriaezu, biiru?",
+   "i": "Mau minum apa? Bir dulu?",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "とりあえず",
+     "toriaezu",
+     "untuk sementara / dulu"
+    ]
+   ],
+   "em": "?",
+   "seg": {
+    "p": "izakaya",
+    "t": "19:30",
+    "l": "夜 · Izakaya",
+    "tone": "malam",
+    "g": "f",
+    "cn": "Teman ゆい (Yui)"
+   }
+  },
+  {
+   "w": "m",
+   "j": "わたしは、ウーロン{茶|ちゃ}に、する。",
+   "r": "Watashi wa, uuron cha ni, suru.",
+   "i": "Aku pilih teh oolong.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "りょうかい。{食|た}べ{物|もの}は、どうする？",
+   "r": "Ryoukai. Tabemono wa, dou suru?",
+   "i": "Oke. Makanannya gimana?",
+   "act": "nod",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{焼|や}き{鳥|とり}と、{枝豆|えだまめ}と、おにぎりが、いいな。",
+   "r": "Yakitori to, edamame to, onigiri ga, ii na.",
+   "i": "Aku mau yakitori, edamame, dan onigiri.",
+   "act": "lean",
+   "s": [],
+   "v": [
+    [
+     "{焼|や}き{鳥|とり}",
+     "yakitori",
+     "sate ayam Jepang"
+    ],
+    [
+     "{枝豆|えだまめ}",
+     "edamame",
+     "kedelai muda rebus"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "すみません、{注文|ちゅうもん}、お{願|ねが}いします！",
+   "r": "Sumimasen, chuumon, onegaishimasu!",
+   "i": "Permisi, mau pesan!",
+   "act": "wave",
+   "s": [],
+   "v": [],
+   "em": "!"
+  },
+  {
+   "w": "m",
+   "j": "じゃあ、かんぱい！",
+   "r": "Jaa, kanpai!",
+   "i": "Nah, bersulang!",
+   "act": "hop",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "かんぱい",
+     "kanpai",
+     "bersulang"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "かんぱーい！{今日|きょう}も、おつかれさま！",
+   "r": "Kanpaai! Kyou mo, otsukaresama!",
+   "i": "Bersulang! Kerja bagus hari ini!",
+   "act": "hop",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "おつかれさま",
+     "otsukaresama",
+     "terima kasih atas kerja kerasmu"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "ん、おいしい！{焼|や}き{鳥|とり}、{最高|さいこう}！",
+   "r": "N, oishii! Yakitori, saikou!",
+   "i": "Hmm, enak! Yakitorinya juara!",
+   "act": "jump",
+   "s": [],
+   "v": [
+    [
+     "{最高|さいこう}",
+     "saikou",
+     "yang terbaik"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "でしょ？また、{来|き}ようね。",
+   "r": "Desho? Mata, kiyou ne.",
+   "i": "Kan? Ayo datang lagi ya.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "うん。{今日|きょう}は、{本当|ほんとう}に、{楽|たの}しかった。",
+   "r": "Un. Kyou wa, hontou ni, tanoshikatta.",
+   "i": "Ya. Hari ini benar-benar menyenangkan.",
+   "act": "sway",
+   "s": [],
+   "v": [
+    [
+     "{本当|ほんとう}に",
+     "hontou ni",
+     "benar-benar"
+    ],
+    [
+     "{楽|たの}しかった",
+     "tanoshikatta",
+     "menyenangkan (lampau)"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "お{会計|かいけい}は、{割|わ}り{勘|かん}で、いい？",
+   "r": "Okaikei wa, warikan de, ii?",
+   "i": "Bayarnya patungan, ya?",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{割|わ}り{勘|かん}",
+     "warikan",
+     "patungan"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "うん、いいよ。ごちそうさま！",
+   "r": "Un, ii yo. Gochisousama!",
+   "i": "Ya, boleh. Terima kasih makanannya!",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "すみません、{終電|しゅうでん}は、{何時|なんじ}ですか。",
+   "r": "Sumimasen, shuuden wa, nanji desu ka.",
+   "i": "Permisi, kereta terakhir jam berapa?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{終電|しゅうでん}",
+     "shuuden",
+     "kereta terakhir"
+    ]
+   ],
+   "em": "?",
+   "seg": {
+    "p": "station",
+    "t": "21:50",
+    "l": "夜 · Stasiun",
+    "tone": "malam"
+   }
+  },
+  {
+   "w": "c",
+   "j": "{終電|しゅうでん}は、{23時|にじゅうさんじ}{10分|じゅっぷん}です。まだ、だいじょうぶですよ。",
+   "r": "Shuuden wa, nijuusanji juppun desu. Mada, daijoubu desu yo.",
+   "i": "Kereta terakhir jam 23.10. Masih aman kok.",
+   "act": "nod",
+   "s": [
+    "time"
+   ],
+   "v": [
+    [
+     "まだ",
+     "mada",
+     "masih"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "よかった。{何番線|なんばんせん}ですか。",
+   "r": "Yokatta. Nanbansen desu ka.",
+   "i": "Syukurlah. Peron nomor berapa?",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{三番線|さんばんせん}です。{階段|かいだん}を{上|あ}がって、{右|みぎ}です。",
+   "r": "Sanbansen desu. Kaidan o agatte, migi desu.",
+   "i": "Peron 3. Naik tangga, lalu ke kanan.",
+   "act": "nod",
+   "s": [
+    "plat"
+   ],
+   "v": [
+    [
+     "{上|あ}がって",
+     "agatte",
+     "naik lalu"
+    ],
+    [
+     "{右|みぎ}",
+     "migi",
+     "kanan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{帰|かえ}りの{切符|きっぷ}は、これで、いいですか。",
+   "r": "Kaeri no kippu wa, kore de, ii desu ka.",
+   "i": "Tiket pulangnya, pakai yang ini sudah benar?",
+   "act": "hop",
+   "s": [
+    "ticket"
+   ],
+   "v": [
+    [
+     "{帰|かえ}り",
+     "kaeri",
+     "(perjalanan) pulang"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "はい、だいじょうぶです。{今日|きょう}は、{楽|たの}しかったですか。",
+   "r": "Hai, daijoubu desu. Kyou wa, tanoshikatta desu ka.",
+   "i": "Ya, sudah benar. Hari ini menyenangkan?",
+   "act": "nod",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、とても。{一日|いちにち}、いろいろな{所|ところ}に、{行|い}きました。",
+   "r": "Hai, totemo. Ichinichi, iroiro na tokoro ni, ikimashita.",
+   "i": "Ya, sangat. Seharian aku pergi ke berbagai tempat.",
+   "act": "sway",
+   "s": [],
+   "v": [
+    [
+     "{一日|いちにち}",
+     "ichinichi",
+     "seharian"
+    ],
+    [
+     "いろいろな",
+     "iroiro na",
+     "bermacam-macam"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "それは、よかったですね。{気|き}をつけて、お{帰|かえ}りください。",
+   "r": "Sore wa, yokatta desu ne. Ki o tsukete, okaeri kudasai.",
+   "i": "Syukurlah kalau begitu. Hati-hati pulangnya.",
+   "act": "bow",
+   "s": [
+    "♪"
+   ],
+   "v": [
+    [
+     "お{帰|かえ}りください",
+     "okaeri kudasai",
+     "silakan pulang"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。おやすみなさい。",
+   "r": "Arigatou gozaimasu. Oyasuminasai.",
+   "i": "Terima kasih. Selamat malam.",
+   "act": "wave",
+   "s": [
+    "♪"
+   ],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "おやすみなさい。",
+   "r": "Oyasuminasai.",
+   "i": "Selamat malam.",
+   "act": "bow",
+   "s": [
+    "♥"
+   ],
+   "v": []
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Di minimarket, kasir bertanya \"Atatamemasu ka?\". Artinya?",
+   "a": "Mau dihangatkan?",
+   "w": [
+    "Mau pakai kantong?",
+    "Mau bayar tunai?",
+    "Mau makan di sini?"
+   ],
+   "f": "{温|あたた}めます (atatamemasu) = menghangatkan, biasanya untuk bento atau sandwich."
+  },
+  {
+   "q": "Di loket stasiun, \"Oufuku\" berarti apa?",
+   "a": "Pulang-pergi",
+   "w": [
+    "Sekali jalan",
+    "Kereta terakhir",
+    "Peron nomor dua"
+   ],
+   "f": "{往復|おうふく} = pulang-pergi, lawannya {片道|かたみち} (katamichi) = sekali jalan."
+  },
+  {
+   "q": "Mochi bilang \"Densha ga suiteita kara\". Kenapa dia datang lebih awal?",
+   "a": "Karena keretanya sepi",
+   "w": [
+    "Karena bangun pagi",
+    "Karena naik taksi",
+    "Karena Yui menjemput"
+   ],
+   "f": "すいている (suiteiru) = sepi atau lengang. から (kara) = karena."
+  },
+  {
+   "q": "\"Momiji ga kirei da ne\" dibicarakan tentang apa?",
+   "a": "Daun merah musim gugur",
+   "w": [
+    "Bunga sakura",
+    "Salju",
+    "Matahari terbenam"
+   ],
+   "f": "{紅葉|もみじ} (momiji) = daun yang berubah merah di musim gugur."
+  },
+  {
+   "q": "Di kafe, apa arti \"Ranchi setto\"?",
+   "a": "Paket makan siang",
+   "w": [
+    "Menu anak",
+    "Kopi gratis",
+    "Meja dekat jendela"
+   ],
+   "f": "ランチセット = paket makan siang, biasanya makanan plus minuman."
+  },
+  {
+   "q": "Kasir supermarket bertanya \"Fukuro wa irimasu ka\". Mochi menolak karena apa?",
+   "a": "Punya tas belanja sendiri (eko baggu)",
+   "w": [
+    "Barangnya sedikit",
+    "Kantongnya mahal",
+    "Lupa membawa uang"
+   ],
+   "f": "ふくろ = kantong plastik. いりますか = perlu? Mochi menjawab エコバッグが、あります."
+  },
+  {
+   "q": "Apa arti \"Yuuyake\"?",
+   "a": "Langit senja",
+   "w": [
+    "Makan malam",
+    "Hujan sore",
+    "Bulan purnama"
+   ],
+   "f": "{夕焼|ゆうや}け = langit berwarna oranye saat matahari terbenam."
+  },
+  {
+   "q": "\"Warikan de ii?\" artinya?",
+   "a": "Bayarnya patungan, ya?",
+   "w": [
+    "Mau pesan lagi?",
+    "Mau bersulang?",
+    "Mau pulang sekarang?"
+   ],
+   "f": "{割|わ}り{勘|かん} (warikan) = membagi tagihan sama rata."
+  },
+  {
+   "q": "Pada malam hari Mochi bertanya soal \"shuuden\". Apa itu?",
+   "a": "Kereta terakhir",
+   "w": [
+    "Kereta pertama",
+    "Kereta ekspres",
+    "Tiket harian"
+   ],
+   "f": "{終電|しゅうでん} = kereta terakhir. Lawannya {始発|しはつ} (shihatsu) = kereta pertama."
+  }
+ ]
+}
