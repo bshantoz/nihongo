@@ -1,0 +1,1663 @@
+{
+ "id": "ep25",
+ "scene": "kaisha",
+ "multi": true,
+ "lines": [
+  {
+   "w": "m",
+   "j": "おはようございます、{先輩|せんぱい}。",
+   "r": "Ohayou gozaimasu, senpai.",
+   "i": "Selamat pagi, senior.",
+   "act": "bow",
+   "s": [],
+   "v": [],
+   "seg": {
+    "p": "kaisha",
+    "t": "08:30",
+    "l": "朝 · 会社",
+    "tone": "pagi",
+    "g": "m"
+   }
+  },
+  {
+   "w": "c",
+   "j": "おはよう。モチ、{顔色|かおいろ}が{悪|わる}いね。だいじょうぶ？",
+   "r": "Ohayou. Mochi, kaoiro ga warui ne. Daijoubu?",
+   "i": "Pagi. Mochi, wajahmu pucat ya. Kamu baik-baik saja?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{顔色|かおいろ}",
+     "kaoiro",
+     "warna wajah (kondisi)"
+    ],
+    [
+     "{悪|わる}い",
+     "warui",
+     "buruk"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "すみません。{昨日|きのう}の{夜|よる}から、{頭|あたま}が{痛|いた}くて、{熱|ねつ}も、{少|すこ}しあります。",
+   "r": "Sumimasen. Kinou no yoru kara, atama ga itakute, netsu mo, sukoshi arimasu.",
+   "i": "Maaf. Sejak semalam kepalaku sakit, dan agak demam juga.",
+   "act": "lean",
+   "s": [],
+   "v": [
+    [
+     "{昨日|きのう}の{夜|よる}",
+     "kinou no yoru",
+     "semalam"
+    ],
+    [
+     "{頭|あたま}が{痛|いた}い",
+     "atama ga itai",
+     "sakit kepala"
+    ],
+    [
+     "{熱|ねつ}",
+     "netsu",
+     "demam"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{熱|ねつ}は、{測|はか}った？",
+   "r": "Netsu wa, hakatta?",
+   "i": "Sudah diukur demamnya?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{測|はか}る",
+     "hakaru",
+     "mengukur"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、{朝|あさ}、{測|はか}りました。{三十八度|さんじゅうはちど}ありました。",
+   "r": "Hai, asa, hakarimashita. Sanjuuhachi-do arimashita.",
+   "i": "Ya, tadi pagi sudah. Ada 38 derajat.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "それは、たいへんだ。{無理|むり}しないで、{病院|びょういん}に{行|い}きなさい。",
+   "r": "Sore wa, taihen da. Muri shinaide, byouin ni ikinasai.",
+   "i": "Wah, gawat. Jangan memaksakan diri, pergilah ke rumah sakit.",
+   "act": "step",
+   "s": [],
+   "v": [
+    [
+     "{無理|むり}しないで",
+     "muri shinaide",
+     "jangan memaksakan diri"
+    ],
+    [
+     "{行|い}きなさい",
+     "ikinasai",
+     "pergilah (perintah halus)"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "でも、{仕事|しごと}が……。",
+   "r": "Demo, shigoto ga...",
+   "i": "Tapi, pekerjaannya...",
+   "act": "tilt",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{仕事|しごと}は、だいじょうぶ。{今日|きょう}は、{休|やす}んでいいよ。この{紙|かみ}に、{名前|なまえ}を{書|か}いて。",
+   "r": "Shigoto wa, daijoubu. Kyou wa, yasunde ii yo. Kono kami ni, namae o kaite.",
+   "i": "Pekerjaan tenang saja. Hari ini boleh istirahat. Tulis namamu di kertas ini.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{休|やす}んでいい",
+     "yasunde ii",
+     "boleh istirahat / libur"
+    ],
+    [
+     "{紙|かみ}",
+     "kami",
+     "kertas"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい。……{書|か}きました。",
+   "r": "Hai... Kakimashita.",
+   "i": "Ya... Sudah kutulis.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "はい、はんこを{押|お}したよ。お{大事|だいじ}に。",
+   "r": "Hai, hanko o oshita yo. Odaiji ni.",
+   "i": "Nah, sudah kucap. Semoga lekas sembuh.",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "お{大事|だいじ}に",
+     "odaiji ni",
+     "semoga lekas sembuh"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。{行|い}ってきます。",
+   "r": "Arigatou gozaimasu. Ittekimasu.",
+   "i": "Terima kasih. Saya berangkat dulu.",
+   "act": "wave",
+   "s": [],
+   "v": [],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "すみません、{近|ちか}くに、{病院|びょういん}は、ありますか。",
+   "r": "Sumimasen, chikaku ni, byouin wa, arimasu ka.",
+   "i": "Permisi, apakah ada rumah sakit di dekat sini?",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{近|ちか}く",
+     "chikaku",
+     "dekat sini"
+    ]
+   ],
+   "em": "?",
+   "seg": {
+    "p": "kouban",
+    "t": "08:55",
+    "l": "朝 · 交番",
+    "tone": "pagi",
+    "g": "m"
+   }
+  },
+  {
+   "w": "c",
+   "j": "どうしましたか。{具合|ぐあい}が、{悪|わる}いんですか。",
+   "r": "Doushimashita ka. Guai ga, warui n desu ka.",
+   "i": "Ada apa? Badanmu kurang sehat?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{具合|ぐあい}",
+     "guai",
+     "kondisi badan"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、{熱|ねつ}があって、{頭|あたま}が{痛|いた}いんです。",
+   "r": "Hai, netsu ga atte, atama ga itai n desu.",
+   "i": "Ya, saya demam dan kepala saya sakit.",
+   "act": "lean",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "それは、いけませんね。{駅|えき}の{前|まえ}に、{内科|ないか}の{病院|びょういん}がありますよ。",
+   "r": "Sore wa, ikemasen ne. Eki no mae ni, naika no byouin ga arimasu yo.",
+   "i": "Wah, itu tidak baik. Di depan stasiun ada rumah sakit penyakit dalam lho.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{内科|ないか}",
+     "naika",
+     "penyakit dalam"
+    ],
+    [
+     "{駅|えき}の{前|まえ}",
+     "eki no mae",
+     "depan stasiun"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{駅|えき}の{前|まえ}ですね。ここから、{遠|とお}いですか。",
+   "r": "Eki no mae desu ne. Koko kara, tooi desu ka.",
+   "i": "Depan stasiun ya. Jauh dari sini?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{遠|とお}い",
+     "tooi",
+     "jauh"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "いいえ、{歩|ある}いて{五分|ごふん}です。この{道|みち}を、まっすぐ{行|い}って、{信号|しんごう}を{右|みぎ}に{曲|ま}がってください。",
+   "r": "Iie, aruite gofun desu. Kono michi o, massugu itte, shingou o migi ni magatte kudasai.",
+   "i": "Tidak, jalan kaki lima menit. Lurus saja di jalan ini, lalu belok kanan di lampu lalu lintas.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "まっすぐ",
+     "massugu",
+     "lurus"
+    ],
+    [
+     "{信号|しんごう}",
+     "shingou",
+     "lampu lalu lintas"
+    ],
+    [
+     "{曲|ま}がる",
+     "magaru",
+     "belok"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "まっすぐ{行|い}って、{信号|しんごう}を{右|みぎ}ですね。",
+   "r": "Massugu itte, shingou o migi desu ne.",
+   "i": "Lurus, lalu kanan di lampu lalu lintas, ya.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "そうです。{青|あお}い{看板|かんばん}が、{見|み}えます。{気|き}をつけて。",
+   "r": "Sou desu. Aoi kanban ga, miemasu. Ki o tsukete.",
+   "i": "Betul. Akan kelihatan papan nama biru. Hati-hati.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{看板|かんばん}",
+     "kanban",
+     "papan nama"
+    ],
+    [
+     "{見|み}える",
+     "mieru",
+     "terlihat"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございました。",
+   "r": "Arigatou gozaimashita.",
+   "i": "Terima kasih banyak.",
+   "act": "bow",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "おはようございます。{初|はじ}めてですか。",
+   "r": "Ohayou gozaimasu. Hajimete desu ka.",
+   "i": "Selamat pagi. Apakah ini kunjungan pertama?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{初|はじ}めて",
+     "hajimete",
+     "pertama kali"
+    ]
+   ],
+   "em": "?",
+   "seg": {
+    "p": "byouin",
+    "t": "09:20",
+    "l": "朝 · 病院の受付",
+    "tone": "pagi",
+    "g": "f"
+   }
+  },
+  {
+   "w": "m",
+   "j": "はい、{初|はじ}めてです。",
+   "r": "Hai, hajimete desu.",
+   "i": "Ya, pertama kali.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{保険証|ほけんしょう}を、お{願|ねが}いします。",
+   "r": "Hokenshou o, onegaishimasu.",
+   "i": "Tolong kartu asuransi kesehatannya.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{保険証|ほけんしょう}",
+     "hokenshou",
+     "kartu asuransi kesehatan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、これです。",
+   "r": "Hai, kore desu.",
+   "i": "Ya, ini.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございます。この{問診票|もんしんひょう}に、{書|か}いてください。",
+   "r": "Arigatou gozaimasu. Kono monshinhyou ni, kaite kudasai.",
+   "i": "Terima kasih. Tolong isi formulir pemeriksaan ini.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{問診票|もんしんひょう}",
+     "monshinhyou",
+     "formulir pertanyaan medis"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{名前|なまえ}と、{住所|じゅうしょ}を、{書|か}きます。……あの、ここは、どう{書|か}きますか。",
+   "r": "Namae to, juusho o, kakimasu... Ano, koko wa, dou kakimasu ka.",
+   "i": "Nama dan alamat kutulis... Anu, bagian ini bagaimana menulisnya?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{住所|じゅうしょ}",
+     "juusho",
+     "alamat"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "そこは、{症状|しょうじょう}です。{熱|ねつ}と{頭痛|ずつう}に、○をつけてください。",
+   "r": "Soko wa, shoujou desu. Netsu to zutsuu ni, maru o tsukete kudasai.",
+   "i": "Bagian itu gejala. Tolong lingkari demam dan sakit kepala.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{症状|しょうじょう}",
+     "shoujou",
+     "gejala"
+    ],
+    [
+     "{頭痛|ずつう}",
+     "zutsuu",
+     "sakit kepala"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、できました。",
+   "r": "Hai, dekimashita.",
+   "i": "Ya, sudah selesai.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "では、{体温|たいおん}を{測|はか}ってください。わきの{下|した}に、{入|い}れてください。",
+   "r": "Dewa, taion o hakatte kudasai. Waki no shita ni, irete kudasai.",
+   "i": "Kalau begitu, tolong ukur suhu badan. Letakkan di bawah ketiak.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{体温|たいおん}",
+     "taion",
+     "suhu badan"
+    ],
+    [
+     "{入|い}れる",
+     "ireru",
+     "memasukkan / meletakkan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "……{三十八度|さんじゅうはちど}二分です。",
+   "r": "...Sanjuuhachi-do nibu desu.",
+   "i": "...38,2 derajat.",
+   "act": "lean",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "ちょっと、{高|たか}いですね。{番号札|ばんごうふだ}です。{十二番|じゅうにばん}で、お{待|ま}ちください。",
+   "r": "Chotto, takai desu ne. Bangoufuda desu. Juuniban de, omachi kudasai.",
+   "i": "Agak tinggi ya. Ini kartu nomornya. Nomor 12, silakan menunggu.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{番号札|ばんごうふだ}",
+     "bangoufuda",
+     "kartu nomor antrean"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{十二番|じゅうにばん}ですね。{待|ま}ちます。",
+   "r": "Juuniban desu ne. Machimasu.",
+   "i": "Nomor 12 ya. Saya tunggu.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "{失礼|しつれい}します。",
+   "r": "Shitsurei shimasu.",
+   "i": "Permisi (saya masuk).",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{失礼|しつれい}します",
+     "shitsurei shimasu",
+     "permisi (sopan)"
+    ]
+   ],
+   "seg": {
+    "p": "byouin",
+    "t": "10:10",
+    "l": "診察室 · Ruang periksa",
+    "tone": "pagi",
+    "g": "m",
+    "cn": "Dokter 先生 (sensei)",
+    "ov": {
+     "hat": "none",
+     "c1": "#f7fafa",
+     "c2": "#cfdada",
+     "bn": "内科",
+     "name": "Dokter 先生 (sensei)",
+     "aria": "Mochi diperiksa dokter di ruang periksa"
+    }
+   }
+  },
+  {
+   "w": "c",
+   "j": "どうぞ、{座|すわ}ってください。どうしましたか。",
+   "r": "Douzo, suwatte kudasai. Doushimashita ka.",
+   "i": "Silakan duduk. Ada keluhan apa?",
+   "act": "nod",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{昨日|きのう}の{夜|よる}から、{熱|ねつ}があって、{頭|あたま}も{痛|いた}いです。",
+   "r": "Kinou no yoru kara, netsu ga atte, atama mo itai desu.",
+   "i": "Sejak semalam saya demam, dan kepala juga sakit.",
+   "act": "lean",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{咳|せき}や、{喉|のど}の{痛|いた}みは、ありますか。",
+   "r": "Seki ya, nodo no itami wa, arimasu ka.",
+   "i": "Apakah ada batuk atau nyeri tenggorokan?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{咳|せき}",
+     "seki",
+     "batuk"
+    ],
+    [
+     "{喉|のど}",
+     "nodo",
+     "tenggorokan"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{喉|のど}が、{少|すこ}し{痛|いた}いです。{咳|せき}は、ありません。",
+   "r": "Nodo ga, sukoshi itai desu. Seki wa, arimasen.",
+   "i": "Tenggorokan agak sakit. Batuk tidak ada.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{口|くち}を{大|おお}きく{開|あ}けてください。「あー」と{言|い}ってください。",
+   "r": "Kuchi o ookiku akete kudasai. 「Aa」 to itte kudasai.",
+   "i": "Tolong buka mulut lebar-lebar. Ucapkan 「aaa」.",
+   "act": "lean",
+   "s": [],
+   "v": [
+    [
+     "{口|くち}を{開|あ}ける",
+     "kuchi o akeru",
+     "membuka mulut"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "あー。",
+   "r": "Aa.",
+   "i": "Aaa.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{喉|のど}が、{赤|あか}いですね。{次|つぎ}に、{胸|むね}の{音|おと}を{聞|き}きます。{深呼吸|しんこきゅう}してください。",
+   "r": "Nodo ga, akai desu ne. Tsugi ni, mune no oto o kikimasu. Shinkokyuu shite kudasai.",
+   "i": "Tenggorokannya merah ya. Selanjutnya saya dengar suara dadamu. Tolong tarik napas dalam.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{胸|むね}",
+     "mune",
+     "dada"
+    ],
+    [
+     "{深呼吸|しんこきゅう}",
+     "shinkokyuu",
+     "napas dalam"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "すー、はー。",
+   "r": "Suu, haa.",
+   "i": "Hhh... (tarik dan buang napas).",
+   "act": "sway",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{風邪|かぜ}ですね。{心配|しんぱい}いりませんよ。",
+   "r": "Kaze desu ne. Shinpai irimasen yo.",
+   "i": "Ini flu biasa. Tidak perlu khawatir.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{風邪|かぜ}",
+     "kaze",
+     "flu / masuk angin"
+    ],
+    [
+     "{心配|しんぱい}いりません",
+     "shinpai irimasen",
+     "tidak perlu khawatir"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "よかった。{仕事|しごと}は、{休|やす}んだほうがいいですか。",
+   "r": "Yokatta. Shigoto wa, yasunda hou ga ii desu ka.",
+   "i": "Syukurlah. Apakah sebaiknya saya libur kerja?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "〜たほうがいい",
+     "~ta hou ga ii",
+     "sebaiknya ~"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "はい、{二日間|ふつかかん}、{休|やす}んでください。{水|みず}をたくさん{飲|の}んで、よく{寝|ね}てください。",
+   "r": "Hai, futsukakan, yasunde kudasai. Mizu o takusan nonde, yoku nete kudasai.",
+   "i": "Ya, istirahatlah dua hari. Banyak minum air dan tidur yang cukup.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{二日間|ふつかかん}",
+     "futsukakan",
+     "selama dua hari"
+    ],
+    [
+     "{寝|ね}る",
+     "neru",
+     "tidur"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{食|た}べ{物|もの}は、{何|なに}を{食|た}べたらいいですか。",
+   "r": "Tabemono wa, nani o tabetara ii desu ka.",
+   "i": "Makanannya, sebaiknya makan apa?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{食|た}べたらいい",
+     "tabetara ii",
+     "sebaiknya makan"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "おかゆや、うどんが、いいですよ。{冷|つめ}たい{物|もの}は、{飲|の}まないでください。",
+   "r": "Okayu ya, udon ga, ii desu yo. Tsumetai mono wa, nomanaide kudasai.",
+   "i": "Bubur atau udon bagus. Jangan minum yang dingin-dingin.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "おかゆ",
+     "okayu",
+     "bubur nasi"
+    ],
+    [
+     "{飲|の}まないでください",
+     "nomanaide kudasai",
+     "tolong jangan minum"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{薬|くすり}を、{出|だ}しておきます。{一日|いちにち}{三回|さんかい}、{食後|しょくご}に、{飲|の}んでください。",
+   "r": "Kusuri o, dashite okimasu. Ichinichi sankai, shokugo ni, nonde kudasai.",
+   "i": "Saya resepkan obat. Minum tiga kali sehari, setelah makan.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{食後|しょくご}",
+     "shokugo",
+     "setelah makan"
+    ],
+    [
+     "{一日|いちにち}{三回|さんかい}",
+     "ichinichi sankai",
+     "tiga kali sehari"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "はい、わかりました。ありがとうございました。",
+   "r": "Hai, wakarimashita. Arigatou gozaimashita.",
+   "i": "Baik, saya mengerti. Terima kasih banyak.",
+   "act": "bow",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "お{大事|だいじ}に。",
+   "r": "Odaiji ni.",
+   "i": "Semoga lekas sembuh.",
+   "act": "bow",
+   "s": [],
+   "v": [],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "{会計|かいけい}は、{千八百円|せんはっぴゃくえん}です。",
+   "r": "Kaikei wa, sen happyaku en desu.",
+   "i": "Biayanya 1.800 yen.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{会計|かいけい}",
+     "kaikei",
+     "pembayaran / kasir"
+    ]
+   ],
+   "seg": {
+    "p": "byouin",
+    "t": "10:50",
+    "l": "会計 · Kasir",
+    "tone": "siang",
+    "g": "f",
+    "ov": {
+     "bn": "会計",
+     "name": "Resepsionis 受付 (uketsuke)"
+    }
+   }
+  },
+  {
+   "w": "m",
+   "j": "カードで、いいですか。",
+   "r": "Kaado de, ii desu ka.",
+   "i": "Boleh pakai kartu?",
+   "act": "tilt",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "すみません、{現金|げんきん}だけです。",
+   "r": "Sumimasen, genkin dake desu.",
+   "i": "Maaf, hanya tunai.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{現金|げんきん}",
+     "genkin",
+     "uang tunai"
+    ],
+    [
+     "〜だけ",
+     "~dake",
+     "hanya ~"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "じゃあ、{現金|げんきん}で、お{願|ねが}いします。……はい。",
+   "r": "Jaa, genkin de, onegaishimasu... Hai.",
+   "i": "Kalau begitu, tunai saja. ...Ini.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございます。これが、{処方箋|しょほうせん}です。{薬局|やっきょく}に、{持|も}っていってください。",
+   "r": "Arigatou gozaimasu. Kore ga, shohousen desu. Yakkyoku ni, motte itte kudasai.",
+   "i": "Terima kasih. Ini resep dokternya. Tolong bawa ke apotek.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{処方箋|しょほうせん}",
+     "shohousen",
+     "resep dokter"
+    ],
+    [
+     "{薬局|やっきょく}",
+     "yakkyoku",
+     "apotek"
+    ],
+    [
+     "{持|も}っていく",
+     "motte iku",
+     "membawa"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{薬局|やっきょく}は、どこですか。",
+   "r": "Yakkyoku wa, doko desu ka.",
+   "i": "Apoteknya di mana?",
+   "act": "tilt",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{病院|びょういん}の{隣|となり}です。{緑|みどり}の{十字|じゅうじ}の{看板|かんばん}が、{目印|めじるし}です。",
+   "r": "Byouin no tonari desu. Midori no juuji no kanban ga, mejirushi desu.",
+   "i": "Di sebelah rumah sakit. Papan nama salib hijau adalah penandanya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{隣|となり}",
+     "tonari",
+     "sebelah"
+    ],
+    [
+     "{目印|めじるし}",
+     "mejirushi",
+     "penanda"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかりました。ありがとうございます。",
+   "r": "Wakarimashita. Arigatou gozaimasu.",
+   "i": "Saya mengerti. Terima kasih.",
+   "act": "bow",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "すみません、{処方箋|しょほうせん}を、お{願|ねが}いします。",
+   "r": "Sumimasen, shohousen o, onegaishimasu.",
+   "i": "Permisi, tolong tebus resep ini.",
+   "act": "step",
+   "s": [],
+   "v": [],
+   "seg": {
+    "p": "yakkyoku",
+    "t": "11:25",
+    "l": "昼 · 薬局",
+    "tone": "siang",
+    "g": "f"
+   }
+  },
+  {
+   "w": "c",
+   "j": "はい、{預|あず}かります。{少|すこ}し、お{待|ま}ちください。",
+   "r": "Hai, azukarimasu. Sukoshi, omachi kudasai.",
+   "i": "Baik, saya terima. Mohon tunggu sebentar.",
+   "act": "nod",
+   "s": [
+    "a"
+   ],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "お{待|ま}たせしました。モチさんですね。",
+   "r": "Omatase shimashita. Mochi-san desu ne.",
+   "i": "Maaf menunggu. Dengan Pak Mochi ya.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "お{待|ま}たせしました",
+     "omatase shimashita",
+     "maaf sudah menunggu"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{薬|くすり}は、{三種類|さんしゅるい}です。{熱|ねつ}を{下|さ}げる{薬|くすり}と、{喉|のど}の{薬|くすり}と、{胃|い}の{薬|くすり}です。",
+   "r": "Kusuri wa, sanshurui desu. Netsu o sageru kusuri to, nodo no kusuri to, i no kusuri desu.",
+   "i": "Obatnya ada tiga macam: obat penurun demam, obat tenggorokan, dan obat lambung.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "{三種類|さんしゅるい}",
+     "sanshurui",
+     "tiga jenis"
+    ],
+    [
+     "{下|さ}げる",
+     "sageru",
+     "menurunkan"
+    ],
+    [
+     "{胃|い}",
+     "i",
+     "lambung"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{飲|の}み{方|かた}を、{教|おし}えてください。",
+   "r": "Nomikata o, oshiete kudasai.",
+   "i": "Tolong beri tahu cara minumnya.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{飲|の}み{方|かた}",
+     "nomikata",
+     "cara minum"
+    ],
+    [
+     "{教|おし}える",
+     "oshieru",
+     "memberitahu / mengajari"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{一日|いちにち}{三回|さんかい}、{食|た}べたあとに、{飲|の}んでください。{食|た}べる{前|まえ}には、{飲|の}まないでください。",
+   "r": "Ichinichi sankai, tabeta ato ni, nonde kudasai. Taberu mae ni wa, nomanaide kudasai.",
+   "i": "Tiga kali sehari, minum setelah makan. Jangan minum sebelum makan.",
+   "act": "nod",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "{食|た}べたあと",
+     "tabeta ato",
+     "setelah makan"
+    ],
+    [
+     "{食|た}べる{前|まえ}",
+     "taberu mae",
+     "sebelum makan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{水|みず}で、{飲|の}みますか。",
+   "r": "Mizu de, nomimasu ka.",
+   "i": "Diminum dengan air?",
+   "act": "tilt",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "はい、{水|みず}か、お{湯|ゆ}で。ジュースや、お{茶|ちゃ}では、{飲|の}まないでください。",
+   "r": "Hai, mizu ka, oyu de. Juusu ya, ocha de wa, nomanaide kudasai.",
+   "i": "Ya, dengan air putih atau air hangat. Jangan dengan jus atau teh.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "お{湯|ゆ}",
+     "oyu",
+     "air panas / hangat"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかりました。{眠|ねむ}くなりますか。",
+   "r": "Wakarimashita. Nemuku narimasu ka.",
+   "i": "Saya mengerti. Apakah akan mengantuk?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{眠|ねむ}くなる",
+     "nemuku naru",
+     "menjadi mengantuk"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{少|すこ}し、{眠|ねむ}くなるかもしれません。{運転|うんてん}は、しないでくださいね。",
+   "r": "Sukoshi, nemuku naru kamoshiremasen. Unten wa, shinaide kudasai ne.",
+   "i": "Mungkin sedikit mengantuk. Jangan mengemudi ya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "〜かもしれません",
+     "~kamoshiremasen",
+     "mungkin ~"
+    ],
+    [
+     "{運転|うんてん}",
+     "unten",
+     "mengemudi"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、{歩|ある}いて{帰|かえ}ります。ありがとうございました。",
+   "r": "Hai, aruite kaerimasu. Arigatou gozaimashita.",
+   "i": "Ya, saya pulang jalan kaki. Terima kasih banyak.",
+   "act": "bow",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "お{大事|だいじ}に。",
+   "r": "Odaiji ni.",
+   "i": "Semoga lekas sembuh.",
+   "act": "bow",
+   "s": [],
+   "v": [],
+   "em": "♥"
+  },
+  {
+   "w": "m",
+   "j": "すみません、おかゆは、ありますか。",
+   "r": "Sumimasen, okayu wa, arimasu ka.",
+   "i": "Permisi, apakah ada bubur?",
+   "act": "hop",
+   "s": [],
+   "v": [],
+   "em": "?",
+   "seg": {
+    "p": "konbini",
+    "t": "12:10",
+    "l": "昼 · コンビニ",
+    "tone": "siang",
+    "g": "m"
+   }
+  },
+  {
+   "w": "c",
+   "j": "はい、あちらの{棚|たな}に、ありますよ。{温|あたた}めますか。",
+   "r": "Hai, achira no tana ni, arimasu yo. Atatamemasu ka.",
+   "i": "Ada, di rak sebelah sana. Mau dihangatkan?",
+   "act": "nod",
+   "s": [
+    "items"
+   ],
+   "v": [
+    [
+     "{棚|たな}",
+     "tana",
+     "rak"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、お{願|ねが}いします。それから、スポーツドリンクと、ゼリーも。",
+   "r": "Hai, onegaishimasu. Sorekara, supootsu dorinku to, zerii mo.",
+   "i": "Ya, tolong. Lalu, minuman olahraga dan jeli juga.",
+   "act": "hop",
+   "s": [
+    "heat"
+   ],
+   "v": [
+    [
+     "それから",
+     "sorekara",
+     "lalu / kemudian"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "ひんやりシートも、いかがですか。{熱|ねつ}が、あるときに、いいですよ。",
+   "r": "Hin'yari shiito mo, ikaga desu ka. Netsu ga, aru toki ni, ii desu yo.",
+   "i": "Plester kompres dingin juga bagaimana? Bagus saat demam.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ひんやりシート",
+     "hin'yari shiito",
+     "plester kompres dingin"
+    ],
+    [
+     "〜ときに",
+     "~toki ni",
+     "pada saat ~"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "じゃあ、それも、お{願|ねが}いします。",
+   "r": "Jaa, sore mo, onegaishimasu.",
+   "i": "Kalau begitu, itu juga, tolong.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{全部|ぜんぶ}で、{九百五十円|きゅうひゃくごじゅうえん}です。",
+   "r": "Zenbu de, kyuuhyaku gojuu en desu.",
+   "i": "Semuanya 950 yen.",
+   "act": "nod",
+   "s": [
+    "money"
+   ],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "{千円|せんえん}で、お{願|ねが}いします。",
+   "r": "Sen'en de, onegaishimasu.",
+   "i": "Pakai 1.000 yen, tolong.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "ありがとうございました。お{大事|だいじ}に。",
+   "r": "Arigatou gozaimashita. Odaiji ni.",
+   "i": "Terima kasih. Semoga lekas sembuh.",
+   "act": "bow",
+   "s": [],
+   "v": [],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "モチ、いる？ゆいだよ。",
+   "r": "Mochi, iru? Yui da yo.",
+   "i": "Mochi, ada di rumah? Ini Yui.",
+   "act": "wave",
+   "s": [],
+   "v": [],
+   "em": "!",
+   "seg": {
+    "p": "ie",
+    "t": "16:30",
+    "l": "夕方 · うち",
+    "tone": "sore",
+    "g": "f"
+   }
+  },
+  {
+   "w": "m",
+   "j": "あ、ゆいちゃん。どうして、ここに？",
+   "r": "A, Yui-chan. Doushite, koko ni?",
+   "i": "Ah, Yui. Kok bisa ada di sini?",
+   "act": "tilt",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{先輩|せんぱい}から、{聞|き}いたの。{熱|ねつ}が、あるんでしょう？",
+   "r": "Senpai kara, kiita no. Netsu ga, arun deshou?",
+   "i": "Aku dengar dari seniormu. Kamu demam, kan?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{聞|き}いたの",
+     "kiita no",
+     "aku dengar (dari)"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "うん。でも、{病院|びょういん}に{行|い}って、{薬|くすり}も{飲|の}んだから、だいぶ、よくなったよ。",
+   "r": "Un. Demo, byouin ni itte, kusuri mo nonda kara, daibu, yokunatta yo.",
+   "i": "Ya. Tapi sudah ke rumah sakit dan minum obat, jadi sudah jauh lebih baik.",
+   "act": "sway",
+   "s": [],
+   "v": [
+    [
+     "だいぶ",
+     "daibu",
+     "jauh lebih / cukup banyak"
+    ],
+    [
+     "よくなる",
+     "yoku naru",
+     "menjadi lebih baik"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{熱|ねつ}は、まだ、あるの？",
+   "r": "Netsu wa, mada, aru no?",
+   "i": "Demamnya masih ada?",
+   "act": "tilt",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{測|はか}ってみるね。……{三十七度|さんじゅうななど}{五分|ごぶ}。{朝|あさ}より、{下|さ}がったよ。",
+   "r": "Hakatte miru ne... Sanjuunana-do gobu. Asa yori, sagatta yo.",
+   "i": "Kucoba ukur ya... 37,5 derajat. Lebih turun dari tadi pagi.",
+   "act": "hop",
+   "s": [
+    "a"
+   ],
+   "v": [
+    [
+     "{下|さ}がった",
+     "sagatta",
+     "turun (lampau)"
+    ],
+    [
+     "〜より",
+     "~yori",
+     "daripada ~"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "よかった。これ、お{見舞|みま}い。みかんと、りんごだよ。",
+   "r": "Yokatta. Kore, omimai. Mikan to, ringo da yo.",
+   "i": "Syukurlah. Ini oleh-oleh jenguk. Jeruk mikan dan apel.",
+   "act": "hop",
+   "s": [
+    "c"
+   ],
+   "v": [
+    [
+     "お{見舞|みま}い",
+     "omimai",
+     "menjenguk orang sakit / buah tangan"
+    ],
+    [
+     "みかん",
+     "mikan",
+     "jeruk mandarin Jepang"
+    ],
+    [
+     "りんご",
+     "ringo",
+     "apel"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "ありがとう。ビタミンが、とれるね。",
+   "r": "Arigatou. Bitamin ga, toreru ne.",
+   "i": "Terima kasih. Bisa dapat vitamin ya.",
+   "act": "jump",
+   "s": [],
+   "v": [],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "おかゆも、{作|つく}ってきたよ。{食|た}べられる？",
+   "r": "Okayu mo, tsukutte kita yo. Taberareru?",
+   "i": "Aku juga bawa bubur buatan sendiri. Bisa makan?",
+   "act": "nod",
+   "s": [
+    "d"
+   ],
+   "v": [
+    [
+     "{作|つく}ってきた",
+     "tsukutte kita",
+     "membuat lalu membawa"
+    ],
+    [
+     "{食|た}べられる",
+     "taberareru",
+     "bisa makan"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "うん、{食|た}べる。{朝|あさ}から、あまり{食|た}べていなかったから。",
+   "r": "Un, taberu. Asa kara, amari tabete inakatta kara.",
+   "i": "Ya, aku makan. Soalnya sejak pagi belum banyak makan.",
+   "act": "lean",
+   "s": [],
+   "v": [
+    [
+     "あまり〜ない",
+     "amari ~nai",
+     "tidak begitu ~"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{薬|くすり}は、{食後|しょくご}だよね。ちゃんと、{飲|の}んでね。",
+   "r": "Kusuri wa, shokugo da yo ne. Chanto, nonde ne.",
+   "i": "Obatnya diminum setelah makan, kan. Minum yang benar ya.",
+   "act": "nod",
+   "s": [
+    "b"
+   ],
+   "v": [
+    [
+     "ちゃんと",
+     "chanto",
+     "dengan benar"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "うん。{食|た}べたら、{水|みず}で、{飲|の}むよ。",
+   "r": "Un. Tabetara, mizu de, nomu yo.",
+   "i": "Ya. Setelah makan, kuminum dengan air.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "ゆっくり、{休|やす}んでね。{何|なに}かあったら、すぐ、{連絡|れんらく}して。",
+   "r": "Yukkuri, yasunde ne. Nani ka attara, sugu, renraku shite.",
+   "i": "Istirahat yang tenang ya. Kalau ada apa-apa, segera kabari.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "ゆっくり",
+     "yukkuri",
+     "pelan-pelan / tenang"
+    ],
+    [
+     "{連絡|れんらく}",
+     "renraku",
+     "menghubungi"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとう。ゆいちゃんは、やさしいね。",
+   "r": "Arigatou. Yui-chan wa, yasashii ne.",
+   "i": "Terima kasih. Yui baik hati ya.",
+   "act": "sway",
+   "s": [],
+   "v": [
+    [
+     "やさしい",
+     "yasashii",
+     "baik hati"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "ともだちでしょ。お{大事|だいじ}に。",
+   "r": "Tomodachi desho. Odaiji ni.",
+   "i": "Kan kita teman. Semoga lekas sembuh.",
+   "act": "wave",
+   "s": [],
+   "v": [],
+   "em": "♥"
+  },
+  {
+   "w": "m",
+   "j": "おはようございます。{昨日|きのう}は、ありがとうございました。",
+   "r": "Ohayou gozaimasu. Kinou wa, arigatou gozaimashita.",
+   "i": "Selamat pagi. Terima kasih untuk kemarin.",
+   "act": "bow",
+   "s": [],
+   "v": [],
+   "seg": {
+    "p": "kaisha",
+    "t": "08:30",
+    "l": "次の朝 · 会社",
+    "tone": "pagi",
+    "g": "m"
+   }
+  },
+  {
+   "w": "c",
+   "j": "おはよう。{元気|げんき}になった？",
+   "r": "Ohayou. Genki ni natta?",
+   "i": "Pagi. Sudah sehat kembali?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{元気|げんき}になる",
+     "genki ni naru",
+     "menjadi sehat"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、{熱|ねつ}は、{下|さ}がりました。もう、だいじょうぶです。",
+   "r": "Hai, netsu wa, sagarimashita. Mou, daijoubu desu.",
+   "i": "Ya, demamnya sudah turun. Sudah tidak apa-apa.",
+   "act": "hop",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "よかった。でも、{無理|むり}は、しないでね。",
+   "r": "Yokatta. Demo, muri wa, shinaide ne.",
+   "i": "Syukurlah. Tapi jangan memaksakan diri ya.",
+   "act": "nod",
+   "s": [],
+   "v": []
+  },
+  {
+   "w": "m",
+   "j": "はい。ご{迷惑|めいわく}を、おかけしました。",
+   "r": "Hai. Gomeiwaku o, okake shimashita.",
+   "i": "Ya. Maaf sudah merepotkan.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "ご{迷惑|めいわく}をおかけしました",
+     "gomeiwaku o okake shimashita",
+     "maaf sudah merepotkan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{気|き}にしないで。{健康|けんこう}が、いちばん{大切|たいせつ}だよ。",
+   "r": "Ki ni shinaide. Kenkou ga, ichiban taisetsu da yo.",
+   "i": "Jangan dipikirkan. Kesehatan itu yang paling penting.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{健康|けんこう}",
+     "kenkou",
+     "kesehatan"
+    ],
+    [
+     "{大切|たいせつ}",
+     "taisetsu",
+     "penting / berharga"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "はい。{今日|きょう}から、また、がんばります！",
+   "r": "Hai. Kyou kara, mata, ganbarimasu!",
+   "i": "Ya. Mulai hari ini, saya semangat lagi!",
+   "act": "jump",
+   "s": [],
+   "v": [],
+   "em": "!"
+  },
+  {
+   "w": "c",
+   "j": "うん、{今日|きょう}も、よろしくね。",
+   "r": "Un, kyou mo, yoroshiku ne.",
+   "i": "Ya, hari ini juga mohon kerja samanya ya.",
+   "act": "wave",
+   "s": [],
+   "v": [],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Mochi bilang \"Atama ga itai\". Apa artinya?",
+   "a": "Kepala sakit",
+   "w": [
+    "Perut sakit",
+    "Tenggorokan sakit",
+    "Badan lelah"
+   ],
+   "f": "{頭|あたま} (atama) = kepala, {痛|いた}い (itai) = sakit."
+  },
+  {
+   "q": "\"Hokenshou\" yang diminta resepsionis adalah...",
+   "a": "Kartu asuransi kesehatan",
+   "w": [
+    "Kartu nomor antrean",
+    "Resep dokter",
+    "Kartu identitas"
+   ],
+   "f": "{保険証|ほけんしょう} = kartu asuransi kesehatan. Hampir selalu diminta saat pertama berobat di Jepang."
+  },
+  {
+   "q": "Resepsionis bertanya \"Hajimete desu ka\". Artinya?",
+   "a": "Apakah ini kunjungan pertama?",
+   "w": [
+    "Sudah buat janji?",
+    "Siapa namanya?",
+    "Ada keluhan apa?"
+   ],
+   "f": "{初|はじ}めて = pertama kali. Kalau pertama, biasanya diminta mengisi formulir {問診票|もんしんひょう}."
+  },
+  {
+   "q": "Dokter bilang \"Kaze desu ne\". Apa diagnosisnya?",
+   "a": "Flu / masuk angin biasa",
+   "w": [
+    "Patah tulang",
+    "Keracunan makanan",
+    "Alergi"
+   ],
+   "f": "{風邪|かぜ} = flu atau masuk angin. Jangan tertukar dengan {風|かぜ} (angin) yang dibaca sama."
+  },
+  {
+   "q": "Apa arti \"Shokugo ni nonde kudasai\"?",
+   "a": "Minumlah setelah makan",
+   "w": [
+    "Minumlah sebelum makan",
+    "Minumlah saat tidur",
+    "Minumlah kalau demam"
+   ],
+   "f": "{食後|しょくご} = setelah makan. Lawannya {食前|しょくぜん} (shokuzen) = sebelum makan."
+  },
+  {
+   "q": "Di kasir rumah sakit, \"Genkin dake desu\" berarti...",
+   "a": "Hanya menerima uang tunai",
+   "w": [
+    "Hanya kartu",
+    "Boleh dicicil",
+    "Gratis"
+   ],
+   "f": "{現金|げんきん} = uang tunai, 〜だけ = hanya. Banyak klinik kecil di Jepang masih tunai saja."
+  },
+  {
+   "q": "\"Shohousen\" adalah...",
+   "a": "Resep dokter",
+   "w": [
+    "Surat izin sakit",
+    "Hasil lab",
+    "Kwitansi"
+   ],
+   "f": "{処方箋|しょほうせん} dibawa ke {薬局|やっきょく} (apotek) untuk ditebus."
+  },
+  {
+   "q": "Apoteker bilang \"Ichinichi sankai\". Berapa kali minum obat sehari?",
+   "a": "Tiga kali",
+   "w": [
+    "Satu kali",
+    "Dua kali",
+    "Empat kali"
+   ],
+   "f": "{一日|いちにち} = sehari, {三回|さんかい} = tiga kali."
+  },
+  {
+   "q": "\"Muri shinaide\" berarti apa?",
+   "a": "Jangan memaksakan diri",
+   "w": [
+    "Jangan terlambat",
+    "Jangan banyak bicara",
+    "Jangan lupa obat"
+   ],
+   "f": "{無理|むり}をしない = tidak memaksakan diri. Sering dipakai untuk orang yang sedang sakit atau lelah."
+  },
+  {
+   "q": "Yui membawa buah dan bilang \"Omimai\". Apa maksudnya?",
+   "a": "Buah tangan untuk menjenguk orang sakit",
+   "w": [
+    "Hadiah ulang tahun",
+    "Oleh-oleh dari luar kota",
+    "Makan siang bersama"
+   ],
+   "f": "お{見舞|みま}い = menjenguk orang sakit, atau barang yang dibawa saat menjenguk."
+  }
+ ]
+}
