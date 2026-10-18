@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Hapalan Kana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: judul, pilihan aksara dan set di atas, tiga tab (Tabel, Kartu, Kuis) di bawahnya */
+:root{
+  --bg:#eef1f6; --surface:#ffffff; --ink:#1a2233; --muted:#5f6b80; --line:#d6dce8;
+  --accent:#2f56b0; --accent-ink:#ffffff; --tint:#dde6f7;
+  --ok:#1f7a45; --ok-bg:#d6efdf; --bad:#b3342f; --bad-bg:#f9dad7; --done:#e3f3e8;
+  --font-display:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
+  --font-body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12161f; --surface:#1c2230; --ink:#eaeef8; --muted:#a3aec4; --line:#2f3850;
+  --accent:#8fb0ff; --accent-ink:#12161f; --tint:#25304a;
+  --ok:#7fdca5; --ok-bg:#173a27; --bad:#ff8c85; --bad-bg:#47201f; --done:#1c3427; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161f; --surface:#1c2230; --ink:#eaeef8; --muted:#a3aec4; --line:#2f3850;
+  --accent:#8fb0ff; --accent-ink:#12161f; --tint:#25304a;
+  --ok:#7fdca5; --ok-bg:#173a27; --bad:#ff8c85; --bad-bg:#47201f; --done:#1c3427; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:20px 48px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:560px;margin-inline:auto;display:grid;gap:14px}
+h1{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(1.7rem,6vw,2.3rem);line-height:1.15}
+h1 small{display:block;font-family:var(--font-body);font-weight:500;font-size:.78rem;letter-spacing:.08em;color:var(--muted);margin-top:4px;text-transform:uppercase}
+.ctl{display:grid;gap:8px}
+.grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.grp .lab{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-width:64px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 14px;font-weight:700;font-size:.9rem}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.tab{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 6px;font-weight:700}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.sec{margin:6px 0 2px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.grid{display:grid;gap:6px}
+.g5{grid-template-columns:repeat(5,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+.cell{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 2px 6px;display:grid;justify-items:center;gap:0;line-height:1.15;min-height:64px}
+.cell .kn{font-family:var(--font-display);font-weight:800;font-size:1.65rem}
+.cell .ro{font-size:.74rem;color:var(--muted)}
+.cell.dn{background:var(--done)}
+.cell.sel{outline:3px solid var(--accent);outline-offset:1px}
+.cell.void{visibility:hidden}
+.detail{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:center}
+.detail .big{font-family:var(--font-display);font-weight:800;font-size:3.4rem;line-height:1;grid-row:span 3}
+.detail .rom{font-size:1.2rem;font-weight:700}
+.detail .ex{font-size:.95rem}
+.detail .ex b{font-family:var(--font-display);font-size:1.15rem}
+.detail .mt{color:var(--muted);font-size:.85rem}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 16px;font-weight:700}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.btn[disabled]{opacity:.45;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.row>.btn{flex:1 1 auto}
+.flash{min-height:260px;display:grid;place-items:center;text-align:center;gap:6px;padding:20px 16px;cursor:pointer;user-select:none}
+.flash .big{font-family:var(--font-display);font-weight:800;font-size:clamp(5rem,28vw,8.5rem);line-height:1}
+.flash .rom{font-size:1.7rem;font-weight:700;color:var(--accent)}
+.flash .hint{color:var(--muted);font-size:.9rem}
+.count{display:flex;justify-content:space-between;color:var(--muted);font-size:.85rem}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.q{display:grid;gap:12px}
+.q .prompt{text-align:center;display:grid;gap:4px}
+.q .big{font-family:var(--font-display);font-weight:800;font-size:clamp(4.5rem,24vw,7rem);line-height:1}
+.q .ask{color:var(--muted);font-size:.9rem}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:14px 8px;font-weight:700;font-size:1.15rem;min-height:56px}
+.opt.kn{font-family:var(--font-display);font-size:2rem;font-weight:800}
+.opt.good{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+.opt.bad{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.fb{min-height:2.6em;text-align:center;font-size:.95rem}
+.fb.good{color:var(--ok)}.fb.bad{color:var(--bad)}
+.res{text-align:center;display:grid;gap:10px}
+.res .score{font-family:var(--font-display);font-weight:800;font-size:3rem;line-height:1}
+.wrongs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.wrongs button{border:1px solid var(--bad);background:var(--bad-bg);color:var(--bad);border-radius:10px;padding:4px 12px;font-family:var(--font-display);font-weight:800;font-size:1.4rem}
+.note{color:var(--muted);font-size:.85rem}
+#view>.grp{margin-bottom:8px}#view>.count{margin-top:2px}
+.foot{margin:0;color:var(--muted);font-size:.8rem;text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1 id="ttl">かな<small>Hapalan Hiragana &amp; Katakana</small></h1></header>
+  <div class="ctl">
+    <div class="grp" role="group" aria-label="Pilih aksara"><span class="lab">Aksara</span><button type="button" class="chip" data-sc="h">ひらがな</button><button type="button" class="chip" data-sc="k">カタカナ</button></div>
+    <div class="grp" role="group" aria-label="Pilih set huruf"><span class="lab">Set</span><button type="button" class="chip" data-set="dasar">Dasar (46)</button><button type="button" class="chip" data-set="dakuten">Dakuten (25)</button><button type="button" class="chip" data-set="yoon">Yoon (33)</button></div>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Mode"><button type="button" class="tab" role="tab" data-tab="tabel">Tabel</button><button type="button" class="tab" role="tab" data-tab="kartu">Kartu</button><button type="button" class="tab" role="tab" data-tab="kuis">Kuis</button></div>
+  <main id="view"></main>
+  <p class="foot" id="foot"></p>
+</div>
+<script>
+var KANA=[{"h":"あ","k":"ア","r":"a","g":"dasar","amb":false,"eh":["あめ","ame","hujan"],"ek":["アイス","aisu","es krim"]},{"h":"い","k":"イ","r":"i","g":"dasar","amb":false,"eh":["いぬ","inu","anjing"],"ek":["インク","inku","tinta"]},{"h":"う","k":"ウ","r":"u","g":"dasar","amb":false,"eh":["うみ","umi","laut"],"ek":["ウイルス","uirusu","virus"]},{"h":"え","k":"エ","r":"e","g":"dasar","amb":false,"eh":["えき","eki","stasiun"],"ek":["エアコン","eakon","AC"]},{"h":"お","k":"オ","r":"o","g":"dasar","amb":false,"eh":["おかね","okane","uang"],"ek":["オレンジ","orenji","jeruk"]},{"h":"か","k":"カ","r":"ka","g":"dasar","amb":false,"eh":["かさ","kasa","payung"],"ek":["カメラ","kamera","kamera"]},{"h":"き","k":"キ","r":"ki","g":"dasar","amb":false,"eh":["き","ki","pohon"],"ek":["キロ","kiro","kilo"]},{"h":"く","k":"ク","r":"ku","g":"dasar","amb":false,"eh":["くるま","kuruma","mobil"],"ek":["クラス","kurasu","kelas"]},{"h":"け","k":"ケ","r":"ke","g":"dasar","amb":false,"eh":["けさ","kesa","pagi ini"],"ek":["ケーキ","keeki","kue"]},{"h":"こ","k":"コ","r":"ko","g":"dasar","amb":false,"eh":["こども","kodomo","anak"],"ek":["コーヒー","koohii","kopi"]},{"h":"さ","k":"サ","r":"sa","g":"dasar","amb":false,"eh":["さかな","sakana","ikan"],"ek":["サッカー","sakkaa","sepak bola"]},{"h":"し","k":"シ","r":"shi","g":"dasar","amb":false,"eh":["しお","shio","garam"],"ek":["システム","shisutemu","sistem"]},{"h":"す","k":"ス","r":"su","g":"dasar","amb":false,"eh":["すし","sushi","sushi"],"ek":["スープ","suupu","sup"]},{"h":"せ","k":"セ","r":"se","g":"dasar","amb":false,"eh":["せんせい","sensei","guru"],"ek":["セーター","seetaa","sweter"]},{"h":"そ","k":"ソ","r":"so","g":"dasar","amb":false,"eh":["そら","sora","langit"],"ek":["ソファ","sofa","sofa"]},{"h":"た","k":"タ","r":"ta","g":"dasar","amb":false,"eh":["たまご","tamago","telur"],"ek":["タクシー","takushii","taksi"]},{"h":"ち","k":"チ","r":"chi","g":"dasar","amb":false,"eh":["ちず","chizu","peta"],"ek":["チーズ","chiizu","keju"]},{"h":"つ","k":"ツ","r":"tsu","g":"dasar","amb":false,"eh":["つくえ","tsukue","meja"],"ek":["ツアー","tsuaa","tur"]},{"h":"て","k":"テ","r":"te","g":"dasar","amb":false,"eh":["てがみ","tegami","surat"],"ek":["テレビ","terebi","televisi"]},{"h":"と","k":"ト","r":"to","g":"dasar","amb":false,"eh":["とり","tori","burung"],"ek":["トイレ","toire","toilet"]},{"h":"な","k":"ナ","r":"na","g":"dasar","amb":false,"eh":["なつ","natsu","musim panas"],"ek":["ナイフ","naifu","pisau"]},{"h":"に","k":"ニ","r":"ni","g":"dasar","amb":false,"eh":["にく","niku","daging"],"ek":["ニット","nitto","rajutan"]},{"h":"ぬ","k":"ヌ","r":"nu","g":"dasar","amb":false,"eh":["ぬの","nuno","kain"],"ek":["ヌードル","nuudoru","mi"]},{"h":"ね","k":"ネ","r":"ne","g":"dasar","amb":false,"eh":["ねこ","neko","kucing"],"ek":["ネクタイ","nekutai","dasi"]},{"h":"の","k":"ノ","r":"no","g":"dasar","amb":false,"eh":["のり","nori","rumput laut"],"ek":["ノート","nooto","buku catatan"]},{"h":"は","k":"ハ","r":"ha","g":"dasar","amb":false,"eh":["はな","hana","bunga"],"ek":["ハンバーガー","hanbaagaa","hamburger"]},{"h":"ひ","k":"ヒ","r":"hi","g":"dasar","amb":false,"eh":["ひと","hito","orang"],"ek":["ヒーター","hiitaa","pemanas"]},{"h":"ふ","k":"フ","r":"fu","g":"dasar","amb":false,"eh":["ふね","fune","kapal"],"ek":["フォーク","fooku","garpu"]},{"h":"へ","k":"ヘ","r":"he","g":"dasar","amb":false,"eh":["へや","heya","kamar"],"ek":["ヘルメット","herumetto","helm"]},{"h":"ほ","k":"ホ","r":"ho","g":"dasar","amb":false,"eh":["ほん","hon","buku"],"ek":["ホテル","hoteru","hotel"]},{"h":"ま","k":"マ","r":"ma","g":"dasar","amb":false,"eh":["まど","mado","jendela"],"ek":["マスク","masuku","masker"]},{"h":"み","k":"ミ","r":"mi","g":"dasar","amb":false,"eh":["みず","mizu","air"],"ek":["ミルク","miruku","susu"]},{"h":"む","k":"ム","r":"mu","g":"dasar","amb":false,"eh":["むし","mushi","serangga"],"ek":["ムービー","muubii","film"]},{"h":"め","k":"メ","r":"me","g":"dasar","amb":false,"eh":["めがね","megane","kacamata"],"ek":["メール","meeru","surel"]},{"h":"も","k":"モ","r":"mo","g":"dasar","amb":false,"eh":["もり","mori","hutan"],"ek":["モデル","moderu","model"]},{"h":"や","k":"ヤ","r":"ya","g":"dasar","amb":false,"eh":["やま","yama","gunung"],"ek":["タイヤ","taiya","ban"]},{"h":"ゆ","k":"ユ","r":"yu","g":"dasar","amb":false,"eh":["ゆき","yuki","salju"],"ek":["ユニフォーム","yunifoomu","seragam"]},{"h":"よ","k":"ヨ","r":"yo","g":"dasar","amb":false,"eh":["よる","yoru","malam"],"ek":["ヨーグルト","yooguruto","yoghurt"]},{"h":"ら","k":"ラ","r":"ra","g":"dasar","amb":false,"eh":["らいねん","rainen","tahun depan"],"ek":["ラジオ","rajio","radio"]},{"h":"り","k":"リ","r":"ri","g":"dasar","amb":false,"eh":["りんご","ringo","apel"],"ek":["リモコン","rimokon","remote"]},{"h":"る","k":"ル","r":"ru","g":"dasar","amb":false,"eh":["るす","rusu","tidak ada di rumah"],"ek":["ルール","ruuru","aturan"]},{"h":"れ","k":"レ","r":"re","g":"dasar","amb":false,"eh":["れきし","rekishi","sejarah"],"ek":["レストラン","resutoran","restoran"]},{"h":"ろ","k":"ロ","r":"ro","g":"dasar","amb":false,"eh":["ろく","roku","enam"],"ek":["ロボット","robotto","robot"]},{"h":"わ","k":"ワ","r":"wa","g":"dasar","amb":false,"eh":["わたし","watashi","saya"],"ek":["ワイン","wain","anggur / wine"]},{"h":"を","k":"ヲ","r":"o","g":"dasar","amb":true,"eh":["みずを のむ","mizu o nomu","minum air (を = partikel objek, dibaca o)"],"ek":null},{"h":"ん","k":"ン","r":"n","g":"dasar","amb":false,"eh":["ほん","hon","buku (ん di akhir kata)"],"ek":["パン","pan","roti"]},{"h":"が","k":"ガ","r":"ga","g":"dakuten","amb":false,"eh":["がっこう","gakkou","sekolah"],"ek":["ガス","gasu","gas"]},{"h":"ぎ","k":"ギ","r":"gi","g":"dakuten","amb":false,"eh":["ぎんこう","ginkou","bank"],"ek":["ギター","gitaa","gitar"]},{"h":"ぐ","k":"グ","r":"gu","g":"dakuten","amb":false,"eh":["ぐあい","guai","kondisi badan"],"ek":["グラス","gurasu","gelas"]},{"h":"げ","k":"ゲ","r":"ge","g":"dakuten","amb":false,"eh":["げんき","genki","sehat"],"ek":["ゲーム","geemu","game"]},{"h":"ご","k":"ゴ","r":"go","g":"dakuten","amb":false,"eh":["ごはん","gohan","nasi"],"ek":["ゴルフ","gorufu","golf"]},{"h":"ざ","k":"ザ","r":"za","g":"dakuten","amb":false,"eh":["ざっし","zasshi","majalah"],"ek":["ピザ","piza","pizza"]},{"h":"じ","k":"ジ","r":"ji","g":"dakuten","amb":false,"eh":["じしょ","jisho","kamus"],"ek":["ジム","jimu","gym"]},{"h":"ず","k":"ズ","r":"zu","g":"dakuten","amb":false,"eh":["ずっと","zutto","terus-menerus"],"ek":["ズボン","zubon","celana"]},{"h":"ぜ","k":"ゼ","r":"ze","g":"dakuten","amb":false,"eh":["ぜんぶ","zenbu","semuanya"],"ek":["ゼロ","zero","nol"]},{"h":"ぞ","k":"ゾ","r":"zo","g":"dakuten","amb":false,"eh":["ぞう","zou","gajah"],"ek":["ゾーン","zoon","zona"]},{"h":"だ","k":"ダ","r":"da","g":"dakuten","amb":false,"eh":["だいがく","daigaku","universitas"],"ek":["ダンス","dansu","dansa"]},{"h":"ぢ","k":"ヂ","r":"ji","g":"dakuten","amb":true,"eh":["はなぢ","hanaji","mimisan (ぢ dibaca sama dengan じ, jarang dipakai)"],"ek":null},{"h":"づ","k":"ヅ","r":"zu","g":"dakuten","amb":true,"eh":["つづく","tsuzuku","berlanjut (づ dibaca sama dengan ず)"],"ek":null},{"h":"で","k":"デ","r":"de","g":"dakuten","amb":false,"eh":["でんしゃ","densha","kereta"],"ek":["デパート","depaato","mal / department store"]},{"h":"ど","k":"ド","r":"do","g":"dakuten","amb":false,"eh":["どうぶつ","doubutsu","hewan"],"ek":["ドア","doa","pintu"]},{"h":"ば","k":"バ","r":"ba","g":"dakuten","amb":false,"eh":["ばんごう","bangou","nomor"],"ek":["バス","basu","bus"]},{"h":"び","k":"ビ","r":"bi","g":"dakuten","amb":false,"eh":["びょういん","byouin","rumah sakit"],"ek":["ビール","biiru","bir"]},{"h":"ぶ","k":"ブ","r":"bu","g":"dakuten","amb":false,"eh":["ぶた","buta","babi"],"ek":["ブーツ","buutsu","sepatu bot"]},{"h":"べ","k":"ベ","r":"be","g":"dakuten","amb":false,"eh":["べんきょう","benkyou","belajar"],"ek":["ベッド","beddo","tempat tidur"]},{"h":"ぼ","k":"ボ","r":"bo","g":"dakuten","amb":false,"eh":["ぼうし","boushi","topi"],"ek":["ボール","booru","bola"]},{"h":"ぱ","k":"パ","r":"pa","g":"dakuten","amb":false,"eh":["ぱん","pan","roti"],"ek":["パソコン","pasokon","komputer"]},{"h":"ぴ","k":"ピ","r":"pi","g":"dakuten","amb":false,"eh":["ぴかぴか","pikapika","berkilau"],"ek":["ピアノ","piano","piano"]},{"h":"ぷ","k":"プ","r":"pu","g":"dakuten","amb":false,"eh":["てんぷら","tenpura","tempura"],"ek":["プール","puuru","kolam renang"]},{"h":"ぺ","k":"ペ","r":"pe","g":"dakuten","amb":false,"eh":["ぺらぺら","perapera","fasih (bahasa)"],"ek":["ペン","pen","pulpen"]},{"h":"ぽ","k":"ポ","r":"po","g":"dakuten","amb":false,"eh":["ぽかぽか","pokapoka","hangat menyenangkan"],"ek":["ポスト","posuto","kotak pos"]},{"h":"きゃ","k":"キャ","r":"kya","g":"yoon","amb":false,"eh":["きゃく","kyaku","tamu"],"ek":["キャベツ","kyabetsu","kol"]},{"h":"きゅ","k":"キュ","r":"kyu","g":"yoon","amb":false,"eh":["きゅうり","kyuuri","timun"],"ek":["キュート","kyuuto","imut"]},{"h":"きょ","k":"キョ","r":"kyo","g":"yoon","amb":false,"eh":["きょう","kyou","hari ini"],"ek":null},{"h":"しゃ","k":"シャ","r":"sha","g":"yoon","amb":false,"eh":["しゃしん","shashin","foto"],"ek":["シャワー","shawaa","shower"]},{"h":"しゅ","k":"シュ","r":"shu","g":"yoon","amb":false,"eh":["しゅみ","shumi","hobi"],"ek":["シュークリーム","shuukuriimu","choux cream"]},{"h":"しょ","k":"ショ","r":"sho","g":"yoon","amb":false,"eh":["しょくじ","shokuji","makan"],"ek":["ショッピング","shoppingu","belanja"]},{"h":"ちゃ","k":"チャ","r":"cha","g":"yoon","amb":false,"eh":["おちゃ","ocha","teh"],"ek":["チャンス","chansu","kesempatan"]},{"h":"ちゅ","k":"チュ","r":"chu","g":"yoon","amb":false,"eh":["ちゅうしゃ","chuusha","parkir"],"ek":["チューブ","chuubu","tabung"]},{"h":"ちょ","k":"チョ","r":"cho","g":"yoon","amb":false,"eh":["ちょっと","chotto","sebentar"],"ek":["チョコレート","chokoreeto","cokelat"]},{"h":"にゃ","k":"ニャ","r":"nya","g":"yoon","amb":false,"eh":["こんにゃく","konnyaku","konnyaku (jeli umbi)"],"ek":null},{"h":"にゅ","k":"ニュ","r":"nyu","g":"yoon","amb":false,"eh":["にゅういん","nyuuin","rawat inap"],"ek":["ニュース","nyuusu","berita"]},{"h":"にょ","k":"ニョ","r":"nyo","g":"yoon","amb":false,"eh":["にょうぼう","nyoubou","istri (santai)"],"ek":null},{"h":"ひゃ","k":"ヒャ","r":"hya","g":"yoon","amb":false,"eh":["ひゃく","hyaku","seratus"],"ek":null},{"h":"ひゅ","k":"ヒュ","r":"hyu","g":"yoon","amb":false,"eh":null,"ek":["ヒューズ","hyuuzu","sekering"]},{"h":"ひょ","k":"ヒョ","r":"hyo","g":"yoon","amb":false,"eh":["ひょうげん","hyougen","ungkapan"],"ek":null},{"h":"みゃ","k":"ミャ","r":"mya","g":"yoon","amb":false,"eh":["みゃく","myaku","denyut nadi"],"ek":["ミャンマー","myanmaa","Myanmar"]},{"h":"みゅ","k":"ミュ","r":"myu","g":"yoon","amb":false,"eh":null,"ek":["ミュージック","myuujikku","musik"]},{"h":"みょ","k":"ミョ","r":"myo","g":"yoon","amb":false,"eh":["みょうじ","myouji","nama keluarga"],"ek":null},{"h":"りゃ","k":"リャ","r":"rya","g":"yoon","amb":false,"eh":["りゃく","ryaku","singkatan"],"ek":null},{"h":"りゅ","k":"リュ","r":"ryu","g":"yoon","amb":false,"eh":["りゅうがくせい","ryuugakusei","pelajar asing"],"ek":["リュック","ryukku","ransel"]},{"h":"りょ","k":"リョ","r":"ryo","g":"yoon","amb":false,"eh":["りょこう","ryokou","perjalanan"],"ek":null},{"h":"ぎゃ","k":"ギャ","r":"gya","g":"yoon","amb":false,"eh":["ぎゃく","gyaku","kebalikan"],"ek":["ギャグ","gyagu","lelucon"]},{"h":"ぎゅ","k":"ギュ","r":"gyu","g":"yoon","amb":false,"eh":["ぎゅうにく","gyuuniku","daging sapi"],"ek":null},{"h":"ぎょ","k":"ギョ","r":"gyo","g":"yoon","amb":false,"eh":["ぎょうざ","gyouza","pangsit"],"ek":["ギョーザ","gyooza","pangsit"]},{"h":"じゃ","k":"ジャ","r":"ja","g":"yoon","amb":false,"eh":["じゃがいも","jagaimo","kentang"],"ek":["ジャム","jamu","selai"]},{"h":"じゅ","k":"ジュ","r":"ju","g":"yoon","amb":false,"eh":["じゅぎょう","jugyou","pelajaran"],"ek":["ジュース","juusu","jus"]},{"h":"じょ","k":"ジョ","r":"jo","g":"yoon","amb":false,"eh":["じょうず","jouzu","pandai"],"ek":["ジョギング","jogingu","jogging"]},{"h":"びゃ","k":"ビャ","r":"bya","g":"yoon","amb":false,"eh":["さんびゃく","sanbyaku","tiga ratus"],"ek":null},{"h":"びゅ","k":"ビュ","r":"byu","g":"yoon","amb":false,"eh":null,"ek":["ビュッフェ","byuffe","prasmanan"]},{"h":"びょ","k":"ビョ","r":"byo","g":"yoon","amb":false,"eh":["びょういん","byouin","rumah sakit"],"ek":null},{"h":"ぴゃ","k":"ピャ","r":"pya","g":"yoon","amb":false,"eh":["ろっぴゃく","roppyaku","enam ratus"],"ek":null},{"h":"ぴゅ","k":"ピュ","r":"pyu","g":"yoon","amb":false,"eh":null,"ek":["コンピューター","konpyuutaa","komputer"]},{"h":"ぴょ","k":"ピョ","r":"pyo","g":"yoon","amb":false,"eh":["ぴょんぴょん","pyonpyon","melompat-lompat"],"ek":null}];
+var ROWS_DASAR=[["a","i","u","e","o"],["ka","ki","ku","ke","ko"],["sa","shi","su","se","so"],["ta","chi","tsu","te","to"],["na","ni","nu","ne","no"],["ha","hi","fu","he","ho"],["ma","mi","mu","me","mo"],["ya",0,"yu",0,"yo"],["ra","ri","ru","re","ro"],["wa",0,"n",0,"wo"]];
+var ROWS_DAKU=[["ga","gi","gu","ge","go"],["za","ji","zu","ze","zo"],["da","di","du","de","do"],["ba","bi","bu","be","bo"],["pa","pi","pu","pe","po"]];
+var SET_NAME={dasar:'Huruf dasar',dakuten:'Dakuten dan handakuten',yoon:'Yoon (gabungan)'};
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ---------- Pengaturan dan progres ---------- */
+var P={sc:'h',sets:{dasar:true,dakuten:false,yoon:false},tab:'tabel',hide:true,mode:'rom'};
+try{var sv=JSON.parse(localStorage.getItem('qkana_prefs')||'null');if(sv){if(sv.sc==='h'||sv.sc==='k')P.sc=sv.sc;if(sv.sets)['dasar','dakuten','yoon'].forEach(function(k){if(typeof sv.sets[k]==='boolean')P.sets[k]=sv.sets[k];});if(sv.tab)P.tab=sv.tab;if(typeof sv.hide==='boolean')P.hide=sv.hide;if(sv.mode)P.mode=sv.mode;}}catch(e){}
+function savePrefs(){try{localStorage.setItem('qkana_prefs',JSON.stringify(P));}catch(e){}}
+function dkey(){return (P.sc==='h'?'hira':'kata')+'_kotoba_archived_v1';}
+function getDone(){try{var a=JSON.parse(localStorage.getItem(dkey())||'[]');return Array.isArray(a)?a.filter(function(x){return typeof x==='string'&&x;}):[];}catch(e){return [];}}
+function putDone(a){try{localStorage.setItem(dkey(),JSON.stringify(a));}catch(e){}}
+function ch(r){return P.sc==='h'?r.h:r.k;}
+function ex(r){return P.sc==='h'?r.eh:r.ek;}
+function idOf(r){return '|'+ch(r);}
+function isDone(r){return getDone().indexOf(idOf(r))>=0;}
+function setDone(r,on){var a=getDone(),i=a.indexOf(idOf(r));if(on&&i<0)a.push(idOf(r));if(!on&&i>=0)a.splice(i,1);putDone(a);}
+function pool(){return KANA.filter(function(r){return P.sets[r.g];});}
+function ensureSet(){if(!P.sets.dasar&&!P.sets.dakuten&&!P.sets.yoon)P.sets.dasar=true;}
+
+/* ---------- Suara ---------- */
+var VOICE_OK=null;
+function jaVoice(){try{var v=(window.speechSynthesis&&speechSynthesis.getVoices?speechSynthesis.getVoices():[]).filter(function(x){return /^ja/i.test(x.lang);});return v[0]||null;}catch(e){return null;}}
+function say(t){try{if(!window.speechSynthesis||!window.SpeechSynthesisUtterance)return false;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=.8;var v=jaVoice();if(v)u.voice=v;speechSynthesis.speak(u);return true;}catch(e){return false;}}
+function canSpeak(){return !!(window.speechSynthesis&&window.SpeechSynthesisUtterance);}
+
+/* ---------- Kerangka ---------- */
+function syncCtl(){
+  $$('[data-sc]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-sc')===P.sc));});
+  $$('[data-set]').forEach(function(b){b.setAttribute('aria-pressed',String(!!P.sets[b.getAttribute('data-set')]));});
+  $$('.tab').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-tab')===P.tab));});
+  var n=pool().length,d=0;pool().forEach(function(r){if(isDone(r))d++;});
+  $('#foot').textContent='Hafal di set ini: '+d+' dari '+n+'. Progres tersimpan di perangkat ini dan ikut tersinkron dengan widget di aplikasi Qategori.';
+}
+function render(){ensureSet();syncCtl();var v=$('#view');if(P.tab==='kartu')renderKartu(v);else if(P.tab==='kuis')renderKuis(v);else renderTabel(v);}
+
+/* ---------- Tabel ---------- */
+var selR=null;
+function byRomaji(set){var m={};KANA.forEach(function(r){if(r.g===set&&!m[r.r])m[r.r]=r;});return m;}
+function chartFor(set){
+  var out=[],i;
+  if(set==='yoon'){KANA.filter(function(r){return r.g==='yoon';}).forEach(function(r){out.push(r);});return {cols:3,cells:out};}
+  var rows=set==='dasar'?ROWS_DASAR:ROWS_DAKU,list=KANA.filter(function(r){return r.g===set;}),used={};
+  rows.forEach(function(row){row.forEach(function(rm){
+    if(!rm){out.push(null);return;}
+    var f=null;for(i=0;i<list.length;i++){if(!used[i]&&(list[i].r===rm||(rm==='wo'&&list[i].h==='を')||(rm==='di'&&list[i].h==='ぢ')||(rm==='du'&&list[i].h==='づ'))){f=list[i];used[i]=1;break;}}
+    out.push(f);});});
+  return {cols:5,cells:out};
+}
+function detailHtml(r){
+  if(!r)return '<div class="card"><p class="note" style="margin:0">Ketuk sebuah huruf untuk mendengar bunyinya dan melihat contoh katanya.</p></div>';
+  var e=ex(r),other=P.sc==='h'?r.k:r.h;
+  var romTxt=r.h==='を'?'o (ditulis wo)':(r.h==='ぢ'?'ji (sama dengan じ)':(r.h==='づ'?'zu (sama dengan ず)':r.r));
+  return '<div class="card detail"><div class="big" lang="ja">'+esc(ch(r))+'</div><div class="rom">'+esc(romTxt)+'</div>'+
+    (e?'<div class="ex" lang="ja"><b>'+esc(e[0])+'</b> ('+esc(e[1])+') = '+esc(e[2])+'</div>':'<div class="ex">Jarang dipakai dalam kata sehari-hari.</div>')+
+    '<div class="mt">Versi '+(P.sc==='h'?'katakana':'hiragana')+': <span lang="ja">'+esc(other)+'</span></div></div>';
+}
+function renderTabel(v){
+  var h='<div id="det">'+detailHtml(selR&&P.sets[selR.g]?selR:null)+'</div>';
+  ['dasar','dakuten','yoon'].forEach(function(s){
+    if(!P.sets[s])return;
+    var c=chartFor(s);
+    h+='<div class="sec">'+SET_NAME[s]+'</div><div class="grid g'+c.cols+'">';
+    c.cells.forEach(function(r){
+      if(!r){h+='<span class="cell void"></span>';return;}
+      var gi=KANA.indexOf(r);
+      h+='<button type="button" class="cell'+(isDone(r)?' dn':'')+(selR===r?' sel':'')+'" data-gi="'+gi+'" aria-label="'+esc(r.r)+'"><b class="kn" lang="ja">'+esc(ch(r))+'</b><span class="ro">'+esc(r.r)+'</span></button>';
+    });
+    h+='</div>';
+  });
+  h+='<p class="note">Sel berwarna hijau = sudah kamu tandai hafal di mode Kartu.</p>';
+  v.innerHTML=h;
+}
+
+/* ---------- Kartu ---------- */
+var deck=[],pos=0,flipped=false,deckSig='';
+function sigOf(){return P.sc+'|'+['dasar','dakuten','yoon'].filter(function(k){return P.sets[k];}).join(',')+'|'+P.hide;}
+function buildDeck(){
+  var a=pool().filter(function(r){return !(P.hide&&isDone(r));});
+  deck=sh(a);pos=0;flipped=false;deckSig=sigOf();
+}
+function renderKartu(v){
+  if(deckSig!==sigOf())buildDeck();
+  var all=pool(),dn=all.filter(isDone).length;
+  var top='<div class="count"><span>Hafal '+dn+' / '+all.length+'</span><span>Sisa di tumpukan: '+deck.length+'</span></div><div class="bar"><i style="width:'+(all.length?Math.round(dn*100/all.length):0)+'%"></i></div>';
+  if(!deck.length){
+    v.innerHTML=top+'<div class="card res"><div class="score">&#127881;</div><p style="margin:0"><b>Semua kartu di set ini sudah hafal.</b></p><div class="row"><button type="button" class="btn pri" id="kReset">Ulangi dari awal</button></div></div>'+hideOpt();
+    return;
+  }
+  var r=deck[pos%deck.length],e=ex(r);
+  v.innerHTML=top+'<div class="card flash" id="flash" role="button" tabindex="0" aria-label="Ketuk untuk membalik kartu"><div class="big" lang="ja">'+esc(ch(r))+'</div>'+
+    (flipped?'<div class="rom">'+esc(r.h==='を'?'o':r.r)+'</div>'+(e?'<div class="hint" lang="ja"><b>'+esc(e[0])+'</b> ('+esc(e[1])+') = '+esc(e[2])+'</div>':'<div class="hint">Jarang dipakai dalam kata sehari-hari.</div>'):'<div class="hint">Ketuk kartu untuk melihat bunyinya</div>')+'</div>'+
+    '<div class="row"><button type="button" class="btn" id="kSay">&#128266; Dengar</button><button type="button" class="btn" id="kNo">Belum</button><button type="button" class="btn ok" id="kYes">&#10003; Hafal</button></div>'+hideOpt();
+}
+function hideOpt(){return '<div class="grp"><button type="button" class="chip" id="kHide" aria-pressed="'+P.hide+'">Sembunyikan yang sudah hafal</button><button type="button" class="chip" id="kRe" aria-pressed="false">Acak ulang</button></div>';}
+function flipCard(){flipped=!flipped;if(flipped){var r=deck[pos%deck.length];say(ch(r));}render();}
+
+/* ---------- Kuis ---------- */
+var Q={on:false,qs:[],i:0,score:0,wrong:[],ans:false};
+var MODES={rom:'Huruf ke romaji',kana:'Romaji ke huruf',ear:'Dengar lalu pilih huruf'};
+function usable(mode){var a=pool();if(mode!=='rom')a=a.filter(function(r){return !r.amb;});return a;}
+function startQuiz(){
+  var a=usable(P.mode);
+  if(a.length<4){Q.on=false;return;}
+  Q={on:true,qs:sh(a).slice(0,10),i:0,score:0,wrong:[],ans:false,opts:null};
+  Q.opts=Q.qs.map(function(r){return makeOpts(r);});
+  if(P.mode==='ear')setTimeout(function(){say(ch(Q.qs[0]));},250);
+}
+function makeOpts(r){
+  var a=usable(P.mode).filter(function(x){return x!==r&&(P.mode==='rom'?x.r!==r.r:ch(x)!==ch(r)&&x.r!==r.r);});
+  var seen={},out=[r];seen[P.mode==='rom'?r.r:ch(r)]=1;
+  sh(a).forEach(function(x){var k=P.mode==='rom'?x.r:ch(x);if(out.length<4&&!seen[k]){seen[k]=1;out.push(x);}});
+  return sh(out);
+}
+function renderKuis(v){
+  var modeChips='<div class="grp" role="group" aria-label="Jenis kuis">'+Object.keys(MODES).map(function(k){return '<button type="button" class="chip" data-mode="'+k+'" aria-pressed="'+(P.mode===k)+'">'+MODES[k]+'</button>';}).join('')+'</div>';
+  if(!Q.on){
+    var ok=usable(P.mode).length>=4,warn=(P.mode==='ear'&&!canSpeak())?'<p class="note">Browser ini tidak punya suara. Pilih jenis kuis lain.</p>':'';
+    v.innerHTML=modeChips+'<div class="card res"><p style="margin:0">10 soal acak dari set yang kamu pilih.</p>'+warn+'<div class="row"><button type="button" class="btn pri" id="qStart"'+((ok&&!(P.mode==='ear'&&!canSpeak()))?'':' disabled')+'>Mulai kuis</button></div></div>';
+    return;
+  }
+  if(Q.i>=Q.qs.length){
+    v.innerHTML=modeChips+'<div class="card res"><div class="score">'+Q.score+' / '+Q.qs.length+'</div><p style="margin:0">'+(Q.score===Q.qs.length?'Sempurna!':(Q.score>=Q.qs.length*0.7?'Bagus, tinggal sedikit lagi.':'Terus latihan, pasti bisa.'))+'</p>'+
+      (Q.wrong.length?'<p class="note" style="margin:0">Yang masih salah (ketuk untuk mendengar):</p><div class="wrongs">'+Q.wrong.map(function(r){return '<button type="button" data-say="'+KANA.indexOf(r)+'" lang="ja">'+esc(ch(r))+'</button>';}).join('')+'</div>':'')+
+      '<div class="row"><button type="button" class="btn pri" id="qAgain">Main lagi</button></div></div>';
+    return;
+  }
+  var r=Q.qs[Q.i],o=Q.opts[Q.i],m=P.mode,prompt;
+  if(m==='rom')prompt='<div class="big" lang="ja">'+esc(ch(r))+'</div><div class="ask">Apa romajinya?</div>';
+  else if(m==='kana')prompt='<div class="big" style="font-family:var(--font-body)">'+esc(r.r)+'</div><div class="ask">Pilih huruf '+(P.sc==='h'?'hiragana':'katakana')+' yang benar</div>';
+  else prompt='<div class="big" style="font-size:3.5rem">&#128266;</div><div class="ask"><button type="button" class="btn" id="qHear">Dengar lagi</button></div>';
+  var opts=o.map(function(x,i){
+    var lab=m==='rom'?esc(x.r):'<span lang="ja">'+esc(ch(x))+'</span>';
+    return '<button type="button" class="opt'+(m==='rom'?'':' kn')+'" data-oi="'+i+'">'+lab+'</button>';
+  }).join('');
+  v.innerHTML=modeChips+'<div class="count"><span>Soal '+(Q.i+1)+' / '+Q.qs.length+'</span><span>Skor '+Q.score+'</span></div><div class="bar"><i style="width:'+Math.round(Q.i*100/Q.qs.length)+'%"></i></div>'+
+    '<div class="q"><div class="prompt">'+prompt+'</div><div class="opts">'+opts+'</div><div class="fb" id="fb" aria-live="polite"></div><div class="row"><button type="button" class="btn pri" id="qNext" hidden>Lanjut</button></div></div>';
+}
+function answer(i){
+  if(Q.ans)return;Q.ans=true;
+  var r=Q.qs[Q.i],o=Q.opts[Q.i],pick=o[i],good=pick===r;
+  if(good)Q.score++;else Q.wrong.push(r);
+  $$('.opt').forEach(function(b,k){if(o[k]===r)b.classList.add('good');else if(k===i)b.classList.add('bad');b.disabled=true;});
+  var e=ex(r);
+  $('#fb').className='fb '+(good?'good':'bad');
+  $('#fb').innerHTML=(good?'Benar! ':'Belum tepat. ')+'<span lang="ja">'+esc(ch(r))+'</span> dibaca <b>'+esc(r.h==='を'?'o':r.r)+'</b>'+(e?' seperti pada <span lang="ja">'+esc(e[0])+'</span> ('+esc(e[1])+').':'.');
+  say(ch(r));
+  $('#qNext').hidden=false;$('#qNext').textContent=Q.i+1>=Q.qs.length?'Lihat hasil':'Lanjut';
+}
+
+/* ---------- Peristiwa ---------- */
+document.addEventListener('click',function(ev){
+  var t=ev.target.closest?ev.target.closest('button,#flash'):null;if(!t)return;
+  var d;
+  if((d=t.getAttribute('data-sc'))){P.sc=d;deckSig='';Q.on=false;savePrefs();render();return;}
+  if((d=t.getAttribute('data-set'))){P.sets[d]=!P.sets[d];ensureSet();deckSig='';Q.on=false;savePrefs();render();return;}
+  if((d=t.getAttribute('data-tab'))){P.tab=d;savePrefs();render();return;}
+  if((d=t.getAttribute('data-mode'))){P.mode=d;Q.on=false;savePrefs();render();return;}
+  if((d=t.getAttribute('data-gi'))){selR=KANA[+d];say(ch(selR));renderTabel($('#view'));return;}
+  if((d=t.getAttribute('data-say'))){say(ch(KANA[+d]));return;}
+  if((d=t.getAttribute('data-oi'))){answer(+d);return;}
+  var id=t.id;
+  if(id==='flash'){flipCard();return;}
+  if(id==='kSay'){say(ch(deck[pos%deck.length]));return;}
+  if(id==='kYes'){var r=deck[pos%deck.length];setDone(r,true);deck.splice(pos%deck.length,1);if(pos>=deck.length)pos=0;flipped=false;render();return;}
+  if(id==='kNo'){if(deck.length>1){var x=deck.splice(pos%deck.length,1)[0];deck.push(x);if(pos>=deck.length)pos=0;}flipped=false;render();return;}
+  if(id==='kHide'){P.hide=!P.hide;deckSig='';savePrefs();render();return;}
+  if(id==='kRe'){deckSig='';render();return;}
+  if(id==='kReset'){var keep=getDone().filter(function(s){return !pool().some(function(r){return idOf(r)===s;});});putDone(keep);deckSig='';render();return;}
+  if(id==='qStart'||id==='qAgain'){startQuiz();render();return;}
+  if(id==='qNext'){Q.i++;Q.ans=false;render();if(Q.i<Q.qs.length&&P.mode==='ear')say(ch(Q.qs[Q.i]));return;}
+  if(id==='qHear'){say(ch(Q.qs[Q.i]));return;}
+});
+document.addEventListener('keydown',function(ev){
+  if(P.tab==='kartu'&&(ev.key===' '||ev.key==='Enter')&&ev.target&&ev.target.id==='flash'){ev.preventDefault();flipCard();}
+});
+try{if(window.speechSynthesis&&speechSynthesis.addEventListener)speechSynthesis.addEventListener('voiceschanged',function(){});}catch(e){}
+render();
+</script>
+</body>
+</html>
