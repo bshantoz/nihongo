@@ -1,0 +1,6 @@
+{
+  "_petunjuk": "Daftar playlist yang jadi tab di halaman Podcast. title = nama tab, playlist = ID playlist YouTube (setelah list=). urutan: \"terbaru\" (episode terbaru di atas) atau \"lama\" (episode 1 di atas).",
+  "playlists": [
+    {"title": "Monolog", "playlist": "PLcR037WhUbXY8biaPT-F5FEcqX30iIEkl", "urutan": "lama"}
+  ]
+}
