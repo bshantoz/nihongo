@@ -1,10 +1,14 @@
 {
-  "_petunjuk": "Isi episodes dengan {\"id\": \"ID_VIDEO_YOUTUBE\", \"title\": \"Judul\"} (ID = 11 huruf setelah watch?v=). Kalau episodes kosong, pemutar memutar playlist langsung. Tambah playlist baru = tambah satu blok lagi di playlists (jadi tab baru).",
   "playlists": [
     {
       "title": "Monolog",
       "playlist": "PLcR037WhUbXY8biaPT-F5FEcqX30iIEkl",
-      "episodes": []
+      "episodes": [
+        {
+          "id": "CiOk1-mSngA",
+          "title": "Suara Hati | Bagaimana Cara Hati Berbicara, Cara Mendengarkan Suara Hati"
+        }
+      ]
     }
   ]
 }
