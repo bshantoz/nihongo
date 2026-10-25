@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Labirin Mochi — Bantu Mochi ke Stasiun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Labirin Mochi: papan labirin satu layar, Mochi (kucing) menuju stasiun.
+   Rintangan: serigala, api, jurang (kena = nyawa berkurang, kembali ke awal). Taman = jalan buntu yang aman. */
+:root{
+  --bg:#f2ecdf; --surface:#fffdf6; --ink:#2b2118; --muted:#7a6a55; --line:#ddd0b8;
+  --accent:#c8561f; --accent-ink:#ffffff; --tint:#f7e3c2; --panel:#f3e9d2; --wall:#8a6d3b;
+  --ok:#1f7a45; --ok-bg:#d6efdf; --bad:#b3342f; --bad-bg:#f9dad7;
+  --font-display:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
+  --font-body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#171208; --surface:#221a10; --ink:#f0e6d2; --muted:#b3a184; --line:#453723;
+  --accent:#e07f3e; --accent-ink:#1d130a; --tint:#3a2a12; --panel:#2a2013; --wall:#a3803f;
+  --ok:#7fc98f; --ok-bg:#17301d; --bad:#e88a84; --bad-bg:#3a1a17;
+}}
+:root[data-theme="dark"]{
+  --bg:#171208; --surface:#221a10; --ink:#f0e6d2; --muted:#b3a184; --line:#453723;
+  --accent:#e07f3e; --accent-ink:#1d130a; --tint:#3a2a12; --panel:#2a2013; --wall:#a3803f;
+  --ok:#7fc98f; --ok-bg:#17301d; --bad:#e88a84; --bad-bg:#3a1a17;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+.wrap{max-width:520px;margin:0 auto;padding:14px 12px 20px}
+.top{text-align:center;margin-bottom:8px}
+.top h1{font-family:var(--font-display);font-size:2rem;margin:0;line-height:1.15}
+.top .r{letter-spacing:.14em;font-size:.72rem;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.top .sub{font-size:.92rem;color:var(--muted);margin:6px 4px 0;line-height:1.45}
+.ctl{display:flex;gap:8px;margin:10px 0 8px}
+.ctl select{flex:1;min-width:0;height:42px;padding:0 10px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:.92rem;font-weight:700}
+.btn{height:42px;padding:0 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:.92rem;font-weight:700;cursor:pointer}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.hud{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;margin:2px 2px 8px;color:var(--muted)}
+.hud b{color:var(--ink)}
+.hud .hearts{font-size:1rem;letter-spacing:2px}
+.board{position:relative;width:100%;max-width:430px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px}
+.maze{display:grid;gap:0}
+.cell{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.cell .dc{font-size:clamp(13px,4.6vw,22px);line-height:1}
+.cell .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(15px,5.4vw,26px);line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35));z-index:2}
+.cell.goal{background:var(--tint)}
+.msg{min-height:1.5em;text-align:center;font-size:.92rem;margin:8px 4px 2px;line-height:1.45}
+.msg.bad{color:var(--bad);font-weight:700}
+.msg.ok{color:var(--ok);font-weight:700}
+.pad{display:grid;grid-template-columns:repeat(3,64px);grid-template-rows:repeat(3,52px);gap:6px;justify-content:center;margin:8px auto 2px}
+.pad button{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font-size:1.25rem;cursor:pointer}
+.pad button:active{background:var(--tint)}
+.pad .up{grid-area:1/2}.pad .left{grid-area:2/1}.pad .right{grid-area:2/3}.pad .down{grid-area:3/2}
+.pad .mid{grid-area:2/2;display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:1px dashed var(--line);border-radius:14px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:center;font-size:.8rem;color:var(--muted);margin-top:10px}
+.win{margin:12px auto 0;max-width:430px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.win h2{font-family:var(--font-display);margin:0 0 6px;font-size:1.3rem}
+.win p{margin:4px 0 12px;font-size:.92rem;color:var(--muted)}
+.foot{font-size:.8rem;color:var(--muted);line-height:1.5;margin-top:14px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>モチのめいろ</h1>
+    <div class="r">Mochi no Meiro · Labirin Mochi</div>
+    <p class="sub" id="sub"></p>
+  </div>
+  <div class="ctl">
+    <select id="selDiff" aria-label="Tingkat kesulitan"></select>
+    <select id="selLang" aria-label="Bahasa"></select>
+    <button type="button" class="btn" id="btnNew"></button>
+  </div>
+  <div class="hud">
+    <span class="hearts" id="hudHearts"></span>
+    <span><span id="labSteps"></span> <b id="hudSteps">0</b></span>
+    <span><span id="labTime"></span> <b id="hudTime">0:00</b></span>
+  </div>
+  <div class="board"><div class="maze" id="maze"></div></div>
+  <p class="msg" id="msg" aria-live="polite"></p>
+  <div class="pad" aria-label="Tombol arah">
+    <button type="button" class="up" data-dx="0" data-dy="-1" aria-label="Atas">▲</button>
+    <button type="button" class="left" data-dx="-1" data-dy="0" aria-label="Kiri">◀</button>
+    <div class="mid">🐱</div>
+    <button type="button" class="right" data-dx="1" data-dy="0" aria-label="Kanan">▶</button>
+    <button type="button" class="down" data-dx="0" data-dy="1" aria-label="Bawah">▼</button>
+  </div>
+  <div class="win" id="win" hidden>
+    <h2 id="winTitle"></h2>
+    <p id="winStats"></p>
+    <button type="button" class="btn pri" id="btnAgain"></button>
+  </div>
+  <div class="legend" id="legend"></div>
+  <p class="foot" id="foot"></p>
+</div>
+<script>
+(function(){
+'use strict';
+var L10N={
+ jp:{sub:'モチを駅まで案内しよう。オオカミ・火・崖に気をつけて!',newB:'新しいマップ',again:'もう一回',steps:'歩数',time:'時間',win:'やった！駅にとうちゃく！',lose:'ざんねん…ライフがなくなった。',wolf:'オオカミ',fire:'火',cliff:'崖',park:'公園',goal:'駅',mWolf:'オオカミにあった！スタートにもどるよ。',mFire:'あつい、火だ！スタートにもどるよ。',mCliff:'崖っぷち！スタートにもどるよ。',mPark:'ここは公園。駅はまだ先だよ。',easy:'かんたん',normal:'ふつう',hard:'むずかしい',foot:'うごき方: 下のボタン、スワイプ、または矢印キー。ライフは3つ。'},
+ id:{sub:'Bantu Mochi sampai ke stasiun. Hati-hati serigala, api, dan jurang!',newB:'Papan baru',again:'Main lagi',steps:'Langkah',time:'Waktu',win:'Hore! Sampai di stasiun!',lose:'Yah, nyawa habis. Coba lagi ya!',wolf:'Serigala',fire:'Api',cliff:'Jurang',park:'Taman',goal:'Stasiun',mWolf:'Ada serigala! Kembali ke awal ya.',mFire:'Panas, ada api! Kembali ke awal ya.',mCliff:'Ada jurang! Kembali ke awal ya.',mPark:'Ini taman, bukan stasiun. Terus cari jalannya!',easy:'Mudah',normal:'Sedang',hard:'Sulit',foot:'Cara main: tombol arah di bawah, usap papan, atau tombol panah di kibor. Nyawa ada 3.'},
+ jv:{sub:'Tulungi Mochi tekan stasiun. Ati-ati ana ajag, geni, lan jurang!',newB:'Papan anyar',again:'Main maneh',steps:'Langkah',time:'Wektu',win:'Hore! Wis tekan stasiun!',lose:'Nyawane entek. Coba maneh!',wolf:'Ajag',fire:'Geni',cliff:'Jurang',park:'Taman',goal:'Stasiun',mWolf:'Ana ajag! Bali menyang wiwitan.',mFire:'Panas, ana geni! Bali menyang wiwitan.',mCliff:'Ana jurang! Bali menyang wiwitan.',mPark:'Iki taman, dudu stasiun. Terus goleki dalane!',easy:'Gampang',normal:'Sedheng',hard:'Angel',foot:'Carane main: tombol arah ing ngisor, usap papan, utawa tombol panah ing kibor. Nyawa ana 3.'},
+ su:{sub:'Bantuan Mochi nepi ka stasiun. Ati-ati ajag, seuneu, jeung gawir!',newB:'Papan anyar',again:'Main deui',steps:'Langkah',time:'Waktu',win:'Hore! Geus nepi ka stasiun!',lose:'Nyawana beak. Coba deui!',wolf:'Ajag',fire:'Seuneu',cliff:'Gawir',park:'Taman',goal:'Stasiun',mWolf:'Aya ajag! Balik deui ka awal.',mFire:'Panas, aya seuneu! Balik deui ka awal.',mCliff:'Aya gawir! Balik deui ka awal.',mPark:'Ieu taman, sanés stasiun. Terus teangan jalanna!',easy:'Gampang',normal:'Sedeng',hard:'Hese',foot:'Cara main: tombol arah di handap, usap papan, atawa tombol panah dina kibor. Nyawa aya 3.'},
+ ban:{sub:'Tulungin Mochi rauh ring stasiun. Becik-becik ada asu ajag, api, lan jurang!',newB:'Papan anyar',again:'Main malih',steps:'Langkah',time:'Waktu',win:'Hore! Sampun rauh ring stasiun!',lose:'Nyawané telas. Coba malih!',wolf:'Asu ajag',fire:'Api',cliff:'Jurang',park:'Taman',goal:'Stasiun',mWolf:'Ada asu ajag! Mawali ka pangawit.',mFire:'Panas, ada api! Mawali ka pangawit.',mCliff:'Ada jurang! Mawali ka pangawit.',mPark:'Niki taman, boya stasiun. Terus golek jalane!',easy:'Aluh',normal:'Sedeng',hard:'Susah',foot:'Cara main: tombol arah ring sor, usap papan, utawi tombol panah ring kibor. Nyawa ada 3.'}
+};
+var LANGS=[['jp','日本語 (Jepang)'],['id','Indonesia'],['jv','Jawa'],['su','Sunda'],['ban','Bali']];
+var HAZ={wolf:{e:'🐺',msg:'mWolf'},fire:{e:'🔥',msg:'mFire'},cliff:{e:'🕳️',msg:'mCliff'}};
+var $=function(id){return document.getElementById(id)};
+var mazeEl=$('maze'),msgEl=$('msg'),winEl=$('win');
+var W=11,H=11,cells=[],pos=0,goal=0,lives=3,steps=0,secs=0,timer=0,playing=false,started=false;
+var lang='id';
+try{lang=localStorage.getItem('gxLabLang')||'id'}catch(e){}
+if(!L10N[lang])lang='id';
+function T(){return L10N[lang]}
+function gen(w,h){
+  W=w;H=h;cells=[];
+  for(var i=0;i<w*h;i++)cells.push({w:[1,1,1,1],v:0,deco:null});
+  var stack=[0];cells[0].v=1;
+  while(stack.length){
+    var cur=stack[stack.length-1],x=cur%w,y=(cur/w)|0,nb=[];
+    if(y>0&&!cells[cur-w].v)nb.push([cur-w,0]);
+    if(x<w-1&&!cells[cur+1].v)nb.push([cur+1,1]);
+    if(y<h-1&&!cells[cur+w].v)nb.push([cur+w,2]);
+    if(x>0&&!cells[cur-1].v)nb.push([cur-1,3]);
+    if(!nb.length){stack.pop();continue}
+    var nx=nb[(Math.random()*nb.length)|0],ni=nx[0],dir=nx[1];
+    cells[cur].w[dir]=0;cells[ni].w[(dir+2)%4]=0;cells[ni].v=1;stack.push(ni);
+  }
+  goal=w*h-1;
+  // jarak BFS dari awal, untuk menaruh rintangan & taman dengan adil
+  var dist={},q=[0];dist[0]=0;
+  while(q.length){var c=q.shift(),cx=c%w,cy=(c/w)|0;
+    [[0,-1,0],[1,0,1],[0,1,2],[-1,0,3]].forEach(function(d){
+      if(cells[c].w[d[2]])return;var nx2=cx+d[0],ny2=cy+d[1];if(nx2<0||ny2<0||nx2>=w||ny2>=h)return;
+      var ni2=ny2*w+nx2;if(dist[ni2]==null){dist[ni2]=dist[c]+1;q.push(ni2)}})}
+  var far=Object.keys(dist).map(Number).filter(function(i){return dist[i]>=5&&i!==goal});
+  far.sort(function(){return Math.random()-.5});
+  var kinds=['wolf','fire','cliff','wolf','fire','cliff'];
+  var nHaz=w>=13?6:5;
+  for(var k=0;k<Math.min(nHaz,far.length);k++)cells[far[k]].deco=kinds[k%kinds.length];
+  var used={};far.forEach(function(i){used[i]=1});
+  var deads=[];
+  for(var j=0;j<w*h;j++){if(j===0||j===goal||cells[j].deco)continue;
+    var walls=cells[j].w[0]+cells[j].w[1]+cells[j].w[2]+cells[j].w[3];
+    if(walls===3&&(dist[j]||0)>=3)deads.push(j)}
+  deads.sort(function(){return Math.random()-.5});
+  for(var p=0;p<Math.min(3,deads.length);p++)cells[deads[p]].deco='park';
+}
+function fmt(s){return ((s/60)|0)+':'+('0'+(s%60)).slice(-2)}
+function draw(){
+  mazeEl.style.gridTemplateColumns='repeat('+W+',1fr)';
+  mazeEl.innerHTML='';
+  for(var i=0;i<W*H;i++){
+    var c=cells[i],d=document.createElement('div');d.className='cell'+(i===goal?' goal':'');
+    var bw='3px solid var(--wall)',bn='3px solid transparent';
+    d.style.borderTop=c.w[0]?bw:bn;d.style.borderRight=c.w[1]?bw:bn;
+    d.style.borderBottom=c.w[2]?bw:bn;d.style.borderLeft=c.w[3]?bw:bn;
+    if(i===goal)d.innerHTML='<span class="dc" title="'+T().goal+'">🚉</span>';
+    else if(c.deco==='park')d.innerHTML='<span class="dc" title="'+T().park+'">🌳</span>';
+    else if(c.deco)d.innerHTML='<span class="dc" title="'+T()[c.deco]+'">'+HAZ[c.deco].e+'</span>';
+    mazeEl.appendChild(d);
+  }
+  placePlayer();
+  hud();
+}
+function placePlayer(){
+  var old=mazeEl.querySelector('.pl');if(old)old.parentNode.removeChild(old);
+  var cell=mazeEl.children[pos];if(!cell)return;
+  var s=document.createElement('span');s.className='pl';s.textContent='🐱';cell.appendChild(s);
+}
+function hud(){
+  $('hudHearts').textContent='❤️'.repeat(lives)+'🖤'.repeat(3-lives);
+  $('hudSteps').textContent=steps;$('hudTime').textContent=fmt(secs);
+}
+function say(txt,cls){msgEl.textContent=txt||'';msgEl.className='msg'+(cls?' '+cls:'')}
+function startTimer(){if(timer)return;timer=setInterval(function(){secs++;$('hudTime').textContent=fmt(secs)},1000)}
+function stopTimer(){if(timer){clearInterval(timer);timer=0}}
+function end(win){
+  playing=false;stopTimer();
+  winEl.hidden=false;
+  $('winTitle').textContent=win?T().win:T().lose;
+  $('winStats').textContent=T().steps+': '+steps+' · '+T().time+': '+fmt(secs);
+  $('btnAgain').textContent=T().again;
+  say(win?T().win:'','ok');
+}
+function move(dx,dy){
+  if(!playing)return;
+  var x=pos%W,y=(pos/W)|0,dir=dx===1?1:dx===-1?3:dy===1?2:0;
+  if(cells[pos].w[dir])return;
+  pos+=dx+dy*W;steps++;
+  if(!started){started=true;startTimer()}
+  placePlayer();hud();
+  if(pos===goal){end(true);return}
+  var deco=cells[pos].deco;
+  if(deco==='park'){say(T().mPark);return}
+  if(deco){
+    lives--;hud();
+    say(T()[HAZ[deco].msg],'bad');
+    if(lives<=0){end(false);return}
+    pos=0;setTimeout(placePlayer,350);
+    return;
+  }
+  say('');
+}
+function newGame(){
+  var sz=+$('selDiff').value||11;
+  lives=3;steps=0;secs=0;pos=0;playing=true;started=false;stopTimer();
+  winEl.hidden=true;say('');
+  gen(sz,sz);draw();
+}
+function applyLang(){
+  var t=T();
+  $('sub').textContent=t.sub;
+  $('btnNew').textContent=t.newB;
+  $('labSteps').textContent=t.steps;
+  $('labTime').textContent=t.time;
+  $('foot').textContent=t.foot;
+  var sd=$('selDiff'),cur=sd.value;
+  sd.innerHTML=[9,11,13].map(function(s,i){return '<option value="'+s+'">'+[t.easy,t.normal,t.hard][i]+' ('+s+'×'+s+')</option>'}).join('');
+  sd.value=cur||'11';
+  $('legend').innerHTML='<span>🚉 '+t.goal+'</span><span>🐺 '+t.wolf+'</span><span>🔥 '+t.fire+'</span><span>🕳️ '+t.cliff+'</span><span>🌳 '+t.park+'</span>';
+  if(cells.length)draw();
+}
+var sl=$('selLang');
+sl.innerHTML=LANGS.map(function(l){return '<option value="'+l[0]+'">'+l[1]+'</option>'}).join('');
+sl.value=lang;
+sl.addEventListener('change',function(){lang=sl.value;try{localStorage.setItem('gxLabLang',lang)}catch(e){}applyLang()});
+$('selDiff').addEventListener('change',newGame);
+$('btnNew').addEventListener('click',newGame);
+$('btnAgain').addEventListener('click',newGame);
+[].slice.call(document.querySelectorAll('.pad button')).forEach(function(b){
+  b.addEventListener('click',function(){move(+b.getAttribute('data-dx'),+b.getAttribute('data-dy'))})});
+document.addEventListener('keydown',function(e){
+  var k=e.key;
+  if(k==='ArrowUp'||k==='w'){move(0,-1)}else if(k==='ArrowDown'||k==='s'){move(0,1)}
+  else if(k==='ArrowLeft'||k==='a'){move(-1,0)}else if(k==='ArrowRight'||k==='d'){move(1,0)}
+  else return;
+  e.preventDefault()});
+var tx0=0,ty0=0;
+mazeEl.addEventListener('touchstart',function(e){var t=e.changedTouches[0];tx0=t.clientX;ty0=t.clientY},{passive:true});
+mazeEl.addEventListener('touchend',function(e){var t=e.changedTouches[0],dx=t.clientX-tx0,dy=t.clientY-ty0;
+  if(Math.max(Math.abs(dx),Math.abs(dy))<24)return;
+  if(Math.abs(dx)>Math.abs(dy))move(dx>0?1:-1,0);else move(0,dy>0?1:-1)},{passive:true});
+applyLang();
+newGame();
+})();
+</script>
+</body>
+</html>
