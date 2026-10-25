@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Tebak Bunyi — Kikitori Kuizu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf3e3; --surface:#ffffff; --ink:#33270e; --muted:#8a743f; --line:#eadfc0;
+  --accent:#a05c17; --accent-ink:#ffffff; --tint:#f5e7c6; --panel:#f7ecd2; --kaki:#c8561f;
+  --ok:#1f7a45; --ok-bg:#d6efdf; --bad:#b3342f; --bad-bg:#f9dad7;
+  --font-display:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
+  --font-body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1d1505; --surface:#2a1e08; --ink:#f7ecd2; --muted:#c2a869; --line:#54431c;
+  --accent:#e5a44e; --accent-ink:#241a04; --tint:#3d2e0e; --panel:#33270c;
+  --ok:#7fc98f; --ok-bg:#17301d; --bad:#e88a84; --bad-bg:#3a1a17;
+}}
+:root[data-theme="dark"]{
+  --bg:#1d1505; --surface:#2a1e08; --ink:#f7ecd2; --muted:#c2a869; --line:#54431c;
+  --accent:#e5a44e; --accent-ink:#241a04; --tint:#3d2e0e; --panel:#33270c;
+  --ok:#7fc98f; --ok-bg:#17301d; --bad:#e88a84; --bad-bg:#3a1a17;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+.wrap{max-width:560px;margin:0 auto;padding:14px 12px 20px}
+.top{text-align:center}
+.top h1{font-family:var(--font-display);font-size:2.1rem;margin:0;line-height:1.15}
+.top .r{letter-spacing:.14em;font-size:.72rem;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.top .sub{font-size:.92rem;color:var(--muted);margin:6px 4px 0;line-height:1.45}
+.grp{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin:12px 0 4px}
+.grp .lab{font-size:.78rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:.9rem;font-weight:700;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.stats{display:flex;justify-content:space-between;font-size:.9rem;color:var(--muted);margin:10px 2px}
+.stats b{color:var(--ink)}
+.prog{height:8px;border-radius:99px;background:var(--tint);overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 14px;text-align:center;margin-top:10px}
+.stage .ask{font-size:1rem;color:var(--muted);margin-bottom:10px}
+.btn{height:46px;padding:0 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:.95rem;font-weight:700;cursor:pointer}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.big{height:58px;padding:0 26px;font-size:1.1rem;border-radius:16px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.opts button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:12px 10px;font:inherit;cursor:pointer;text-align:center;line-height:1.3}
+.opts button b{display:block;font-size:1.3rem}
+.opts button small{color:var(--muted);font-size:.8rem}
+.opts button.ok{background:var(--ok-bg);border-color:var(--ok)}
+.opts button.bad{background:var(--bad-bg);border-color:var(--bad)}
+.opts button:disabled{opacity:.85;cursor:default}
+.msg{min-height:1.5em;text-align:center;font-size:.95rem;margin:10px 4px 0;line-height:1.5}
+.msg.bad{color:var(--bad);font-weight:700}
+.msg.ok{color:var(--ok);font-weight:700}
+.win{margin:14px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.win h2{font-family:var(--font-display);margin:0 0 6px;font-size:1.35rem}
+.win p{margin:4px 0 12px;font-size:.92rem;color:var(--muted)}
+.foot{font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:16px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>聞き取りクイズ</h1>
+    <div class="r">Kikitori Kuizu · Tebak Bunyi</div>
+    <p class="sub">Dengarkan kata bahasa Jepang yang diucapkan, lalu pilih kata yang benar.</p>
+  </div>
+  <div class="grp" role="group" aria-label="Mode">
+    <span class="lab">Mode</span>
+    <button type="button" class="chip" data-m="mudah" aria-pressed="true">Dengan arti</button>
+    <button type="button" class="chip" data-m="sulit" aria-pressed="false">Tanpa arti</button>
+  </div>
+  <div class="stats"><span>Soal <b id="stNo">1/10</b></span><span>Skor <b id="stScore">0</b></span><span>Beruntun <b id="stStreak">0</b></span></div>
+  <div class="prog"><i id="progFill"></i></div>
+  <div class="stage">
+    <div class="ask">Kata apa yang kamu dengar?</div>
+    <button type="button" class="btn pri big" id="btnPlay">🔊 Dengarkan</button>
+    <div class="opts" id="opts"></div>
+  </div>
+  <p class="msg" id="msg" aria-live="polite"></p>
+  <div class="win" id="win" hidden>
+    <h2>🎉 Selesai!</h2>
+    <p id="winStats"></p>
+    <button type="button" class="btn pri" id="btnAgain">Main lagi</button>
+  </div>
+  <p class="foot">Suara memakai pengisi suara Jepang bawaan browser (TTS). Boleh didengarkan berulang kali. Mode "Tanpa arti" menyembunyikan arti pada pilihan — lebih menantang.</p>
+</div>
+<script>
+(function(){
+'use strict';
+var BANK=[['あめ','ame','hujan'],['ゆき','yuki','salju'],['ねこ','neko','kucing'],['いぬ','inu','anjing'],['とり','tori','burung'],['さかな','sakana','ikan'],['やま','yama','gunung'],['かわ','kawa','sungai'],['うみ','umi','laut'],['そら','sora','langit'],['はな','hana','bunga'],['き','ki','pohon'],['くるま','kuruma','mobil'],['でんしゃ','densha','kereta'],['えき','eki','stasiun'],['みず','mizu','air'],['ごはん','gohan','nasi / makanan'],['パン','pan','roti'],['りんご','ringo','apel'],['みかん','mikan','jeruk'],['ともだち','tomodachi','teman'],['せんせい','sensei','guru'],['がくせい','gakusei','pelajar'],['ほん','hon','buku'],['かばん','kaban','tas'],['とけい','tokei','jam'],['めがね','megane','kacamata'],['つくえ','tsukue','meja'],['いす','isu','kursi'],['まど','mado','jendela'],['あさ','asa','pagi'],['よる','yoru','malam'],['きょう','kyou','hari ini'],['あした','ashita','besok'],['らいねん','rainen','tahun depan'],['せんしゅう','senshuu','minggu lalu']];
+var $=function(id){return document.getElementById(id)};
+var mode='mudah',qs=[],qi=0,score=0,streak=0,cur=null,locked=false;
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=(Math.random()*(i+1))|0;var t=a[i];a[i]=a[j];a[j]=t}return a}
+function say(t,cls){var m=$('msg');m.textContent=t||'';m.className='msg'+(cls?' '+cls:'')}
+function speak(txt){
+  try{
+    if(!('speechSynthesis' in window)){say('Browser ini tidak punya pengisi suara. Kata itu: '+cur[0],'bad');return}
+    var u=new SpeechSynthesisUtterance(txt);u.lang='ja-JP';u.rate=.82;
+    var vs=speechSynthesis.getVoices().filter(function(v){return v.lang&&v.lang.indexOf('ja')===0});
+    if(vs[0])u.voice=vs[0];
+    speechSynthesis.cancel();speechSynthesis.speak(u);
+  }catch(e){say('Suara gagal diputar. Kata itu: '+cur[0],'bad')}
+}
+function load(){
+  locked=false;cur=qs[qi];
+  $('stNo').textContent=(qi+1)+'/'+qs.length;
+  $('progFill').style.width=(qi/qs.length*100)+'%';
+  var others=shuffle(BANK.filter(function(w){return w!==cur})).slice(0,3);
+  var opts=shuffle([cur].concat(others));
+  var box=$('opts');box.innerHTML='';
+  opts.forEach(function(w){
+    var b=document.createElement('button');b.type='button';
+    b.innerHTML='<b>'+w[0]+'</b><small>'+w[1]+(mode==='mudah'?' · '+w[2]:'')+'</small>';
+    b.addEventListener('click',function(){
+      if(locked)return;locked=true;
+      [].slice.call(box.querySelectorAll('button')).forEach(function(x){x.disabled=true});
+      if(w===cur){
+        b.classList.add('ok');score+=10;streak++;
+        $('stScore').textContent=score;$('stStreak').textContent=streak;
+        say('Benar! '+cur[0]+' ('+cur[1]+') artinya '+cur[2]+'.','ok');
+      }else{
+        b.classList.add('bad');streak=0;$('stStreak').textContent='0';
+        [].slice.call(box.querySelectorAll('button')).forEach(function(x){if(x.textContent.indexOf(cur[0])===0||x.querySelector('b').textContent===cur[0])x.classList.add('ok')});
+        say('Bukan — yang benar '+cur[0]+' ('+cur[1]+'), artinya '+cur[2]+'.','bad');
+      }
+      setTimeout(next,1900);
+    });
+    box.appendChild(b);
+  });
+  say('');
+}
+function next(){qi++;if(qi>=qs.length){
+  $('progFill').style.width='100%';
+  $('win').hidden=false;$('winStats').textContent='Skor akhir '+score+' dari '+(qs.length*10)+'.';
+  say('');return}
+  load();setTimeout(function(){speak(cur[0])},250)}
+function start(){
+  qs=shuffle(BANK).slice(0,10);qi=0;score=0;streak=0;
+  $('stScore').textContent='0';$('stStreak').textContent='0';$('win').hidden=true;
+  load();
+}
+$('btnPlay').addEventListener('click',function(){if(cur)speak(cur[0])});
+$('btnAgain').addEventListener('click',start);
+[].slice.call(document.querySelectorAll('.chip[data-m]')).forEach(function(c){
+  c.addEventListener('click',function(){
+    [].slice.call(document.querySelectorAll('.chip[data-m]')).forEach(function(x){x.setAttribute('aria-pressed','false')});
+    c.setAttribute('aria-pressed','true');mode=c.getAttribute('data-m');start();
+  })});
+if('speechSynthesis' in window)speechSynthesis.getVoices();
+start();
+})();
+</script>
+</body>
+</html>

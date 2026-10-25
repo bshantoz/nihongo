@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Balap Romaji — Kana Race</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf0e9; --surface:#ffffff; --ink:#332016; --muted:#8a6a58; --line:#f0d9c8;
+  --accent:#d3542c; --accent-ink:#ffffff; --tint:#fbe0d2; --panel:#fbe7da; --kaki:#c8561f;
+  --ok:#1f7a45; --ok-bg:#d6efdf; --bad:#b3342f; --bad-bg:#f9dad7;
+  --font-display:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
+  --font-body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#221209; --surface:#2e1a0e; --ink:#fae9dc; --muted:#c39a7e; --line:#57381f;
+  --accent:#ef7d4e; --accent-ink:#26130a; --tint:#4a2612; --panel:#3d2110;
+  --ok:#7fc98f; --ok-bg:#17301d; --bad:#e88a84; --bad-bg:#3a1a17;
+}}
+:root[data-theme="dark"]{
+  --bg:#221209; --surface:#2e1a0e; --ink:#fae9dc; --muted:#c39a7e; --line:#57381f;
+  --accent:#ef7d4e; --accent-ink:#26130a; --tint:#4a2612; --panel:#3d2110;
+  --ok:#7fc98f; --ok-bg:#17301d; --bad:#e88a84; --bad-bg:#3a1a17;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+.wrap{max-width:560px;margin:0 auto;padding:14px 12px 20px}
+.top{text-align:center}
+.top h1{font-family:var(--font-display);font-size:2.1rem;margin:0;line-height:1.15}
+.top .r{letter-spacing:.14em;font-size:.72rem;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.top .sub{font-size:.92rem;color:var(--muted);margin:6px 4px 0;line-height:1.45}
+.grp{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin:12px 0 4px}
+.grp .lab{font-size:.78rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:.9rem;font-weight:700;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.stats{display:flex;justify-content:space-between;font-size:.9rem;color:var(--muted);margin:10px 2px}
+.stats b{color:var(--ink)}
+.bar{height:10px;border-radius:99px;background:var(--tint);overflow:hidden;margin:6px 0 2px}
+.bar i{display:block;height:100%;background:var(--accent);width:100%;transition:width .12s linear}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 14px 16px;text-align:center;margin-top:8px}
+.stage .big{font-size:5.2rem;line-height:1.1;font-weight:700;min-height:1.1em}
+.stage .hint{color:var(--muted);font-size:.9rem;min-height:1.4em;margin-top:4px}
+.stage.good{border-color:var(--ok);background:var(--ok-bg)}
+.stage.bad{border-color:var(--bad);background:var(--bad-bg)}
+.row{display:flex;gap:8px;margin-top:12px}
+.row input{flex:1;min-width:0;height:48px;padding:0 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:1.1rem;text-align:center}
+.btn{height:48px;padding:0 20px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:.95rem;font-weight:700;cursor:pointer}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.win{margin:14px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.win h2{font-family:var(--font-display);margin:0 0 6px;font-size:1.35rem}
+.win p{margin:4px 0 12px;font-size:.92rem;color:var(--muted)}
+.foot{font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:16px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>カナレース</h1>
+    <div class="r">Kana Reesu · Balap Romaji</div>
+    <p class="sub">Ketik romaji dari kana yang muncul, secepat yang kamu bisa. Waktu 60 detik!</p>
+  </div>
+  <div class="grp" role="group" aria-label="Mode">
+    <span class="lab">Mode</span>
+    <button type="button" class="chip" data-m="h" aria-pressed="true">Hiragana</button>
+    <button type="button" class="chip" data-m="k" aria-pressed="false">Katakana</button>
+    <button type="button" class="chip" data-m="c" aria-pressed="false">Campuran</button>
+  </div>
+  <div class="stats"><span>Waktu <b id="stTime">60</b></span><span>Skor <b id="stScore">0</b></span><span>Beruntun <b id="stStreak">0</b></span><span>Rekor <b id="stBest">0</b></span></div>
+  <div class="bar"><i id="barFill"></i></div>
+  <div class="stage" id="stage">
+    <div class="big" id="big">あ</div>
+    <div class="hint" id="hint">Tekan Mulai, lalu ketik romajinya.</div>
+  </div>
+  <div class="row">
+    <input type="text" id="inp" placeholder="romaji…" aria-label="Ketik romaji" autocomplete="off" autocapitalize="none" disabled>
+    <button type="button" class="btn pri" id="btnStart">Mulai</button>
+  </div>
+  <div class="win" id="win" hidden>
+    <h2>🏁 Waktu habis!</h2>
+    <p id="winStats"></p>
+    <button type="button" class="btn pri" id="btnAgain">Balap lagi</button>
+  </div>
+  <p class="foot">Ejaan lain diterima: si = shi, ti = chi, tu = tsu, hu = fu, zi = ji. Mode Campuran menambah dakuten (が, ぱ, dst.) dan mencampur dua aksara.</p>
+</div>
+<script>
+(function(){
+'use strict';
+var HIRA='あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん';
+var KATA='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+var ROMA=['a','i','u','e','o','ka','ki','ku','ke','ko','sa','shi','su','se','so','ta','chi','tsu','te','to','na','ni','nu','ne','no','ha','hi','fu','he','ho','ma','mi','mu','me','mo','ya','yu','yo','ra','ri','ru','re','ro','wa','wo','n'];
+var DH='がぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ';
+var DK='ガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポ';
+var DR=['ga','gi','gu','ge','go','za','ji','zu','ze','zo','da','ji','zu','de','do','ba','bi','bu','be','bo','pa','pi','pu','pe','po'];
+var ALT={'shi':['si'],'chi':['ti'],'tsu':['tu'],'fu':['hu'],'ji':['zi'],'wo':['o'],'n':['nn']};
+var $=function(id){return document.getElementById(id)};
+var mode='h',set=[],cur=null,prev='',score=0,streak=0,got=0,left=60,timer=0,run=false;
+var best=0;try{best=+localStorage.getItem('gxBalapBest')||0}catch(e){}
+$('stBest').textContent=best;
+function buildSet(){
+  set=[];
+  var add=function(chars,romas){for(var i=0;i<chars.length;i++)set.push({ch:chars[i],ro:romas[i]})};
+  if(mode==='h')add(HIRA,ROMA);
+  else if(mode==='k')add(KATA,ROMA);
+  else{add(HIRA,ROMA);add(KATA,ROMA);add(DH,DR);add(DK,DR)}
+}
+function accepted(it){var a=[it.ro];if(ALT[it.ro])a=a.concat(ALT[it.ro]);return a}
+function next(){
+  var it,tries=0;
+  do{it=set[(Math.random()*set.length)|0];tries++}while(it.ch===prev&&tries<8);
+  prev=it.ch;cur=it;$('big').textContent=it.ch;$('hint').textContent='';
+  $('stage').className='stage';$('inp').value='';
+}
+function finish(){
+  run=false;clearInterval(timer);timer=0;$('inp').disabled=true;
+  if(score>best){best=score;try{localStorage.setItem('gxBalapBest',best)}catch(e){}$('stBest').textContent=best}
+  $('win').hidden=false;
+  $('winStats').textContent='Skor '+score+' dari '+got+' kana benar. Beruntun terbaikmu tercatat di skor — coba lagi untuk memecahkannya!';
+}
+function start(){
+  buildSet();score=0;streak=0;got=0;left=60;run=true;$('win').hidden=true;
+  $('stScore').textContent='0';$('stStreak').textContent='0';$('stTime').textContent='60';$('barFill').style.width='100%';
+  $('inp').disabled=false;$('inp').focus();$('btnStart').textContent='Ulang';
+  next();
+  clearInterval(timer);
+  timer=setInterval(function(){left=Math.max(0,left-0.1);$('stTime').textContent=Math.ceil(left);$('barFill').style.width=(left/60*100)+'%';if(left<=0)finish()},100);
+}
+$('inp').addEventListener('input',function(){
+  if(!run||!cur)return;
+  var v=$('inp').value.trim().toLowerCase();if(!v)return;
+  if(accepted(cur).indexOf(v)>=0){
+    got++;streak++;score+=10+(streak>=5?2:0);
+    $('stScore').textContent=score;$('stStreak').textContent=streak;
+    $('stage').className='stage good';$('hint').textContent='✓ '+cur.ch+' = '+cur.ro;
+    setTimeout(next,120);
+  }
+});
+$('inp').addEventListener('keydown',function(e){
+  if(e.key!=='Enter'||!run||!cur)return;
+  var v=$('inp').value.trim().toLowerCase();if(!v)return;
+  if(accepted(cur).indexOf(v)<0){
+    streak=0;$('stStreak').textContent='0';
+    $('stage').className='stage bad';$('hint').textContent='✗ '+cur.ch+' dibaca "'+cur.ro+'"';
+    setTimeout(next,650);
+  }
+});
+$('btnStart').addEventListener('click',start);
+$('btnAgain').addEventListener('click',start);
+[].slice.call(document.querySelectorAll('.chip[data-m]')).forEach(function(c){
+  c.addEventListener('click',function(){
+    [].slice.call(document.querySelectorAll('.chip[data-m]')).forEach(function(x){x.setAttribute('aria-pressed','false')});
+    c.setAttribute('aria-pressed','true');mode=c.getAttribute('data-m');
+    if(run)start();
+  })});
+buildSet();
+})();
+</script>
+</body>
+</html>

@@ -77,6 +77,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
   </div>
   <div class="hud">
     <span class="hearts" id="hudHearts"></span>
+    <span>⭐ <b id="hudStars">0</b></span>
     <span><span id="labSteps"></span> <b id="hudSteps">0</b></span>
     <span><span id="labTime"></span> <b id="hudTime">0:00</b></span>
   </div>
@@ -107,11 +108,12 @@ var L10N={
  su:{sub:'Bantuan Mochi nepi ka stasiun. Ati-ati ajag, seuneu, jeung gawir!',newB:'Papan anyar',again:'Main deui',steps:'Langkah',time:'Waktu',win:'Hore! Geus nepi ka stasiun!',lose:'Nyawana beak. Coba deui!',wolf:'Ajag',fire:'Seuneu',cliff:'Gawir',park:'Taman',goal:'Stasiun',mWolf:'Aya ajag! Balik deui ka awal.',mFire:'Panas, aya seuneu! Balik deui ka awal.',mCliff:'Aya gawir! Balik deui ka awal.',mPark:'Ieu taman, sanés stasiun. Terus teangan jalanna!',easy:'Gampang',normal:'Sedeng',hard:'Hese',foot:'Cara main: tombol arah di handap, usap papan, atawa tombol panah dina kibor. Nyawa aya 3.'},
  ban:{sub:'Tulungin Mochi rauh ring stasiun. Becik-becik ada asu ajag, api, lan jurang!',newB:'Papan anyar',again:'Main malih',steps:'Langkah',time:'Waktu',win:'Hore! Sampun rauh ring stasiun!',lose:'Nyawané telas. Coba malih!',wolf:'Asu ajag',fire:'Api',cliff:'Jurang',park:'Taman',goal:'Stasiun',mWolf:'Ada asu ajag! Mawali ka pangawit.',mFire:'Panas, ada api! Mawali ka pangawit.',mCliff:'Ada jurang! Mawali ka pangawit.',mPark:'Niki taman, boya stasiun. Terus golek jalane!',easy:'Aluh',normal:'Sedeng',hard:'Susah',foot:'Cara main: tombol arah ring sor, usap papan, utawi tombol panah ring kibor. Nyawa ada 3.'}
 };
+var STAR={jp:['ほし','ほしをゲット！'],id:['Bintang','Dapat bintang!'],jv:['Lintang','Entuk lintang!'],su:['Béntang','Meunang béntang!'],ban:['Bintang','Polih bintang!']};
 var LANGS=[['jp','日本語 (Jepang)'],['id','Indonesia'],['jv','Jawa'],['su','Sunda'],['ban','Bali']];
 var HAZ={wolf:{e:'🐺',msg:'mWolf'},fire:{e:'🔥',msg:'mFire'},cliff:{e:'🕳️',msg:'mCliff'}};
 var $=function(id){return document.getElementById(id)};
 var mazeEl=$('maze'),msgEl=$('msg'),winEl=$('win');
-var W=11,H=11,cells=[],pos=0,goal=0,lives=3,steps=0,secs=0,timer=0,playing=false,started=false;
+var W=11,H=11,cells=[],pos=0,goal=0,lives=3,steps=0,secs=0,timer=0,playing=false,started=false,starsGot=0,starsTotal=0;
 var lang='id';
 try{lang=localStorage.getItem('gxLabLang')||'id'}catch(e){}
 if(!L10N[lang])lang='id';
@@ -137,18 +139,27 @@ function gen(w,h){
     [[0,-1,0],[1,0,1],[0,1,2],[-1,0,3]].forEach(function(d){
       if(cells[c].w[d[2]])return;var nx2=cx+d[0],ny2=cy+d[1];if(nx2<0||ny2<0||nx2>=w||ny2>=h)return;
       var ni2=ny2*w+nx2;if(dist[ni2]==null){dist[ni2]=dist[c]+1;q.push(ni2)}})}
-  var far=Object.keys(dist).map(Number).filter(function(i){return dist[i]>=5&&i!==goal});
-  far.sort(function(){return Math.random()-.5});
+  // Jalur solusi (satu-satunya jalan dari awal ke tujuan): rintangan, bintang,
+  // dan taman hanya boleh di luar jalur ini, jadi papan selalu bisa dimenangkan.
+  var par={0:-1},qq=[0];
+  while(qq.length){var c2=qq.shift(),cx2=c2%w,cy2=(c2/w)|0;
+    [[0,-1,0],[1,0,1],[0,1,2],[-1,0,3]].forEach(function(d){
+      if(cells[c2].w[d[2]])return;var ax=cx2+d[0],ay=cy2+d[1];if(ax<0||ay<0||ax>=w||ay>=h)return;
+      var ai=ay*w+ax;if(par[ai]==null){par[ai]=c2;qq.push(ai)}})}
+  var sol={},sp=goal;while(sp>=0){sol[sp]=1;sp=par[sp]}
+  var off=Object.keys(dist).map(Number).filter(function(i){return !sol[i]&&dist[i]>=4&&i!==goal});
+  off.sort(function(){return Math.random()-.5});
   var kinds=['wolf','fire','cliff','wolf','fire','cliff'];
   var nHaz=w>=13?6:5;
-  for(var k=0;k<Math.min(nHaz,far.length);k++)cells[far[k]].deco=kinds[k%kinds.length];
-  var used={};far.forEach(function(i){used[i]=1});
+  for(var k=0;k<Math.min(nHaz,off.length);k++)cells[off[k]].deco=kinds[k%kinds.length];
   var deads=[];
-  for(var j=0;j<w*h;j++){if(j===0||j===goal||cells[j].deco)continue;
+  for(var j=0;j<w*h;j++){if(j===0||j===goal||cells[j].deco||sol[j])continue;
     var walls=cells[j].w[0]+cells[j].w[1]+cells[j].w[2]+cells[j].w[3];
     if(walls===3&&(dist[j]||0)>=3)deads.push(j)}
   deads.sort(function(){return Math.random()-.5});
-  for(var p=0;p<Math.min(3,deads.length);p++)cells[deads[p]].deco='park';
+  starsTotal=Math.min(3,deads.length);
+  for(var p2=0;p2<starsTotal;p2++)cells[deads[p2]].deco='star';
+  for(var p3=starsTotal;p3<Math.min(starsTotal+3,deads.length);p3++)cells[deads[p3]].deco='park';
 }
 function fmt(s){return ((s/60)|0)+':'+('0'+(s%60)).slice(-2)}
 function draw(){
@@ -160,6 +171,7 @@ function draw(){
     d.style.borderTop=c.w[0]?bw:bn;d.style.borderRight=c.w[1]?bw:bn;
     d.style.borderBottom=c.w[2]?bw:bn;d.style.borderLeft=c.w[3]?bw:bn;
     if(i===goal)d.innerHTML='<span class="dc" title="'+T().goal+'">🚉</span>';
+    else if(c.deco==='star')d.innerHTML='<span class="dc">⭐</span>';
     else if(c.deco==='park')d.innerHTML='<span class="dc" title="'+T().park+'">🌳</span>';
     else if(c.deco)d.innerHTML='<span class="dc" title="'+T()[c.deco]+'">'+HAZ[c.deco].e+'</span>';
     mazeEl.appendChild(d);
@@ -174,7 +186,7 @@ function placePlayer(){
 }
 function hud(){
   $('hudHearts').textContent='❤️'.repeat(lives)+'🖤'.repeat(3-lives);
-  $('hudSteps').textContent=steps;$('hudTime').textContent=fmt(secs);
+  $('hudSteps').textContent=steps;$('hudTime').textContent=fmt(secs);var hs=$('hudStars');if(hs)hs.textContent=starsGot;
 }
 function say(txt,cls){msgEl.textContent=txt||'';msgEl.className='msg'+(cls?' '+cls:'')}
 function startTimer(){if(timer)return;timer=setInterval(function(){secs++;$('hudTime').textContent=fmt(secs)},1000)}
@@ -183,7 +195,7 @@ function end(win){
   playing=false;stopTimer();
   winEl.hidden=false;
   $('winTitle').textContent=win?T().win:T().lose;
-  $('winStats').textContent=T().steps+': '+steps+' · '+T().time+': '+fmt(secs);
+  $('winStats').textContent=T().steps+': '+steps+' · '+T().time+': '+fmt(secs)+' · ⭐ '+starsGot+'/'+starsTotal;
   $('btnAgain').textContent=T().again;
   say(win?T().win:'','ok');
 }
@@ -196,6 +208,7 @@ function move(dx,dy){
   placePlayer();hud();
   if(pos===goal){end(true);return}
   var deco=cells[pos].deco;
+  if(deco==='star'){starsGot++;cells[pos].deco=null;draw();say(STAR[lang][1],'ok');return}
   if(deco==='park'){say(T().mPark);return}
   if(deco){
     lives--;hud();
@@ -208,7 +221,7 @@ function move(dx,dy){
 }
 function newGame(){
   var sz=+$('selDiff').value||11;
-  lives=3;steps=0;secs=0;pos=0;playing=true;started=false;stopTimer();
+  lives=3;steps=0;secs=0;pos=0;starsGot=0;playing=true;started=false;stopTimer();
   winEl.hidden=true;say('');
   gen(sz,sz);draw();
 }
@@ -222,7 +235,7 @@ function applyLang(){
   var sd=$('selDiff'),cur=sd.value;
   sd.innerHTML=[9,11,13].map(function(s,i){return '<option value="'+s+'">'+[t.easy,t.normal,t.hard][i]+' ('+s+'×'+s+')</option>'}).join('');
   sd.value=cur||'11';
-  $('legend').innerHTML='<span>🚉 '+t.goal+'</span><span>🐺 '+t.wolf+'</span><span>🔥 '+t.fire+'</span><span>🕳️ '+t.cliff+'</span><span>🌳 '+t.park+'</span>';
+  $('legend').innerHTML='<span>🚉 '+t.goal+'</span><span>🐺 '+t.wolf+'</span><span>🔥 '+t.fire+'</span><span>🕳️ '+t.cliff+'</span><span>🌳 '+t.park+'</span><span>⭐ '+STAR[lang][0]+'</span>';
   if(cells.length)draw();
 }
 var sl=$('selLang');
