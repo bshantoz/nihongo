@@ -26,14 +26,14 @@ window.N4_QUIZ = {
     {mondai:"あぶない道ですから、気をつけてください。", options:["危ない","危い","険ない","危所"], correct:0, penjelasan:"'abunai' (berbahaya) ditulis 危ない."},
     {mondai:"つごうがよければ、来てください。", options:["都合","通合","都号","通号"], correct:0, penjelasan:"'tsugou' (kesempatan/kecocokan waktu) ditulis 都合."},
     {mondai:"しんぱいしないでください。", options:["心配","心備","信配","心杯"], correct:0, penjelasan:"'shinpai' (khawatir) ditulis 心配."},
-    {mondai:"このアプリはべんりです。", options:["便利","便理","勉利","便理"], correct:0, penjelasan:"'benri' (praktis) ditulis 便利."},
-    {mondai:"けいけんがあります。", options:["経験","経検","経験","径験"], correct:0, penjelasan:"'keiken' (pengalaman) ditulis 経験."},
+    {mondai:"このアプリはべんりです。", options:["便利","便理","勉利","勉理"], correct:0, penjelasan:"'benri' (praktis) ditulis 便利."},
+    {mondai:"けいけんがあります。", options:["経験","経検","軽験","径験"], correct:0, penjelasan:"'keiken' (pengalaman) ditulis 経験."},
     {mondai:"よていを確認します。", options:["予定","預定","余定","予訂"], correct:0, penjelasan:"'yotei' (jadwal) ditulis 予定."},
     {mondai:"やくそくを忘れないでください。", options:["約束","訳束","約速","約則"], correct:0, penjelasan:"'yakusoku' (janji) ditulis 約束."},
     {mondai:"しゅみは読書です。", options:["趣味","趣未","趣身","取味"], correct:0, penjelasan:"'shumi' (hobi) ditulis 趣味."},
     {mondai:"りょうしんは田舎に住んでいます。", options:["両親","両新","両視","良親"], correct:0, penjelasan:"'ryoushin' (orang tua) ditulis 両親."},
     {mondai:"さいきん忙しいです。", options:["最近","最今","再近","最緊"], correct:0, penjelasan:"'saikin' (akhir-akhir ini) ditulis 最近."},
-    {mondai:"にゅういんすることになりました。", options:["入院","入員","入院","乳院"], correct:0, penjelasan:"'nyuuin' (masuk rumah sakit/rawat inap) ditulis 入院."},
+    {mondai:"にゅういんすることになりました。", options:["入院","入員","入韻","乳院"], correct:0, penjelasan:"'nyuuin' (masuk rumah sakit/rawat inap) ditulis 入院."},
     {mondai:"しょうらい医者になりたいです。", options:["将来","招来","将耒","相来"], correct:0, penjelasan:"'shourai' (masa depan) ditulis 将来."}
   ],
 
