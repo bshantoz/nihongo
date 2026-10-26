@@ -34,7 +34,7 @@ window.N1_QUIZ = {
     {mondai:"新しい概念をていぎする。", options:["定義","定議","定儀","定技"], correct:0, penjelasan:"'teigi' (definisi) ditulis 定義."},
     {mondai:"彼はかせつを立てて実験した。", options:["仮説","仮設","仮節","仮折"], correct:0, penjelasan:"'kasetsu' (hipotesis) ditulis 仮説."},
     {mondai:"社会のたようせいを尊重する。", options:["多様性","多洋性","多用性","他様性"], correct:0, penjelasan:"'tayousei' (keberagaman) ditulis 多様性."},
-    {mondai:"この結果はきゃっかんてきなデータに基づく。", options:["客観的","客観的","客感的","各観的"], correct:0, penjelasan:"'kyakkanteki' (objektif) ditulis 客観的."}
+    {mondai:"この結果はきゃっかんてきなデータに基づく。", options:["客観的","客関的","客感的","各観的"], correct:0, penjelasan:"'kyakkanteki' (objektif) ditulis 客観的."}
   ],
 
   // ---------------- 文脈規定 (Kata Sesuai Konteks) ----------------
