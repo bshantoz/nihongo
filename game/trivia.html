@@ -32,9 +32,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .wrap{max-width:640px;margin-inline:auto;display:grid;gap:16px}
 h1{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(1.7rem,6vw,2.3rem);line-height:1.15;text-wrap:balance}
 h1 small{display:block;font-family:var(--font-body);font-weight:500;font-size:.78rem;letter-spacing:.08em;color:var(--muted);margin-top:4px;text-transform:uppercase}
-.cats{display:flex;flex-wrap:wrap;gap:6px}
-.cat{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 14px;font-size:.88rem;font-weight:500}
-.cat[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.catSel{width:100%;height:44px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:.95rem;font-weight:700}
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-variant-numeric:tabular-nums;color:var(--muted);font-size:.9rem}
 .top b{color:var(--ink)}
 .streak b{color:var(--kaki)}
@@ -70,7 +68,7 @@ h1 small{display:block;font-family:var(--font-body);font-weight:500;font-size:.7
   <header>
     <h1>日本文化クイズ<small>nihon bunka kuizu · trivia budaya Jepang</small></h1>
   </header>
-  <div class="cats" id="cats" role="group" aria-label="Pilih kategori"></div>
+  <select id="catSel" class="catSel" aria-label="Pilih kategori"></select>
   <div class="top">
     <span>Soal <b id="no">1/10</b></span>
     <span class="streak">Beruntun <b id="streak">0</b></span>
@@ -185,9 +183,9 @@ function copyScore(){
   try{navigator.clipboard.writeText(t).then(function(){done('Skor disalin.');},function(){done(t);});}catch(e){done(t);}
 }
 function buildCats(){
-  $('cats').innerHTML=CATS.map(function(c){return '<button type="button" class="cat" data-c="'+esc(c)+'" aria-pressed="'+(c===cat)+'">'+esc(c)+'</button>';}).join('');
+  $('catSel').innerHTML=CATS.map(function(c){return '<option value="'+esc(c)+'"'+(c===cat?' selected':'')+'>'+esc(c)+'</option>';}).join('');
 }
-$('cats').addEventListener('click',function(e){var b=e.target.closest('[data-c]');if(!b)return;cat=b.getAttribute('data-c');buildCats();start();});
+$('catSel').addEventListener('change',function(){cat=this.value;start();});
 $('stage').addEventListener('click',function(e){
   var o=e.target.closest('.o');if(o){answer(o);return;}
   if(e.target.id==='next')next();else if(e.target.id==='again')start();else if(e.target.id==='copy')copyScore();
