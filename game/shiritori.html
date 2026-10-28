@@ -84,6 +84,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
   <p class="msg" id="msg" aria-live="polite"></p>
   <div style="text-align:center;margin-top:6px">
     <button type="button" class="btn sm" id="btnGive">Menyerah</button>
+    <button type="button" class="btn sm" id="btnHint">Petunjuk (3)</button>
     <button type="button" class="btn sm" id="btnRe">Mulai ulang</button>
   </div>
   <div class="win" id="win" hidden>
@@ -91,7 +92,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
     <p id="winStats"></p>
     <button type="button" class="btn pri" id="btnAgain">Main lagi</button>
   </div>
-  <p class="foot">Bank kata dari kosakata JLPT di situs ini. Contoh: ねこ (neko) → kata berikutnya mulai dari 「こ」, misalnya ことり (kotori). Huruf kecil ゃゅょ dihitung sebagai やゆよ.</p>
+  <p class="foot">Bank kata dari kosakata JLPT di situs ini. Contoh: ねこ (neko) → kata berikutnya mulai dari 「こ」, misalnya ことり (kotori). Huruf kecil ゃゅょ dihitung sebagai やゆよ. Tombol Petunjuk menunjukkan satu kata sah dari bank untuk huruf yang sedang jalan (3 kali per permainan).</p>
 </div>
 <script>
 (function(){
@@ -140,7 +141,7 @@ function play(w,cpu){
   required=lastKana(w.kana);render();
 }
 function end(win,why){
-  over=true;$('inp').disabled=true;$('btnGo').disabled=true;
+  over=true;$('inp').disabled=true;$('btnGo').disabled=true;updHint();
   var n=chain.length;
   if(win&&n>best){best=n;try{localStorage.setItem('gxShiriBest',best)}catch(e){}$('stBest').textContent=best}
   $('win').hidden=false;
@@ -170,16 +171,30 @@ function submit(){
   $('inp').disabled=true;$('btnGo').disabled=true;
   setTimeout(cpuTurn,850);
 }
+var hints=3;
+function updHint(){var b=$('btnHint');b.textContent='Petunjuk ('+hints+')';b.disabled=(hints<=0||over)}
+function hint(){
+  if(over||hints<=0)return;
+  if($('inp').disabled){say('Tunggu giliranmu dulu ya.');return}
+  var cand=pool.filter(function(w){return !used[w.kana]&&w.kana.charAt(0)===required&&w.kana.charAt(w.kana.length-1)!=='ん'});
+  if(!cand.length){say('Tidak ada kata sah berawalan 「'+required+'」 yang belum dipakai di bank level ini.','bad');return}
+  hints--;
+  var w=cand[(Math.random()*cand.length)|0];
+  $('inp').value=w.kana;
+  say('Petunjuk: '+w.kana+(w.romaji?' ('+w.romaji+')':'')+(w.arti?' · '+w.arti:'')+' — tinggal tekan Kirim. Sisa petunjuk: '+hints,'ok');
+  updHint();$('inp').focus();
+}
 function start(){
-  buildPool();used={};chain=[];over=false;$('win').hidden=true;say('');
+  buildPool();used={};chain=[];over=false;hints=3;$('win').hidden=true;say('');
   var openers=pool.filter(function(w){return w.kana.charAt(w.kana.length-1)!=='ん'});
   play(openers[(Math.random()*openers.length)|0],true);
   say('Mochi mulai duluan. Giliranmu — mulai dari 「'+required+'」');
-  $('inp').disabled=false;$('btnGo').disabled=false;$('inp').focus();
+  $('inp').disabled=false;$('btnGo').disabled=false;$('inp').focus();updHint();
 }
 $('btnGo').addEventListener('click',submit);
 $('inp').addEventListener('keydown',function(e){if(e.key==='Enter')submit()});
 $('btnGive').addEventListener('click',function(){if(!over)end(false,'Kamu menyerah')});
+$('btnHint').addEventListener('click',hint);
 $('btnRe').addEventListener('click',start);
 $('btnAgain').addEventListener('click',start);
 [].slice.call(document.querySelectorAll('.chip[data-lv]')).forEach(function(c){
