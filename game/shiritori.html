@@ -69,13 +69,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
     <div class="r">Shiritori · Sambung Kata</div>
     <p class="sub">Sambung kata dari kana terakhir kata sebelumnya. Kata berakhiran 「ん」 kalah. Lawanmu: Mochi 🐱</p>
   </div>
-  <div class="grp" role="group" aria-label="Level">
-    <span class="lab">Level</span>
-    <button type="button" class="chip" data-lv="5" aria-pressed="true">N5</button>
-    <button type="button" class="chip" data-lv="4" aria-pressed="false">N4</button>
-    <button type="button" class="chip" data-lv="3" aria-pressed="false">N3</button>
-    <button type="button" class="chip" data-lv="2" aria-pressed="false">N2</button>
-  </div>
   <div class="stats"><span>Rantai <b id="stChain">0</b> kata</span><span>Rekor <b id="stBest">0</b></span></div>
   <div class="banner" id="banner">Memuat bank kata…</div>
   <div class="chain" id="chain"></div>
@@ -94,7 +87,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
     <p id="winStats"></p>
     <button type="button" class="btn pri" id="btnAgain">Main lagi</button>
   </div>
-  <p class="foot">Bank kata dari kosakata JLPT di situs ini. Contoh: ねこ (neko) → kata berikutnya mulai dari 「こ」, misalnya ことり (kotori). Huruf kecil ゃゅょ dihitung sebagai やゆよ. Tombol Petunjuk menunjukkan satu kata sah dari bank untuk huruf yang sedang jalan (3 kali per permainan). Pilihan level bersifat gabungan mengikuti kartu hapalan di situs ini: N3 berarti bank berisi kosakata N5 + N4 + N3, dan N2 berarti semuanya sampai N2.</p>
+  <p class="foot">Bank kata dari kosakata JLPT di situs ini. Contoh: ねこ (neko) → kata berikutnya mulai dari 「こ」, misalnya ことり (kotori). Huruf kecil ゃゅょ dihitung sebagai やゆよ. Tombol Petunjuk menunjukkan satu kata sah dari bank untuk huruf yang sedang jalan (3 kali per permainan). Bank kata adalah gabungan semua kosakata JLPT di situs ini, dari N5 sampai N1.</p>
 </div>
 <script>
 (function(){
@@ -109,7 +102,7 @@ function toKana(s){s=(s||'').toLowerCase().trim();if(/[぀-ヿ]/.test(s))return 
   return out}
 var FALLBACK=[['ねこ','neko','kucing'],['いぬ','inu','anjing'],['とり','tori','burung'],['さかな','sakana','ikan'],['やま','yama','gunung'],['かわ','kawa','sungai'],['うみ','umi','laut'],['そら','sora','langit'],['はな','hana','bunga'],['あめ','ame','hujan'],['ゆき','yuki','salju'],['くるま','kuruma','mobil'],['でんしゃ','densha','kereta'],['えき','eki','stasiun'],['みず','mizu','air'],['ごはん','gohan','nasi'],['りんご','ringo','apel'],['みかん','mikan','jeruk'],['ともだち','tomodachi','teman'],['せんせい','sensei','guru'],['ほん','hon','buku'],['かばん','kaban','tas'],['とけい','tokei','jam'],['つくえ','tsukue','meja'],['いす','isu','kursi'],['まど','mado','jendela'],['あさ','asa','pagi'],['よる','yoru','malam'],['ねこ','neko','kucing'],['すし','sushi','sushi'],['さくら','sakura','sakura'],['たまご','tamago','telur'],['ごま','goma','wijen'],['まめ','mame','kacang'],['めがね','megane','kacamata'],['ねじ','neji','sekrup'],['しか','shika','rusa'],['かめ','kame','kura-kura'],['めだか','medaka','ikan medaka'],['かぜ','kaze','angin'],['ぜみ','zemi','seminar']];
 var $=function(id){return document.getElementById(id)};
-var pool=[],byKana={},byRomaji={},used={},chain=[],required='',over=false,level=5;
+var pool=[],byKana={},byRomaji={},used={},chain=[],required='',over=false;
 var best=0;try{best=+localStorage.getItem('gxShiriBest')||0}catch(e){}
 $('stBest').textContent=best;
 function loadScript(src){return new Promise(function(res){var s=document.createElement('script');s.src=src;s.onload=function(){res(1)};s.onerror=function(){res(0)};document.head.appendChild(s)})}
@@ -117,9 +110,10 @@ function buildPool(){
   pool=[];byKana={};byRomaji={};
   var src=[];
   if(window.N5_KOTOBA)src=src.concat(window.N5_KOTOBA);
-  if(level<=4&&window.N4_KOTOBA)src=src.concat(window.N4_KOTOBA);
-  if(level<=3&&window.N3_KOTOBA)src=src.concat(window.N3_KOTOBA);
-  if(level<=2&&window.N2_KOTOBA)src=src.concat(window.N2_KOTOBA);
+  if(window.N4_KOTOBA)src=src.concat(window.N4_KOTOBA);
+  if(window.N3_KOTOBA)src=src.concat(window.N3_KOTOBA);
+  if(window.N2_KOTOBA)src=src.concat(window.N2_KOTOBA);
+  if(window.N1_KOTOBA)src=src.concat(window.N1_KOTOBA);
   if(!src.length)FALLBACK.forEach(function(w){src.push({kana:w[0],romaji:w[1],arti:w[2]})});
   var seen={};
   src.forEach(function(w){if(!w||!w.kana||seen[w.kana])return;seen[w.kana]=1;
@@ -166,7 +160,7 @@ function submit(){
   var raw=$('inp').value.trim();if(!raw)return;
   var kana=toKana(raw);
   var w=byKana[kana]||byRomaji[raw.toLowerCase()];
-  if(!w){say('Kata "'+raw+'" tidak ada di bank kata level ini. Coba kata lain.','bad');return}
+  if(!w){say('Kata "'+raw+'" tidak ada di bank kata. Coba kata lain.','bad');return}
   if(used[w.kana]){say('Kata '+w.kana+' sudah dipakai. Cari yang lain.','bad');return}
   if(w.kana.charAt(0)!==required){say('Harus mulai dari 「'+required+'」, bukan 「'+w.kana.charAt(0)+'」.','bad');return}
   $('inp').value='';play(w,false);
@@ -181,7 +175,7 @@ function hint(){
   if(over||hints<=0)return;
   if($('inp').disabled){say('Tunggu giliranmu dulu ya.');return}
   var cand=pool.filter(function(w){return !used[w.kana]&&w.kana.charAt(0)===required&&w.kana.charAt(w.kana.length-1)!=='ん'});
-  if(!cand.length){say('Tidak ada kata sah berawalan 「'+required+'」 yang belum dipakai di bank level ini.','bad');return}
+  if(!cand.length){say('Tidak ada kata sah berawalan 「'+required+'」 yang belum dipakai di bank kata.','bad');return}
   hints--;
   var w=cand[(Math.random()*cand.length)|0];
   $('inp').value=w.kana;
@@ -206,25 +200,13 @@ $('btnGive').addEventListener('click',function(){if(!over)end(false,'Kamu menyer
 $('btnHint').addEventListener('click',hint);
 $('btnRe').addEventListener('click',start);
 $('btnAgain').addEventListener('click',start);
-[].slice.call(document.querySelectorAll('.chip[data-lv]')).forEach(function(c){
-  c.addEventListener('click',function(){
-    [].slice.call(document.querySelectorAll('.chip[data-lv]')).forEach(function(x){x.setAttribute('aria-pressed','false')});
-    c.setAttribute('aria-pressed','true');level=+c.getAttribute('data-lv');
-    ensureData(start);
-  })});
-var LV_FILES={5:'n5/n5-kotoba.js',4:'n4/n4-kotoba.js',3:'n3/n3-kotoba.js',2:'n2/n2-kotoba.js'};
-var lvLoaded={},lvBusy=false,lvCb=null;
-function needLevels(){var a=[5];if(level<=4)a.push(4);if(level<=3)a.push(3);if(level<=2)a.push(2);return a}
+var dataReady=false;
 function ensureData(cb){
-  var need=needLevels().filter(function(l){return !lvLoaded[l]});
-  if(!need.length){cb();return}
-  if(lvBusy){lvCb=cb;return}
-  lvBusy=true;
+  if(dataReady){cb();return}
+  var files=['n5/n5-kotoba.js','n4/n4-kotoba.js','n3/n3-kotoba.js','n2/n2-kotoba.js','n1/n1-kotoba.js'];
   var done=false;
-  var finish=function(){if(done)return;done=true;lvBusy=false;
-    need.forEach(function(l){lvLoaded[l]=1});
-    var c=lvCb||cb;lvCb=null;ensureData(c)};
-  Promise.all(need.map(function(l){return loadScript('https://bshantoz.github.io/nihongo/'+LV_FILES[l])})).then(finish);
+  var finish=function(){if(done)return;done=true;dataReady=true;cb()};
+  Promise.all(files.map(function(f){return loadScript('https://bshantoz.github.io/nihongo/'+f)})).then(finish);
   setTimeout(finish,7000);
 }
 ensureData(start);
