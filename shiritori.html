@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Shiritori — Sambung Kata Jepang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#efeaf8; --surface:#ffffff; --ink:#221a3d; --muted:#655a8c; --line:#d9d0ef;
+  --accent:#6d4fc2; --accent-ink:#ffffff; --tint:#e3dbf7; --panel:#e9e2fa; --kaki:#c8561f;
+  --ok:#1f7a45; --ok-bg:#d6efdf; --bad:#b3342f; --bad-bg:#f9dad7;
+  --font-display:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
+  --font-body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#130f24; --surface:#1d1836; --ink:#eae4fb; --muted:#a294cc; --line:#3a3160;
+  --accent:#9d85e8; --accent-ink:#17102e; --tint:#2c2350; --panel:#251e47;
+  --ok:#7fc98f; --ok-bg:#17301d; --bad:#e88a84; --bad-bg:#3a1a17;
+}}
+:root[data-theme="dark"]{
+  --bg:#130f24; --surface:#1d1836; --ink:#eae4fb; --muted:#a294cc; --line:#3a3160;
+  --accent:#9d85e8; --accent-ink:#17102e; --tint:#2c2350; --panel:#251e47;
+  --ok:#7fc98f; --ok-bg:#17301d; --bad:#e88a84; --bad-bg:#3a1a17;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+.wrap{max-width:560px;margin:0 auto;padding:14px 12px 20px}
+.top{text-align:center}
+.top h1{font-family:var(--font-display);font-size:2.1rem;margin:0;line-height:1.15}
+.top .r{letter-spacing:.14em;font-size:.72rem;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.top .sub{font-size:.92rem;color:var(--muted);margin:6px 4px 0;line-height:1.45}
+.grp{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin:12px 0 4px}
+.grp .lab{font-size:.78rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:.9rem;font-weight:700;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.stats{display:flex;justify-content:space-between;font-size:.9rem;color:var(--muted);margin:10px 2px}
+.stats b{color:var(--ink)}
+.banner{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;font-size:1rem;margin:8px 0}
+.banner b{font-size:1.5rem;color:var(--accent)}
+.chain{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;min-height:52px}
+.wd{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:7px 11px;line-height:1.25}
+.wd b{font-size:1.12rem}
+.wd small{display:block;color:var(--muted);font-size:.72rem}
+.wd.me{border-color:var(--accent)}
+.wd.cpu{background:var(--tint)}
+.wd.last{outline:2px solid var(--accent)}
+.row{display:flex;gap:8px;margin-top:10px}
+.row input{flex:1;min-width:0;height:46px;padding:0 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:1rem}
+.btn{height:46px;padding:0 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:.95rem;font-weight:700;cursor:pointer}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.sm{height:38px;padding:0 13px;font-size:.86rem}
+.msg{min-height:1.5em;text-align:center;font-size:.92rem;margin:8px 4px 0;line-height:1.45}
+.msg.bad{color:var(--bad);font-weight:700}
+.msg.ok{color:var(--ok);font-weight:700}
+.win{margin:14px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.win h2{font-family:var(--font-display);margin:0 0 6px;font-size:1.35rem}
+.win p{margin:4px 0 12px;font-size:.92rem;color:var(--muted)}
+.foot{font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:16px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>しりとり</h1>
+    <div class="r">Shiritori · Sambung Kata</div>
+    <p class="sub">Sambung kata dari kana terakhir kata sebelumnya. Kata berakhiran 「ん」 kalah. Lawanmu: Mochi 🐱</p>
+  </div>
+  <div class="stats"><span>Rantai <b id="stChain">0</b> kata</span><span>Rekor <b id="stBest">0</b></span></div>
+  <div class="banner" id="banner">Memuat bank kata…</div>
+  <div class="chain" id="chain"></div>
+  <div class="row">
+    <input type="text" id="inp" placeholder="Ketik kata (romaji atau kana), lalu Enter" aria-label="Kata kamu" disabled>
+    <button type="button" class="btn pri" id="btnGo" disabled>Kirim</button>
+  </div>
+  <p class="msg" id="msg" aria-live="polite"></p>
+  <div style="text-align:center;margin-top:6px">
+    <button type="button" class="btn sm" id="btnGive">Menyerah</button>
+    <button type="button" class="btn sm" id="btnHint">Petunjuk (3)</button>
+    <button type="button" class="btn sm" id="btnRe">Mulai ulang</button>
+  </div>
+  <div class="win" id="win" hidden>
+    <h2 id="winTitle"></h2>
+    <p id="winStats"></p>
+    <button type="button" class="btn pri" id="btnAgain">Main lagi</button>
+  </div>
+  <p class="foot">Bank kata dari kosakata JLPT di situs ini. Contoh: ねこ (neko) → kata berikutnya mulai dari 「こ」, misalnya ことり (kotori). Huruf kecil ゃゅょ dihitung sebagai やゆよ. Tombol Petunjuk menunjukkan satu kata sah dari bank untuk huruf yang sedang jalan (3 kali per permainan). Bank kata adalah gabungan semua kosakata JLPT di situs ini, dari N5 sampai N1.</p>
+</div>
+<script>
+(function(){
+'use strict';
+var ROMA={a:'あ',i:'い',u:'う',e:'え',o:'お',ka:'か',ki:'き',ku:'く',ke:'け',ko:'こ',sa:'さ',shi:'し',si:'し',su:'す',se:'せ',so:'そ',ta:'た',chi:'ち',ti:'ち',tsu:'つ',tu:'つ',te:'て',to:'と',na:'な',ni:'に',nu:'ぬ',ne:'ね',no:'の',ha:'は',hi:'ひ',fu:'ふ',hu:'ふ',he:'へ',ho:'ほ',ma:'ま',mi:'み',mu:'む',me:'め',mo:'も',ya:'や',yu:'ゆ',yo:'よ',ra:'ら',ri:'り',ru:'る',re:'れ',ro:'ろ',wa:'わ',wo:'を',ga:'が',gi:'ぎ',gu:'ぐ',ge:'げ',go:'ご',za:'ざ',ji:'じ',zi:'じ',zu:'ず',ze:'ぜ',zo:'ぞ',da:'だ',di:'ぢ',du:'づ',de:'で',do:'ど',ba:'ば',bi:'び',bu:'ぶ',be:'べ',bo:'ぼ',pa:'ぱ',pi:'ぴ',pu:'ぷ',pe:'ぺ',po:'ぽ',kya:'きゃ',kyu:'きゅ',kyo:'きょ',sha:'しゃ',shu:'しゅ',sho:'しょ',sya:'しゃ',syu:'しゅ',syo:'しょ',cha:'ちゃ',chu:'ちゅ',cho:'ちょ',tya:'ちゃ',tyu:'ちゅ',tyo:'ちょ',ja:'じゃ',ju:'じゅ',jo:'じょ',jya:'じゃ',jyu:'じゅ',jyo:'じょ',nya:'にゃ',nyu:'にゅ',nyo:'にょ',hya:'ひゃ',hyu:'ひゅ',hyo:'ひょ',mya:'みゃ',myu:'みゅ',myo:'みょ',rya:'りゃ',ryu:'りゅ',ryo:'りょ',gya:'ぎゃ',gyu:'ぎゅ',gyo:'ぎょ',bya:'びゃ',byu:'びゅ',byo:'びょ',pya:'ぴゃ',pyu:'ぴゅ',pyo:'ぴょ'};
+function toKana(s){s=(s||'').toLowerCase().trim();if(/[぀-ヿ]/.test(s))return s.replace(/[\s・]/g,'');var out='',i=0;while(i<s.length){var ch=s[i];
+  if(ch==='-'){out+='ー';i++;continue}
+  if(ch==='n'&&(i+1>=s.length||'aeiouy'.indexOf(s[i+1])<0)){out+='ん';i++;continue}
+  if(i+1<s.length&&ch===s[i+1]&&'bcdfghjkmprstvwz'.indexOf(ch)>=0){out+='っ';i++;continue}
+  var hit='';for(var L=3;L>=1;L--){var sub=s.substr(i,L);if(ROMA[sub]){hit=sub;break}}
+  if(hit){out+=ROMA[hit];i+=hit.length}else i++}
+  return out}
+var FALLBACK=[['ねこ','neko','kucing'],['いぬ','inu','anjing'],['とり','tori','burung'],['さかな','sakana','ikan'],['やま','yama','gunung'],['かわ','kawa','sungai'],['うみ','umi','laut'],['そら','sora','langit'],['はな','hana','bunga'],['あめ','ame','hujan'],['ゆき','yuki','salju'],['くるま','kuruma','mobil'],['でんしゃ','densha','kereta'],['えき','eki','stasiun'],['みず','mizu','air'],['ごはん','gohan','nasi'],['りんご','ringo','apel'],['みかん','mikan','jeruk'],['ともだち','tomodachi','teman'],['せんせい','sensei','guru'],['ほん','hon','buku'],['かばん','kaban','tas'],['とけい','tokei','jam'],['つくえ','tsukue','meja'],['いす','isu','kursi'],['まど','mado','jendela'],['あさ','asa','pagi'],['よる','yoru','malam'],['ねこ','neko','kucing'],['すし','sushi','sushi'],['さくら','sakura','sakura'],['たまご','tamago','telur'],['ごま','goma','wijen'],['まめ','mame','kacang'],['めがね','megane','kacamata'],['ねじ','neji','sekrup'],['しか','shika','rusa'],['かめ','kame','kura-kura'],['めだか','medaka','ikan medaka'],['かぜ','kaze','angin'],['ぜみ','zemi','seminar']];
+var $=function(id){return document.getElementById(id)};
+var pool=[],byKana={},byRomaji={},used={},chain=[],required='',over=false;
+var best=0;try{best=+localStorage.getItem('gxShiriBest')||0}catch(e){}
+$('stBest').textContent=best;
+function loadScript(src){return new Promise(function(res){var s=document.createElement('script');s.src=src;s.onload=function(){res(1)};s.onerror=function(){res(0)};document.head.appendChild(s)})}
+function buildPool(){
+  pool=[];byKana={};byRomaji={};
+  var src=[];
+  if(window.N5_KOTOBA)src=src.concat(window.N5_KOTOBA);
+  if(window.N4_KOTOBA)src=src.concat(window.N4_KOTOBA);
+  if(window.N3_KOTOBA)src=src.concat(window.N3_KOTOBA);
+  if(window.N2_KOTOBA)src=src.concat(window.N2_KOTOBA);
+  if(window.N1_KOTOBA)src=src.concat(window.N1_KOTOBA);
+  if(!src.length)FALLBACK.forEach(function(w){src.push({kana:w[0],romaji:w[1],arti:w[2]})});
+  var seen={};
+  src.forEach(function(w){if(!w||!w.kana||seen[w.kana])return;seen[w.kana]=1;
+    var e={kana:w.kana,romaji:w.romaji||'',arti:w.arti||'',kanji:w.kanji||''};
+    pool.push(e);byKana[e.kana]=e;if(e.romaji)byRomaji[e.romaji.toLowerCase()]=e});
+}
+function lastKana(k){
+  var c=k.charAt(k.length-1);
+  if(c==='ー')return lastKana(k.slice(0,-1));
+  if(c==='ゃ')return 'や';if(c==='ゅ')return 'ゆ';if(c==='ょ')return 'よ';
+  if(c==='っ')return 'つ';
+  return c;
+}
+function say(t,cls){var m=$('msg');m.textContent=t||'';m.className='msg'+(cls?' '+cls:'')}
+function render(){
+  $('stChain').textContent=chain.length;
+  var box=$('chain');box.innerHTML=chain.map(function(w,i){
+    return '<div class="wd '+(w.cpu?'cpu':'me')+(i===chain.length-1?' last':'')+'"><b>'+w.kana+'</b><small>'+(w.cpu?'🐱 ':'')+(w.romaji||'')+(w.arti?' · '+w.arti:'')+'</small></div>'}).join('');
+  if(!over)$('banner').innerHTML='Kata berikutnya mulai dari <b>「'+required+'」</b>';
+}
+function play(w,cpu){
+  used[w.kana]=1;chain.push({kana:w.kana,romaji:w.romaji,arti:w.arti,cpu:cpu});
+  required=lastKana(w.kana);render();
+}
+function end(win,why){
+  over=true;$('inp').disabled=true;$('btnGo').disabled=true;updHint();
+  var n=chain.length;
+  if(win&&n>best){best=n;try{localStorage.setItem('gxShiriBest',best)}catch(e){}$('stBest').textContent=best}
+  $('win').hidden=false;
+  $('winTitle').textContent=win?'🎉 Kamu menang!':'🐱 Mochi menang';
+  $('winStats').textContent=(why?why+' · ':'')+'Rantai mencapai '+n+' kata.';
+  $('banner').textContent=win?'Mochi kehabisan kata. Hebat!':'Permainan selesai.';
+}
+function cpuTurn(){
+  if(over)return;
+  var cand=pool.filter(function(w){return !used[w.kana]&&w.kana.charAt(0)===required&&w.kana.charAt(w.kana.length-1)!=='ん'});
+  if(!cand.length){end(true,'Mochi tidak punya kata berawalan 「'+required+'」');return}
+  play(cand[(Math.random()*cand.length)|0],true);
+  say('Giliranmu — mulai dari 「'+required+'」');
+  $('inp').disabled=false;$('btnGo').disabled=false;$('inp').focus();
+}
+function submit(){
+  if(over)return;
+  var raw=$('inp').value.trim();if(!raw)return;
+  var kana=toKana(raw);
+  var w=byKana[kana]||byRomaji[raw.toLowerCase()];
+  if(!w){say('Kata "'+raw+'" tidak ada di bank kata. Coba kata lain.','bad');return}
+  if(used[w.kana]){say('Kata '+w.kana+' sudah dipakai. Cari yang lain.','bad');return}
+  if(w.kana.charAt(0)!==required){say('Harus mulai dari 「'+required+'」, bukan 「'+w.kana.charAt(0)+'」.','bad');return}
+  $('inp').value='';play(w,false);
+  if(w.kana.charAt(w.kana.length-1)==='ん'){end(false,'Kata berakhiran 「ん」 langsung kalah');return}
+  say('Bagus! Mochi berpikir…');
+  $('inp').disabled=true;$('btnGo').disabled=true;
+  setTimeout(cpuTurn,850);
+}
+var hints=3;
+function updHint(){var b=$('btnHint');b.textContent='Petunjuk ('+hints+')';b.disabled=(hints<=0||over)}
+function hint(){
+  if(over||hints<=0)return;
+  if($('inp').disabled){say('Tunggu giliranmu dulu ya.');return}
+  var cand=pool.filter(function(w){return !used[w.kana]&&w.kana.charAt(0)===required&&w.kana.charAt(w.kana.length-1)!=='ん'});
+  if(!cand.length){say('Tidak ada kata sah berawalan 「'+required+'」 yang belum dipakai di bank kata.','bad');return}
+  hints--;
+  var w=cand[(Math.random()*cand.length)|0];
+  $('inp').value=w.kana;
+  say('Petunjuk: '+w.kana+(w.romaji?' ('+w.romaji+')':'')+(w.arti?' · '+w.arti:'')+' — tinggal tekan Kirim. Sisa petunjuk: '+hints,'ok');
+  updHint();$('inp').focus();
+}
+function start(){
+  buildPool();used={};chain=[];over=false;hints=3;$('win').hidden=true;say('');
+  var openers=pool.filter(function(w){
+    if(w.kana.charAt(w.kana.length-1)==='ん')return false;
+    var lk=lastKana(w.kana);
+    return pool.some(function(x){return x.kana!==w.kana&&x.kana.charAt(0)===lk&&x.kana.charAt(x.kana.length-1)!=='ん'});
+  });
+  if(!openers.length)openers=pool.filter(function(w){return w.kana.charAt(w.kana.length-1)!=='ん'});
+  play(openers[(Math.random()*openers.length)|0],true);
+  say('Mochi mulai duluan. Giliranmu — mulai dari 「'+required+'」');
+  $('inp').disabled=false;$('btnGo').disabled=false;$('inp').focus();updHint();
+}
+$('btnGo').addEventListener('click',submit);
+$('inp').addEventListener('keydown',function(e){if(e.key==='Enter')submit()});
+$('btnGive').addEventListener('click',function(){if(!over)end(false,'Kamu menyerah')});
+$('btnHint').addEventListener('click',hint);
+$('btnRe').addEventListener('click',start);
+$('btnAgain').addEventListener('click',start);
+var dataReady=false;
+function ensureData(cb){
+  if(dataReady){cb();return}
+  var files=['n5/n5-kotoba.js','n4/n4-kotoba.js','n3/n3-kotoba.js','n2/n2-kotoba.js','n1/n1-kotoba.js'];
+  var done=false;
+  var finish=function(){if(done)return;done=true;dataReady=true;cb()};
+  Promise.all(files.map(function(f){return loadScript('https://bshantoz.github.io/nihongo/'+f)})).then(finish);
+  setTimeout(finish,7000);
+}
+ensureData(start);
+})();
+</script>
+</body>
+</html>
