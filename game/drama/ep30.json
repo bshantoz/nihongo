@@ -1,0 +1,238 @@
+{
+ "id": "ep30",
+ "scene": "kaisha",
+ "lines": [
+  {
+   "w": "m",
+   "j": "{先輩|せんぱい}、すこし、よろしいですか。",
+   "r": "Senpai, sukoshi, yoroshii desu ka.",
+   "i": "Senpai, boleh minta waktu sebentar?",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{先輩|せんぱい}",
+     "senpai",
+     "senior"
+    ],
+    [
+     "よろしいですか",
+     "yoroshii desu ka",
+     "apakah boleh"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "うん、どうした？",
+   "r": "Un, doushita?",
+   "i": "Ya, ada apa?",
+   "act": "nod",
+   "s": [],
+   "v": [],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{来月|らいげつ}、{国|くに}に、{帰|かえ}りたいので、{有給休暇|ゆうきゅうきゅうか}を、いただけますか。",
+   "r": "Raigetsu, kuni ni, kaeritai node, yuukyuu kyuuka o, itadakemasu ka.",
+   "i": "Bulan depan saya ingin pulang kampung, bolehkah saya mendapat cuti berbayar?",
+   "act": "step",
+   "s": [],
+   "v": [
+    [
+     "{来月|らいげつ}",
+     "raigetsu",
+     "bulan depan"
+    ],
+    [
+     "{有給休暇|ゆうきゅうきゅうか}",
+     "yuukyuu kyuuka",
+     "cuti berbayar"
+    ],
+    [
+     "いただけますか",
+     "itadakemasu ka",
+     "bolehkah saya mendapat"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "いいよ。{何日間|なんにちかん}、{休|やす}みたいの？",
+   "r": "Ii yo. Nannichikan, yasumitai no?",
+   "i": "Boleh. Mau libur berapa hari?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{何日間|なんにちかん}",
+     "nannichikan",
+     "berapa hari"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "{五日間|いつかかん}です。{家族|かぞく}に、{会|あ}いに、{行|い}きたいんです。",
+   "r": "Itsukakan desu. Kazoku ni, ai ni, ikitain desu.",
+   "i": "Lima hari. Saya ingin pergi menemui keluarga.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{五日間|いつかかん}",
+     "itsukakan",
+     "lima hari"
+    ],
+    [
+     "{会|あ}いに{行|い}きたい",
+     "ai ni ikitai",
+     "ingin pergi menemui"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "わかった。{申請書|しんせいしょ}を、{書|か}いて、{出|だ}してね。",
+   "r": "Wakatta. Shinseisho o, kaite, dashite ne.",
+   "i": "Oke. Tolong tulis dan serahkan formulir pengajuannya ya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{申請書|しんせいしょ}",
+     "shinseisho",
+     "formulir pengajuan"
+    ],
+    [
+     "{出|だ}してね",
+     "dashite ne",
+     "tolong serahkan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい！ありがとうございます。",
+   "r": "Hai! Arigatou gozaimasu.",
+   "i": "Baik! Terima kasih.",
+   "act": "hop",
+   "s": [],
+   "v": [],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "{気|き}をつけて、{行|い}ってきてね。お{土産|みやげ}、{待|ま}ってるよ。",
+   "r": "Ki o tsukete, itte kite ne. Omiyage, matteru yo.",
+   "i": "Hati-hati ya pulang-perginya. Ditunggu oleh-olehnya lho.",
+   "act": "wave",
+   "s": [],
+   "v": [
+    [
+     "{気|き}をつけて",
+     "ki o tsukete",
+     "hati-hati"
+    ],
+    [
+     "お{土産|みやげ}",
+     "omiyage",
+     "oleh-oleh"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "もちろんです！{楽|たの}しみにしていてください。",
+   "r": "Mochiron desu! Tanoshimi ni shiteite kudasai.",
+   "i": "Tentu saja! Tunggu saja ya.",
+   "act": "jump",
+   "s": [],
+   "v": [
+    [
+     "もちろん",
+     "mochiron",
+     "tentu saja"
+    ],
+    [
+     "{楽|たの}しみにしていてください",
+     "tanoshimi ni shiteite kudasai",
+     "silakan nantikan"
+    ]
+   ],
+   "em": "!"
+  },
+  {
+   "w": "c",
+   "j": "じゃ、{帰|かえ}る{前|まえ}まで、{仕事|しごと}、{頑張|がんば}ろうね。",
+   "r": "Ja, kaeru mae made, shigoto, ganbarou ne.",
+   "i": "Nah, ayo semangat kerja sampai sebelum pulang ya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{帰|かえ}る{前|まえ}まで",
+     "kaeru mae made",
+     "sampai sebelum pulang"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Mochi meminta apa pada senpai-nya?",
+   "a": "Cuti berbayar (yuukyuu kyuuka)",
+   "w": [
+    "Kenaikan gaji",
+    "Pindah shift",
+    "Izin sakit"
+   ],
+   "f": "有給休暇 (yuukyuu kyuuka) = cuti berbayar."
+  },
+  {
+   "q": "Berapa hari Mochi ingin cuti?",
+   "a": "5 hari",
+   "w": [
+    "3 hari",
+    "7 hari",
+    "10 hari"
+   ],
+   "f": "五日間です (itsukakan desu) = lima hari."
+  },
+  {
+   "q": "Apa yang harus dilakukan Mochi sebelum cuti?",
+   "a": "Menulis dan menyerahkan formulir pengajuan",
+   "w": [
+    "Membayar denda",
+    "Mengganti jadwal rekan kerja",
+    "Membeli tiket pulang-pergi"
+   ],
+   "f": "申請書を書いて、出してね = tolong tulis dan serahkan formulir pengajuan."
+  },
+  {
+   "q": "Apa yang diminta senpai dari Mochi sebagai buah tangan?",
+   "a": "Oleh-oleh (omiyage)",
+   "w": [
+    "Uang",
+    "Foto",
+    "Surat"
+   ],
+   "f": "お土産、待ってるよ = ditunggu oleh-olehnya."
+  },
+  {
+   "q": "Apa arti \"ki o tsukete\"?",
+   "a": "Hati-hati",
+   "w": [
+    "Selamat jalan",
+    "Sampai jumpa",
+    "Semangat"
+   ],
+   "f": "気をつけて (ki o tsukete) = ucapan hati-hati, biasa untuk orang yang akan bepergian."
+  }
+ ]
+}

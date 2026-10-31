@@ -1,0 +1,240 @@
+{
+ "id": "ep26",
+ "scene": "super",
+ "lines": [
+  {
+   "w": "m",
+   "j": "すみません、これは{半額|はんがく}ですか。",
+   "r": "Sumimasen, kore wa hangaku desu ka.",
+   "i": "Permisi, ini setengah harga?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{半額|はんがく}",
+     "hangaku",
+     "setengah harga"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "はい、{賞味期限|しょうみきげん}が{今日|きょう}までです。",
+   "r": "Hai, shoumikigen ga kyou made desu.",
+   "i": "Ya, tanggal baiknya sampai hari ini.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{賞味期限|しょうみきげん}",
+     "shoumikigen",
+     "tanggal anjuran konsumsi"
+    ],
+    [
+     "{今日|きょう}まで",
+     "kyou made",
+     "sampai hari ini"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "じゃあ、これを{三|みっ}つ、ください。",
+   "r": "Jaa, kore o mittsu, kudasai.",
+   "i": "Kalau begitu, tolong tiga ini.",
+   "act": "hop",
+   "s": [
+    "items"
+   ],
+   "v": [
+    [
+     "{三|みっ}つ",
+     "mittsu",
+     "tiga buah"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{冷凍|れいとう}した{方|ほう}が、いいですよ。",
+   "r": "Reitou shita hou ga, ii desu yo.",
+   "i": "Sebaiknya dibekukan lho.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{冷凍|れいとう}する",
+     "reitou suru",
+     "membekukan"
+    ],
+    [
+     "〜た{方|ほう}がいい",
+     "~ta hou ga ii",
+     "sebaiknya"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかりました。{袋|ふくろ}は、いりません。",
+   "r": "Wakarimashita. Fukuro wa, irimasen.",
+   "i": "Mengerti. Saya tidak perlu kantong plastik.",
+   "act": "nod",
+   "s": [
+    "ding"
+   ],
+   "v": [
+    [
+     "いりません",
+     "irimasen",
+     "tidak perlu"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{全部|ぜんぶ}で、{450|よんひゃくごじゅう}{円|えん}です。",
+   "r": "Zenbu de, yonhyaku gojuu en desu.",
+   "i": "Totalnya 450 yen.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{全部|ぜんぶ}で",
+     "zenbu de",
+     "totalnya"
+    ],
+    [
+     "{450|よんひゃくごじゅう}",
+     "yonhyaku gojuu",
+     "450"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "{五百円|ごひゃくえん}で、お{願|ねが}いします。",
+   "r": "Gohyaku-en de, onegaishimasu.",
+   "i": "Saya bayar pakai 500 yen.",
+   "act": "hop",
+   "s": [
+    "money"
+   ],
+   "v": [
+    [
+     "{五百円|ごひゃくえん}",
+     "gohyaku-en",
+     "500 yen"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "{五十円|ごじゅうえん}の、お{返|かえ}しです。{今日|きょう}は、お{得|とく}でしたね。",
+   "r": "Gojuu-en no, okaeshi desu. Kyou wa, otoku deshita ne.",
+   "i": "Kembaliannya 50 yen. Hari ini untung ya.",
+   "act": "bow",
+   "s": [
+    "change"
+   ],
+   "v": [
+    [
+     "お{得|とく}",
+     "otoku",
+     "untung / hemat"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい！{半額|はんがく}セールは、いつもありますか。",
+   "r": "Hai! Hangaku seeru wa, itsumo arimasu ka.",
+   "i": "Ya! Diskon setengah harganya selalu ada?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "いつも",
+     "itsumo",
+     "selalu"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "いいえ、{木曜日|もくようび}だけです。また、どうぞ。",
+   "r": "Iie, mokuyoubi dake desu. Mata, douzo.",
+   "i": "Tidak, hanya hari Kamis. Silakan datang lagi.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "{木曜日|もくようび}",
+     "mokuyoubi",
+     "hari Kamis"
+    ],
+    [
+     "〜だけ",
+     "~dake",
+     "hanya"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Hangaku\" artinya?",
+   "a": "Setengah harga",
+   "w": [
+    "Harga penuh",
+    "Gratis",
+    "Harga naik"
+   ],
+   "f": "半額 (hangaku) = 半(han, setengah) + 額(gaku, jumlah/harga)."
+  },
+  {
+   "q": "Kenapa produk itu didiskon?",
+   "a": "Karena tanggal baiknya (shoumikigen) habis hari ini",
+   "w": [
+    "Karena rusak",
+    "Karena kemasannya robek",
+    "Karena kelebihan stok lama"
+   ],
+   "f": "賞味期限が今日までです = tanggal baiknya sampai hari ini."
+  },
+  {
+   "q": "Berapa total belanja Mochi?",
+   "a": "450 yen",
+   "w": [
+    "350 yen",
+    "540 yen",
+    "405 yen"
+   ],
+   "f": "四百五十円 (yonhyaku gojuu en) = 400 + 50."
+  },
+  {
+   "q": "Mochi bayar pakai 500 yen. Berapa kembaliannya?",
+   "a": "50 yen",
+   "w": [
+    "500 yen",
+    "100 yen",
+    "150 yen"
+   ],
+   "f": "五十円 (gojuu en) = 50."
+  },
+  {
+   "q": "Sale setengah harga di supermarket itu diadakan kapan?",
+   "a": "Setiap hari Kamis",
+   "w": [
+    "Setiap hari",
+    "Setiap akhir bulan",
+    "Setiap akhir pekan"
+   ],
+   "f": "木曜日だけです (mokuyoubi dake desu) = hanya hari Kamis."
+  }
+ ]
+}

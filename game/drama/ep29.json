@@ -1,0 +1,233 @@
+{
+ "id": "ep29",
+ "scene": "kouen",
+ "g": "f",
+ "lines": [
+  {
+   "w": "m",
+   "j": "ゆいちゃん、{桜|さくら}が、きれいだね。",
+   "r": "Yui-chan, sakura ga, kirei da ne.",
+   "i": "Yui, bunga sakuranya indah ya.",
+   "act": "sway",
+   "s": [],
+   "v": [
+    [
+     "{桜|さくら}",
+     "sakura",
+     "bunga sakura"
+    ],
+    [
+     "きれい",
+     "kirei",
+     "indah / cantik"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "ほんとう！{花見|はなみ}に、{来|き}てよかった。",
+   "r": "Hontou! Hanami ni, kite yokatta.",
+   "i": "Betul! Syukurlah datang untuk lihat sakura.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{花見|はなみ}",
+     "hanami",
+     "melihat bunga sakura"
+    ]
+   ],
+   "em": "!"
+  },
+  {
+   "w": "m",
+   "j": "お{弁当|べんとう}、{作|つく}ってきたよ。{一緒|いっしょ}に、{食|た}べよう。",
+   "r": "Obentou, tsukutte kita yo. Issho ni, tabeyou.",
+   "i": "Aku bawa bekal. Ayo makan bareng.",
+   "act": "hop",
+   "s": [
+    "items"
+   ],
+   "v": [
+    [
+     "{一緒|いっしょ}に",
+     "issho ni",
+     "bersama"
+    ],
+    [
+     "{食|た}べよう",
+     "tabeyou",
+     "ayo makan"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "わあ、おいしそう！{何|なに}が、はいってるの？",
+   "r": "Waa, oishisou! Nani ga, haitteru no?",
+   "i": "Waa, kelihatan enak! Isinya apa?",
+   "act": "lean",
+   "s": [],
+   "v": [
+    [
+     "{何|なに}がはいってるの",
+     "nani ga haitteru no",
+     "ada apa isinya"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "たまご{焼|や}きと、おにぎりだよ。",
+   "r": "Tamagoyaki to, onigiri da yo.",
+   "i": "Telur dadar manis dan onigiri.",
+   "act": "step",
+   "s": [],
+   "v": [
+    [
+     "たまご{焼|や}き",
+     "tamagoyaki",
+     "telur dadar manis"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{写真|しゃしん}、{撮|と}ろう！{桜|さくら}をバックにして。",
+   "r": "Shashin, torou! Sakura o bakku ni shite.",
+   "i": "Ayo foto! Dengan latar sakura.",
+   "act": "hop",
+   "s": [],
+   "v": [
+    [
+     "{写真|しゃしん}を{撮|と}ろう",
+     "shashin o torou",
+     "ayo foto"
+    ],
+    [
+     "バックにして",
+     "bakku ni shite",
+     "dengan latar"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "いいね！チーズ！",
+   "r": "Ii ne! Chiizu!",
+   "i": "Boleh! Cheese!",
+   "act": "jump",
+   "s": [],
+   "v": [],
+   "em": "!"
+  },
+  {
+   "w": "c",
+   "j": "かわいく、{撮|と}れた！{送|おく}るね。",
+   "r": "Kawaiku, toreta! Okuru ne.",
+   "i": "Fotonya jadi lucu! Nanti kukirim ya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{撮|と}れた",
+     "toreta",
+     "sudah terambil (foto)"
+    ],
+    [
+     "{送|おく}るね",
+     "okuru ne",
+     "akan kukirimkan"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "m",
+   "j": "ありがとう。{今年|ことし}も、ゆいちゃんと、{花見|はなみ}できて、うれしい。",
+   "r": "Arigatou. Kotoshi mo, Yui-chan to, hanami dekite, ureshii.",
+   "i": "Terima kasih. Tahun ini juga bisa hanami bareng Yui, senangnya.",
+   "act": "sway",
+   "s": [],
+   "v": [
+    [
+     "{今年|ことし}も",
+     "kotoshi mo",
+     "tahun ini juga"
+    ]
+   ],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "また、{来年|らいねん}も、{一緒|いっしょ}に、{来|こ}ようね。",
+   "r": "Mata, rainen mo, issho ni, koyou ne.",
+   "i": "Tahun depan ayo datang bareng lagi ya.",
+   "act": "wave",
+   "s": [],
+   "v": [
+    [
+     "{来年|らいねん}",
+     "rainen",
+     "tahun depan"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Mochi dan Yui sedang melakukan kegiatan apa?",
+   "a": "Melihat bunga sakura (hanami)",
+   "w": [
+    "Piknik musim panas",
+    "Lari pagi",
+    "Memancing"
+   ],
+   "f": "花見 (hanami) = kegiatan menikmati bunga sakura."
+  },
+  {
+   "q": "Apa isi bekal yang dibawa Mochi?",
+   "a": "Telur dadar manis dan onigiri",
+   "w": [
+    "Ramen dan gyoza",
+    "Sandwich dan kopi",
+    "Kari dan nasi"
+   ],
+   "f": "たまご焼きと、おにぎりだよ = telur dadar manis dan onigiri."
+  },
+  {
+   "q": "Apa arti \"shashin o torou\"?",
+   "a": "Ayo foto",
+   "w": [
+    "Ayo pulang",
+    "Ayo makan",
+    "Ayo jalan-jalan"
+   ],
+   "f": "写真を撮ろう (shashin o torou) = ayo mengambil foto."
+  },
+  {
+   "q": "Kapan rencana Mochi dan Yui bertemu lagi untuk hanami?",
+   "a": "Tahun depan",
+   "w": [
+    "Bulan depan",
+    "Minggu depan",
+    "Musim panas ini"
+   ],
+   "f": "また、来年も、一緒に来ようね = ayo datang bareng lagi tahun depan."
+  },
+  {
+   "q": "Apa arti kata \"kirei\"?",
+   "a": "Indah / cantik",
+   "w": [
+    "Dingin",
+    "Ramai",
+    "Lelah"
+   ],
+   "f": "きれい (kirei) = indah, cantik, atau bersih tergantung konteks."
+  }
+ ]
+}

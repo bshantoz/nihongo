@@ -1,0 +1,212 @@
+{
+ "id": "ep28",
+ "scene": "kafe",
+ "lines": [
+  {
+   "w": "m",
+   "j": "すみません、Wi-Fiのパスワードを、{教|おし}えてください。",
+   "r": "Sumimasen, Wi-Fi no pasuwaado o, oshiete kudasai.",
+   "i": "Permisi, tolong beritahu password Wi-Fi-nya.",
+   "act": "step",
+   "s": [],
+   "v": [
+    [
+     "{教|おし}えてください",
+     "oshiete kudasai",
+     "tolong beritahu"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "レシートに、{書|か}いてあります。",
+   "r": "Reshiito ni, kaite arimasu.",
+   "i": "Sudah tertulis di struk.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{書|か}いてあります",
+     "kaite arimasu",
+     "sudah tertulis"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。あのう、コンセントは、ありますか。",
+   "r": "Arigatou gozaimasu. Anou, konsento wa, arimasu ka.",
+   "i": "Terima kasih. Eh, ada colokan listrik?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "コンセント",
+     "konsento",
+     "colokan listrik"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "あちらの、{席|せき}に、ありますよ。",
+   "r": "Achira no, seki ni, arimasu yo.",
+   "i": "Ada di kursi sebelah sana lho.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{席|せき}",
+     "seki",
+     "kursi / tempat duduk"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "よかった。{日本語|にほんご}のテストを、{勉強|べんきょう}したいので。",
+   "r": "Yokatta. Nihongo no tesuto o, benkyou shitai node.",
+   "i": "Syukurlah. Soalnya saya mau belajar untuk tes bahasa Jepang.",
+   "act": "sway",
+   "s": [],
+   "v": [
+    [
+     "〜ので",
+     "~node",
+     "karena / soalnya"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{頑張|がんば}ってくださいね。コーヒーの、おかわりは、{無料|むりょう}ですよ。",
+   "r": "Ganbatte kudasai ne. Koohii no, okawari wa, muryou desu yo.",
+   "i": "Semangat ya. Tambahan kopinya gratis lho.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "おかわり",
+     "okawari",
+     "tambahan / refill"
+    ],
+    [
+     "{無料|むりょう}",
+     "muryou",
+     "gratis"
+    ]
+   ],
+   "em": "♪"
+  },
+  {
+   "w": "m",
+   "j": "ほんとうですか！うれしいです。",
+   "r": "Hontou desu ka! Ureshii desu.",
+   "i": "Benarkah! Senangnya.",
+   "act": "jump",
+   "s": [],
+   "v": [],
+   "em": "!"
+  },
+  {
+   "w": "c",
+   "j": "はい。{三時間|さんじかん}まで、いられますよ。",
+   "r": "Hai. Sanjikan made, iraremasu yo.",
+   "i": "Ya. Bisa duduk sampai 3 jam lho.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{三時間|さんじかん}",
+     "sanjikan",
+     "3 jam"
+    ],
+    [
+     "いられます",
+     "iraremasu",
+     "bisa tinggal / berada"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "ありがとうございます。{頑張|がんば}ります！",
+   "r": "Arigatou gozaimasu. Ganbarimasu!",
+   "i": "Terima kasih. Saya akan berjuang!",
+   "act": "hop",
+   "s": [],
+   "v": [],
+   "em": "♪"
+  },
+  {
+   "w": "c",
+   "j": "{応援|おうえん}していますね。",
+   "r": "Ouen shiteimasu ne.",
+   "i": "Saya mendukungmu ya.",
+   "act": "wave",
+   "s": [],
+   "v": [
+    [
+     "{応援|おうえん}しています",
+     "ouen shiteimasu",
+     "mendukung"
+    ]
+   ],
+   "em": "♥"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Mochi minta apa pertama kali ke pelayan?",
+   "a": "Password Wi-Fi",
+   "w": [
+    "Menu makanan",
+    "Nomor meja",
+    "Colokan listrik"
+   ],
+   "f": "Wi-Fiのパスワードを教えてください = tolong beritahu password Wi-Fi."
+  },
+  {
+   "q": "Di mana password Wi-Fi tertulis?",
+   "a": "Di struk belanja (reshiito)",
+   "w": [
+    "Di dinding kafe",
+    "Di gelas kopi",
+    "Di meja kasir"
+   ],
+   "f": "レシートに書いてあります = sudah tertulis di struk."
+  },
+  {
+   "q": "Apa arti \"konsento\"?",
+   "a": "Colokan listrik",
+   "w": [
+    "Meja",
+    "Kursi",
+    "Kipas angin"
+   ],
+   "f": "コンセント (konsento) dari bahasa Inggris \"concentric plug\" = colokan listrik."
+  },
+  {
+   "q": "Apa yang gratis di kafe itu?",
+   "a": "Tambahan (refill) kopi",
+   "w": [
+    "Kue",
+    "Wi-Fi",
+    "Parkir"
+   ],
+   "f": "コーヒーのおかわりは無料です = tambahan kopi gratis."
+  },
+  {
+   "q": "Sampai berapa jam Mochi boleh duduk di kafe?",
+   "a": "3 jam",
+   "w": [
+    "1 jam",
+    "5 jam",
+    "Seharian"
+   ],
+   "f": "三時間まで、いられます = bisa berada sampai 3 jam."
+  }
+ ]
+}

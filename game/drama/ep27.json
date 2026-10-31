@@ -1,0 +1,232 @@
+{
+ "id": "ep27",
+ "scene": "ginkou",
+ "lines": [
+  {
+   "w": "m",
+   "j": "すみません、{海外|かいがい}に、お{金|かね}を{送|おく}りたいです。",
+   "r": "Sumimasen, kaigai ni, okane o okuritai desu.",
+   "i": "Permisi, saya ingin mengirim uang ke luar negeri.",
+   "act": "step",
+   "s": [],
+   "v": [
+    [
+     "{海外|かいがい}",
+     "kaigai",
+     "luar negeri"
+    ],
+    [
+     "{送|おく}りたい",
+     "okuritai",
+     "ingin mengirim"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{国際送金|こくさいそうきん}ですね。{窓口|まどぐち}で、ご{案内|あんない}します。",
+   "r": "Kokusai soukin desu ne. Madoguchi de, goannai shimasu.",
+   "i": "Transfer internasional ya. Saya bantu di loket.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{国際送金|こくさいそうきん}",
+     "kokusai soukin",
+     "transfer internasional"
+    ],
+    [
+     "{窓口|まどぐち}",
+     "madoguchi",
+     "loket"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "インドネシアの、{家族|かぞく}に、{送|おく}りたいです。",
+   "r": "Indoneshia no, kazoku ni, okuritai desu.",
+   "i": "Saya ingin mengirim ke keluarga di Indonesia.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{家族|かぞく}",
+     "kazoku",
+     "keluarga"
+    ]
+   ]
+  },
+  {
+   "w": "c",
+   "j": "{在留|ざいりゅう}カードと、{通帳|つうちょう}を、お{願|ねが}いします。",
+   "r": "Zairyuu kaado to, tsuuchou o, onegaishimasu.",
+   "i": "Tolong kartu izin tinggal dan buku tabungannya.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{在留|ざいりゅう}カード",
+     "zairyuu kaado",
+     "kartu izin tinggal"
+    ],
+    [
+     "{通帳|つうちょう}",
+     "tsuuchou",
+     "buku tabungan"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "はい、どうぞ。",
+   "r": "Hai, douzo.",
+   "i": "Ya, silakan.",
+   "act": "hop",
+   "s": [
+    "items"
+   ],
+   "v": []
+  },
+  {
+   "w": "c",
+   "j": "{手数料|てすうりょう}は、{千五百円|せんごひゃくえん}です。よろしいですか。",
+   "r": "Tesuuryou wa, sengohyaku-en desu. Yoroshii desu ka.",
+   "i": "Biaya adminnya 1.500 yen. Boleh?",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{手数料|てすうりょう}",
+     "tesuuryou",
+     "biaya admin"
+    ],
+    [
+     "よろしいですか",
+     "yoroshii desu ka",
+     "apakah boleh"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "m",
+   "j": "はい、{大丈夫|だいじょうぶ}です。{着|つ}くまで、どのくらい、かかりますか。",
+   "r": "Hai, daijoubu desu. Tsuku made, dono kurai, kakarimasu ka.",
+   "i": "Ya, tidak apa-apa. Sampai tiba butuh berapa lama?",
+   "act": "tilt",
+   "s": [],
+   "v": [
+    [
+     "{着|つ}くまで",
+     "tsuku made",
+     "sampai tiba"
+    ],
+    [
+     "どのくらい",
+     "dono kurai",
+     "berapa lama"
+    ]
+   ],
+   "em": "?"
+  },
+  {
+   "w": "c",
+   "j": "{2、3日|ふつかみっか}、かかります。",
+   "r": "Futsuka mikka, kakarimasu.",
+   "i": "Memakan waktu 2-3 hari.",
+   "act": "nod",
+   "s": [],
+   "v": [
+    [
+     "{2、3日|ふつかみっか}",
+     "futsuka mikka",
+     "dua-tiga hari"
+    ],
+    [
+     "かかります",
+     "kakarimasu",
+     "memakan waktu"
+    ]
+   ]
+  },
+  {
+   "w": "m",
+   "j": "わかりました。ありがとうございます。",
+   "r": "Wakarimashita. Arigatou gozaimasu.",
+   "i": "Mengerti. Terima kasih.",
+   "act": "bow",
+   "s": [],
+   "v": [],
+   "em": "♥"
+  },
+  {
+   "w": "c",
+   "j": "どういたしまして。また、ご{利用|りよう}ください。",
+   "r": "Douitashimashite. Mata, goriyou kudasai.",
+   "i": "Sama-sama. Silakan gunakan lagi.",
+   "act": "bow",
+   "s": [],
+   "v": [
+    [
+     "ご{利用|りよう}ください",
+     "goriyou kudasai",
+     "silakan gunakan"
+    ]
+   ],
+   "em": "♪"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "\"Kaigai ni okuritai desu\" artinya?",
+   "a": "Saya ingin mengirim ke luar negeri",
+   "w": [
+    "Saya ingin pergi ke luar negeri",
+    "Saya ingin bekerja di luar negeri",
+    "Saya ingin menelepon ke luar negeri"
+   ],
+   "f": "海外 (kaigai) = luar negeri, 送りたい (okuritai) = ingin mengirim."
+  },
+  {
+   "q": "Dokumen apa yang diminta petugas bank?",
+   "a": "Kartu izin tinggal dan buku tabungan",
+   "w": [
+    "KTP dan paspor",
+    "SIM dan materai",
+    "Kartu kredit dan stempel"
+   ],
+   "f": "在留カード (zairyuu kaado) dan 通帳 (tsuuchou)."
+  },
+  {
+   "q": "Berapa biaya transfer (tesuuryou)?",
+   "a": "1.500 yen",
+   "w": [
+    "1.000 yen",
+    "500 yen",
+    "2.500 yen"
+   ],
+   "f": "手数料は千五百円です = biaya admin 1.500 yen."
+  },
+  {
+   "q": "Berapa lama transfer sampai ke Indonesia?",
+   "a": "2-3 hari",
+   "w": [
+    "Hari itu juga",
+    "1 minggu",
+    "1 bulan"
+   ],
+   "f": "2、3日かかります (futsuka mikka kakarimasu)."
+  },
+  {
+   "q": "Apa arti \"douitashimashite\"?",
+   "a": "Sama-sama",
+   "w": [
+    "Terima kasih kembali",
+    "Permisi",
+    "Mohon maaf"
+   ],
+   "f": "どういたしまして adalah balasan sopan untuk ucapan terima kasih."
+  }
+ ]
+}
