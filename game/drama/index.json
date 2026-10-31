@@ -226,4 +226,49 @@
   "desc": "Mochi demam: lapor ke senior, tanya jalan, daftar di rumah sakit, diperiksa dokter, tebus obat di apotek, belanja di minimarket, dijenguk Yui, lalu kembali bekerja.",
   "kind": "long"
  }
+  {
+  "id": "ep26",
+  "no": 26,
+  "ja": "スーパーで（{見切|みき}り{品|ひん}）",
+  "ro": "suupaa de (mikirihin)",
+  "idn": "Di supermarket (barang diskon)",
+  "level": "N5",
+  "desc": "Mochi berbelanja malam dan belajar soal barang setengah harga serta tanggal kadaluwarsa."
+ },
+ {
+  "id": "ep27",
+  "no": 27,
+  "ja": "{銀行|ぎんこう}で（{送金|そうきん}）",
+  "ro": "ginkou de (soukin)",
+  "idn": "Di bank (kirim uang)",
+  "level": "N4",
+  "desc": "Mochi mengirim uang ke keluarga di Indonesia lewat transfer internasional."
+ },
+ {
+  "id": "ep28",
+  "no": 28,
+  "ja": "カフェで（Wi-Fiと{勉強|べんきょう}）",
+  "ro": "kafe de (wifi to benkyou)",
+  "idn": "Di kafe (Wi-Fi dan belajar)",
+  "level": "N5",
+  "desc": "Mochi menanyakan Wi-Fi dan colokan listrik sambil belajar untuk tes JLPT."
+ },
+ {
+  "id": "ep29",
+  "no": 29,
+  "ja": "{公園|こうえん}で（{花見|はなみ}）",
+  "ro": "kouen de (hanami)",
+  "idn": "Di taman (lihat bunga sakura)",
+  "level": "N4",
+  "desc": "Mochi dan Yui menikmati hanami, makan bekal bersama, dan berfoto di bawah sakura."
+ },
+ {
+  "id": "ep30",
+  "no": 30,
+  "ja": "{会社|かいしゃ}で（{有給休暇|ゆうきゅうきゅうか}）",
+  "ro": "kaisha de (yuukyuu kyuuka)",
+  "idn": "Di kantor (minta cuti)",
+  "level": "N3",
+  "desc": "Mochi meminta cuti berbayar ke senpai untuk pulang menengok keluarga di Indonesia."
+ }
 ]
